@@ -23,25 +23,25 @@ public class LowBeamBehaviour : MonoBehaviour
         
     }
 
-    public void setLowBeamOn(bool beam)
+    public void SetLowBeamOn(bool beam)
     {
         lowBeamOn = beam;
     }
 
-    public bool isLowBeamOn()
+    public bool IsLowBeamOn()
     {
         return lowBeamOn;
     }
 
-    public void turnLowBeamOn()
+    public void TurnLowBeamOn()
     {
         print("Low Beam On");
-        setLowBeamOn(true);
+        SetLowBeamOn(true);
     }
 
-    public void turnLowBeamOff()
+    public void TurnLowBeamOff()
     {
         print("Low Beam Off");
-        setLowBeamOn(false);
+        SetLowBeamOn(false);
     }
 }

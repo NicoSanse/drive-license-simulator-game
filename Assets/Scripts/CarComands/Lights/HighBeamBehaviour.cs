@@ -23,25 +23,25 @@ public class HighBeamBehaviour : MonoBehaviour
         
     }
 
-    public void setHighBeamOn(bool beam)
+    public void SetHighBeamOn(bool beam)
     {
         highBeamOn = beam;
     }
 
-    public bool isHighBeamOn()
+    public bool IsHighBeamOn()
     {
         return highBeamOn;
     }
 
-    public void turnHighBeamOn()
+    public void TurnHighBeamOn()
     {
         print("High Beam On");
-        setHighBeamOn(true);
+        SetHighBeamOn(true);
     }
 
-    public void turnHighBeamOff()
+    public void TurnHighBeamOff()
     {
         print("High Beam Off");
-        setHighBeamOn(false);
+        SetHighBeamOn(false);
     }
 }

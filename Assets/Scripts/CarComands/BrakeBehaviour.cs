@@ -26,12 +26,12 @@ public class BrakeBehaviour : MonoBehaviour
         
     }
 
-    public void setDeceleration(float value) 
+    public void SetDeceleration(float value) 
     {
         deceleration = value;
     }
 
-    public float getDeceleration() 
+    public float GetDeceleration() 
     {
         return deceleration;
     }
@@ -39,7 +39,7 @@ public class BrakeBehaviour : MonoBehaviour
     public void BrakeIsPressed() 
     {
         isBrakePressed = true;
-        coroutineBrake = StartCoroutine(decelerate());
+        coroutineBrake = StartCoroutine(Decelerate());
     }
 
     public void BrakeIsReleased() 
@@ -48,7 +48,7 @@ public class BrakeBehaviour : MonoBehaviour
         StopCoroutine(coroutineBrake);
     }
 
-    private IEnumerator decelerate() 
+    private IEnumerator Decelerate() 
     { 
         while (deceleration > -800f) 
         {

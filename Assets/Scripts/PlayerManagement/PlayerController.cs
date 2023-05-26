@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         print("Start");
-        gear = ClutchBehaviour.clutch.getGear();
+        gear = ClutchBehaviour.clutch.GetGear();
         speed = 0f;
     }
 
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         */
 
         //the speed is calculated by adding the acceleration and the deceleration
-        speed = AccelerationBehaviour.accelerator.getAcceleration() + BrakeBehaviour.brake.getDeceleration();
+        speed = AccelerationBehaviour.accelerator.GetAcceleration() + BrakeBehaviour.brake.GetDeceleration();
         if (speed <= 0f)
         {
             speed = 0f;
@@ -65,8 +65,8 @@ public class PlayerController : MonoBehaviour
         {
             print("You win!");
             speed = 0f;
-            AccelerationBehaviour.accelerator.setAcceleration(0f);
-            BrakeBehaviour.brake.setDeceleration(0f);
+            AccelerationBehaviour.accelerator.SetAcceleration(0f);
+            BrakeBehaviour.brake.SetDeceleration(0f);
             GameManager.LevelPassed();
         }
     }

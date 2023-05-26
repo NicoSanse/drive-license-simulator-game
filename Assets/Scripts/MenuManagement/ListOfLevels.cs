@@ -17,7 +17,7 @@ public class ListOfLevels : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             levels.Add(new Level());
-            levels[i].setId(i + 1);
+            levels[i].SetId(i + 1);
         }
     }
 
@@ -32,24 +32,24 @@ public class ListOfLevels : MonoBehaviour
         
     }
 
-    public List<Level> getLevels() 
+    public List<Level> GetLevels() 
     {
         return levels;
     }
 
-    public Level getLevel(int pos)
+    public Level GetLevel(int pos)
     {
         return levels[pos];
     }
 
-    public void setLevelPassed(int id) 
+    public void SetLevelPassed(int id) 
     {
-        levels[id-1].setPassed(true);
+        levels[id-1].SetPassed(true);
     }
 
-    public bool isLevelPassed(int id) 
+    public bool IsLevelPassed(int id) 
     {
-        return levels[id-1].isPassed();
+        return levels[id-1].IsPassed();
     }
 
     public int Length() 

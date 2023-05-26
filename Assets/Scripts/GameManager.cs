@@ -28,17 +28,17 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public ListOfLevels getListOfLevels() 
+    public ListOfLevels GetListOfLevels() 
     { 
         return listOfLevels;
     }
 
-    public Level getCurrentLevel() 
+    public Level GetCurrentLevel() 
     { 
         return currentLevel;
     }
 
-    public void setCurrentLevel(Level level) 
+    public void SetCurrentLevel(Level level) 
     { 
         currentLevel = level;
     }
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     //set the current level as passed and come back to the menu
     public static void LevelPassed()
     {
-        currentLevel.setPassed(true);
+        currentLevel.SetPassed(true);
         SceneManager.LoadScene("Menu");
     }
 }

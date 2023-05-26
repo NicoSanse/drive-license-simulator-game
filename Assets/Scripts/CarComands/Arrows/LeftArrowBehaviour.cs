@@ -23,24 +23,24 @@ public class LeftArrowBehaviour : MonoBehaviour
         
     }
 
-    public void setLeftArrowOn(bool arrow)
+    public void SetLeftArrowOn(bool arrow)
     {
         leftArrowOn = arrow;
     }
 
-    public bool isLeftArrowOn()
+    public bool IsLeftArrowOn()
     {
         return leftArrowOn;
     }
 
-    public void turnLeftArrowOn()
+    public void TurnLeftArrowOn()
     {
         print("Left Arrows On");
-        setLeftArrowOn(true);
+        SetLeftArrowOn(true);
     }
 
-    public void turnLeftArrowOff(){
+    public void TurnLeftArrowOff(){
         print("Left Arrows Off");
-        setLeftArrowOn(false);
+        SetLeftArrowOn(false);
     }
 }

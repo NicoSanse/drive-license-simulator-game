@@ -11,22 +11,22 @@ public class Level
         passed = false;
     }
 
-    public void setPassed(bool passed) 
+    public void SetPassed(bool passed) 
     {
         this.passed = passed;
     }
 
-    public bool isPassed() 
+    public bool IsPassed() 
     {
         return passed;
     }
 
-    public void setId(int id) 
+    public void SetId(int id) 
     {
         this.id = id;
     }
 
-    public int getId() 
+    public int GetId() 
     {
         return id;
     }

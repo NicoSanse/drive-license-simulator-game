@@ -391,7 +391,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 532196140}
         m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-        m_MethodName: clickOnRightArrow
+        m_MethodName: ClickOnRightArrow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -856,7 +856,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 532196140}
           m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-          m_MethodName: clickOnBrake
+          m_MethodName: ClickOnBrake
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -872,7 +872,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 532196140}
           m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-          m_MethodName: releaseBrake
+          m_MethodName: ReleaseBrake
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1312,7 +1312,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 532196140}
         m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-        m_MethodName: clickOnHighBeam
+        m_MethodName: ClickOnHighBeam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9035,7 +9035,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 532196140}
         m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-        m_MethodName: clickOnLeftArrow
+        m_MethodName: ClickOnLeftArrow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9192,7 +9192,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 532196140}
           m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-          m_MethodName: clickOnAccelerator
+          m_MethodName: ClickOnAccelerator
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9208,7 +9208,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 532196140}
           m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-          m_MethodName: releaseAccelerator
+          m_MethodName: ReleaseAccelerator
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9645,7 +9645,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 532196140}
           m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-          m_MethodName: clickOnClutch
+          m_MethodName: ClickOnClutch
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9661,7 +9661,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 532196140}
           m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-          m_MethodName: releaseClutch
+          m_MethodName: ReleaseClutch
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10610,7 +10610,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 532196140}
         m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-        m_MethodName: clickOnLowBeam
+        m_MethodName: ClickOnLowBeam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

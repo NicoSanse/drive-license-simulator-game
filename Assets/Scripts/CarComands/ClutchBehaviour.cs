@@ -31,12 +31,12 @@ public class ClutchBehaviour : MonoBehaviour
         
     }
 
-    public void setGear(int gear) 
+    public void SetGear(int gear) 
     {
         currentGear = gear;
     }
 
-    public int getGear() 
+    public int GetGear() 
     {
         return currentGear;
     }
@@ -46,19 +46,19 @@ public class ClutchBehaviour : MonoBehaviour
         return clutchPressed;
     }
 
-    public void setClutchPressed(bool clutch)
+    public void SetClutchPressed(bool clutch)
     {
         clutchPressed = clutch;
     }
 
     public void ClutchIsPressed()
     {
-        setClutchPressed(true);
+        SetClutchPressed(true);
         //qua bisogna fare cose per gestire l'effettivo cambio marcia
         //sfruttando il valore clutchPressed
         //le istruzioni che seguono assumono che il cambio marcia sia già avvenuto
         loadingBar.SetActive(true);
-        coroutineLoadBar = StartCoroutine(loadBar(findTimeForChangeTheGear(currentGear)));
+        coroutineLoadBar = StartCoroutine(LoadBar(FindTimeForChangeTheGear(currentGear)));
     }
 
     public void ClutchIsReleased()
@@ -79,12 +79,12 @@ public class ClutchBehaviour : MonoBehaviour
             //far spegnere la macchina
         }
 
-        setClutchPressed(false);
+        SetClutchPressed(false);
         loadingBar.SetActive(false);
-        emptyBar();
+        EmptyBar();
     }
 
-    private float findTimeForChangeTheGear(int gear) 
+    private float FindTimeForChangeTheGear(int gear) 
     { 
         switch (gear) 
         { 
@@ -107,7 +107,7 @@ public class ClutchBehaviour : MonoBehaviour
         }
     }
 
-    private IEnumerator loadBar(float incrementValue)
+    private IEnumerator LoadBar(float incrementValue)
     {
 
         while(loadingBar.GetComponent<Slider>().value <= 1f)
@@ -119,7 +119,7 @@ public class ClutchBehaviour : MonoBehaviour
         yield return null;
     }
 
-    private void emptyBar()
+    private void EmptyBar()
     {
         loadingBar.GetComponent<Slider>().value = 0f;
     }

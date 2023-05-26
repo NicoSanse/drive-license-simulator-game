@@ -14,9 +14,9 @@ public class Menu : MonoBehaviour
     //i have passed through the little image of the locker on the right of the button
     void Start()
     {
-        for (int i = 0; i < GameManager.gameManager.getListOfLevels().Length(); i++)
+        for (int i = 0; i < GameManager.gameManager.GetListOfLevels().Length(); i++)
         {
-            if (GameManager.gameManager.getListOfLevels().getLevel(i).isPassed())
+            if (GameManager.gameManager.GetListOfLevels().GetLevel(i).IsPassed())
             {
                 switch (i)
                 {
@@ -56,7 +56,7 @@ public class Menu : MonoBehaviour
         {
             case "FirstLevelButton":
                 print("StartFirstLevel");
-                GameManager.gameManager.setCurrentLevel(GameManager.gameManager.getListOfLevels().getLevel(0));
+                GameManager.gameManager.SetCurrentLevel(GameManager.gameManager.GetListOfLevels().GetLevel(0));
                 SceneManager.LoadScene("LevelOne");
                 break;
             case "SecondLevelButton":
@@ -94,9 +94,9 @@ public class Menu : MonoBehaviour
     //The first level is always available
     public void CheckLevel(int position) 
     {
-        if (GameManager.gameManager.getListOfLevels().getLevel(position).isPassed())
+        if (GameManager.gameManager.GetListOfLevels().GetLevel(position).IsPassed())
         {
-            GameManager.gameManager.setCurrentLevel(GameManager.gameManager.getListOfLevels().getLevel(position + 1));
+            GameManager.gameManager.SetCurrentLevel(GameManager.gameManager.GetListOfLevels().GetLevel(position + 1));
             SceneManager.LoadScene(position + 3);
         }
         else

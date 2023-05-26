@@ -15,89 +15,89 @@ public class GUIManager : MonoBehaviour
 
     }
 
-    public void clickOnLeftArrow() 
+    public void ClickOnLeftArrow() 
     { 
         //implementazione da sistemare: la freccia dovrebbe togliersi da sola
         //il controllo si servirà dell'accelerometro del cellulare
-        if(LeftArrowBehaviour.leftArrow.isLeftArrowOn())
+        if(LeftArrowBehaviour.leftArrow.IsLeftArrowOn())
         {
-            LeftArrowBehaviour.leftArrow.turnLeftArrowOff();
+            LeftArrowBehaviour.leftArrow.TurnLeftArrowOff();
         }
         else
         {
-            LeftArrowBehaviour.leftArrow.turnLeftArrowOn();
+            LeftArrowBehaviour.leftArrow.TurnLeftArrowOn();
         }
     }
 
-    public void clickOnRightArrow() 
+    public void ClickOnRightArrow() 
     { 
         //implementazione da sistemare: la freccia dovrebbe togliersi da sola
         //il controllo si servirà dell'accelerometro del cellulare
-        if(RightArrowBehaviour.rightArrow.isRightArrowOn())
+        if(RightArrowBehaviour.rightArrow.IsRightArrowOn())
         {
-            RightArrowBehaviour.rightArrow.turnRightArrowOff();
+            RightArrowBehaviour.rightArrow.TurnRightArrowOff();
         }
         else
         {
-            RightArrowBehaviour.rightArrow.turnRightArrowOn();
+            RightArrowBehaviour.rightArrow.TurnRightArrowOn();
         }
     }
 
-    public void clickOnHighBeam() 
+    public void ClickOnHighBeam() 
     { 
-        if(HighBeamBehaviour.highBeam.isHighBeamOn())
+        if(HighBeamBehaviour.highBeam.IsHighBeamOn())
         {
-            HighBeamBehaviour.highBeam.turnHighBeamOff();
+            HighBeamBehaviour.highBeam.TurnHighBeamOff();
         }
         else
         {
-            HighBeamBehaviour.highBeam.turnHighBeamOn();
+            HighBeamBehaviour.highBeam.TurnHighBeamOn();
         }
     }
 
-    public void clickOnLowBeam() 
+    public void ClickOnLowBeam() 
     { 
-        if(LowBeamBehaviour.lowBeam.isLowBeamOn())
+        if(LowBeamBehaviour.lowBeam.IsLowBeamOn())
         {
-            LowBeamBehaviour.lowBeam.turnLowBeamOff();
+            LowBeamBehaviour.lowBeam.TurnLowBeamOff();
         }
         else
         {
-            LowBeamBehaviour.lowBeam.turnLowBeamOn();
+            LowBeamBehaviour.lowBeam.TurnLowBeamOn();
         }
     }
 
-    public void clickOnAccelerator() 
+    public void ClickOnAccelerator() 
     { 
         AccelerationBehaviour.accelerator.AcceleratorIsPressed();
     }
 
-    public void releaseAccelerator()
+    public void ReleaseAccelerator()
     {
         AccelerationBehaviour.accelerator.AcceleratorIsReleased();
     }
 
-    public void clickOnBrake() 
+    public void ClickOnBrake() 
     { 
         BrakeBehaviour.brake.BrakeIsPressed();
     }
 
-    public void releaseBrake() 
+    public void ReleaseBrake() 
     { 
         BrakeBehaviour.brake.BrakeIsReleased();
     }
 
-    public void clickOnClutch() 
+    public void ClickOnClutch() 
     { 
         ClutchBehaviour.clutch.ClutchIsPressed();
     }
 
-    public void releaseClutch() 
+    public void ReleaseClutch() 
     { 
         ClutchBehaviour.clutch.ClutchIsReleased();
     }
 
-    public void clickOnChangeButton() 
+    public void ClickOnChangeButton() 
     { 
         print("Change Button");
     }
