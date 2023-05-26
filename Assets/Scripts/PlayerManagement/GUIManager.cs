@@ -15,47 +15,60 @@ public class GUIManager : MonoBehaviour
 
     }
 
-    public void clickOnLeftArrow() { 
+    public void clickOnLeftArrow() 
+    { 
         //implementazione da sistemare: la freccia dovrebbe togliersi da sola
         //il controllo si servirà dell'accelerometro del cellulare
-        if(LeftArrowBehaviour.leftArrow.isLeftArrowOn()){
+        if(LeftArrowBehaviour.leftArrow.isLeftArrowOn())
+        {
             LeftArrowBehaviour.leftArrow.turnLeftArrowOff();
         }
-        else{
+        else
+        {
             LeftArrowBehaviour.leftArrow.turnLeftArrowOn();
         }
     }
 
-    public void clickOnRightArrow() { 
+    public void clickOnRightArrow() 
+    { 
         //implementazione da sistemare: la freccia dovrebbe togliersi da sola
         //il controllo si servirà dell'accelerometro del cellulare
-        if(RightArrowBehaviour.rightArrow.isRightArrowOn()){
+        if(RightArrowBehaviour.rightArrow.isRightArrowOn())
+        {
             RightArrowBehaviour.rightArrow.turnRightArrowOff();
         }
-        else{
+        else
+        {
             RightArrowBehaviour.rightArrow.turnRightArrowOn();
         }
     }
 
-    public void clickOnHighBeam() { 
-        if(HighBeamBehaviour.highBeam.isHighBeamOn()){
+    public void clickOnHighBeam() 
+    { 
+        if(HighBeamBehaviour.highBeam.isHighBeamOn())
+        {
             HighBeamBehaviour.highBeam.turnHighBeamOff();
         }
-        else{
+        else
+        {
             HighBeamBehaviour.highBeam.turnHighBeamOn();
         }
     }
 
-    public void clickOnLowBeam() { 
-        if(LowBeamBehaviour.lowBeam.isLowBeamOn()){
+    public void clickOnLowBeam() 
+    { 
+        if(LowBeamBehaviour.lowBeam.isLowBeamOn())
+        {
             LowBeamBehaviour.lowBeam.turnLowBeamOff();
         }
-        else{
+        else
+        {
             LowBeamBehaviour.lowBeam.turnLowBeamOn();
         }
     }
 
-    public void clickOnAccelerator() { 
+    public void clickOnAccelerator() 
+    { 
         AccelerationBehaviour.accelerator.AcceleratorIsPressed();
     }
 
@@ -64,23 +77,28 @@ public class GUIManager : MonoBehaviour
         AccelerationBehaviour.accelerator.AcceleratorIsReleased();
     }
 
-    public void clickOnBrake() { 
+    public void clickOnBrake() 
+    { 
         BrakeBehaviour.brake.BrakeIsPressed();
     }
 
-    public void releaseBrake() { 
+    public void releaseBrake() 
+    { 
         BrakeBehaviour.brake.BrakeIsReleased();
     }
 
-    public void clickOnClutch() { 
+    public void clickOnClutch() 
+    { 
         ClutchBehaviour.clutch.ClutchIsPressed();
     }
 
-    public void releaseClutch() { 
+    public void releaseClutch() 
+    { 
         ClutchBehaviour.clutch.ClutchIsReleased();
     }
 
-    public void clickOnChangeButton() { 
+    public void clickOnChangeButton() 
+    { 
         print("Change Button");
     }
 }

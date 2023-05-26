@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager gameManager;
-    public static ListOfLevels listOfLevels;
-    public static Level currentLevel;
-    void Awake() { 
+    private ListOfLevels listOfLevels;
+    private Level currentLevel;
+    void Awake() 
+    { 
         gameManager = this;
         listOfLevels = new ListOfLevels();
     }
@@ -28,30 +28,25 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public static ListOfLevels getListOfLevels() { 
+    public ListOfLevels getListOfLevels() 
+    { 
         return listOfLevels;
     }
 
-    public static Level getCurrentLevel() { 
+    public Level getCurrentLevel() 
+    { 
         return currentLevel;
     }
 
-    public static void setCurrentLevel(Level level) { 
+    public void setCurrentLevel(Level level) 
+    { 
         currentLevel = level;
     }
 
     //set the current level as passed and come back to the menu
-    public static void LevelPassed()
+    public void LevelPassed()
     {
-        //ho appea ggiunto il ciclo for, ma non ha funzionato
         currentLevel.setPassed(true);
-        for (int i = 0; i < listOfLevels.Length(); i++)
-        {
-            if (listOfLevels.getLevel(i).getId() == currentLevel.getId())
-            {
-                listOfLevels.getLevel(i).setPassed(true);
-            }
-        }
         SceneManager.LoadScene("Menu");
     }
 }

@@ -14,17 +14,9 @@ public class Menu : MonoBehaviour
     //i have passed through the little image of the locker on the right of the button
     void Start()
     {
-        print(GameManager.listOfLevels.getLevel(0).isPassed());
-        print(GameManager.listOfLevels.getLevel(1).isPassed());
-        print(GameManager.currentLevel.isPassed());
-        print(GameManager.listOfLevels.getLevel(0).getId());
-        print(GameManager.currentLevel.getId());
-        //currentLevel e level(0) hanno lo stesso id, ma non lo stesso dato
-        //sono istanze diverse, ma dove le ho create?
-        
-        for (int i = 0; i < GameManager.listOfLevels.Length(); i++)
+        for (int i = 0; i < GameManager.gameManager.getListOfLevels().Length(); i++)
         {
-            if (GameManager.listOfLevels.getLevel(i).isPassed())
+            if (GameManager.gameManager.getListOfLevels().getLevel(i).isPassed())
             {
                 switch (i)
                 {
@@ -64,7 +56,7 @@ public class Menu : MonoBehaviour
         {
             case "FirstLevelButton":
                 print("StartFirstLevel");
-                GameManager.currentLevel = GameManager.listOfLevels.getLevel(0);
+                GameManager.gameManager.setCurrentLevel(GameManager.gameManager.getListOfLevels().getLevel(0));
                 SceneManager.LoadScene("LevelOne");
                 break;
             case "SecondLevelButton":
@@ -102,9 +94,9 @@ public class Menu : MonoBehaviour
     //The first level is always available
     public void CheckLevel(int position) 
     {
-        if (GameManager.listOfLevels.getLevel(position).isPassed())
+        if (GameManager.gameManager.getListOfLevels().getLevel(position).isPassed())
         {
-            GameManager.currentLevel = GameManager.listOfLevels.getLevel(position + 1);
+            GameManager.gameManager.setCurrentLevel(GameManager.gameManager.getListOfLevels().getLevel(position + 1));
             SceneManager.LoadScene(position + 3);
         }
         else

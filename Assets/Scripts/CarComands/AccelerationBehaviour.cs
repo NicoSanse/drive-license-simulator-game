@@ -27,29 +27,34 @@ public class AccelerationBehaviour : MonoBehaviour
         
     }
 
-    public void setAcceleration(float value) {
+    public void setAcceleration(float value) 
+    {
         acceleration = value;
     }
 
-    public float getAcceleration() {
+    public float getAcceleration() 
+    {
         return acceleration;
     }
 
-    public void AcceleratorIsPressed() {
+    public void AcceleratorIsPressed() 
+    {
         isAcceleratorPressed = true;
         coroutineAccelerate = StartCoroutine(accelerate());
     }
 
-    public void AcceleratorIsReleased() {
+    public void AcceleratorIsReleased()
+    {
         isAcceleratorPressed = false;
         StopCoroutine(coroutineAccelerate);
     }
 
-    private IEnumerator accelerate() {
+    private IEnumerator accelerate() 
+    {
         while (acceleration < 500f) {
             print("acceleration: " + acceleration);
             acceleration += 1.5f;
             yield return new WaitForSeconds(0.5f);
         }
-     }
+    }
 }

@@ -31,11 +31,13 @@ public class ClutchBehaviour : MonoBehaviour
         
     }
 
-    public void setGear(int gear) {
+    public void setGear(int gear) 
+    {
         currentGear = gear;
     }
 
-    public int getGear() {
+    public int getGear() 
+    {
         return currentGear;
     }
 
@@ -84,7 +86,8 @@ public class ClutchBehaviour : MonoBehaviour
 
     private float findTimeForChangeTheGear(int gear) 
     { 
-        switch (gear) { 
+        switch (gear) 
+        { 
             case 0:
                 return 0f;
             case 1:

@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class ListOfLevels : MonoBehaviour
 {
-
-    public static List<Level> levels;
+    //andranno fatte delle cose per recuperare i dati dal file di salvataggio
+    private static List<Level> levels = new List<Level>();
+    //questa riga è molto importante, per qualche motivo la lista va inizializzata qui
+    //forse se la inizializzo nella Awake, levels verrebbe inizializzata più volte 
+    //cioè quando diventano attive le classi che usano LisTOfLevels,
+    //ma non saprei risalire a tutte le chiamate e non avrebbe senso perchè anche il ciclo for dovrebbe ripetersi
 
     // Start is called before the first frame update
     void Awake()
     {
-        //andranno fatte delle cose per recuperare i dati dal file di salvataggio
-        levels = new List<Level>();
         for (int i = 0; i < 10; i++)
         {
             levels.Add(new Level());
@@ -35,9 +37,9 @@ public class ListOfLevels : MonoBehaviour
         return levels;
     }
 
-    public Level getLevel(int id)
+    public Level getLevel(int pos)
     {
-        return levels[id];
+        return levels[pos];
     }
 
     public void setLevelPassed(int id) 
@@ -50,7 +52,8 @@ public class ListOfLevels : MonoBehaviour
         return levels[id-1].isPassed();
     }
 
-    public int Length() { 
+    public int Length() 
+    { 
         return levels.Count;
     }
 
