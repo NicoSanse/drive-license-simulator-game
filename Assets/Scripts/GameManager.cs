@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
     //set the current level as passed and come back to the menu
     public static void LevelPassed()
     {
-        print("prova");
         currentLevel.setPassed(true);
         SceneManager.LoadScene("Menu");
     }
