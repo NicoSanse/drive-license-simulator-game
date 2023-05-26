@@ -53,7 +53,7 @@ public class BrakeBehaviour : MonoBehaviour
         while (deceleration > -800f) 
         {
             print("deceleration: " + deceleration);
-            deceleration -= 3.5f;
+            deceleration -= 7f;
             yield return new WaitForSeconds(0.5f);
         }
     }

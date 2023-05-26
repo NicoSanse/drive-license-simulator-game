@@ -97,8 +97,16 @@ public class GUIManager : MonoBehaviour
         ClutchBehaviour.clutch.ClutchIsReleased();
     }
 
-    public void ClickOnChangeButton() 
-    { 
-        print("Change Button");
+    public void BeginDragChangePanel() 
+    {
+        //raccogliere le coordinate del primo touch
+        ChangeGearPanelBehaviour.changeGear.GetFirstTouchCoordinates();
+    }
+
+    public void EndDragChangePanel() 
+    {
+        //raccogliere le coordinate dell'ultimo touch
+        ChangeGearPanelBehaviour.changeGear.GetLastTouchCoordinates();
+        ChangeGearPanelBehaviour.changeGear.ChangeGear();
     }
 }

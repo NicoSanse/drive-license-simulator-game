@@ -18,34 +18,15 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         print("Start");
-        gear = ClutchBehaviour.clutch.GetGear();
+        gear = ClutchBehaviour.clutch.GetCurrentGear();
         speed = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (gear == 1){ 
-            print("Gear 1");
-        }
-        if (gear == 2)
-        {
-            print("Gear 2");
-        }
-        if (gear == 3)
-        {
-            print("Gear 3");
-        }
-        if (gear == 4)
-        {
-            print("Gear 4");
-        }
-        if (gear == 5)
-        {
-            print("Gear 5");
-        }
-        */
+        //non opportuno pescare la gear nella Update, andrà trovato un modo più adatto
+        gear = ClutchBehaviour.clutch.GetCurrentGear();
 
         //the speed is calculated by adding the acceleration and the deceleration
         speed = AccelerationBehaviour.accelerator.GetAcceleration() + BrakeBehaviour.brake.GetDeceleration();

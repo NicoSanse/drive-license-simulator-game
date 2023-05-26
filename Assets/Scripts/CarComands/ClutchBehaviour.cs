@@ -7,7 +7,7 @@ public class ClutchBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject loadingBar;
     public static ClutchBehaviour clutch;
-    private enum Gears {Gear1 = 1, Gear2 = 2, Gear3 = 3, Gear4 = 4, Gear5 = 5, GearR = -1, GearN = 0};
+    public enum Gears {Gear1 = 1, Gear2 = 2, Gear3 = 3, Gear4 = 4, Gear5 = 5, GearR = -1, GearN = 0};
     private bool clutchPressed;
     private Coroutine coroutineLoadBar;
     private int currentGear;
@@ -22,7 +22,7 @@ public class ClutchBehaviour : MonoBehaviour
     void Start()
     {
         clutchPressed = false;
-        currentGear = (int)Gears.Gear1;
+        currentGear = (int) Gears.Gear1;
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class ClutchBehaviour : MonoBehaviour
         currentGear = gear;
     }
 
-    public int GetGear() 
+    public int GetCurrentGear() 
     {
         return currentGear;
     }
@@ -78,6 +78,8 @@ public class ClutchBehaviour : MonoBehaviour
             print("Clutch released too early");
             //far spegnere la macchina
         }
+
+        print("current gear: " + currentGear);
 
         SetClutchPressed(false);
         loadingBar.SetActive(false);

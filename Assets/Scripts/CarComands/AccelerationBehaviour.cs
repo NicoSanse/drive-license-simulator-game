@@ -53,7 +53,7 @@ public class AccelerationBehaviour : MonoBehaviour
     {
         while (acceleration < 500f) {
             print("acceleration: " + acceleration);
-            acceleration += 1.5f;
+            acceleration += 3.5f;
             yield return new WaitForSeconds(0.5f);
         }
     }
