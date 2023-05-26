@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
-    private ListOfLevels listOfLevels;
-    private Level currentLevel;
+    private static ListOfLevels listOfLevels;
+    private static Level currentLevel;
     void Awake() 
     { 
         gameManager = this;
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     }
 
     //set the current level as passed and come back to the menu
-    public void LevelPassed()
+    public static void LevelPassed()
     {
         currentLevel.setPassed(true);
         SceneManager.LoadScene("Menu");

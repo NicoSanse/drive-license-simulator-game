@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
             speed = 0f;
             AccelerationBehaviour.accelerator.setAcceleration(0f);
             BrakeBehaviour.brake.setDeceleration(0f);
-            GameManager.gameManager.LevelPassed();
+            GameManager.LevelPassed();
         }
     }
 }
