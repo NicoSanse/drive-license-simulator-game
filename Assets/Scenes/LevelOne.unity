@@ -1141,7 +1141,7 @@ MonoBehaviour:
         - m_Target: {fileID: 532196140}
           m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
           m_MethodName: EndDragChangePanel
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1157,7 +1157,7 @@ MonoBehaviour:
         - m_Target: {fileID: 532196140}
           m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
           m_MethodName: BeginDragChangePanel
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

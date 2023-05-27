@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
+
+
+
 
 public class GUIManager : MonoBehaviour
 {
@@ -97,15 +102,21 @@ public class GUIManager : MonoBehaviour
         ClutchBehaviour.clutch.ClutchIsReleased();
     }
 
-    public void BeginDragChangePanel() 
+    //finire di rivedere le ultime due funziuni
+
+    public void BeginDragChangePanel(BaseEventData data) 
     {
         //raccogliere le coordinate del primo touch
+        PointerEventData eventData = data as PointerEventData;
+        print(eventData.ToString());
         ChangeGearPanelBehaviour.changeGear.GetFirstTouchCoordinates();
     }
 
-    public void EndDragChangePanel() 
+    public void EndDragChangePanel(BaseEventData data) 
     {
         //raccogliere le coordinate dell'ultimo touch
+        PointerEventData eventData = data as PointerEventData;
+        print(eventData.ToString());
         ChangeGearPanelBehaviour.changeGear.GetLastTouchCoordinates();
         ChangeGearPanelBehaviour.changeGear.ChangeGear();
     }
