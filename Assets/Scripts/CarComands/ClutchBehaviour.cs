@@ -7,10 +7,10 @@ public class ClutchBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject loadingBar;
     public static ClutchBehaviour clutch;
-    public enum Gears {Gear1 = 1, Gear2 = 2, Gear3 = 3, Gear4 = 4, Gear5 = 5, GearR = -1, GearN = 0};
+    public enum Gear { Gear1 = 1, Gear2 = 2, Gear3 = 3, Gear4 = 4, Gear5 = 5, GearR = -1, GearN = 0 };
     private bool clutchPressed;
     private Coroutine coroutineLoadBar;
-    private int currentGear;
+    private Gear currentGear;
 
 
     void Awake()
@@ -22,21 +22,21 @@ public class ClutchBehaviour : MonoBehaviour
     void Start()
     {
         clutchPressed = false;
-        currentGear = (int) Gears.Gear1;
+        currentGear = Gear.Gear1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void SetGear(int gear) 
+    public void SetGear(Gear gear)
     {
         currentGear = gear;
     }
 
-    public int GetCurrentGear() 
+    public Gear GetCurrentGear()
     {
         return currentGear;
     }
@@ -65,11 +65,11 @@ public class ClutchBehaviour : MonoBehaviour
     {
         StopCoroutine(coroutineLoadBar);
 
-        if(currentGear == 0)
+        if (currentGear == 0)
         {
             print("auto in folle");
         }
-        else if (currentGear != 0 && loadingBar.GetComponent<Slider>().value > 0.9f) 
+        else if (currentGear != 0 && loadingBar.GetComponent<Slider>().value > 0.9f)
         {
             print("Clutch Released ok");
         }
@@ -86,24 +86,24 @@ public class ClutchBehaviour : MonoBehaviour
         EmptyBar();
     }
 
-    private float FindTimeForChangeTheGear(int gear) 
-    { 
-        switch (gear) 
-        { 
-            case 0:
+    private float FindTimeForChangeTheGear(Gear gear)
+    {
+        switch (gear)
+        {
+            case Gear.Gear1:
+                return 0.005f;
+            case Gear.Gear2:
+                return 0.01f;
+            case Gear.Gear3:
+                return 0.015f;
+            case Gear.Gear4:
+                return 0.02f;
+            case Gear.Gear5:
+                return 0.025f;
+            case Gear.GearR:
+                return 0.005f;
+            case Gear.GearN:
                 return 0f;
-            case 1:
-                return 0.05f;
-            case 2:
-                return 0.1f;
-            case 3: 
-                return 0.12f;
-            case 4:
-                return 0.15f;
-            case 5:
-                return 0.2f;
-            case -1:
-                return 0.05f;
             default:
                 return 0f;
         }
@@ -112,9 +112,9 @@ public class ClutchBehaviour : MonoBehaviour
     private IEnumerator LoadBar(float incrementValue)
     {
 
-        while(loadingBar.GetComponent<Slider>().value <= 1f)
+        while (loadingBar.GetComponent<Slider>().value <= 1f)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
             loadingBar.GetComponent<Slider>().value += incrementValue;
         }
 

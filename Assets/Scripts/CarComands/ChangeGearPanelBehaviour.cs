@@ -7,6 +7,9 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
 {
     //private Vector2 previousPosition;
     public static ChangeGearPanelBehaviour changeGear;
+    private Vector2 firstTouchCoordinates;
+    private Vector2 lastTouchCoordinates;
+    private string directionDragged;
 
     void Awake()
     {
@@ -23,12 +26,60 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     {
 
     }
-    /*
+    
 
-    public void OnDrag(PointerEventData eventData)
+    private void ChangeGear() 
     {
-        Vector2 currentPosition = eventData.position;
-        Vector2 direction = currentPosition - previousPosition;
+        CalculateDirection();
+        print(directionDragged);
+        
+        
+        if (directionDragged == "up")
+        {
+            if (ClutchBehaviour.clutch.GetCurrentGear() != ClutchBehaviour.Gear.GearN &&
+                ClutchBehaviour.clutch.GetCurrentGear() != ClutchBehaviour.Gear.GearR &&
+                ClutchBehaviour.clutch.GetCurrentGear() != ClutchBehaviour.Gear.Gear5) 
+                {
+                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.clutch.GetCurrentGear() + 1);
+                    print(ClutchBehaviour.clutch.GetCurrentGear());
+                }
+        }
+
+        if(directionDragged == "down")
+        {
+            ClutchBehaviour.clutch.SetGear(ClutchBehaviour.clutch.GetCurrentGear() - 1);
+            print(ClutchBehaviour.clutch.GetCurrentGear());
+        }
+
+        if (directionDragged == "left")
+        {
+            ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearR);
+            print(ClutchBehaviour.clutch.GetCurrentGear());
+        }
+
+        if (directionDragged == "right")
+        {
+            ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearN);
+            print(ClutchBehaviour.clutch.GetCurrentGear());
+        }
+        
+        
+    }
+
+    public void TakeFirstTouchCoordinates(PointerEventData eventData) 
+    {
+        firstTouchCoordinates = eventData.position;
+    }
+
+    public void TakeLastTouchCoordinates(PointerEventData eventData) 
+    {
+        lastTouchCoordinates = eventData.position;
+        ChangeGear();
+    }
+
+    private void CalculateDirection() 
+    {
+        Vector2 direction = lastTouchCoordinates - firstTouchCoordinates;
 
         //if (ClutchBehaviour.clutch.IsClutchPressed()) 
         //{ 
@@ -37,9 +88,11 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         {
             if (direction.x > 0)
             {
+                directionDragged = "right";
             }
             else if (direction.x < 0)
             {
+                directionDragged = "left";
             }
         }
         else
@@ -47,57 +100,17 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
             //il seguente comportamento si può revisionare
             if (direction.y > 0)
             {
+                directionDragged = "up";
             }
             else if (direction.y < 0)
             {
+                directionDragged = "down";
             }
         }
-    //}
-    //else
-    //{
-    //    Debug.Log("Frizione non premuta");
-    //}
-
-    previousPosition = currentPosition;
-    }
-
-    */
-
-    public void ChangeGear() 
-    {
-        CalculateDirection();
-        /*
-        if (directionDragged == "up") 
-        {
-            ClutchBehaviour.clutch.SetGear((int) ClutchBehaviour.clutch.GetCurrentGear() + 1);
-        }
-        else if (directionDragged == "down")
-        {
-            ClutchBehaviour.clutch.SetGear((int) ClutchBehaviour.clutch.GetCurrentGear() - 1);
-        }
-        else if (directionDragged == "left")
-        {
-            ClutchBehaviour.clutch.SetGear((int) ClutchBehaviour.Gears.GearR);
-        }
-        else if (directionDragged == "right")
-        {
-            ClutchBehaviour.clutch.SetGear((int) ClutchBehaviour.Gears.GearN);
-        }
-        */
-    }
-
-    public void GetFirstTouchCoordinates() 
-    {
-        //immagazzinare coordinate
-    }
-
-    public void GetLastTouchCoordinates() 
-    {
-        //immagazzinare coordinate
-    }
-
-    public void CalculateDirection() 
-    {
-        //calcolare direzione
+        //}
+        //else
+        //{
+        //    print("Frizione non premuta");
+        //}
     }
 }

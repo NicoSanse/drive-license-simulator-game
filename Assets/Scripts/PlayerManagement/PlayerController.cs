@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController player;
-    private int gear;
+    private ClutchBehaviour.Gear gear;
     private float speed;
 
     void Awake()
