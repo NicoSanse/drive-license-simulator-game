@@ -25,9 +25,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //non opportuno pescare la gear nella Update, andrà trovato un modo più adatto
-        gear = ClutchBehaviour.clutch.GetCurrentGear();
-
+        
         //the speed is calculated by adding the acceleration and the deceleration
         speed = AccelerationBehaviour.accelerator.GetAcceleration() + BrakeBehaviour.brake.GetDeceleration();
         if (speed <= 0f)
@@ -50,5 +48,11 @@ public class PlayerController : MonoBehaviour
             BrakeBehaviour.brake.SetDeceleration(0f);
             GameManager.LevelPassed();
         }
+    }
+
+    public void NotifyGearChanged()
+    {
+        gear = ClutchBehaviour.clutch.GetCurrentGear();
+        print("Gear changed to " + gear);
     }
 }

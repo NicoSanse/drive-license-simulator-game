@@ -111,4 +111,10 @@ public class GUIManager : MonoBehaviour
         PointerEventData eventData = data as PointerEventData;
         ChangeGearPanelBehaviour.changeGear.TakeLastTouchCoordinates(eventData);
     }
+
+    public void SetNeutralGear() 
+    { 
+        ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearN);
+        PlayerController.player.NotifyGearChanged();
+    }
 }
