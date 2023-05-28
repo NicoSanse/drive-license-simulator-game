@@ -79,8 +79,6 @@ public class ClutchBehaviour : MonoBehaviour
             //far spegnere la macchina
         }
 
-        print("current gear: " + currentGear);
-
         SetClutchPressed(false);
         loadingBar.SetActive(false);
         EmptyBar();

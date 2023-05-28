@@ -10,6 +10,8 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     private Vector2 firstTouchCoordinates;
     private Vector2 lastTouchCoordinates;
     private string directionDragged;
+    private Coroutine coroutineTimeForNeutralGear;
+    private float timeForNeutralGear;
 
     void Awake()
     {
@@ -196,5 +198,33 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         //{
         //    print("Frizione non premuta");
         //}
+    }
+
+    public void NeutralGear()
+    {
+        coroutineTimeForNeutralGear = StartCoroutine(TimeForNeutralGear());
+    }
+
+    private IEnumerator TimeForNeutralGear()
+    {
+        timeForNeutralGear = 0f;
+        while (timeForNeutralGear < 1f)
+        {
+            timeForNeutralGear += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        yield return null;
+    }
+
+    public void ReleseGearChangePanel()
+    {
+        StopCoroutine(coroutineTimeForNeutralGear);
+
+        if (timeForNeutralGear > 0.95f) 
+        {
+            ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearN);
+            PlayerController.player.NotifyGearChanged();
+        }
     }
 }

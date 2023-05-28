@@ -113,8 +113,12 @@ public class GUIManager : MonoBehaviour
     }
 
     public void SetNeutralGear() 
-    { 
-        ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearN);
-        PlayerController.player.NotifyGearChanged();
+    {
+        ChangeGearPanelBehaviour.changeGear.NeutralGear();
+    }
+
+    public void ReleseGearChangePanel() 
+    {
+        ChangeGearPanelBehaviour.changeGear.ReleseGearChangePanel();
     }
 }
