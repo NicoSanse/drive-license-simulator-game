@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638188072101900454
-    m_Hash: 1672212342
+      ticks: 638207003253158307
+    m_Hash: 3588562117
   m_LockFileStatus:
     m_FilePath: C:/Users/nicos/drive license simulator game/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638188072101989220
-    m_Hash: 1076021058
+      ticks: 638207003253168456
+    m_Hash: 1510854390
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -635,6 +635,7 @@ m_ResolvedPackages:
     - 1.3.2
     - 1.3.3
     - 1.3.4
+    - 1.3.5
     - 2.0.1-exp.1
     - 2.0.1-exp.2
     - 2.0.1-pre.12
@@ -647,6 +648,7 @@ m_ResolvedPackages:
     - 1.3.2
     - 1.3.3
     - 1.3.4
+    - 1.3.5
     - 2.0.1-exp.1
     - 2.0.1-exp.2
     - 2.0.1-pre.12
@@ -3135,8 +3137,10 @@ m_ResolvedPackages:
     - 2.0.2
     - 2.1.0
     - 2.1.1
+    - 2.2.0
     compatible:
     - 2.1.1
+    - 2.2.0
     verified: 2.1.1
   dependencies:
   - name: com.unity.modules.androidjni

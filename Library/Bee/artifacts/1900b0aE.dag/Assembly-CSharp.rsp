@@ -363,7 +363,7 @@
 "Assets/Scripts/CarComands/Arrows/LeftArrowBehaviour.cs"
 "Assets/Scripts/CarComands/Arrows/RightArrowBehaviour.cs"
 "Assets/Scripts/CarComands/BrakeBehaviour.cs"
-"Assets/Scripts/CarComands/ChangeButton.cs"
+"Assets/Scripts/CarComands/ChangeGearPanelBehaviour.cs"
 "Assets/Scripts/CarComands/ClutchBehaviour.cs"
 "Assets/Scripts/CarComands/Lights/HighBeamBehaviour.cs"
 "Assets/Scripts/CarComands/Lights/LowBeamBehaviour.cs"

@@ -32,11 +32,16 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
 
     private void ChangeGear() 
     {
+        //if (ClutchBehaviour.clutch.IsClutchPressed()
+        //eccetera
+
+
         CalculateDirection();
         print(directionDragged);
         ClutchBehaviour.Gear currentGear = ClutchBehaviour.clutch.GetCurrentGear();
 
-        switch (currentGear) { 
+        switch (currentGear)
+        { 
             case ClutchBehaviour.Gear.Gear1:
                 if (directionDragged == "down") 
                 {
@@ -152,7 +157,12 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
                     ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearR);
                 }
                 break;
+            
+            default:
+                print("boh");
+                break;
         }
+        ClutchBehaviour.clutch.GearHasBeenChanged();
     }
 
     public void TakeFirstTouchCoordinates(PointerEventData eventData) 
@@ -164,15 +174,11 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     {
         lastTouchCoordinates = eventData.position;
         ChangeGear();
-        PlayerController.player.NotifyGearChanged();
     }
 
     private void CalculateDirection() 
     {
         Vector2 direction = lastTouchCoordinates - firstTouchCoordinates;
-
-        //if (ClutchBehaviour.clutch.IsClutchPressed()) 
-        //{ 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle += 360; // Garantisci che l'angolo sia positivo
         angle %= 360; // Riduci l'angolo a un valore tra 0 e 359
@@ -193,16 +199,18 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
             directionDragged = "down";
         if (angle >= 292.5f && angle < 337.5f)
             directionDragged = "down-right";
-        //}
-        //else
-        //{
-        //    print("Frizione non premuta");
-        //}
     }
 
     public void NeutralGear()
     {
-        coroutineTimeForNeutralGear = StartCoroutine(TimeForNeutralGear());
+        //if (ClutchBehaviour.clutch.IsClutchPressed())
+        //{
+            coroutineTimeForNeutralGear = StartCoroutine(TimeForNeutralGear());
+        //}
+        //else
+        //{
+          //  print("Frizione non premuta");
+        //}
     }
 
     private IEnumerator TimeForNeutralGear()
@@ -223,8 +231,15 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
 
         if (timeForNeutralGear > 0.95f) 
         {
+            print("switching to N");
             ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearN);
             PlayerController.player.NotifyGearChanged();
+        }
+        else
+        {
+            print("GearHasBeenChanged triggered from this script now commented");
+            //forse si potrà decommentare quando potrò testare come si deve il gioco su un telefono
+            //ClutchBehaviour.clutch.GearHasBeenChanged();
         }
     }
 }

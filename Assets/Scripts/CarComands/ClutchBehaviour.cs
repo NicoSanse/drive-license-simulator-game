@@ -54,16 +54,20 @@ public class ClutchBehaviour : MonoBehaviour
     public void ClutchIsPressed()
     {
         SetClutchPressed(true);
-        //qua bisogna fare cose per gestire l'effettivo cambio marcia
-        //sfruttando il valore clutchPressed
-        //le istruzioni che seguono assumono che il cambio marcia sia già avvenuto
+    }
+
+    public void GearHasBeenChanged() {
+        print("Loading bar value before starting coroutine: " + loadingBar.GetComponent<Slider>().value);
         loadingBar.SetActive(true);
         coroutineLoadBar = StartCoroutine(LoadBar(FindTimeForChangeTheGear(currentGear)));
     }
 
     public void ClutchIsReleased()
     {
-        StopCoroutine(coroutineLoadBar);
+        if (coroutineLoadBar != null)
+        { 
+            StopCoroutine(coroutineLoadBar); 
+        }
 
         if (currentGear == 0)
         {
@@ -82,6 +86,8 @@ public class ClutchBehaviour : MonoBehaviour
         SetClutchPressed(false);
         loadingBar.SetActive(false);
         EmptyBar();
+        print("Loading bar value: " + loadingBar.GetComponent<Slider>().value);
+        PlayerController.player.NotifyGearChanged();
     }
 
     private float FindTimeForChangeTheGear(Gear gear)
@@ -109,6 +115,7 @@ public class ClutchBehaviour : MonoBehaviour
 
     private IEnumerator LoadBar(float incrementValue)
     {
+        yield return new WaitForSeconds(0.2f);
 
         while (loadingBar.GetComponent<Slider>().value <= 1f)
         {
