@@ -8,7 +8,7 @@ public class AccelerationBehaviour : MonoBehaviour
     public static AccelerationBehaviour accelerator;
     private float acceleration;
     private Coroutine coroutineAccelerate;
-    private bool isAcceleratorPressed;
+    private bool acceleratorPressed;
 
     void Awake()
     {
@@ -17,14 +17,14 @@ public class AccelerationBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isAcceleratorPressed = false;
+        acceleratorPressed = false;
         acceleration = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        StartCoroutine(CommonBehaviours.ChangeScale(acceleratorPressed, GetComponent<RectTransform>()));
     }
 
     public void SetAcceleration(float value) 
@@ -37,15 +37,25 @@ public class AccelerationBehaviour : MonoBehaviour
         return acceleration;
     }
 
+    private void SetAcceleratorPressed(bool value) 
+    {
+        acceleratorPressed = value;
+    }
+
+    public bool IsAcceleratorPressed() 
+    {
+        return acceleratorPressed;
+    }
+
     public void AcceleratorIsPressed() 
     {
-        isAcceleratorPressed = true;
+        acceleratorPressed = true;
         coroutineAccelerate = StartCoroutine(Accelerate());
     }
 
     public void AcceleratorIsReleased()
     {
-        isAcceleratorPressed = false;
+        acceleratorPressed = false;
         StopCoroutine(coroutineAccelerate);
     }
 

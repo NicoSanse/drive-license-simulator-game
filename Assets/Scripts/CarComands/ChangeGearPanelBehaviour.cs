@@ -32,7 +32,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
 
     private void ChangeGear() 
     {
-        //if (ClutchBehaviour.clutch.IsClutchPressed()
+        //if (ClutchBehaviour.clutch.IsClutchPressed())
         //eccetera
 
 
@@ -239,6 +239,11 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         {
             print("GearHasBeenChanged triggered from this script now commented");
             //forse si potrà decommentare quando potrò testare come si deve il gioco su un telefono
+            //questa istruzione viene eseguita perchè gli event trigger sono attivi tutti, 
+            //quindi anche quando avviene un drag gli altri eventi vengono attivati e si svolge tutto il resto
+            //bisogna trovare il modo per non far avvenire questa istruzione quando non serve
+            //altrimenti rovina tutto
+            //in sostanza il drag trigger anche i pointer down/up trigger, ma non vale il contrario
             //ClutchBehaviour.clutch.GearHasBeenChanged();
         }
     }

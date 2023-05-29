@@ -7,7 +7,7 @@ public class BrakeBehaviour : MonoBehaviour
     public static BrakeBehaviour brake;
     private float deceleration;
     private Coroutine coroutineBrake;
-    private bool isBrakePressed;
+    private bool brakePressed;
 
     void Awake()
     {
@@ -16,14 +16,14 @@ public class BrakeBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isBrakePressed = false;
+        brakePressed = false;
         deceleration = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        StartCoroutine(CommonBehaviours.ChangeScale(brakePressed, GetComponent<RectTransform>()));
     }
 
     public void SetDeceleration(float value) 
@@ -38,13 +38,13 @@ public class BrakeBehaviour : MonoBehaviour
 
     public void BrakeIsPressed() 
     {
-        isBrakePressed = true;
+        brakePressed = true;
         coroutineBrake = StartCoroutine(Decelerate());
     }
 
     public void BrakeIsReleased() 
     {
-        isBrakePressed = false;
+        brakePressed = false;
         StopCoroutine(coroutineBrake);
     }
 

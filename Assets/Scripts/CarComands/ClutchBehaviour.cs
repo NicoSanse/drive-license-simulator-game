@@ -9,7 +9,7 @@ public class ClutchBehaviour : MonoBehaviour
     public static ClutchBehaviour clutch;
     public enum Gear { Gear1 = 1, Gear2 = 2, Gear3 = 3, Gear4 = 4, Gear5 = 5, GearR = -1, GearN = 0 };
     private bool clutchPressed;
-    private Coroutine coroutineLoadBar;
+    private Coroutine coroutineLoadBarAndChangeScale;
     private Gear currentGear;
 
 
@@ -54,19 +54,20 @@ public class ClutchBehaviour : MonoBehaviour
     public void ClutchIsPressed()
     {
         SetClutchPressed(true);
+        StartCoroutine(DecreaseScale());
     }
 
     public void GearHasBeenChanged() {
         print("Loading bar value before starting coroutine: " + loadingBar.GetComponent<Slider>().value);
         loadingBar.SetActive(true);
-        coroutineLoadBar = StartCoroutine(LoadBar(FindTimeForChangeTheGear(currentGear)));
+        coroutineLoadBarAndChangeScale = StartCoroutine(LoadBarAndChangeScale(FindTimeForChangeTheGear(currentGear), GetComponent<RectTransform>()));
     }
 
     public void ClutchIsReleased()
     {
-        if (coroutineLoadBar != null)
+        if (coroutineLoadBarAndChangeScale != null)
         { 
-            StopCoroutine(coroutineLoadBar); 
+            StopCoroutine(coroutineLoadBarAndChangeScale); 
         }
 
         if (currentGear == 0)
@@ -113,17 +114,27 @@ public class ClutchBehaviour : MonoBehaviour
         }
     }
 
-    private IEnumerator LoadBar(float incrementValue)
+    private IEnumerator LoadBarAndChangeScale(float incrementValue, RectTransform rectTransform)
     {
         yield return new WaitForSeconds(0.2f);
 
-        while (loadingBar.GetComponent<Slider>().value <= 1f)
+        while (loadingBar.GetComponent<Slider>().value <= 1f && rectTransform.localScale.x < 0.1f && rectTransform.localScale.y < 0.3f)
         {
             yield return new WaitForSeconds(0.01f);
             loadingBar.GetComponent<Slider>().value += incrementValue;
+            rectTransform.localScale += new Vector3(incrementValue/50, (incrementValue/50) * 3, 0f);
         }
 
         yield return null;
+    }
+
+    private IEnumerator DecreaseScale()
+    {
+        while (GetComponent<RectTransform>().localScale.x > 0.08f && GetComponent<RectTransform>().localScale.y > 0.24f)
+        {
+            GetComponent<RectTransform>().localScale += new Vector3(-0.001f, -0.001f * 3, 0f);
+            yield return new WaitForSeconds(0.001f);
+        }
     }
 
     private void EmptyBar()
