@@ -58,7 +58,6 @@ public class ClutchBehaviour : MonoBehaviour
     }
 
     public void GearHasBeenChanged() {
-        print("Loading bar value before starting coroutine: " + loadingBar.GetComponent<Slider>().value);
         loadingBar.SetActive(true);
         coroutineLoadBarAndChangeScale = StartCoroutine(LoadBarAndChangeScale(FindTimeForChangeTheGear(currentGear), GetComponent<RectTransform>()));
     }
@@ -87,7 +86,6 @@ public class ClutchBehaviour : MonoBehaviour
         SetClutchPressed(false);
         loadingBar.SetActive(false);
         EmptyBar();
-        print("Loading bar value: " + loadingBar.GetComponent<Slider>().value);
         PlayerController.player.NotifyGearChanged();
     }
 

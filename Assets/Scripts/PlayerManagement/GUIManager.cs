@@ -112,13 +112,15 @@ public class GUIManager : MonoBehaviour
         ChangeGearPanelBehaviour.changeGear.TakeLastTouchCoordinates(eventData);
     }
 
-    public void SetNeutralGear() 
+    public void SetNeutralGear(BaseEventData data) 
     {
-        ChangeGearPanelBehaviour.changeGear.NeutralGear();
+        PointerEventData eventData = data as PointerEventData;
+        ChangeGearPanelBehaviour.changeGear.NeutralGear(eventData);
     }
 
-    public void ReleseGearChangePanel() 
+    public void ReleseGearChangePanel(BaseEventData data) 
     {
-        ChangeGearPanelBehaviour.changeGear.ReleseGearChangePanel();
+        PointerEventData eventData = data as PointerEventData;
+        ChangeGearPanelBehaviour.changeGear.ReleseGearChangePanel(eventData);
     }
 }
