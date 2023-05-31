@@ -50,7 +50,7 @@ public class RightArrowBehaviour : MonoBehaviour
 
             SetRightArrowOn(false);
         }
-        else
+        else if (!LeftArrowBehaviour.leftArrow.IsLeftArrowOn())
         {
             togglingArrows = StartCoroutine(ToggleArrows());
             SetRightArrowOn(true);

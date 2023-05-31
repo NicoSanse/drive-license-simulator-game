@@ -18,9 +18,6 @@ public class GUIManager : MonoBehaviour
 
     }
 
-    //aggiungere come limite di comportamento delle frecce il fatto
-    //che non possono essere accese entrame contemporaneamente
-
     public void ClickOnLeftArrow() 
     { 
         //implementazione da sistemare: la freccia dovrebbe togliersi da sola
