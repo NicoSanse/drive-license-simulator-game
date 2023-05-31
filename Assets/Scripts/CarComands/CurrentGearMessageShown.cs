@@ -19,7 +19,6 @@ public class CurrentGearMessageShown : MonoBehaviour
     }
 
     //forse non il modo migliore per fare questa cosa
-
     private void ChangeMessageShown()
     {
         ClutchBehaviour.Gear gear = ClutchBehaviour.clutch.GetCurrentGear();
