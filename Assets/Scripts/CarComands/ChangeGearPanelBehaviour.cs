@@ -35,14 +35,16 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
 
     private void ChangeAlphaValue()
     {
+        Color color = this.GetComponent<Image>().color;
         if(!ClutchBehaviour.clutch.IsClutchPressed())
         {
-            GetComponent<Image>().color = new Color(255, 255, 255, 100);
+            color.a = 100/255f;
         }
         else
         {
-            GetComponent<Image>().color = new Color(255, 255, 255, 255);
-        }   
+            color.a = 1f;
+        }
+        this.GetComponent<Image>().color = color;
     }
     
 

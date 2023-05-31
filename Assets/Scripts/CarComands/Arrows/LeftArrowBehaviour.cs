@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeftArrowBehaviour : MonoBehaviour
 {
     public static LeftArrowBehaviour leftArrow;
     private bool leftArrowOn;
+    private Color imageColor;
+    private Coroutine togglingArrows;
 
     void Awake()
     {
@@ -15,6 +18,7 @@ public class LeftArrowBehaviour : MonoBehaviour
     void Start()
     {
         leftArrowOn = false;
+        imageColor = GetComponent<Image>().color;
     }
 
     // Update is called once per frame
@@ -33,14 +37,37 @@ public class LeftArrowBehaviour : MonoBehaviour
         return leftArrowOn;
     }
 
-    public void TurnLeftArrowOn()
+    public void TurnLeftArrowOnOrOff() 
     {
-        print("Left Arrows On");
-        SetLeftArrowOn(true);
+        if (leftArrowOn)
+        {
+            StopCoroutine(togglingArrows);
+
+            imageColor.a = 100 / 255f;
+            GetComponent<Image>().color = imageColor;
+
+            print("Left Arrows Off");
+            SetLeftArrowOn(false);
+        }
+        else
+        {
+            togglingArrows = StartCoroutine(ToggleArrows());
+            print("Left Arrows On");
+            SetLeftArrowOn(true);
+        }
     }
 
-    public void TurnLeftArrowOff(){
-        print("Left Arrows Off");
-        SetLeftArrowOn(false);
+    private IEnumerator ToggleArrows()
+    {
+        while (true)
+        {
+            imageColor.a = 1f;
+            GetComponent<Image>().color = imageColor;
+            yield return new WaitForSeconds(0.5f);
+            imageColor.a = 100 / 255f;
+            GetComponent<Image>().color = imageColor;
+            yield return new WaitForSeconds(0.5f);
+        }
+
     }
 }

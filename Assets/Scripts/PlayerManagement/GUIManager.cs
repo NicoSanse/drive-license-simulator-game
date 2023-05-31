@@ -18,56 +18,31 @@ public class GUIManager : MonoBehaviour
 
     }
 
+    //aggiungere come limite di comportamento delle frecce il fatto
+    //che non possono essere accese entrame contemporaneamente
+
     public void ClickOnLeftArrow() 
     { 
         //implementazione da sistemare: la freccia dovrebbe togliersi da sola
         //il controllo si servirà dell'accelerometro del cellulare
-        if(LeftArrowBehaviour.leftArrow.IsLeftArrowOn())
-        {
-            LeftArrowBehaviour.leftArrow.TurnLeftArrowOff();
-        }
-        else
-        {
-            LeftArrowBehaviour.leftArrow.TurnLeftArrowOn();
-        }
+        LeftArrowBehaviour.leftArrow.TurnLeftArrowOnOrOff();
     }
 
     public void ClickOnRightArrow() 
     { 
         //implementazione da sistemare: la freccia dovrebbe togliersi da sola
         //il controllo si servirà dell'accelerometro del cellulare
-        if(RightArrowBehaviour.rightArrow.IsRightArrowOn())
-        {
-            RightArrowBehaviour.rightArrow.TurnRightArrowOff();
-        }
-        else
-        {
-            RightArrowBehaviour.rightArrow.TurnRightArrowOn();
-        }
+        RightArrowBehaviour.rightArrow.TurnRightArrowOnOrOff();
     }
 
     public void ClickOnHighBeam() 
     { 
-        if(HighBeamBehaviour.highBeam.IsHighBeamOn())
-        {
-            HighBeamBehaviour.highBeam.TurnHighBeamOff();
-        }
-        else
-        {
-            HighBeamBehaviour.highBeam.TurnHighBeamOn();
-        }
+        HighBeamBehaviour.highBeam.TurnHighBeamOnOrOff();
     }
 
     public void ClickOnLowBeam() 
     { 
-        if(LowBeamBehaviour.lowBeam.IsLowBeamOn())
-        {
-            LowBeamBehaviour.lowBeam.TurnLowBeamOff();
-        }
-        else
-        {
-            LowBeamBehaviour.lowBeam.TurnLowBeamOn();
-        }
+        LowBeamBehaviour.lowBeam.TurnLowBeamOnOrOff();
     }
 
     public void ClickOnAccelerator() 

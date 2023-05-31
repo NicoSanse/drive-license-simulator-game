@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LowBeamBehaviour : MonoBehaviour
 {
     public static LowBeamBehaviour lowBeam;
     private static bool lowBeamOn;
+    private Color imageColor;
 
     void Awake()
     {
@@ -15,6 +17,7 @@ public class LowBeamBehaviour : MonoBehaviour
     void Start()
     {
         lowBeamOn = false;
+        imageColor = GetComponent<Image>().color;
     }
 
     // Update is called once per frame
@@ -33,15 +36,20 @@ public class LowBeamBehaviour : MonoBehaviour
         return lowBeamOn;
     }
 
-    public void TurnLowBeamOn()
+    public void TurnLowBeamOnOrOff()
     {
-        print("Low Beam On");
-        SetLowBeamOn(true);
-    }
-
-    public void TurnLowBeamOff()
-    {
-        print("Low Beam Off");
-        SetLowBeamOn(false);
+        if (lowBeamOn)
+        {
+            print("Low Beam Off");
+            imageColor.a = 100/255f;
+            SetLowBeamOn(false);
+        }
+        else
+        {
+            print("Low Beam On");
+            imageColor.a = 1f;
+            SetLowBeamOn(true);
+        }
+        GetComponent<Image>().color = imageColor;
     }
 }
