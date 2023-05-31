@@ -37,6 +37,8 @@ public class RightArrowBehaviour : MonoBehaviour
         return rightArrowOn;
     }
 
+    //checks whether the arrow is on or off and according to that
+    //turns the arrow off or starts the coroutine to make it toogle
     public void TurnRightArrowOnOrOff()
     {
         if (rightArrowOn)
@@ -46,17 +48,16 @@ public class RightArrowBehaviour : MonoBehaviour
             imageColor.a = 100 / 255f;
             GetComponent<Image>().color = imageColor;
 
-            print("Right Arrows Off");
             SetRightArrowOn(false);
         }
         else
         {
             togglingArrows = StartCoroutine(ToggleArrows());
-            print("Right Arrows On");
             SetRightArrowOn(true);
         }
     }
 
+    //toggles the arrows on and off with 0.5 seconds between
     private IEnumerator ToggleArrows()
     { 
         while (true)

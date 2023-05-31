@@ -51,17 +51,22 @@ public class ClutchBehaviour : MonoBehaviour
         clutchPressed = clutch;
     }
 
+    //triggered by GUIManager class, starts the coroutine to decrease the scale
     public void ClutchIsPressed()
     {
         SetClutchPressed(true);
         StartCoroutine(DecreaseScale());
     }
 
+    //triggered by ChangeGearPanelBehaviour class, starts the coroutine
+    //to increase the value of the bar and the scale of the clutch
     public void GearHasBeenChanged() {
         loadingBar.SetActive(true);
         coroutineLoadBarAndChangeScale = StartCoroutine(LoadBarAndChangeScale(FindTimeForChangeTheGear(currentGear), GetComponent<RectTransform>()));
     }
 
+    //triggered by GUIManger class, stops the coroutine and checks if the clutch was released
+    //in a proper time
     public void ClutchIsReleased()
     {
         if (coroutineLoadBarAndChangeScale != null)
@@ -84,11 +89,54 @@ public class ClutchBehaviour : MonoBehaviour
         }
 
         SetClutchPressed(false);
-        loadingBar.SetActive(false);
+        MakeDisappearTheLoadingBar();
         EmptyBar();
         PlayerController.player.NotifyGearChanged();
     }
 
+    //!!!!!forse la seguente funzione si può splittare in due distinte
+
+    //increases the value of the bar and increases the scale of the clutch
+    //the rate of increment is split in 50 to increase the scale, though i can't
+    //really remember why
+    private IEnumerator LoadBarAndChangeScale(float incrementValue, RectTransform rectTransform)
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        while (loadingBar.GetComponent<Slider>().value <= 1f && rectTransform.localScale.x < 0.1f && rectTransform.localScale.y < 0.3f)
+        {
+            yield return new WaitForSeconds(0.01f);
+            loadingBar.GetComponent<Slider>().value += incrementValue;
+            rectTransform.localScale += new Vector3(incrementValue/50, (incrementValue/50) * 3, 0f);
+        }
+
+        yield return null;
+    }
+
+    //decreases the scale of the clutch, can't use the CommonPedalsBehaviours
+    //because interfers with other funcionalities
+    private IEnumerator DecreaseScale()
+    {
+        while (GetComponent<RectTransform>().localScale.x > 0.08f && GetComponent<RectTransform>().localScale.y > 0.24f)
+        {
+            GetComponent<RectTransform>().localScale += new Vector3(-0.001f, -0.001f * 3, 0f);
+            yield return new WaitForSeconds(0.001f);
+        }
+    }
+
+    //sets to 0 the value of the bar
+    private void EmptyBar()
+    {
+        loadingBar.GetComponent<Slider>().value = 0f;
+    }
+
+    //makes the bar inactive
+    private void MakeDisappearTheLoadingBar()
+    {
+        loadingBar.SetActive(false);
+    }
+
+    //finds the best time for each gear(actually its a rate value)
     private float FindTimeForChangeTheGear(Gear gear)
     {
         switch (gear)
@@ -110,33 +158,5 @@ public class ClutchBehaviour : MonoBehaviour
             default:
                 return 0f;
         }
-    }
-
-    private IEnumerator LoadBarAndChangeScale(float incrementValue, RectTransform rectTransform)
-    {
-        yield return new WaitForSeconds(0.2f);
-
-        while (loadingBar.GetComponent<Slider>().value <= 1f && rectTransform.localScale.x < 0.1f && rectTransform.localScale.y < 0.3f)
-        {
-            yield return new WaitForSeconds(0.01f);
-            loadingBar.GetComponent<Slider>().value += incrementValue;
-            rectTransform.localScale += new Vector3(incrementValue/50, (incrementValue/50) * 3, 0f);
-        }
-
-        yield return null;
-    }
-
-    private IEnumerator DecreaseScale()
-    {
-        while (GetComponent<RectTransform>().localScale.x > 0.08f && GetComponent<RectTransform>().localScale.y > 0.24f)
-        {
-            GetComponent<RectTransform>().localScale += new Vector3(-0.001f, -0.001f * 3, 0f);
-            yield return new WaitForSeconds(0.001f);
-        }
-    }
-
-    private void EmptyBar()
-    {
-        loadingBar.GetComponent<Slider>().value = 0f;
     }
 }

@@ -25,8 +25,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        //the speed is calculated by adding the acceleration and the deceleration
+        Move();
+    }
+
+    //temporarily the speed is calculated by adding the acceleration and the deceleration
+    private void Move()
+    {
         speed = AccelerationBehaviour.accelerator.GetAcceleration() + BrakeBehaviour.brake.GetDeceleration();
         if (speed <= 0f)
         {

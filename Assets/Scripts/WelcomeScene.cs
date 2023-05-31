@@ -14,10 +14,12 @@ public class WelcomeScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            SceneManager.LoadScene("Menu");
-        }
+        
+    }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
     public void ExitGame()

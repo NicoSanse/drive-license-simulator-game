@@ -9,7 +9,6 @@ public class Menu : MonoBehaviour
     buttonFirstLevel, buttonSecondLevel, buttonThirdLevel, buttonFourthLevel, 
     buttonFifthLevel, buttonSixthLevel, buttonSeventhLevel;
 
-
     //here i update the content of the menu. I just want to see updated the levels that 
     //i have passed through the little image of the locker on the right of the button
     void Start()
@@ -49,7 +48,7 @@ public class Menu : MonoBehaviour
     }
 
 
-    //i go find the right level to be played and go check whether it can be played or not
+    //finds the right level to be played and go check whether it can be played or not
     public void StartLevel(GameObject button) 
     { 
         switch (button.tag)
@@ -104,9 +103,8 @@ public class Menu : MonoBehaviour
             print("Level " + (position + 2) + " is locked");
         }
     }
-    
 
-
+    //makes quit the game
     public void ExitGame()
     {
         print("ExitGame");

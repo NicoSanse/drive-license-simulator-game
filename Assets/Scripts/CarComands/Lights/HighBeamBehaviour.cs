@@ -36,29 +36,17 @@ public class HighBeamBehaviour : MonoBehaviour
         return highBeamOn;
     }
 
-    public void TurnHighBeamOn()
-    {
-        print("High Beam On");
-        SetHighBeamOn(true);
-    }
-
-    public void TurnHighBeamOff()
-    {
-        print("High Beam Off");
-        SetHighBeamOn(false);
-    }
-
+    //turns the beam off if its on and viceversa
+    //also changes the alpha value
     public void TurnHighBeamOnOrOff()
     {
         if (highBeamOn)
         {
-            print("High Beam Off");
             imageColor.a = 100/255f;
             SetHighBeamOn(false);
         }
         else
         {
-            print("High Beam On");
             imageColor.a = 1f;
             SetHighBeamOn(true);
         }

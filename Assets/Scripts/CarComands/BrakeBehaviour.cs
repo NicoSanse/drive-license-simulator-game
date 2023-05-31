@@ -36,18 +36,22 @@ public class BrakeBehaviour : MonoBehaviour
         return deceleration;
     }
 
+    //triggered by GUIManager class, starts the coroutine to 
+    //increase the decelerationb value
     public void BrakeIsPressed() 
     {
         brakePressed = true;
         coroutineBrake = StartCoroutine(Decelerate());
     }
 
+    //triggered by GUIManager class, stops the coroutine
     public void BrakeIsReleased() 
     {
         brakePressed = false;
         StopCoroutine(coroutineBrake);
     }
 
+    //increases(decreases actually) the deceleration value
     private IEnumerator Decelerate() 
     { 
         while (deceleration > -800f) 

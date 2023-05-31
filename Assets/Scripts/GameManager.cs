@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         currentLevel = level;
     }
 
-    //set the current level as passed and come back to the menu
+    //sets the current level as passed and come back to the menu
     public static void LevelPassed()
     {
         currentLevel.SetPassed(true);

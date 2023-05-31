@@ -47,18 +47,22 @@ public class AccelerationBehaviour : MonoBehaviour
         return acceleratorPressed;
     }
 
+    //triggered by GUIManager class, starts the coroutine to increase the 
+    //acceleration value
     public void AcceleratorIsPressed() 
     {
         acceleratorPressed = true;
         coroutineAccelerate = StartCoroutine(Accelerate());
     }
 
+    //triggered by GUIManager class, stops the coroutine
     public void AcceleratorIsReleased()
     {
         acceleratorPressed = false;
         StopCoroutine(coroutineAccelerate);
     }
 
+    //increases the acceleration value
     private IEnumerator Accelerate() 
     {
         while (acceleration < 500f) {

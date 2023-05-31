@@ -36,17 +36,17 @@ public class LowBeamBehaviour : MonoBehaviour
         return lowBeamOn;
     }
 
+    //turns the beam off if its on and viceversa
+    //also changes the alpha value
     public void TurnLowBeamOnOrOff()
     {
         if (lowBeamOn)
         {
-            print("Low Beam Off");
             imageColor.a = 100/255f;
             SetLowBeamOn(false);
         }
         else
         {
-            print("Low Beam On");
             imageColor.a = 1f;
             SetLowBeamOn(true);
         }
