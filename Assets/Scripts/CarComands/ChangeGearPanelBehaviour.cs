@@ -83,7 +83,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
             if (timeForNeutralGear > 0.95f) 
             {
                 ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearN);
-                PlayerController.player.NotifyGearChanged();
+                Car.car.NotifyGearChanged();
             }
             //fare il resize, preferibilmente nel secondo modo
             ClutchBehaviour.clutch.GetComponent<RectTransform>().localScale = new Vector3(0.1f, 0.3f, 1f);

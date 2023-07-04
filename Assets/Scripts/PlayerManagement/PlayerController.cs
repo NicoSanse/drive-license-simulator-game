@@ -18,27 +18,13 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         print("Start");
-        gear = ClutchBehaviour.clutch.GetCurrentGear();
-        speed = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
-    }
 
-    //temporarily the speed is calculated by adding the acceleration and the deceleration
-    private void Move()
-    {
-        speed = AccelerationBehaviour.accelerator.GetAcceleration() + BrakeBehaviour.brake.GetDeceleration();
-        if (speed <= 0f)
-        {
-            speed = 0f;
-        }
-
-        transform.position += Vector3.forward * Time.deltaTime * speed;
-    }
+    }    
 
     //once the player enters the goal, the level is passed
     //TODO: implement the control on scores which is still to be created
@@ -47,16 +33,9 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Goal")
         {
             print("You win!");
-            speed = 0f;
-            AccelerationBehaviour.accelerator.SetAcceleration(0f);
-            BrakeBehaviour.brake.SetDeceleration(0f);
+            Car.car.Stop();
             GameManager.LevelPassed();
         }
     }
 
-    public void NotifyGearChanged()
-    {
-        gear = ClutchBehaviour.clutch.GetCurrentGear();
-        print("Gear changed to " + gear);
-    }
 }

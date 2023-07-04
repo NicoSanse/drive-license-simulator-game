@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ClutchBehaviour : MonoBehaviour
 {
@@ -60,7 +61,8 @@ public class ClutchBehaviour : MonoBehaviour
 
     //triggered by ChangeGearPanelBehaviour class, starts the coroutine
     //to increase the value of the bar and the scale of the clutch
-    public void GearHasBeenChanged() {
+    public void GearHasBeenChanged() 
+    {
         loadingBar.SetActive(true);
         coroutineLoadBarAndChangeScale = StartCoroutine(LoadBarAndChangeScale(FindTimeForChangeTheGear(currentGear), GetComponent<RectTransform>()));
     }
@@ -91,7 +93,7 @@ public class ClutchBehaviour : MonoBehaviour
         SetClutchPressed(false);
         MakeDisappearTheLoadingBar();
         EmptyBar();
-        PlayerController.player.NotifyGearChanged();
+        Car.car.NotifyGearChanged();
     }
 
     //!!!!!forse la seguente funzione si può splittare in due distinte
@@ -107,6 +109,7 @@ public class ClutchBehaviour : MonoBehaviour
         {
             yield return new WaitForSeconds(0.01f);
             loadingBar.GetComponent<Slider>().value += incrementValue;
+            loadingBar.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, loadingBar.GetComponent<Slider>().value);
             rectTransform.localScale += new Vector3(incrementValue/50, (incrementValue/50) * 3, 0f);
         }
 

@@ -7,8 +7,8 @@ public class AccelerationBehaviour : MonoBehaviour
 
     public static AccelerationBehaviour accelerator;
     private float acceleration;
-    private Coroutine coroutineAccelerate;
     private bool acceleratorPressed;
+    private float sensibility = 3f;
 
     void Awake()
     {
@@ -25,6 +25,7 @@ public class AccelerationBehaviour : MonoBehaviour
     void Update()
     {
         StartCoroutine(CommonBehaviours.ChangeScale(acceleratorPressed, GetComponent<RectTransform>()));
+        Accelerate();
     }
 
     public void SetAcceleration(float value) 
@@ -52,23 +53,25 @@ public class AccelerationBehaviour : MonoBehaviour
     public void AcceleratorIsPressed() 
     {
         acceleratorPressed = true;
-        coroutineAccelerate = StartCoroutine(Accelerate());
     }
 
     //triggered by GUIManager class, stops the coroutine
     public void AcceleratorIsReleased()
     {
         acceleratorPressed = false;
-        StopCoroutine(coroutineAccelerate);
     }
 
     //increases the acceleration value
-    private IEnumerator Accelerate() 
+    private void Accelerate() 
     {
-        while (acceleration < 500f) {
-            print("acceleration: " + acceleration);
-            acceleration += 3.5f;
-            yield return new WaitForSeconds(0.5f);
+        if (acceleratorPressed)
+        {
+            acceleration += Time.deltaTime * sensibility;
         }
+        else
+        {
+            acceleration -= Time.deltaTime * sensibility;
+        }
+        acceleration = Mathf.Clamp(acceleration, 0, 1);
     }
 }

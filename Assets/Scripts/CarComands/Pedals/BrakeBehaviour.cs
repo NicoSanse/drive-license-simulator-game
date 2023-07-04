@@ -6,8 +6,8 @@ public class BrakeBehaviour : MonoBehaviour
 {
     public static BrakeBehaviour brake;
     private float deceleration;
-    private Coroutine coroutineBrake;
     private bool brakePressed;
+    private float sensibility = 3f;
 
     void Awake()
     {
@@ -24,6 +24,7 @@ public class BrakeBehaviour : MonoBehaviour
     void Update()
     {
         StartCoroutine(CommonBehaviours.ChangeScale(brakePressed, GetComponent<RectTransform>()));
+        Decelerate();
     }
 
     public void SetDeceleration(float value) 
@@ -41,24 +42,25 @@ public class BrakeBehaviour : MonoBehaviour
     public void BrakeIsPressed() 
     {
         brakePressed = true;
-        coroutineBrake = StartCoroutine(Decelerate());
     }
 
     //triggered by GUIManager class, stops the coroutine
     public void BrakeIsReleased() 
     {
         brakePressed = false;
-        StopCoroutine(coroutineBrake);
     }
 
     //increases(decreases actually) the deceleration value
-    private IEnumerator Decelerate() 
-    { 
-        while (deceleration > -800f) 
+    private void Decelerate() 
+    {
+        if (brakePressed)
         {
-            print("deceleration: " + deceleration);
-            deceleration -= 7f;
-            yield return new WaitForSeconds(0.5f);
+            deceleration += Time.deltaTime * sensibility;
         }
+        else
+        {
+            deceleration -= Time.deltaTime * sensibility;
+        }
+        deceleration = Mathf.Clamp(deceleration, 0, 1);
     }
 }

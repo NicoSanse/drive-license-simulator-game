@@ -8,10 +8,11 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;
     private static ListOfLevels listOfLevels;
     private static Level currentLevel;
+    private enum GameState { Welcome, Menu, Playing, LevelPaused };
     void Awake() 
     { 
         gameManager = this;
-        listOfLevels = new ListOfLevels();
+        listOfLevels = gameObject.AddComponent<ListOfLevels>();
     }
 
     // Start is called before the first frame update
