@@ -87,7 +87,8 @@ public class ClutchBehaviour : MonoBehaviour
         else
         {
             print("Clutch released too early");
-            //far spegnere la macchina
+            //quando testerò il tutto dovrò decommentare la riga successiva
+            //Car.car.Off();
         }
 
         SetClutchPressed(false);

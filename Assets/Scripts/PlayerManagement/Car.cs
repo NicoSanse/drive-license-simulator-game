@@ -8,7 +8,8 @@ public class Car : MonoBehaviour
     private float speed;
     private float RPM;
     private ClutchBehaviour.Gear gear;
-    private enum state { On, Off };
+    private enum State { On, Off };
+    private State currentState;
 
 
     void Awake()
@@ -22,6 +23,7 @@ public class Car : MonoBehaviour
         gear = ClutchBehaviour.clutch.GetCurrentGear();
         speed = 0f;
         RPM = 0f;
+        currentState = State.On;
     }
 
     // Update is called once per frame
@@ -32,8 +34,11 @@ public class Car : MonoBehaviour
 
     private void Move()
     {
-        speed = GetComponent<Rigidbody>().velocity.magnitude * 3.6f;
-        RPM = CalculateRPM();
+        if (currentState == State.On)
+        { 
+            speed = GetComponent<Rigidbody>().velocity.magnitude * 3.6f;
+            RPM = CalculateRPM();
+        }
     }
 
     public void Stop()
@@ -42,6 +47,19 @@ public class Car : MonoBehaviour
         RPM = 0f;
         AccelerationBehaviour.accelerator.SetAcceleration(0f);
         BrakeBehaviour.brake.SetDeceleration(0f);
+    }
+
+    public void Off()
+    {
+        Stop();
+        gear = ClutchBehaviour.Gear.GearN;
+        currentState = State.Off;
+    }
+
+    public void On()
+    { 
+        gear = ClutchBehaviour.clutch.GetCurrentGear();
+        currentState = State.On;
     }
 
     public void NotifyGearChanged()
@@ -67,11 +85,23 @@ public class Car : MonoBehaviour
 
     private float CalculateRPM() 
     {
-        float RPM2 = GetComponentsInChildren<WheelCollider>()[0].rpm;
-        RPM2 += GetComponentsInChildren<WheelCollider>()[1].rpm;
-        RPM2 += GetComponentsInChildren<WheelCollider>()[2].rpm;
-        RPM2 += GetComponentsInChildren<WheelCollider>()[3].rpm;
-        RPM2 /= 4;
-        return RPM2;
+        float tempRPM = GetComponentsInChildren<WheelCollider>()[0].rpm;
+        tempRPM += GetComponentsInChildren<WheelCollider>()[1].rpm;
+        tempRPM += GetComponentsInChildren<WheelCollider>()[2].rpm;
+        tempRPM += GetComponentsInChildren<WheelCollider>()[3].rpm;
+        tempRPM /= 4;
+        return tempRPM;
+    }
+
+    public void SetState(bool state)
+    {
+        if(state == true) currentState = State.On;
+        else currentState = State.Off;
+    }
+
+    public bool GetState()
+    {
+        if(currentState == State.On) return true;
+        else return false;
     }
 }

@@ -579,15 +579,18 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		if (isInsideTheCar) {
 			theEngineIsRunning = _vehicleSettings.startOn;
 			if (theEngineIsRunning) {
-				StartCoroutine ("StartEngineCoroutine", true);
+                Car.car.On();
+                StartCoroutine ("StartEngineCoroutine", true);
 				StartCoroutine ("TurnOffEngineTime");
 			} else {
-				StartCoroutine ("StartEngineCoroutine", false);
+                Car.car.Off();
+                StartCoroutine ("StartEngineCoroutine", false);
 				StartCoroutine ("TurnOffEngineTime");
 			}
 		} else {
 			theEngineIsRunning = false;
-			StartCoroutine ("StartEngineCoroutine", false);
+            Car.car.Off();
+            StartCoroutine ("StartEngineCoroutine", false);
 			StartCoroutine ("TurnOffEngineTime");
 		}
 
@@ -996,12 +999,13 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		}
 			
 		ms_Rigidbody.drag = Mathf.Clamp ((KMh / _vehicleTorque.maxVelocityKMh) * 0.075f, 0.001f, 0.075f);
-		//
-		if (!changinGearsAuto) {
-			engineInput = Mathf.Clamp01 (verticalInput);
+        FindIfGearISBeingChanged();
+        //
+        if (!changinGearsAuto) {
+            engineInput = Mathf.Clamp01 (verticalInput);
 		} else {
-			engineInput = 0;
-		}
+            engineInput = 0;
+        }
 		if (isInsideTheCar) {
 			if (Input.GetKeyDown (controls.controls.handBrakeInput) && controls.controls.enable_handBrakeInput_Input && Time.timeScale > 0.2f) {
 				handBrakeTrue = !handBrakeTrue;
@@ -1018,7 +1022,9 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		}
 	}
 
-	public void EnterInVehicle(){
+
+
+    public void EnterInVehicle(){
 		isInsideTheCar = true;
 		EnableCameras (indexCamera);
 	}
@@ -1039,10 +1045,11 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		StabilizeVehicleRollForces ();
 		StabilizeAirRotation ();
 		StabilizeAngularRotation ();
-		//
+        ControlSpeed();
+        //
 
-		//extra gravity
-		if (_vehicleSettings._aerodynamics.extraGravity) {
+        //extra gravity
+        if (_vehicleSettings._aerodynamics.extraGravity) {
 			gravityValueFixedUpdate = 0;
 			if (wheelFDIsGrounded && wheelFEIsGrounded && wheelTDIsGrounded && wheelTEIsGrounded) {
 				gravityValueFixedUpdate = 4.0f * ms_Rigidbody.mass * Mathf.Clamp((KMh / _vehicleTorque.maxVelocityKMh),0.05f,1.0f);
@@ -1082,8 +1089,30 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		}
 	}
 
-	#region UpdateWheelMesh
-	void UpdateWheelMeshes(){
+    private void ControlSpeed()
+    {
+        if(!isBraking)
+		{
+            if (currentGear == 1 & KMh < 5) ms_Rigidbody.AddForce(transform.forward * 1000);
+            if (currentGear == 2 & KMh < 10) ms_Rigidbody.AddForce(transform.forward * 1000);
+            if (currentGear == 3 & KMh < 20) ms_Rigidbody.AddForce(transform.forward * 1100);
+            if (currentGear == 4 & KMh < 30) ms_Rigidbody.AddForce(transform.forward * 1500);
+            if (currentGear == 5 & KMh < 45) ms_Rigidbody.AddForce(transform.forward * 2800);
+            if (currentGear == -1 & KMh < 5) ms_Rigidbody.AddForce(transform.forward * -1000);
+        }
+        if (isBraking & !changinGearsAuto)
+        {
+            if (currentGear == 1 & KMh < 5 | currentGear == 2 & KMh < 10 |
+                currentGear == 3 & KMh < 20 | currentGear == 4 & KMh < 30 |
+                currentGear == 5 & KMh < 45 | currentGear == -1 & KMh < 5)
+            { 
+				//suono velocità troppo bassa
+			}
+        }
+    }
+
+    #region UpdateWheelMesh
+    void UpdateWheelMeshes(){
 		_wheels.rightFrontWheel.wheelCollider.GetWorldPose(out vectorMeshPos1, out quatMesh1);
 		_wheels.rightFrontWheel.wheelWorldPosition = _wheels.rightFrontWheel.wheelMesh.position = vectorMeshPos1;
 		_wheels.rightFrontWheel.wheelMesh.rotation = quatMesh1;
@@ -1553,19 +1582,22 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		if (youCanCall && isInsideTheCar && controls.controls.enable_startTheVehicle_Input) {
 			if ((Input.GetKeyDown (controls.controls.startTheVehicle) && !theEngineIsRunning) || (Mathf.Abs(verticalInput) > 0.5f && !theEngineIsRunning)) {
 				enableEngineSound = true;
-				if (_sounds.engineSound) {
+                Car.car.On();
+                if (_sounds.engineSound) {
 					engineSoundAUD.pitch = 0.5f;
 				}
 				StartCoroutine ("StartEngineCoroutine", true);
 				StartCoroutine ("StartEngineTime");
 			}
 			if (Input.GetKeyDown (controls.controls.startTheVehicle) && theEngineIsRunning) {
-				StartCoroutine ("StartEngineCoroutine", false);
+                Car.car.Off();
+                StartCoroutine ("StartEngineCoroutine", false);
 				StartCoroutine ("TurnOffEngineTime");
 			}
 		}
 		if (!isInsideTheCar && theEngineIsRunning) {
-			StartCoroutine ("StartEngineCoroutine", false);
+            Car.car.Off();
+            StartCoroutine ("StartEngineCoroutine", false);
 			StartCoroutine ("TurnOffEngineTime");
 		}
 	}
@@ -1715,9 +1747,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
         {
             currentGear = (int)gear;
         }
-
-        print("CURRENTGEAR IN MSVEHICLE: " + currentGear);
 	}
+	/*
     IEnumerator TimeAutoGears(int gear){
 		changinGearsAuto = true;
 		yield return new WaitForSeconds(0.4f);
@@ -1725,6 +1756,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		yield return new WaitForSeconds(timeAutoGear);
 		changinGearsAuto = false;
 	}
+	*/
 	#endregion
 
 	#region VolantManager
@@ -1794,14 +1826,14 @@ public class MSVehicleControllerFree : MonoBehaviour {
 			return 0;
 		}
 		if ((Mathf.Abs (verticalInput) < 0.5f) || KMh > _vehicleTorque.maxVelocityKMh) {
-			return 0;
+            return 0;
 		}
 		if ((rpmTempTorque*wheelCollider.radius) > (50.0f * _vehicleTorque.numberOfGears*_vehicleTorque.speedOfGear)){
-			return 0;
+            return 0;
 		}
 		if (KMh < 0.5f){
 			if(rpmTempTorque > (25.0f / wheelCollider.radius)) {
-				return 0;
+                return 0;
 			}
 		}
 		if (!theEngineIsRunning) {
@@ -1823,7 +1855,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 			clampInputTorque = Mathf.Abs(Mathf.Clamp(verticalInput, -1f, 0f));
 			torqueM = (500.0f * _vehicleTorque.engineTorque) * clampInputTorque * (_vehicleTorque.gears [0].Evaluate ((KMh / _vehicleTorque.speedOfGear))) * -0.8f;
 		} else if (currentGear == 0) {
-			return 0;
+            return 0;
 		} else {
 			torqueM = (500.0f*_vehicleTorque.engineTorque) * (Mathf.Clamp(engineInput, 0f, 1f)) * _vehicleTorque.gears[currentGear-1].Evaluate((KMh/_vehicleTorque.speedOfGear));
 		}
@@ -1943,7 +1975,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
 			}
 		}
 
-		ApplyBrakeInWheels(_wheels.rightFrontWheel.wheelCollider, _wheels.rightFrontWheel.wheelHandBrake);
+
+        ApplyBrakeInWheels(_wheels.rightFrontWheel.wheelCollider, _wheels.rightFrontWheel.wheelHandBrake);
 		ApplyBrakeInWheels(_wheels.leftFrontWheel.wheelCollider, _wheels.leftFrontWheel.wheelHandBrake);
 		ApplyBrakeInWheels(_wheels.rightRearWheel.wheelCollider, _wheels.rightRearWheel.wheelHandBrake);
 		ApplyBrakeInWheels(_wheels.leftRearWheel.wheelCollider, _wheels.leftRearWheel.wheelHandBrake);
@@ -2185,4 +2218,9 @@ public class MSVehicleControllerFree : MonoBehaviour {
     public float GetRPM() { 
 		return mediumRPM;
 	}
+
+    private void FindIfGearISBeingChanged()
+    {
+        changinGearsAuto = ClutchBehaviour.clutch.IsClutchPressed();
+    }
 }
