@@ -282,11 +282,11 @@ public class MSSceneControllerFree : MonoBehaviour {
 							MSbuttonVertical = BrakeBehaviour.brake.GetDeceleration() -
 										   AccelerationBehaviour.accelerator.GetAcceleration();
 						}
-                        else 
-						{
+                        else
+                        {
                             MSbuttonVertical = AccelerationBehaviour.accelerator.GetAcceleration() -
                                            BrakeBehaviour.brake.GetDeceleration();
-						}
+                        }
                     }
 				if(joystickCamera){
 					mouseXInput = joystickCamera.joystickHorizontal;

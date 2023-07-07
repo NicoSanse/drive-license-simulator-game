@@ -88,6 +88,7 @@ public class ClutchBehaviour : MonoBehaviour
         {
             print("Clutch released too early");
             //quando testerò il tutto dovrò decommentare la riga successiva
+            //MSVehicleControllerFree.mSVehicleControllerFree.setEngineOnOff(true);
             //Car.car.Off();
         }
 

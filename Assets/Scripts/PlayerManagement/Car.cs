@@ -23,7 +23,7 @@ public class Car : MonoBehaviour
         gear = ClutchBehaviour.clutch.GetCurrentGear();
         speed = 0f;
         RPM = 0f;
-        currentState = State.On;
+        currentState = State.Off;
     }
 
     // Update is called once per frame

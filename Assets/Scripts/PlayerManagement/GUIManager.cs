@@ -95,4 +95,18 @@ public class GUIManager : MonoBehaviour
         PointerEventData eventData = data as PointerEventData;
         ChangeGearPanelBehaviour.changeGear.ReleseGearChangePanel(eventData);
     }
+
+    public void TurningEngineOnBehaviour()
+    {
+        //if Car is on, turn it off
+        if (Car.car.GetState())
+        { 
+            MSVehicleControllerFree.mSVehicleControllerFree.setEngineOnOff(true);
+        }
+        //otherwise turn it on
+        else
+        {
+            MSVehicleControllerFree.mSVehicleControllerFree.setEngineOnOff(false);
+        }
+    }
 }

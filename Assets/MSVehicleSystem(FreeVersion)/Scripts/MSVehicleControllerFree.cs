@@ -575,8 +575,10 @@ public class MSVehicleControllerFree : MonoBehaviour {
 
 		youCanCall = true;
 		handBrakeTrue = false;
+        theEngineIsRunning = false;
 
-		if (isInsideTheCar) {
+		/*
+        if (isInsideTheCar) {
 			theEngineIsRunning = _vehicleSettings.startOn;
 			if (theEngineIsRunning) {
                 Car.car.On();
@@ -593,6 +595,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
             StartCoroutine ("StartEngineCoroutine", false);
 			StartCoroutine ("TurnOffEngineTime");
 		}
+		*/
 
 		ms_Rigidbody = GetComponent <Rigidbody> ();
 		ms_Rigidbody.useGravity = true;
@@ -1091,6 +1094,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 
     private void ControlSpeed()
     {
+		//makes the speed car adapt to his gear
         if(!isBraking)
 		{
             if (currentGear == 1 & KMh < 5) ms_Rigidbody.AddForce(transform.forward * 1000);
@@ -1102,12 +1106,28 @@ public class MSVehicleControllerFree : MonoBehaviour {
         }
         if (isBraking & !changinGearsAuto)
         {
+			//specifi command for braking in neutral gear
+            if (currentGear == 0)
+            {
+				ms_Rigidbody.AddForce(transform.forward * -25000);
+			}
+			//its appropriate to use a specific sound for this
             if (currentGear == 1 & KMh < 5 | currentGear == 2 & KMh < 10 |
                 currentGear == 3 & KMh < 20 | currentGear == 4 & KMh < 30 |
                 currentGear == 5 & KMh < 45 | currentGear == -1 & KMh < 5)
             { 
 				//suono velocità troppo bassa
 			}
+			//speed too low, make the car stop
+            if (currentGear == 1 & KMh < 3 | currentGear == 2 & KMh < 5 |
+                currentGear == 3 & KMh < 10 | currentGear == 4 & KMh < 15 |
+                currentGear == 5 & KMh < 25 | currentGear == -1 & KMh < 3)
+            {
+				//decommentare le seguenti righe in fase di test su cellulare
+                //Car.car.Off();
+                //StartCoroutine("StartEngineCoroutine", false);
+                //StartCoroutine("TurnOffEngineTime");
+            }
         }
     }
 
@@ -1539,7 +1559,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		if (_sounds.engineSound) {
 			if (theEngineIsRunning) {
 				engineSoundAUD.volume = Mathf.Lerp (engineSoundAUD.volume, Mathf.Clamp (Mathf.Abs (engineInput), 0.35f, 0.85f), Time.deltaTime*5.0f);
-				if (handBrakeTrue || currentGear == 0) {
+				if (handBrakeTrue || currentGear == 0 & (isBraking)) {
 					engineSoundAUD.pitch = Mathf.Lerp (engineSoundAUD.pitch, 0.85f + Mathf.Abs(verticalInput)*(_sounds.speedOfEngineSound*0.7f-0.85f), Time.deltaTime * 5.0f);
 				} else {
 					engineSoundAUD.pitch = Mathf.Lerp (engineSoundAUD.pitch, pitchAUD, Time.deltaTime * speedLerpSound);
@@ -1580,7 +1600,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	#region CoroutineStartEndTurnOff
 	void TurnOnAndTurnOff(){
 		if (youCanCall && isInsideTheCar && controls.controls.enable_startTheVehicle_Input) {
-			if ((Input.GetKeyDown (controls.controls.startTheVehicle) && !theEngineIsRunning) || (Mathf.Abs(verticalInput) > 0.5f && !theEngineIsRunning)) {
+			if ((Input.GetKeyDown (controls.controls.startTheVehicle) && !theEngineIsRunning) 
+			) {
 				enableEngineSound = true;
                 Car.car.On();
                 if (_sounds.engineSound) {
@@ -1667,73 +1688,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	#endregion
 
 	#region GearsManager
-	void ManualGears(){//aqui
-        /*
-            if (currentGear == 0) {//entre -5 e 5 RPM, se a marcha estver em 0
-                if (mediumRPM < 5 && mediumRPM >= 0) {
-                    currentGear = 1;
-                }
-                if (mediumRPM > -5 && mediumRPM < 0) {
-                    currentGear = -1;
-                }
-            }
-            if (mediumRPM < -0.1f && Mathf.Abs (verticalInput) < 0.1f) {
-                currentGear = -1;
-            }
-            if (Mathf.Abs (verticalInput) < 0.1f && mediumRPM >= 0 && currentGear < 2) {
-                currentGear = 1;
-            }
-            if (controls.selectControls == MSSceneControllerFree.ControlTypeFree.windows) {//joystick OFF && buttons offf
-                if ((Mathf.Abs (Mathf.Clamp (verticalInput, -1f, 0f))) > 0.8f) {
-                    if ((KMh < 5 && mediumRPM < 1) || mediumRPM < -2) {
-                        currentGear = -1;
-                    }
-                }
-                if ((Mathf.Abs (Mathf.Clamp (verticalInput, 0f, 1f))) > 0.8f) {
-                    if ((KMh < 5) || (mediumRPM > 2 && currentGear < 2)) {
-                        currentGear = 1;
-                    }
-                }
-            }
-            else {//joystick ON
-                if ((Mathf.Abs (Mathf.Clamp (verticalInput, -1f, 0f))) > 0.2f) {
-                    if ((KMh < 5) || mediumRPM < -2) {
-                        currentGear = -1;
-                    }
-                }
-                if ((Mathf.Abs (Mathf.Clamp (verticalInput, 0f, 1f))) > 0.2f) {
-                    if ((KMh < 5) || (mediumRPM > 2 && currentGear < 2)) {
-                        currentGear = 1;
-                    }
-                }
-            }
-
-            //
-            if (currentGear > 0) {
-                if (KMh > (_vehicleTorque.idealVelocityGears [currentGear - 1] * _vehicleTorque.speedOfGear + 7 * _vehicleTorque.speedOfGear)) {
-                    if (currentGear < _vehicleTorque.numberOfGears && !changinGearsAuto && currentGear != -1) {
-                        timeAutoGear = 1.5f;
-                        StartCoroutine ("TimeAutoGears", currentGear + 1);
-                    }
-                } else if (KMh < (_vehicleTorque.idealVelocityGears [currentGear - 1] * _vehicleTorque.speedOfGear - 15 * _vehicleTorque.speedOfGear)) {
-                    if (currentGear > 1 && !changinGearsAuto) {
-                        timeAutoGear = 0;
-                        StartCoroutine ("TimeAutoGears", currentGear - 1);
-                    }
-                }
-                if (verticalInput > 0.1f && KMh > (_vehicleTorque.idealVelocityGears [currentGear - 1] * _vehicleTorque.speedOfGear + 7 * _vehicleTorque.speedOfGear)) {
-                    if (currentGear < _vehicleTorque.numberOfGears && currentGear != -1) {
-                        timeAutoGear = 0.0f;
-                        StartCoroutine ("TimeAutoGears", currentGear + 1);
-                    }
-                }
-            }
-            */
-        findGear();
-    }
-
-    private void findGear()
-    {
+	void ManualGears()
+	{
         ClutchBehaviour.Gear gear = ClutchBehaviour.clutch.GetCurrentGear();
         if (gear == ClutchBehaviour.Gear.GearN)
         {
@@ -1748,15 +1704,6 @@ public class MSVehicleControllerFree : MonoBehaviour {
             currentGear = (int)gear;
         }
 	}
-	/*
-    IEnumerator TimeAutoGears(int gear){
-		changinGearsAuto = true;
-		yield return new WaitForSeconds(0.4f);
-		currentGear = gear;
-		yield return new WaitForSeconds(timeAutoGear);
-		changinGearsAuto = false;
-	}
-	*/
 	#endregion
 
 	#region VolantManager
@@ -2218,6 +2165,29 @@ public class MSVehicleControllerFree : MonoBehaviour {
     public float GetRPM() { 
 		return mediumRPM;
 	}
+
+    public void setEngineOnOff(bool isengineOn)
+    {
+		//if engine is on, turn it off
+        if (isengineOn) 
+		{
+            Car.car.Off();
+			StartCoroutine("StartEngineCoroutine", false);
+			StartCoroutine("StartEngineTime");
+        }
+		//otherwise, turn it on
+        else
+        { 
+            enableEngineSound = true;
+            Car.car.On();
+            if (_sounds.engineSound)
+            {
+                engineSoundAUD.pitch = 0.5f;
+            }
+            StartCoroutine("StartEngineCoroutine", true);
+            StartCoroutine("StartEngineTime");
+		}
+    }
 
     private void FindIfGearISBeingChanged()
     {
