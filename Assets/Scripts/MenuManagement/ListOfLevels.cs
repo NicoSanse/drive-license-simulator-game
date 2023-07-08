@@ -11,7 +11,6 @@ public class ListOfLevels : MonoBehaviour
     //cioè quando diventano attive le classi che usano LisTOfLevels,
     //ma non saprei risalire a tutte le chiamate e non avrebbe senso perchè anche il ciclo for dovrebbe ripetersi
 
-    // Start is called before the first frame update
     void Awake()
     {
         for (int i = 0; i < 10; i++)
@@ -26,7 +25,6 @@ public class ListOfLevels : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         

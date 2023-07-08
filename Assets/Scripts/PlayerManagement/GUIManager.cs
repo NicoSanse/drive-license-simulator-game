@@ -109,4 +109,9 @@ public class GUIManager : MonoBehaviour
             MSVehicleControllerFree.mSVehicleControllerFree.setEngineOnOff(false);
         }
     }
+
+    public void PauseButton()
+    {
+        PauseButtonBehaviour.pauseButtonBehaviour.ClickOnPauseButton();
+    }
 }

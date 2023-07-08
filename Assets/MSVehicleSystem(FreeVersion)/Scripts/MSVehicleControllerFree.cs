@@ -2193,4 +2193,14 @@ public class MSVehicleControllerFree : MonoBehaviour {
     {
         changinGearsAuto = ClutchBehaviour.clutch.IsClutchPressed();
     }
+
+    public bool IsEngineSoundOn()
+    { 
+		return enableEngineSound;
+	}
+
+	public void SetEngineAbleSound(bool enableEngineSound)
+	{
+		this.enableEngineSound = enableEngineSound;
+	}
 }

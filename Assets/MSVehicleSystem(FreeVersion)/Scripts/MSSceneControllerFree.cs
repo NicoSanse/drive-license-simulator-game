@@ -315,9 +315,9 @@ public class MSSceneControllerFree : MonoBehaviour {
 
 			if (Input.GetKeyDown (controls.pause) && controls.enable_pause_Input) {
 				pause = !pause;
-			}
+            }
 			if (pause) {
-				Time.timeScale = Mathf.Lerp (Time.timeScale, 0.0f, Time.fixedDeltaTime * 5.0f);
+                Time.timeScale = Mathf.Lerp (Time.timeScale, 0.0f, Time.fixedDeltaTime * 5.0f);
 			} else {
 				Time.timeScale = Mathf.Lerp (Time.timeScale, 1.0f, Time.fixedDeltaTime * 5.0f);
 			}
@@ -575,5 +575,15 @@ public class MSSceneControllerFree : MonoBehaviour {
 	public MSVehicleControllerFree GetVehicleCode() 
 	{ 
 		return vehicleCode;
+	}
+
+    public void SetPause(bool pause)
+    {
+		this.pause = pause;
+	}
+
+	public bool IsOnPause() 
+	{ 
+		return pause;
 	}
 }
