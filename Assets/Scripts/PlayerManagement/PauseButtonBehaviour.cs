@@ -23,7 +23,6 @@ public class PauseButtonBehaviour : MonoBehaviour
 
     public void ClickOnPauseButton()
     {
-        MSVehicleControllerFree.mSVehicleControllerFree.SetEngineAbleSound(false);
         MSSceneControllerFree.mSSceneControllerFree.SetPause(true);
         pauseScreen.SetActive(true);
     }

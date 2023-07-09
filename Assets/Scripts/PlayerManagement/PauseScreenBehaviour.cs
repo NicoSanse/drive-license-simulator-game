@@ -20,7 +20,6 @@ public class PauseScreenBehaviour : MonoBehaviour
 
     public void Resume()
     {
-        MSVehicleControllerFree.mSVehicleControllerFree.SetEngineAbleSound(true);
         MSSceneControllerFree.mSSceneControllerFree.SetPause(false);
         pauseScreen.SetActive(false);
     }
