@@ -18,6 +18,6 @@ public class CurrentRPMMessageShown : MonoBehaviour
     }
 
     private void ChangeMessageShown(){
-        GetComponent<TMP_Text>().text = "RPM: " + Mathf.RoundToInt(Car.car.GetRPM());
+        GetComponent<TMP_Text>().text = Mathf.RoundToInt(Car.car.GetRPM()) + " x1000 rpm";
     }
 }

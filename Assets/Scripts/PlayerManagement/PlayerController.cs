@@ -14,13 +14,11 @@ public class PlayerController : MonoBehaviour
         player = this;
     }
 
-    //Start is called before the first frame update
     void Start()
     {
         print("Start");
     }
 
-    // Update is called once per frame
     void Update()
     {
 

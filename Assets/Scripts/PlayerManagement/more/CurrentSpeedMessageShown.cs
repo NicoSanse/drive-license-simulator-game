@@ -18,6 +18,6 @@ public class CurrentSpeedMessageShown : MonoBehaviour
     }
 
     private void ChangeMessageShown(){
-        GetComponent<TMP_Text>().text = "Speed: " + Mathf.RoundToInt(Car.car.GetSpeed()) + " km/h";
+        GetComponent<TMP_Text>().text = Mathf.RoundToInt(Car.car.GetSpeed()) + " km/h";
     }
 }
