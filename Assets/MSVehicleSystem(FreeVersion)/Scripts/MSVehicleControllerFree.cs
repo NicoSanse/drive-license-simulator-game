@@ -49,7 +49,7 @@ public class VehicleWheelsClassFree {
 [Serializable]
 public class VehicleAdjustmentClassFree {
 	[Tooltip("If this variable is true, the vehicle will start with the engine running. But this only applies if the player starts inside this vehicle.")]
-	public bool startOn = true;
+	public bool startOn = false;
 	[Range(500,2000000)][Tooltip("In this variable you must define the mass that the vehicle will have. Common vehicles usually have a mass around 1500")]
 	public int vehicleMass = 2000;
 	[Tooltip("In this variable there are some variables that allow to improve the control of the vehicle.")]
