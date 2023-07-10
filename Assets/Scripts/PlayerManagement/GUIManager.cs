@@ -114,4 +114,9 @@ public class GUIManager : MonoBehaviour
     {
         PauseButtonBehaviour.pauseButtonBehaviour.ClickOnPauseButton();
     }
+
+    public void SwitchCameraButton()
+    { 
+        SwitchCameraBehaviour.switchCamera.SwitchCamera();
+    }
 }
