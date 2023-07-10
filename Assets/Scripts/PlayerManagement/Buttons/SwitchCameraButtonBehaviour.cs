@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchCameraBehaviour : MonoBehaviour
+public class SwitchCameraButtonBehaviour : MonoBehaviour
 {
-    public static SwitchCameraBehaviour switchCamera;
+    public static SwitchCameraButtonBehaviour switchCamera;
 
     void Awake()
     {
@@ -24,6 +24,6 @@ public class SwitchCameraBehaviour : MonoBehaviour
 
     public void SwitchCamera()
     {
-        MSVehicleControllerFree.mSVehicleControllerFree.InputsCamerasMobile();
+        MSVehicleControllerFree.mSVehicleControllerFree.MySwitchCamera();
     }
 }

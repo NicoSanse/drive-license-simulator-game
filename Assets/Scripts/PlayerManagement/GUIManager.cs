@@ -101,12 +101,12 @@ public class GUIManager : MonoBehaviour
         //if Car is on, turn it off
         if (Car.car.GetState())
         { 
-            MSVehicleControllerFree.mSVehicleControllerFree.setEngineOnOff(true);
+            MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
         }
         //otherwise turn it on
         else
         {
-            MSVehicleControllerFree.mSVehicleControllerFree.setEngineOnOff(false);
+            MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(false);
         }
     }
 
@@ -117,6 +117,6 @@ public class GUIManager : MonoBehaviour
 
     public void SwitchCameraButton()
     { 
-        SwitchCameraBehaviour.switchCamera.SwitchCamera();
+        SwitchCameraButtonBehaviour.switchCamera.SwitchCamera();
     }
 }

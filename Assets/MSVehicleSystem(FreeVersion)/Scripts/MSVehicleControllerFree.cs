@@ -577,26 +577,6 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		handBrakeTrue = false;
         theEngineIsRunning = false;
 
-		/*
-        if (isInsideTheCar) {
-			theEngineIsRunning = _vehicleSettings.startOn;
-			if (theEngineIsRunning) {
-                Car.car.On();
-                StartCoroutine ("StartEngineCoroutine", true);
-				StartCoroutine ("TurnOffEngineTime");
-			} else {
-                Car.car.Off();
-                StartCoroutine ("StartEngineCoroutine", false);
-				StartCoroutine ("TurnOffEngineTime");
-			}
-		} else {
-			theEngineIsRunning = false;
-            Car.car.Off();
-            StartCoroutine ("StartEngineCoroutine", false);
-			StartCoroutine ("TurnOffEngineTime");
-		}
-		*/
-
 		ms_Rigidbody = GetComponent <Rigidbody> ();
 		ms_Rigidbody.useGravity = true;
 		ms_Rigidbody.mass = _vehicleSettings.vehicleMass;
@@ -1021,7 +1001,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		Sounds ();
 		UpdateWheelMeshes ();
 		if (isInsideTheCar) {
-			ManualGears ();
+			MyManualGears ();
 		}
 	}
 
@@ -1048,7 +1028,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		StabilizeVehicleRollForces ();
 		StabilizeAirRotation ();
 		StabilizeAngularRotation ();
-        ControlSpeed();
+        MyControlSpeed();
         //
 
         //extra gravity
@@ -1092,7 +1072,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		}
 	}
 
-    private void ControlSpeed()
+    private void MyControlSpeed()
     {
 		//makes the speed car adapt to his gear
         if(!isBraking)
@@ -1688,7 +1668,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	#endregion
 
 	#region GearsManager
-	void ManualGears()
+	void MyManualGears()
 	{
         ClutchBehaviour.Gear gear = ClutchBehaviour.clutch.GetCurrentGear();
         if (gear == ClutchBehaviour.Gear.GearN)
@@ -2166,7 +2146,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		return mediumRPM;
 	}
 
-    public void setEngineOnOff(bool isengineOn)
+    public void MySetEngineOnOff(bool isengineOn)
     {
 		//if engine is on, turn it off
         if (isengineOn) 
@@ -2203,4 +2183,18 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	{
 		this.enableEngineSound = enableEngineSound;
 	}
+
+    public void MySwitchCamera()
+    {
+        if (_cameras.cameras[0]._camera.gameObject.activeSelf) 
+		{ 
+        _cameras.cameras[0]._camera.gameObject.SetActive(false);
+        _cameras.cameras[2]._camera.gameObject.SetActive(true);
+    	}
+        else
+        {
+            _cameras.cameras[2]._camera.gameObject.SetActive(false);
+            _cameras.cameras[0]._camera.gameObject.SetActive(true);
+		}
+    }
 }
