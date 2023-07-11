@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class LowBeamBehaviour : MonoBehaviour
 {
-    [SerializeField] Light lowBeamLightLeft;
-    [SerializeField] Light lowBeamLightRight;
+    [SerializeField] private Light lowBeamLightLeft;
+    [SerializeField] private Light lowBeamLightRight;
     public static LowBeamBehaviour lowBeam;
     private static bool lowBeamOn;
     private Color imageColor;
@@ -57,7 +57,7 @@ public class LowBeamBehaviour : MonoBehaviour
     public void TurnLowBeamOnOrOff()
     {
         //if the car is on you can turn on lights
-        if (Car.car.GetState())
+        if (Car.car.IsOn())
         {
             if (HighBeamBehaviour.highBeam.IsHighBeamOn())
             {

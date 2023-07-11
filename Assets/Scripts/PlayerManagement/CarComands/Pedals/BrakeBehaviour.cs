@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BrakeBehaviour : MonoBehaviour
 {
-    [SerializeField] private GameObject brakeLight;
+    [SerializeField] private Light brakeLeftLight;
+    [SerializeField] private Light brakeRightLight;
     public static BrakeBehaviour brake;
     private float deceleration;
     private bool brakePressed;
@@ -30,12 +31,19 @@ public class BrakeBehaviour : MonoBehaviour
     }
 
     private void BrakesLight()
-    { 
-        if (brakePressed)
+    {
+        if (Car.car.IsOn())
         {
-        }
-        else
-        {
+            if (brakePressed)
+            {
+                brakeLeftLight.intensity = 20;
+                brakeRightLight.intensity = 20;
+            }
+            else
+            {
+                brakeLeftLight.intensity = 0;
+                brakeRightLight.intensity = 0;
+            }
         }
     }
 

@@ -99,7 +99,7 @@ public class GUIManager : MonoBehaviour
     public void TurningEngineOnBehaviour()
     {
         //if Car is on, turn it off
-        if (Car.car.GetState())
+        if (Car.car.IsOn())
         { 
             MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
         }

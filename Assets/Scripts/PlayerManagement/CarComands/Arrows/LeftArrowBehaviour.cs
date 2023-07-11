@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class LeftArrowBehaviour : MonoBehaviour
 {
-    [SerializeField] Light leftFrontArrowLight;
-    [SerializeField] Light leftBackArrowLight;
+    [SerializeField] private Light leftFrontArrowLight;
+    [SerializeField] private Light leftBackArrowLight;
     public static LeftArrowBehaviour leftArrow;
     private bool leftArrowOn;
     private Color imageColor;
@@ -59,7 +59,7 @@ public class LeftArrowBehaviour : MonoBehaviour
     public void TurnLeftArrowOnOrOff() 
     {
         //if the car is on you can set arrows
-        if (Car.car.GetState())
+        if (Car.car.IsOn())
         {
             //turn off the other arrow if its on
             if(RightArrowBehaviour.rightArrow.IsRightArrowOn())

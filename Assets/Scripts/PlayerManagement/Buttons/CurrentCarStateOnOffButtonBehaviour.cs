@@ -19,7 +19,7 @@ public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
 
     private void ShowState()
     {
-        if (Car.car.GetState())
+        if (Car.car.IsOn())
         {
             GetComponentInChildren<TMP_Text>().text = "ON";
         }

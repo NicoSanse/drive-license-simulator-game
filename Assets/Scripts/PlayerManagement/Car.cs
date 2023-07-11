@@ -104,7 +104,7 @@ public class Car : MonoBehaviour
         else currentState = State.Off;
     }
 
-    public bool GetState()
+    public bool IsOn()
     {
         if(currentState == State.On) return true;
         else return false;
