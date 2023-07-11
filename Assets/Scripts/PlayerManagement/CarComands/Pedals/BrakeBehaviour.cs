@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BrakeBehaviour : MonoBehaviour
 {
+    [SerializeField] private GameObject brakeLight;
     public static BrakeBehaviour brake;
     private float deceleration;
     private bool brakePressed;
@@ -25,7 +26,19 @@ public class BrakeBehaviour : MonoBehaviour
     {
         StartCoroutine(CommonBehaviours.ChangeScale(brakePressed, GetComponent<RectTransform>()));
         Decelerate();
+        BrakesLight();
     }
+
+    private void BrakesLight()
+    { 
+        if (brakePressed)
+        {
+        }
+        else
+        {
+        }
+    }
+
 
     public void SetDeceleration(float value) 
     {

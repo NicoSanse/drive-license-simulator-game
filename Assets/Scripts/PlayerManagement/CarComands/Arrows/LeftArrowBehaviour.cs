@@ -27,9 +27,22 @@ public class LeftArrowBehaviour : MonoBehaviour
         
     }
 
-    public void SetLeftArrowOn(bool arrow)
+    public void SetLeftArrowOn()
     {
-        leftArrowOn = arrow;
+        leftArrowOn = true;
+        togglingArrows = StartCoroutine(ToggleArrows());
+    }
+
+    public void SetLeftArrowOff()
+    {
+        leftArrowOn = false;
+        if (togglingArrows != null)
+        {
+            StopCoroutine(togglingArrows);
+        }
+
+        imageColor.a = 100 / 255f;
+        GetComponent<Image>().color = imageColor;
     }
 
     public bool IsLeftArrowOn()
@@ -41,19 +54,22 @@ public class LeftArrowBehaviour : MonoBehaviour
     //turns the arrow off or starts the coroutine to make it toogle
     public void TurnLeftArrowOnOrOff() 
     {
-        if (leftArrowOn)
+        //if the car is on you can set arrows
+        if (Car.car.GetState())
         {
-            StopCoroutine(togglingArrows);
-
-            imageColor.a = 100 / 255f;
-            GetComponent<Image>().color = imageColor;
-
-            SetLeftArrowOn(false);
-        }
-        else if(!RightArrowBehaviour.rightArrow.IsRightArrowOn())
-        {
-            togglingArrows = StartCoroutine(ToggleArrows());
-            SetLeftArrowOn(true);
+            //turn off the other arrow if its on
+            if(RightArrowBehaviour.rightArrow.IsRightArrowOn())
+            {
+                RightArrowBehaviour.rightArrow.SetRightArrowOff();
+            }
+            if (leftArrowOn)
+            {
+                SetLeftArrowOff();
+            }
+            else if (!RightArrowBehaviour.rightArrow.IsRightArrowOn())
+            {
+                SetLeftArrowOn();
+            }
         }
     }
 

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LowBeamBehaviour : MonoBehaviour
 {
+    [SerializeField] Light lowBeamLightLeft;
+    [SerializeField] Light lowBeamLightRight;
     public static LowBeamBehaviour lowBeam;
     private static bool lowBeamOn;
     private Color imageColor;
@@ -18,6 +20,8 @@ public class LowBeamBehaviour : MonoBehaviour
     {
         lowBeamOn = false;
         imageColor = GetComponent<Image>().color;
+        lowBeamLightLeft.intensity = 0;
+        lowBeamLightRight.intensity = 0;
     }
 
     // Update is called once per frame
@@ -26,9 +30,21 @@ public class LowBeamBehaviour : MonoBehaviour
         
     }
 
-    public void SetLowBeamOn(bool beam)
+    public void SetLowBeamOn()
     {
-        lowBeamOn = beam;
+        lowBeamOn = true;
+        lowBeamLightLeft.intensity = 80;
+        lowBeamLightRight.intensity = 80;
+        imageColor.a = 1f;
+    }
+
+    public void SetLowBeamOff()
+    { 
+        lowBeamOn = false;
+        lowBeamLightLeft.intensity = 0;
+        lowBeamLightRight.intensity = 0;
+        imageColor.a = 100 / 255f;
+        GetComponent<Image>().color = imageColor;
     }
 
     public bool IsLowBeamOn()
@@ -40,15 +56,21 @@ public class LowBeamBehaviour : MonoBehaviour
     //also changes the alpha value
     public void TurnLowBeamOnOrOff()
     {
-        if (lowBeamOn)
+        //if the car is on you can turn on lights
+        if (Car.car.GetState())
         {
-            imageColor.a = 100/255f;
-            SetLowBeamOn(false);
-        }
-        else
-        {
-            imageColor.a = 1f;
-            SetLowBeamOn(true);
+            if (HighBeamBehaviour.highBeam.IsHighBeamOn())
+            {
+                HighBeamBehaviour.highBeam.TurnHighBeamOnOrOff();
+            }
+            if (lowBeamOn)
+            {
+                SetLowBeamOff();
+            }
+            else
+            {
+                SetLowBeamOn();
+            }
         }
         GetComponent<Image>().color = imageColor;
     }

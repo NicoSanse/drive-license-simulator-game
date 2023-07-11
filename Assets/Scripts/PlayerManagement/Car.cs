@@ -43,10 +43,15 @@ public class Car : MonoBehaviour
 
     public void Stop()
     {
-        speed = 0f;
         RPM = 0f;
+        
         AccelerationBehaviour.accelerator.SetAcceleration(0f);
         BrakeBehaviour.brake.SetDeceleration(0f);
+
+        LowBeamBehaviour.lowBeam.SetLowBeamOff();
+        HighBeamBehaviour.highBeam.SetHighBeamOff();
+        LeftArrowBehaviour.leftArrow.SetLeftArrowOff();
+        RightArrowBehaviour.rightArrow.SetRightArrowOff();
     }
 
     public void Off()

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HighBeamBehaviour : MonoBehaviour
 {
+    [SerializeField] Light highBeamLightLeft;
+    [SerializeField] Light highBeamLightRight;
     public static HighBeamBehaviour highBeam;
     private static bool highBeamOn;
     private Color imageColor;
@@ -18,6 +20,8 @@ public class HighBeamBehaviour : MonoBehaviour
     {
         highBeamOn = false;
         imageColor = GetComponent<Image>().color;
+        highBeamLightLeft.intensity = 0;
+        highBeamLightRight.intensity = 0;
     }
 
     // Update is called once per frame
@@ -26,9 +30,21 @@ public class HighBeamBehaviour : MonoBehaviour
         
     }
 
-    public void SetHighBeamOn(bool beam)
+    public void SetHighBeamOn()
     {
-        highBeamOn = beam;
+        highBeamOn = true;
+        highBeamLightLeft.intensity = 100;
+        highBeamLightRight.intensity = 100;
+        imageColor.a = 1f;
+    }
+
+    public void SetHighBeamOff()
+    {
+        highBeamOn = false;
+        highBeamLightLeft.intensity = 0;
+        highBeamLightRight.intensity = 0;
+        imageColor.a = 100 / 255f;
+        GetComponent<Image>().color = imageColor;
     }
 
     public bool IsHighBeamOn()
@@ -40,15 +56,21 @@ public class HighBeamBehaviour : MonoBehaviour
     //also changes the alpha value
     public void TurnHighBeamOnOrOff()
     {
-        if (highBeamOn)
+        //if the car is on you can turn on lights
+        if (Car.car.GetState())
         {
-            imageColor.a = 100/255f;
-            SetHighBeamOn(false);
-        }
-        else
-        {
-            imageColor.a = 1f;
-            SetHighBeamOn(true);
+            if(LowBeamBehaviour.lowBeam.IsLowBeamOn())
+            {
+                LowBeamBehaviour.lowBeam.TurnLowBeamOnOrOff();
+            }
+            if (highBeamOn)
+            {
+                SetHighBeamOff();
+            }
+            else
+            {
+                SetHighBeamOn();
+            }
         }
         GetComponent<Image>().color = imageColor;
     }
