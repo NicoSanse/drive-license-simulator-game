@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LeftArrowBehaviour : MonoBehaviour
 {
+    [SerializeField] Light leftFrontArrowLight;
+    [SerializeField] Light leftBackArrowLight;
     public static LeftArrowBehaviour leftArrow;
     private bool leftArrowOn;
     private Color imageColor;
@@ -41,6 +43,8 @@ public class LeftArrowBehaviour : MonoBehaviour
             StopCoroutine(togglingArrows);
         }
 
+        leftBackArrowLight.intensity = 0;
+        leftFrontArrowLight.intensity = 0;
         imageColor.a = 100 / 255f;
         GetComponent<Image>().color = imageColor;
     }
@@ -80,8 +84,12 @@ public class LeftArrowBehaviour : MonoBehaviour
         while (true)
         {
             imageColor.a = 1f;
+            leftBackArrowLight.intensity = 20;
+            leftFrontArrowLight.intensity = 20;
             GetComponent<Image>().color = imageColor;
             yield return new WaitForSeconds(0.5f);
+            leftBackArrowLight.intensity = 0;
+            leftFrontArrowLight.intensity = 0;
             imageColor.a = 100 / 255f;
             GetComponent<Image>().color = imageColor;
             yield return new WaitForSeconds(0.5f);

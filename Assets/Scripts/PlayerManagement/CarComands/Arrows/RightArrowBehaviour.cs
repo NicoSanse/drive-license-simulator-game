@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class RightArrowBehaviour : MonoBehaviour
 {
+    [SerializeField] Light rightFrontArrowLight;
+    [SerializeField] Light rightBackArrowLight;
     public static RightArrowBehaviour rightArrow;
     private bool rightArrowOn;
     private Color imageColor;
@@ -41,6 +43,8 @@ public class RightArrowBehaviour : MonoBehaviour
             StopCoroutine(togglingArrows);
         }
 
+        rightBackArrowLight.intensity = 0;
+        rightFrontArrowLight.intensity = 0;
         imageColor.a = 100 / 255f;
         GetComponent<Image>().color = imageColor;
     }
@@ -80,7 +84,11 @@ public class RightArrowBehaviour : MonoBehaviour
         {
             imageColor.a = 100 / 255f;
             GetComponent<Image>().color = imageColor;
+            rightBackArrowLight.intensity = 20;
+            rightFrontArrowLight.intensity = 20;
             yield return new WaitForSeconds(0.5f);
+            rightBackArrowLight.intensity = 0;
+            rightFrontArrowLight.intensity = 0;
             imageColor.a = 255 / 255f;
             GetComponent<Image>().color = imageColor;
             yield return new WaitForSeconds(0.5f);

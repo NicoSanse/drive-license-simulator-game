@@ -36,9 +36,9 @@ public class Car : MonoBehaviour
     {
         if (currentState == State.On)
         { 
-            speed = GetComponent<Rigidbody>().velocity.magnitude * 3.6f;
             RPM = CalculateRPM();
         }
+        speed = GetComponent<Rigidbody>().velocity.magnitude * 3.6f;
     }
 
     public void Stop()
