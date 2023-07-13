@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AccelerationBehaviour : MonoBehaviour
 {
-
+    [SerializeField] Light retroLeftLight;
+    [SerializeField] Light retroRightLight;
     public static AccelerationBehaviour accelerator;
     private float acceleration;
     private bool acceleratorPressed;
@@ -26,6 +27,21 @@ public class AccelerationBehaviour : MonoBehaviour
     {
         StartCoroutine(CommonBehaviours.ChangeScale(acceleratorPressed, GetComponent<RectTransform>()));
         Accelerate();
+        RetroLights();
+    }
+
+    private void RetroLights()
+    {
+        if (Car.car.IsOn() && ClutchBehaviour.clutch.GetCurrentGear() == ClutchBehaviour.Gear.GearR && acceleratorPressed)
+        { 
+            retroLeftLight.intensity = 20;
+            retroRightLight.intensity = 20;
+        }
+        else
+        {
+            retroLeftLight.intensity = 0;
+            retroRightLight.intensity = 0;
+        }
     }
 
     public void SetAcceleration(float value) 

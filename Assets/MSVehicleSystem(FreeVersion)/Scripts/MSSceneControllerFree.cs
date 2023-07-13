@@ -130,6 +130,8 @@ public class MSSceneControllerFree : MonoBehaviour {
 
 	Vector2 vectorDirJoystick;
 
+	private Gyroscope gyroscope;
+
 	void Awake () {
         mSSceneControllerFree = this;
         error = false;
@@ -248,7 +250,13 @@ public class MSSceneControllerFree : MonoBehaviour {
 		}
 	}
 
-	void CheckEqualKeyCodes(){
+    void Start()
+    {
+        gyroscope = Input.gyro;
+		gyroscope.enabled = true;
+    }
+
+    void CheckEqualKeyCodes(){
 		var type = typeof(ControlsFree);
 		var fields = type.GetFields();
 		var values = (from field in fields

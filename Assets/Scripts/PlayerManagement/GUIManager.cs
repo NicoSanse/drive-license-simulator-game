@@ -102,11 +102,13 @@ public class GUIManager : MonoBehaviour
         if (Car.car.IsOn())
         { 
             MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
+            CurrentCarStateOnOffButtonBehaviour.currentCarStateOnOffButtonBehaviour.DarkenButton();
         }
         //otherwise turn it on
         else
         {
             MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(false);
+            CurrentCarStateOnOffButtonBehaviour.currentCarStateOnOffButtonBehaviour.LightenButton();
         }
     }
 
