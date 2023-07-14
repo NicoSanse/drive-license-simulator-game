@@ -130,7 +130,6 @@ public class MSSceneControllerFree : MonoBehaviour {
 
 	Vector2 vectorDirJoystick;
 
-	private Gyroscope gyroscope;
 
 	void Awake () {
         mSSceneControllerFree = this;
@@ -252,8 +251,7 @@ public class MSSceneControllerFree : MonoBehaviour {
 
     void Start()
     {
-        gyroscope = Input.gyro;
-		gyroscope.enabled = true;
+		
     }
 
     void CheckEqualKeyCodes(){
@@ -279,12 +277,10 @@ public class MSSceneControllerFree : MonoBehaviour {
 			switch (selectControls) {
 			case ControlTypeFree.mobileButton:
 				if(buttonLeft && buttonRight){
-					//MSbuttonHorizontal = -buttonLeft.buttonInput+buttonRight.buttonInput;
-					//usare qua accelerometro telefono per rotazione
+					MSbuttonHorizontal = MyCarRotation.myCarRotation.GetValue();
 				}
                     if (buttonUp && buttonDown)
                     {
-                        //MSbuttonVertical = -buttonDown.buttonInput+ buttonUp.buttonInput;
 						if(ClutchBehaviour.clutch.GetCurrentGear() == ClutchBehaviour.Gear.GearR)
 						{
 							MSbuttonVertical = BrakeBehaviour.brake.GetDeceleration() -

@@ -10259,6 +10259,24 @@ Texture2D:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1037390293 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1417274621101168, guid: b6883ab16065ce74589a2e2f0874e149,
+    type: 3}
+  m_PrefabInstance: {fileID: 94482935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1037390296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037390293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a68d0b152f47c418059d897662345e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1061566018
 Mesh:
   m_ObjectHideFlags: 0
