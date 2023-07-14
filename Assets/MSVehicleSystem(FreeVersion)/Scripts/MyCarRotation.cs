@@ -66,7 +66,7 @@ public class MyCarRotation : MonoBehaviour
             //leftSensibility = 3f;
             leftTurningValue -= leftSensibility * Time.deltaTime;
         }
-        leftTurningValue = Mathf.Clamp(leftSensibility, 0, 1);
+        leftTurningValue = Mathf.Clamp(leftTurningValue, 0, 1);
         print("left turning value: " + leftTurningValue);
 
 
