@@ -20,6 +20,7 @@ public class WelcomeScene : MonoBehaviour
     public void GoToMenu()
     {
         SceneManager.LoadScene("Menu");
+        GameManager.gameManager.SetGameState(GameManager.GameState.Menu);
     }
 
     public void ExitGame()

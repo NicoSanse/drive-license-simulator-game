@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         {
             print("You win!");
             Car.car.Stop();
-            GameManager.LevelPassed();
+            GameManager.gameManager.LevelPassed();
         }
     }
 

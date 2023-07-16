@@ -2142,10 +2142,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	}
     #endregion
 
-    public float GetRPM() { 
-		return mediumRPM;
-	}
-
+   
     public void MySetEngineOnOff(bool isengineOn)
     {
 		//if engine is on, turn it off

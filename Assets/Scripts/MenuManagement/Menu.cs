@@ -9,13 +9,23 @@ public class Menu : MonoBehaviour
     buttonFirstLevel, buttonSecondLevel, buttonThirdLevel, buttonFourthLevel, 
     buttonFifthLevel, buttonSixthLevel, buttonSeventhLevel;
 
+    public static Menu menu;
+    private static ListOfLevels listOfLevels;
+    private static Level currentLevel;
+
+    void Awake()
+    {
+        menu = this;
+        listOfLevels = gameObject.AddComponent<ListOfLevels>();
+    }
+
     //here i update the content of the menu. I just want to see updated the levels that 
     //i have passed through the little image of the locker on the right of the button
     void Start()
     {
-        for (int i = 0; i < GameManager.gameManager.GetListOfLevels().Length(); i++)
+        for (int i = 0; i < listOfLevels.Length(); i++)
         {
-            if (GameManager.gameManager.GetListOfLevels().GetLevel(i).IsPassed())
+            if (listOfLevels.GetLevel(i).IsPassed())
             {
                 switch (i)
                 {
@@ -55,7 +65,8 @@ public class Menu : MonoBehaviour
         {
             case "FirstLevelButton":
                 print("StartFirstLevel");
-                GameManager.gameManager.SetCurrentLevel(GameManager.gameManager.GetListOfLevels().GetLevel(0));
+                SetCurrentLevel(listOfLevels.GetLevel(0));
+                GameManager.gameManager.SetGameState(GameManager.GameState.Playing);
                 SceneManager.LoadScene("LevelOne");
                 break;
             case "SecondLevelButton":
@@ -93,15 +104,32 @@ public class Menu : MonoBehaviour
     //The first level is always available
     public void CheckLevel(int position) 
     {
-        if (GameManager.gameManager.GetListOfLevels().GetLevel(position).IsPassed())
+        if (listOfLevels.GetLevel(position).IsPassed())
         {
-            GameManager.gameManager.SetCurrentLevel(GameManager.gameManager.GetListOfLevels().GetLevel(position + 1));
+            SetCurrentLevel(listOfLevels.GetLevel(position + 1));
+            GameManager.gameManager.SetGameState(GameManager.GameState.Playing);
             SceneManager.LoadScene(position + 3);
         }
         else
         {
             print("Level " + (position + 2) + " is locked");
         }
+    }
+
+
+    public ListOfLevels GetListOfLevels()
+    {
+        return listOfLevels;
+    }
+
+    public Level GetCurrentLevel()
+    {
+        return currentLevel;
+    }
+
+    public void SetCurrentLevel(Level level)
+    {
+        currentLevel = level;
     }
 
     //makes quit the game

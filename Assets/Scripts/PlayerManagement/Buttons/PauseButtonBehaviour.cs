@@ -25,5 +25,6 @@ public class PauseButtonBehaviour : MonoBehaviour
     {
         MSSceneControllerFree.mSSceneControllerFree.SetPause(true);
         pauseScreen.SetActive(true);
+        GameManager.gameManager.SetGameState(GameManager.GameState.LevelPaused);
     }
 }

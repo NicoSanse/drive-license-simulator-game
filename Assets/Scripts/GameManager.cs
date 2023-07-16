@@ -6,13 +6,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
-    private static ListOfLevels listOfLevels;
-    private static Level currentLevel;
-    private enum GameState { Welcome, Menu, Playing, LevelPaused };
+    public enum GameState { Welcome, Menu, Playing, LevelPaused };
+    private GameState gameState;
     void Awake() 
     { 
         gameManager = this;
-        listOfLevels = gameObject.AddComponent<ListOfLevels>();
     }
 
     // Start is called before the first frame update
@@ -21,6 +19,7 @@ public class GameManager : MonoBehaviour
         //andranno fatte delle cose per recuperare i dati dal file di salvataggio
         //in modo da non perdere i dati delle pardite ad ogni avvio
         //per ora li inizializzo a mano
+        gameState = GameState.Welcome;
     }
 
     // Update is called once per frame
@@ -29,25 +28,21 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public ListOfLevels GetListOfLevels() 
+    public GameState GetCurrentGameState() 
     { 
-        return listOfLevels;
+        return gameState;
     }
 
-    public Level GetCurrentLevel() 
+    public void SetGameState(GameState state) 
     { 
-        return currentLevel;
-    }
-
-    public void SetCurrentLevel(Level level) 
-    { 
-        currentLevel = level;
+        gameState = state;
     }
 
     //sets the current level as passed and come back to the menu
-    public static void LevelPassed()
+    public void LevelPassed()
     {
-        currentLevel.SetPassed(true);
+        Menu.menu.GetCurrentLevel().SetPassed(true);
         SceneManager.LoadScene("Menu");
+        gameState = GameState.Menu;
     }
 }
