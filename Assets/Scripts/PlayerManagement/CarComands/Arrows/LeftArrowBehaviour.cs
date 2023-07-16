@@ -7,10 +7,11 @@ public class LeftArrowBehaviour : MonoBehaviour
 {
     [SerializeField] private Light leftFrontArrowLight;
     [SerializeField] private Light leftBackArrowLight;
-    public static LeftArrowBehaviour leftArrow;
+    private static LeftArrowBehaviour leftArrow;
     private bool leftArrowOn;
     private Color imageColor;
     private Coroutine togglingArrows;
+    private RightArrowBehaviour rightArrow;
 
     void Awake()
     {
@@ -21,6 +22,8 @@ public class LeftArrowBehaviour : MonoBehaviour
     {
         leftArrowOn = false;
         imageColor = GetComponent<Image>().color;
+
+        rightArrow = RightArrowBehaviour.GetRightArrowBehaviourInstance();
     }
 
     // Update is called once per frame
@@ -62,15 +65,15 @@ public class LeftArrowBehaviour : MonoBehaviour
         if (Car.car.IsOn())
         {
             //turn off the other arrow if its on
-            if(RightArrowBehaviour.rightArrow.IsRightArrowOn())
+            if(rightArrow.IsRightArrowOn())
             {
-                RightArrowBehaviour.rightArrow.SetRightArrowOff();
+                rightArrow.SetRightArrowOff();
             }
             if (leftArrowOn)
             {
                 SetLeftArrowOff();
             }
-            else if (!RightArrowBehaviour.rightArrow.IsRightArrowOn())
+            else if (!rightArrow.IsRightArrowOn())
             {
                 SetLeftArrowOn();
             }
@@ -94,5 +97,10 @@ public class LeftArrowBehaviour : MonoBehaviour
             GetComponent<Image>().color = imageColor;
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    public static LeftArrowBehaviour GetLeftArrowBehaviourInstance()
+    {
+        return leftArrow;
     }
 }

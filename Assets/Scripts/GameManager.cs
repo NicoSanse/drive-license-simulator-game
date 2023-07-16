@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager gameManager;
+    private static GameManager gameManager;
     public enum GameState { Welcome, Menu, Playing, LevelPaused };
-    private GameState gameState;
+    private static GameState gameState;
+    private Menu menu;
     void Awake() 
     { 
         gameManager = this;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
         //in modo da non perdere i dati delle pardite ad ogni avvio
         //per ora li inizializzo a mano
         gameState = GameState.Welcome;
+        menu = Menu.GetMenuInstance();
     }
 
     // Update is called once per frame
@@ -41,8 +43,13 @@ public class GameManager : MonoBehaviour
     //sets the current level as passed and come back to the menu
     public void LevelPassed()
     {
-        Menu.menu.GetCurrentLevel().SetPassed(true);
+        menu.GetCurrentLevel().SetPassed(true);
         SceneManager.LoadScene("Menu");
         gameState = GameState.Menu;
+    }
+
+    public static GameManager GetGameManagerInstance() 
+    { 
+        return gameManager;
     }
 }

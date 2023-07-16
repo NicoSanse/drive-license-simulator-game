@@ -6,10 +6,11 @@ public class AccelerationBehaviour : MonoBehaviour
 {
     [SerializeField] Light retroLeftLight;
     [SerializeField] Light retroRightLight;
-    public static AccelerationBehaviour accelerator;
+    private static AccelerationBehaviour accelerator;
     private float acceleration;
     private bool acceleratorPressed;
     private float sensibility = 3f;
+    private ClutchBehaviour clutch;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class AccelerationBehaviour : MonoBehaviour
     {
         acceleratorPressed = false;
         acceleration = 0f;
+        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
     }
 
     // Update is called once per frame
@@ -32,7 +34,7 @@ public class AccelerationBehaviour : MonoBehaviour
 
     private void RetroLights()
     {
-        if (Car.car.IsOn() && ClutchBehaviour.clutch.GetCurrentGear() == ClutchBehaviour.Gear.GearR && acceleratorPressed)
+        if (Car.car.IsOn() && clutch.GetCurrentGear() == ClutchBehaviour.Gear.GearR && acceleratorPressed)
         { 
             retroLeftLight.intensity = 20;
             retroRightLight.intensity = 20;
@@ -89,5 +91,10 @@ public class AccelerationBehaviour : MonoBehaviour
             acceleration -= Time.deltaTime * sensibility;
         }
         acceleration = Mathf.Clamp(acceleration, 0, 1);
+    }
+
+    public static AccelerationBehaviour GetAccelerationBehaviourInstance()
+    {
+        return accelerator;
     }
 }

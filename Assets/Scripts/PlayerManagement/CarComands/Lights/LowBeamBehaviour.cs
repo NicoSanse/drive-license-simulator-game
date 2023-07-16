@@ -7,9 +7,10 @@ public class LowBeamBehaviour : MonoBehaviour
 {
     [SerializeField] private Light lowBeamLightLeft;
     [SerializeField] private Light lowBeamLightRight;
-    public static LowBeamBehaviour lowBeam;
+    private static LowBeamBehaviour lowBeam;
     private static bool lowBeamOn;
     private Color imageColor;
+    private HighBeamBehaviour highBeam;
 
     void Awake()
     {
@@ -22,6 +23,8 @@ public class LowBeamBehaviour : MonoBehaviour
         imageColor = GetComponent<Image>().color;
         lowBeamLightLeft.intensity = 0;
         lowBeamLightRight.intensity = 0;
+
+        highBeam = HighBeamBehaviour.GetHighBeamBehaviourInstance();
     }
 
     // Update is called once per frame
@@ -59,9 +62,9 @@ public class LowBeamBehaviour : MonoBehaviour
         //if the car is on you can turn on lights
         if (Car.car.IsOn())
         {
-            if (HighBeamBehaviour.highBeam.IsHighBeamOn())
+            if (highBeam.IsHighBeamOn())
             {
-                HighBeamBehaviour.highBeam.TurnHighBeamOnOrOff();
+                highBeam.TurnHighBeamOnOrOff();
             }
             if (lowBeamOn)
             {
@@ -73,5 +76,10 @@ public class LowBeamBehaviour : MonoBehaviour
             }
         }
         GetComponent<Image>().color = imageColor;
+    }
+
+    public static LowBeamBehaviour GetLowBeamBehaviourInstance()
+    {
+        return lowBeam;
     }
 }

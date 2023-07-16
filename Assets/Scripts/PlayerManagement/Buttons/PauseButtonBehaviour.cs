@@ -5,7 +5,8 @@ using UnityEngine;
 public class PauseButtonBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject pauseScreen;
-    public static PauseButtonBehaviour pauseButtonBehaviour;
+    private static PauseButtonBehaviour pauseButtonBehaviour;
+    private GameManager gameManager;
     void Awake()
     {
         pauseButtonBehaviour = this;
@@ -13,7 +14,7 @@ public class PauseButtonBehaviour : MonoBehaviour
 
     void Start()
     {
-        
+        gameManager = GameManager.GetGameManagerInstance();
     }
 
     void Update()
@@ -25,6 +26,11 @@ public class PauseButtonBehaviour : MonoBehaviour
     {
         MSSceneControllerFree.mSSceneControllerFree.SetPause(true);
         pauseScreen.SetActive(true);
-        GameManager.gameManager.SetGameState(GameManager.GameState.LevelPaused);
+        gameManager.SetGameState(GameManager.GameState.LevelPaused);
+    }
+
+    public static PauseButtonBehaviour GetPauseButtonBehaviourInstance()
+    {
+        return pauseButtonBehaviour;
     }
 }

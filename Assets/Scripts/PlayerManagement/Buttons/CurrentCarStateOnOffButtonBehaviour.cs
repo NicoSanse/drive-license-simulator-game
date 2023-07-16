@@ -7,7 +7,7 @@ using TMPro;
 public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
 {
     private Color tempColor;
-    public static CurrentCarStateOnOffButtonBehaviour currentCarStateOnOffButtonBehaviour;
+    private static CurrentCarStateOnOffButtonBehaviour currentCarStateOnOffButtonBehaviour;
 
     void Awake()
     {
@@ -53,5 +53,10 @@ public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         GetComponentInChildren<TMP_Text>().color = tempColor;
+    }
+
+    public static CurrentCarStateOnOffButtonBehaviour GetCurrentCarStateOnOffButtonBehaviourInstance()
+    {
+        return currentCarStateOnOffButtonBehaviour;
     }
 }

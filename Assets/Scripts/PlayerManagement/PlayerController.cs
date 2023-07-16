@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController player;
+    private GameManager gameManager;
     private ClutchBehaviour.Gear gear;
     private float speed;
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         print("Start");
+        gameManager = GameManager.GetGameManagerInstance();
     }
 
     void Update()
@@ -32,7 +34,7 @@ public class PlayerController : MonoBehaviour
         {
             print("You win!");
             Car.car.Stop();
-            GameManager.gameManager.LevelPassed();
+            gameManager.LevelPassed();
         }
     }
 

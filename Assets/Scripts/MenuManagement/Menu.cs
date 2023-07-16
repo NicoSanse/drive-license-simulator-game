@@ -9,9 +9,10 @@ public class Menu : MonoBehaviour
     buttonFirstLevel, buttonSecondLevel, buttonThirdLevel, buttonFourthLevel, 
     buttonFifthLevel, buttonSixthLevel, buttonSeventhLevel;
 
-    public static Menu menu;
+    private static Menu menu;
     private static ListOfLevels listOfLevels;
     private static Level currentLevel;
+    private GameManager gameManager;
 
     void Awake()
     {
@@ -23,6 +24,8 @@ public class Menu : MonoBehaviour
     //i have passed through the little image of the locker on the right of the button
     void Start()
     {
+        gameManager = GameManager.GetGameManagerInstance();
+
         for (int i = 0; i < listOfLevels.Length(); i++)
         {
             if (listOfLevels.GetLevel(i).IsPassed())
@@ -66,7 +69,7 @@ public class Menu : MonoBehaviour
             case "FirstLevelButton":
                 print("StartFirstLevel");
                 SetCurrentLevel(listOfLevels.GetLevel(0));
-                GameManager.gameManager.SetGameState(GameManager.GameState.Playing);
+                gameManager.SetGameState(GameManager.GameState.Playing);
                 SceneManager.LoadScene("LevelOne");
                 break;
             case "SecondLevelButton":
@@ -107,7 +110,7 @@ public class Menu : MonoBehaviour
         if (listOfLevels.GetLevel(position).IsPassed())
         {
             SetCurrentLevel(listOfLevels.GetLevel(position + 1));
-            GameManager.gameManager.SetGameState(GameManager.GameState.Playing);
+            gameManager.SetGameState(GameManager.GameState.Playing);
             SceneManager.LoadScene(position + 3);
         }
         else
@@ -130,6 +133,11 @@ public class Menu : MonoBehaviour
     public void SetCurrentLevel(Level level)
     {
         currentLevel = level;
+    }
+
+    public static Menu GetMenuInstance()
+    {
+        return menu;
     }
 
     //makes quit the game

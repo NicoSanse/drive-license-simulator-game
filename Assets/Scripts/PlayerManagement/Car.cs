@@ -14,7 +14,13 @@ public class Car : MonoBehaviour
     private ClutchBehaviour.Gear gear;
     private enum State { On, Off };
     private State currentState;
-
+    private LeftArrowBehaviour leftArrow;
+    private RightArrowBehaviour rightArrow;
+    private HighBeamBehaviour highBeam;
+    private LowBeamBehaviour lowBeam;
+    private AccelerationBehaviour accelerator;
+    private BrakeBehaviour brake;
+    private ClutchBehaviour clutch;
 
     void Awake()
     {
@@ -24,12 +30,20 @@ public class Car : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        leftArrow = LeftArrowBehaviour.GetLeftArrowBehaviourInstance();
+        rightArrow = RightArrowBehaviour.GetRightArrowBehaviourInstance();
+        highBeam = HighBeamBehaviour.GetHighBeamBehaviourInstance();
+        lowBeam = LowBeamBehaviour.GetLowBeamBehaviourInstance();
+        accelerator = AccelerationBehaviour.GetAccelerationBehaviourInstance();
+        brake = BrakeBehaviour.GetBrakeBehaviourInstance();
+        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
+
         torqueAdjustment = new float[5];
         SetTorqueAdjustmentValues();
         //r = 3.0f;
         radius = 0.5f;
         circumference = Mathf.PI * radius * 2f;
-        gear = ClutchBehaviour.clutch.GetCurrentGear();
+        gear = clutch.GetCurrentGear();
         speed = 0f;
         RPM = 0f;
         currentState = State.Off;
@@ -63,13 +77,13 @@ public class Car : MonoBehaviour
     {
         RPM = 0f;
         
-        AccelerationBehaviour.accelerator.SetAcceleration(0f);
-        BrakeBehaviour.brake.SetDeceleration(0f);
+        accelerator.SetAcceleration(0f);
+        brake.SetDeceleration(0f);
 
-        LowBeamBehaviour.lowBeam.SetLowBeamOff();
-        HighBeamBehaviour.highBeam.SetHighBeamOff();
-        LeftArrowBehaviour.leftArrow.SetLeftArrowOff();
-        RightArrowBehaviour.rightArrow.SetRightArrowOff();
+        lowBeam.SetLowBeamOff();
+        highBeam.SetHighBeamOff();
+        leftArrow.SetLeftArrowOff();
+        rightArrow.SetRightArrowOff();
     }
 
     public void Off()
@@ -81,13 +95,13 @@ public class Car : MonoBehaviour
 
     public void On()
     { 
-        gear = ClutchBehaviour.clutch.GetCurrentGear();
+        gear = clutch.GetCurrentGear();
         currentState = State.On;
     }
 
     public void NotifyGearChanged()
     {
-        gear = ClutchBehaviour.clutch.GetCurrentGear();
+        gear = clutch.GetCurrentGear();
         print("Gear changed to " + gear);
     }
 

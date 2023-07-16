@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class WelcomeScene : MonoBehaviour
 {
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameManager.GetGameManagerInstance();
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class WelcomeScene : MonoBehaviour
     public void GoToMenu()
     {
         SceneManager.LoadScene("Menu");
-        GameManager.gameManager.SetGameState(GameManager.GameState.Menu);
+        gameManager.SetGameState(GameManager.GameState.Menu);
     }
 
     public void ExitGame()

@@ -6,7 +6,7 @@ public class BrakeBehaviour : MonoBehaviour
 {
     [SerializeField] private Light brakeLeftLight;
     [SerializeField] private Light brakeRightLight;
-    public static BrakeBehaviour brake;
+    private static BrakeBehaviour brake;
     private float deceleration;
     private bool brakePressed;
     private float sensibility = 3f;
@@ -83,5 +83,10 @@ public class BrakeBehaviour : MonoBehaviour
             deceleration -= Time.deltaTime * sensibility;
         }
         deceleration = Mathf.Clamp(deceleration, 0, 1);
+    }
+
+    public static BrakeBehaviour GetBrakeBehaviourInstance()
+    {
+        return brake;
     }
 }

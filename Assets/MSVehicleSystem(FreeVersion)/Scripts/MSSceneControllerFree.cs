@@ -129,7 +129,9 @@ public class MSSceneControllerFree : MonoBehaviour {
 	bool playerIsNull;
 
 	Vector2 vectorDirJoystick;
-
+	private AccelerationBehaviour accelerator;
+	private BrakeBehaviour brake;
+	private ClutchBehaviour clutch;
 
 	void Awake () {
         mSSceneControllerFree = this;
@@ -251,7 +253,9 @@ public class MSSceneControllerFree : MonoBehaviour {
 
     void Start()
     {
-		
+        accelerator = AccelerationBehaviour.GetAccelerationBehaviourInstance();
+		brake = BrakeBehaviour.GetBrakeBehaviourInstance();
+		clutch = ClutchBehaviour.GetClutchBehaviourInstance();
     }
 
     void CheckEqualKeyCodes(){
@@ -281,15 +285,15 @@ public class MSSceneControllerFree : MonoBehaviour {
 				}
                     if (buttonUp && buttonDown)
                     {
-						if(ClutchBehaviour.clutch.GetCurrentGear() == ClutchBehaviour.Gear.GearR)
+						if(clutch.GetCurrentGear() == ClutchBehaviour.Gear.GearR)
 						{
-							MSbuttonVertical = BrakeBehaviour.brake.GetDeceleration() -
-										   AccelerationBehaviour.accelerator.GetAcceleration();
+							MSbuttonVertical = brake.GetDeceleration() -
+										   accelerator.GetAcceleration();
 						}
                         else
                         {
-                            MSbuttonVertical = AccelerationBehaviour.accelerator.GetAcceleration() -
-                                           BrakeBehaviour.brake.GetDeceleration();
+                            MSbuttonVertical = accelerator.GetAcceleration() -
+                                           brake.GetDeceleration();
                         }
                     }
 				if(joystickCamera){

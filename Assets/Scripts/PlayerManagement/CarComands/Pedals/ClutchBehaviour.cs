@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class ClutchBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject loadingBar;
-    public static ClutchBehaviour clutch;
+    private static ClutchBehaviour clutch;
     public enum Gear { Gear1 = 1, Gear2 = 2, Gear3 = 3, Gear4 = 4, Gear5 = 5, GearR = -1, GearN = 0 };
     private bool clutchPressed;
     private Coroutine coroutineLoadBarAndChangeScale;
@@ -163,5 +163,10 @@ public class ClutchBehaviour : MonoBehaviour
             default:
                 return 0f;
         }
+    }
+
+    public static ClutchBehaviour GetClutchBehaviourInstance()
+    {
+        return clutch;
     }
 }

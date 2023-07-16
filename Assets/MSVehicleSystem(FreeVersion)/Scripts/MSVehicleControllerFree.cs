@@ -480,6 +480,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	MSSceneControllerFree controls;
     public static MSVehicleControllerFree mSVehicleControllerFree;
 
+	private ClutchBehaviour clutch;
+
     void Awake(){
 		mSVehicleControllerFree = this;
 		enableSkidMarksOnStart = true;
@@ -534,7 +536,9 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		} else {
 			enableSkidMarksOnStart = false;
 		}
-	}
+
+        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
+    }
 
 	void SetValues(){
 		forceEngineBrake = 0.75f * _vehicleSettings.vehicleMass;
@@ -1670,7 +1674,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	#region GearsManager
 	void MyManualGears()
 	{
-        ClutchBehaviour.Gear gear = ClutchBehaviour.clutch.GetCurrentGear();
+        ClutchBehaviour.Gear gear = clutch.GetCurrentGear();
         if (gear == ClutchBehaviour.Gear.GearN)
         {
             currentGear = 0;
@@ -2168,7 +2172,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 
     private void FindIfGearISBeingChanged()
     {
-        changinGearsAuto = ClutchBehaviour.clutch.IsClutchPressed();
+        changinGearsAuto = clutch.IsClutchPressed();
     }
 
     public bool IsEngineSoundOn()

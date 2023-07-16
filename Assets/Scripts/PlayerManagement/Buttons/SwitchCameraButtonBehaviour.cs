@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwitchCameraButtonBehaviour : MonoBehaviour
 {
-    public static SwitchCameraButtonBehaviour switchCamera;
+    private static SwitchCameraButtonBehaviour switchCamera;
 
     void Awake()
     {
@@ -25,5 +25,10 @@ public class SwitchCameraButtonBehaviour : MonoBehaviour
     public void SwitchCamera()
     {
         MSVehicleControllerFree.mSVehicleControllerFree.MySwitchCamera();
+    }
+
+    public static SwitchCameraButtonBehaviour GetSwitchCameraButtonBehaviourInstance()
+    {
+        return switchCamera;
     }
 }

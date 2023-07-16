@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ChangeGearPanelBehaviour : MonoBehaviour
 {
-    public static ChangeGearPanelBehaviour changeGear;
+    private static ChangeGearPanelBehaviour changeGear;
     private Vector2 firstTouchCoordinates;
     private Vector2 lastTouchCoordinates;
     private Vector2 direction;
@@ -16,6 +16,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     private string directionDragged;
     private Coroutine coroutineTimeForNeutralGear;
     private float timeForNeutralGear;
+    private ClutchBehaviour clutch;
 
     void Awake()
     {
@@ -24,7 +25,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
     }
 
     // Update is called once per frame
@@ -54,7 +55,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     public void NeutralGear(PointerEventData eventData)
     {
         clickFirstTouchCoordinates = eventData.position;
-        //if (ClutchBehaviour.clutch.IsClutchPressed())
+        //if (clutch.IsClutchPressed())
         //{
             coroutineTimeForNeutralGear = StartCoroutine(TimeForNeutralGear());
         //}
@@ -82,12 +83,12 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         if(distance < 5){
             if (timeForNeutralGear > 0.95f) 
             {
-                ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearN);
+                clutch.SetGear(ClutchBehaviour.Gear.GearN);
                 Car.car.NotifyGearChanged();
             }
             //fare il resize, preferibilmente nel secondo modo
-            ClutchBehaviour.clutch.GetComponent<RectTransform>().localScale = new Vector3(0.1f, 0.3f, 1f);
-            //StartCoroutine(CommonBehaviours.ChangeScale(!ClutchBehaviour.clutch.IsClutchPressed(), ClutchBehaviour.clutch.GetComponent<RectTransform>()));
+            clutch.GetComponent<RectTransform>().localScale = new Vector3(0.1f, 0.3f, 1f);
+            //StartCoroutine(CommonBehaviours.ChangeScale(!clutch.IsClutchPressed(), clutch.GetComponent<RectTransform>()));
         }
     }
 
@@ -96,7 +97,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     private void ChangeAlphaValue()
     {
         Color color = this.GetComponent<Image>().color;
-        if (!ClutchBehaviour.clutch.IsClutchPressed())
+        if (!clutch.IsClutchPressed())
         {
             color.a = 100 / 255f;
         }
@@ -150,22 +151,22 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     //according to the current gear sets the new gear
     private void ChangeGear()
     {
-        //if (ClutchBehaviour.clutch.IsClutchPressed())
+        //if (clutch.IsClutchPressed())
         //eccetera
 
         CalculateDirection();
-        ClutchBehaviour.Gear currentGear = ClutchBehaviour.clutch.GetCurrentGear();
+        ClutchBehaviour.Gear currentGear = clutch.GetCurrentGear();
 
         switch (currentGear)
         {
             case ClutchBehaviour.Gear.Gear1:
                 if (directionDragged == "down")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear2);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear2);
                 }
                 if (directionDragged == "down-right")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearR);
+                    clutch.SetGear(ClutchBehaviour.Gear.GearR);
                 }
                 else
                 {
@@ -176,11 +177,11 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
             case ClutchBehaviour.Gear.Gear2:
                 if (directionDragged == "up")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear1);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear1);
                 }
                 if (directionDragged == "up-right")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear3);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear3);
                 }
                 else
                 {
@@ -191,16 +192,16 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
             case ClutchBehaviour.Gear.Gear3:
                 if (directionDragged == "down")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear4);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear4);
                 }
                 if (directionDragged == "down-left")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear2);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear2);
                 }
                 if (directionDragged == "down-right")
                 {
                     //insommma meh
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearR);
+                    clutch.SetGear(ClutchBehaviour.Gear.GearR);
                 }
                 else
                 {
@@ -211,16 +212,16 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
             case ClutchBehaviour.Gear.Gear4:
                 if (directionDragged == "up")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear3);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear3);
                 }
                 if (directionDragged == "up-right")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear5);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear5);
                 }
                 if (directionDragged == "up-left")
                 {
                     //insommma meh
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear1);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear1);
                 }
                 else
                 {
@@ -232,45 +233,45 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
                 if (directionDragged == "down")
                 {
                     //insommma meh
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearR);
+                    clutch.SetGear(ClutchBehaviour.Gear.GearR);
                 }
                 else if (directionDragged == "down-left")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear4);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear4);
                 }
                 break;
 
             case ClutchBehaviour.Gear.GearR:
                 if (directionDragged == "up-left")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear1);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear1);
                 }
                 break;
 
             case ClutchBehaviour.Gear.GearN:
                 if (directionDragged == "up-left")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear1);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear1);
                 }
                 if (directionDragged == "dwon-left")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear2);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear2);
                 }
                 if (directionDragged == "up")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear3);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear3);
                 }
                 if (directionDragged == "down")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear4);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear4);
                 }
                 if (directionDragged == "up-right")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.Gear5);
+                    clutch.SetGear(ClutchBehaviour.Gear.Gear5);
                 }
                 if (directionDragged == "down-right")
                 {
-                    ClutchBehaviour.clutch.SetGear(ClutchBehaviour.Gear.GearR);
+                    clutch.SetGear(ClutchBehaviour.Gear.GearR);
                 }
                 break;
 
@@ -278,6 +279,11 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
                 print("boh");
                 break;
         }
-        ClutchBehaviour.clutch.GearHasBeenChanged();
+        clutch.GearHasBeenChanged();
+    }
+
+    public static ChangeGearPanelBehaviour GetChangeGearPanelBehaviourInstance()
+    {
+        return changeGear;
     }
 }

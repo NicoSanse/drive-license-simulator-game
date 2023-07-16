@@ -8,6 +8,17 @@ using UnityEngine.Events;
 public class GUIManager : MonoBehaviour
 {
     public static GUIManager guiManager;
+    private CurrentCarStateOnOffButtonBehaviour currentCarStateOnOffButton;
+    private PauseButtonBehaviour pauseButton;
+    private SwitchCameraButtonBehaviour switchCameraButton;
+    private LeftArrowBehaviour leftArrow;
+    private RightArrowBehaviour rightArrow;
+    private HighBeamBehaviour highBeam;
+    private LowBeamBehaviour lowBeam;
+    private AccelerationBehaviour accelerator;
+    private BrakeBehaviour brake;
+    private ClutchBehaviour clutch;
+    private ChangeGearPanelBehaviour changeGearPanel;
 
     void Awake()
     {
@@ -15,85 +26,95 @@ public class GUIManager : MonoBehaviour
     }
     void Start()
     {
-
+        currentCarStateOnOffButton = CurrentCarStateOnOffButtonBehaviour.GetCurrentCarStateOnOffButtonBehaviourInstance();
+        pauseButton = PauseButtonBehaviour.GetPauseButtonBehaviourInstance();
+        switchCameraButton = SwitchCameraButtonBehaviour.GetSwitchCameraButtonBehaviourInstance();
+        leftArrow = LeftArrowBehaviour.GetLeftArrowBehaviourInstance();
+        rightArrow = RightArrowBehaviour.GetRightArrowBehaviourInstance();
+        highBeam = HighBeamBehaviour.GetHighBeamBehaviourInstance();
+        lowBeam = LowBeamBehaviour.GetLowBeamBehaviourInstance();
+        accelerator = AccelerationBehaviour.GetAccelerationBehaviourInstance();
+        brake = BrakeBehaviour.GetBrakeBehaviourInstance();
+        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
+        changeGearPanel = ChangeGearPanelBehaviour.GetChangeGearPanelBehaviourInstance();
     }
 
     public void ClickOnLeftArrow() 
     { 
         //implementazione da sistemare: la freccia dovrebbe togliersi da sola
         //il controllo si servirà dell'accelerometro del cellulare
-        LeftArrowBehaviour.leftArrow.TurnLeftArrowOnOrOff();
+        leftArrow.TurnLeftArrowOnOrOff();
     }
 
     public void ClickOnRightArrow() 
     { 
         //implementazione da sistemare: la freccia dovrebbe togliersi da sola
         //il controllo si servirà dell'accelerometro del cellulare
-        RightArrowBehaviour.rightArrow.TurnRightArrowOnOrOff();
+        rightArrow.TurnRightArrowOnOrOff();
     }
 
     public void ClickOnHighBeam() 
     { 
-        HighBeamBehaviour.highBeam.TurnHighBeamOnOrOff();
+        highBeam.TurnHighBeamOnOrOff();
     }
 
     public void ClickOnLowBeam() 
     { 
-        LowBeamBehaviour.lowBeam.TurnLowBeamOnOrOff();
+        lowBeam.TurnLowBeamOnOrOff();
     }
 
     public void ClickOnAccelerator() 
     { 
-        AccelerationBehaviour.accelerator.AcceleratorIsPressed();
+        accelerator.AcceleratorIsPressed();
     }
 
     public void ReleaseAccelerator()
     {
-        AccelerationBehaviour.accelerator.AcceleratorIsReleased();
+        accelerator.AcceleratorIsReleased();
     }
 
     public void ClickOnBrake() 
     { 
-        BrakeBehaviour.brake.BrakeIsPressed();
+        brake.BrakeIsPressed();
     }
 
     public void ReleaseBrake() 
     { 
-        BrakeBehaviour.brake.BrakeIsReleased();
+        brake.BrakeIsReleased();
     }
 
     public void ClickOnClutch() 
     { 
-        ClutchBehaviour.clutch.ClutchIsPressed();
+        clutch.ClutchIsPressed();
     }
 
     public void ReleaseClutch() 
     { 
-        ClutchBehaviour.clutch.ClutchIsReleased();
+        clutch.ClutchIsReleased();
     }
 
     public void BeginDragChangePanel(BaseEventData data) 
     {
         PointerEventData eventData = data as PointerEventData;
-        ChangeGearPanelBehaviour.changeGear.TakeFirstTouchCoordinates(eventData);
+        changeGearPanel.TakeFirstTouchCoordinates(eventData);
     }
 
     public void EndDragChangePanel(BaseEventData data) 
     {
         PointerEventData eventData = data as PointerEventData;
-        ChangeGearPanelBehaviour.changeGear.TakeLastTouchCoordinates(eventData);
+        changeGearPanel.TakeLastTouchCoordinates(eventData);
     }
 
     public void SetNeutralGear(BaseEventData data) 
     {
         PointerEventData eventData = data as PointerEventData;
-        ChangeGearPanelBehaviour.changeGear.NeutralGear(eventData);
+        changeGearPanel.NeutralGear(eventData);
     }
 
     public void ReleseGearChangePanel(BaseEventData data) 
     {
         PointerEventData eventData = data as PointerEventData;
-        ChangeGearPanelBehaviour.changeGear.ReleseGearChangePanel(eventData);
+        changeGearPanel.ReleseGearChangePanel(eventData);
     }
 
     public void TurningEngineOnBehaviour()
@@ -102,23 +123,23 @@ public class GUIManager : MonoBehaviour
         if (Car.car.IsOn())
         { 
             MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
-            CurrentCarStateOnOffButtonBehaviour.currentCarStateOnOffButtonBehaviour.DarkenButton();
+            currentCarStateOnOffButton.DarkenButton();
         }
         //otherwise turn it on
         else
         {
             MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(false);
-            CurrentCarStateOnOffButtonBehaviour.currentCarStateOnOffButtonBehaviour.LightenButton();
+            currentCarStateOnOffButton.LightenButton();
         }
     }
 
     public void PauseButton()
     {
-        PauseButtonBehaviour.pauseButtonBehaviour.ClickOnPauseButton();
+        pauseButton.ClickOnPauseButton();
     }
 
     public void SwitchCameraButton()
     { 
-        SwitchCameraButtonBehaviour.switchCamera.SwitchCamera();
+        switchCameraButton.SwitchCamera();
     }
 }

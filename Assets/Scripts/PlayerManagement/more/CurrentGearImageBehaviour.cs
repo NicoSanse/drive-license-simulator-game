@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CurrentGearImageBehaviour : MonoBehaviour
 {
+    private ClutchBehaviour clutch;
     // Start is called before the first frame update
     void Start()
     {
-        
+        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class CurrentGearImageBehaviour : MonoBehaviour
     //than inside the editor
     void FindLocation()
     { 
-        ClutchBehaviour.Gear currentGear = ClutchBehaviour.clutch.GetCurrentGear();
+        ClutchBehaviour.Gear currentGear = clutch.GetCurrentGear();
         RectTransform rectTransform = GetComponent<RectTransform>();
 
         if (currentGear == ClutchBehaviour.Gear.Gear1) rectTransform.localPosition = new Vector3(-130, 120, 0);
