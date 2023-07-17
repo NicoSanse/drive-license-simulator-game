@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager gameManager;
+    private SaveManager saveManager;
     public enum GameState { Welcome, Menu, Playing, LevelPaused, LevelWon, LevelLost };
     private static GameState currentGameState = GameState.Welcome;
     private Menu menu;
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     void Awake() 
     { 
         gameManager = this;
+        saveManager = SaveManager.GetSaveManagerInstance();
     }
 
     void Start()
@@ -137,12 +139,14 @@ public class GameManager : MonoBehaviour
     public void LevelPassed()
     {
         menu.GetCurrentLevel().SetPassed(true);
+        saveManager.Save();
     }
 
     //sets the current level as failed
     public void LevelFailed()
     {
         menu.GetCurrentLevel().SetPassed(false);
+        saveManager.Save();
     }
 
     public void LoadScene(string sceneName)

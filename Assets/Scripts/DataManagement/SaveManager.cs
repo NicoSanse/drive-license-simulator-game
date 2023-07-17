@@ -46,24 +46,27 @@ public class SaveManager : MonoBehaviour
 
     public void Save()
     {
-        if (saveState == null)
-            saveState = new SaveState();
-        try 
+        //todo: get the player name from the input field
+        if (saveState != null)
         {
-            //FileStream file = new FileStream(SAVE_STATE_FILE, FileMode.OpenOrCreate, FileAccess.Write);
-            FileStream file = new FileStream(Application.persistentDataPath + SAVE_STATE_FILE, FileMode.OpenOrCreate, FileAccess.Write);
-            bf.Serialize(file, saveState);
-            file.Close();
-        }
-        catch (System.Exception e)
-        {
-            Debug.Log(e.Message);
+            try
+            {
+                //FileStream file = new FileStream(SAVE_STATE_FILE, FileMode.OpenOrCreate, FileAccess.Write);
+                FileStream file = new FileStream(Application.persistentDataPath + SAVE_STATE_FILE, FileMode.OpenOrCreate, FileAccess.Write);
+                saveState.SetLastTimeSave(System.DateTime.Now);
+                bf.Serialize(file, saveState);
+                file.Close();
+            }
+            catch (System.Exception e)
+            {
+                Debug.Log(e.Message);
+            }
         }
     }
 
 
 
-    public static SaveManager GetSaveManageInstance() 
+    public static SaveManager GetSaveManagerInstance() 
     { 
         return saveManager;
     }

@@ -26,6 +26,7 @@ TagManager:
   - LevelWonPanel
   - CanvasEndOfLevel
   - GUICanvas
+  - PlayerName
   layers:
   - Default
   - TransparentFX

@@ -11,9 +11,12 @@ public class Level
 {
     private bool passed;
     private int id;
-    public Level()
+    private int score;
+    public Level(int id)
     {
         passed = false;
+        this.id = id;
+        score = 0;
     }
 
     public void SetPassed(bool passed) 
@@ -34,5 +37,15 @@ public class Level
     public int GetId() 
     {
         return id;
+    }
+
+    public void SetScore(int score) 
+    {
+        this.score = score;
+    }
+
+    public int GetScore() 
+    {
+        return score;
     }
 }
