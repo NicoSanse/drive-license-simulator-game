@@ -5,19 +5,18 @@ using TMPro;
 
 public class CurrentRPMMessageShown : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Car car;
     void Start()
     {
-        
+        car = Car.GetCarInstance();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ChangeMessageShown();
     }
 
     private void ChangeMessageShown(){
-        GetComponent<TMP_Text>().text = Mathf.RoundToInt(Car.car.GetRPM()) + " x1000 rpm";
+        GetComponent<TMP_Text>().text = Mathf.RoundToInt(car.GetRPM()) + " x1000 rpm";
     }
 }

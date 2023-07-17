@@ -5,13 +5,11 @@ using UnityEngine;
 public class CurrentGearImageBehaviour : MonoBehaviour
 {
     private ClutchBehaviour clutch;
-    // Start is called before the first frame update
     void Start()
     {
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
     }
 
-    // Update is called once per frame
     void Update()
     {
         FindLocation();

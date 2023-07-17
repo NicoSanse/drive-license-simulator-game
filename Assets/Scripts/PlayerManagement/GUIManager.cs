@@ -19,6 +19,7 @@ public class GUIManager : MonoBehaviour
     private BrakeBehaviour brake;
     private ClutchBehaviour clutch;
     private ChangeGearPanelBehaviour changeGearPanel;
+    private Car car;
 
     void Awake()
     {
@@ -26,17 +27,7 @@ public class GUIManager : MonoBehaviour
     }
     void Start()
     {
-        currentCarStateOnOffButton = CurrentCarStateOnOffButtonBehaviour.GetCurrentCarStateOnOffButtonBehaviourInstance();
-        pauseButton = PauseButtonBehaviour.GetPauseButtonBehaviourInstance();
-        switchCameraButton = SwitchCameraButtonBehaviour.GetSwitchCameraButtonBehaviourInstance();
-        leftArrow = LeftArrowBehaviour.GetLeftArrowBehaviourInstance();
-        rightArrow = RightArrowBehaviour.GetRightArrowBehaviourInstance();
-        highBeam = HighBeamBehaviour.GetHighBeamBehaviourInstance();
-        lowBeam = LowBeamBehaviour.GetLowBeamBehaviourInstance();
-        accelerator = AccelerationBehaviour.GetAccelerationBehaviourInstance();
-        brake = BrakeBehaviour.GetBrakeBehaviourInstance();
-        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
-        changeGearPanel = ChangeGearPanelBehaviour.GetChangeGearPanelBehaviourInstance();
+        GettingInstances();
     }
 
     public void ClickOnLeftArrow() 
@@ -120,7 +111,7 @@ public class GUIManager : MonoBehaviour
     public void TurningEngineOnBehaviour()
     {
         //if Car is on, turn it off
-        if (Car.car.IsOn())
+        if (car.IsOn())
         { 
             MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
             currentCarStateOnOffButton.DarkenButton();
@@ -146,5 +137,21 @@ public class GUIManager : MonoBehaviour
     public static GUIManager GetGUIManagerInstance()
     {
         return guiManager;
+    }
+
+    private void GettingInstances()
+    {
+        currentCarStateOnOffButton = CurrentCarStateOnOffButtonBehaviour.GetCurrentCarStateOnOffButtonBehaviourInstance();
+        pauseButton = PauseButtonBehaviour.GetPauseButtonBehaviourInstance();
+        switchCameraButton = SwitchCameraButtonBehaviour.GetSwitchCameraButtonBehaviourInstance();
+        leftArrow = LeftArrowBehaviour.GetLeftArrowBehaviourInstance();
+        rightArrow = RightArrowBehaviour.GetRightArrowBehaviourInstance();
+        highBeam = HighBeamBehaviour.GetHighBeamBehaviourInstance();
+        lowBeam = LowBeamBehaviour.GetLowBeamBehaviourInstance();
+        accelerator = AccelerationBehaviour.GetAccelerationBehaviourInstance();
+        brake = BrakeBehaviour.GetBrakeBehaviourInstance();
+        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
+        changeGearPanel = ChangeGearPanelBehaviour.GetChangeGearPanelBehaviourInstance();
+        car = Car.GetCarInstance();
     }
 }

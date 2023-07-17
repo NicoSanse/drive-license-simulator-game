@@ -10,6 +10,7 @@ public class BrakeBehaviour : MonoBehaviour
     private float deceleration;
     private bool brakePressed;
     private float sensibility = 3f;
+    private Car car;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class BrakeBehaviour : MonoBehaviour
     {
         brakePressed = false;
         deceleration = 0f;
+        car = Car.GetCarInstance();
     }
 
     // Update is called once per frame
@@ -32,7 +34,7 @@ public class BrakeBehaviour : MonoBehaviour
 
     private void BrakesLight()
     {
-        if (Car.car.IsOn())
+        if (car.IsOn())
         {
             if (brakePressed)
             {

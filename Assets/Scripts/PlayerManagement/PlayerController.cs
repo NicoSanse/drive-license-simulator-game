@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private ClutchBehaviour.Gear gear;
     private float speed;
     private bool crashed;
+    private Car car;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.GetGameManagerInstance();
+        car = Car.GetCarInstance();
         crashed = false;
     }
 
@@ -42,7 +44,7 @@ public class PlayerController : MonoBehaviour
             crashed = true;
             GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[1].gameObject.SetActive(true);
         }
-        Car.car.Stop();
+        car.Stop();
         GameObject.FindGameObjectWithTag("GUI").SetActive(false);
         gameManager.ChangeGameState(gameManager.GetCurrentGameState());
     }

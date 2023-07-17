@@ -17,6 +17,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     private Coroutine coroutineTimeForNeutralGear;
     private float timeForNeutralGear;
     private ClutchBehaviour clutch;
+    private Car car;
 
     void Awake()
     {
@@ -26,6 +27,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     void Start()
     {
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
+        car = Car.GetCarInstance();
     }
 
     // Update is called once per frame
@@ -84,7 +86,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
             if (timeForNeutralGear > 0.95f) 
             {
                 clutch.SetGear(ClutchBehaviour.Gear.GearN);
-                Car.car.NotifyGearChanged();
+                car.NotifyGearChanged();
             }
             //fare il resize, preferibilmente nel secondo modo
             clutch.GetComponent<RectTransform>().localScale = new Vector3(0.1f, 0.3f, 1f);

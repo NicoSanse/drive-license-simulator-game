@@ -12,6 +12,7 @@ public class RightArrowBehaviour : MonoBehaviour
     private Color imageColor;
     private Coroutine togglingArrows;
     private LeftArrowBehaviour leftArrow;
+    private Car car;
 
     void Awake()
     {
@@ -24,6 +25,7 @@ public class RightArrowBehaviour : MonoBehaviour
         imageColor = GetComponent<Image>().color;
 
         leftArrow = LeftArrowBehaviour.GetLeftArrowBehaviourInstance();
+        car = Car.GetCarInstance();
     }
 
     // Update is called once per frame
@@ -62,7 +64,7 @@ public class RightArrowBehaviour : MonoBehaviour
     public void TurnRightArrowOnOrOff()
     {
         //if the car is on you can set arrows
-        if (Car.car.IsOn())
+        if (car.IsOn())
         {
             //turn off the other arrow if its on
             if(leftArrow.IsLeftArrowOn())

@@ -12,6 +12,7 @@ public class ClutchBehaviour : MonoBehaviour
     private static Gear currentGear;
     private bool clutchPressed;
     private Coroutine coroutineLoadBarAndChangeScale;
+    private Car car;
 
 
     void Awake()
@@ -24,6 +25,7 @@ public class ClutchBehaviour : MonoBehaviour
     {
         clutchPressed = false;
         currentGear = Gear.Gear1;
+        car = Car.GetCarInstance();
     }
 
     // Update is called once per frame
@@ -89,13 +91,13 @@ public class ClutchBehaviour : MonoBehaviour
             print("Clutch released too early");
             //quando testerò il tutto dovrò decommentare la riga successiva
             //MSVehicleControllerFree.mSVehicleControllerFree.setEngineOnOff(true);
-            //Car.car.Off();
+            //car.Off();
         }
 
         SetClutchPressed(false);
         MakeDisappearTheLoadingBar();
         EmptyBar();
-        Car.car.NotifyGearChanged();
+        car.NotifyGearChanged();
     }
 
     //!!!!!forse la seguente funzione si può splittare in due distinte

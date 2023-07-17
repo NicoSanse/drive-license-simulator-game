@@ -479,8 +479,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
 
 	MSSceneControllerFree controls;
     public static MSVehicleControllerFree mSVehicleControllerFree;
-
 	private ClutchBehaviour clutch;
+	private Car car;
 
     void Awake(){
 		mSVehicleControllerFree = this;
@@ -538,6 +538,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		}
 
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
+		car = Car.GetCarInstance();
     }
 
 	void SetValues(){
@@ -1108,7 +1109,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
                 currentGear == 5 & KMh < 25 | currentGear == -1 & KMh < 3)
             {
 				//decommentare le seguenti righe in fase di test su cellulare
-                //Car.car.Off();
+                //car.Off();
                 //StartCoroutine("StartEngineCoroutine", false);
                 //StartCoroutine("TurnOffEngineTime");
             }
@@ -1587,7 +1588,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 			if ((Input.GetKeyDown (controls.controls.startTheVehicle) && !theEngineIsRunning) 
 			) {
 				enableEngineSound = true;
-                Car.car.On();
+                car.On();
                 if (_sounds.engineSound) {
 					engineSoundAUD.pitch = 0.5f;
 				}
@@ -1595,13 +1596,13 @@ public class MSVehicleControllerFree : MonoBehaviour {
 				StartCoroutine ("StartEngineTime");
 			}
 			if (Input.GetKeyDown (controls.controls.startTheVehicle) && theEngineIsRunning) {
-                Car.car.Off();
+                car.Off();
                 StartCoroutine ("StartEngineCoroutine", false);
 				StartCoroutine ("TurnOffEngineTime");
 			}
 		}
 		if (!isInsideTheCar && theEngineIsRunning) {
-            Car.car.Off();
+            car.Off();
             StartCoroutine ("StartEngineCoroutine", false);
 			StartCoroutine ("TurnOffEngineTime");
 		}
@@ -2152,7 +2153,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		//if engine is on, turn it off
         if (isengineOn) 
 		{
-            Car.car.Off();
+            car.Off();
 			StartCoroutine("StartEngineCoroutine", false);
 			StartCoroutine("StartEngineTime");
         }
@@ -2160,7 +2161,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
         else
         { 
             enableEngineSound = true;
-            Car.car.On();
+            car.On();
             if (_sounds.engineSound)
             {
                 engineSoundAUD.pitch = 0.5f;

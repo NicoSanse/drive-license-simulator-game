@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-    public static Car car;
+    private static Car car;
     private float speed;
     private float RPM;
     private float[] torqueAdjustment;
@@ -156,5 +156,10 @@ public class Car : MonoBehaviour
     {
         if(state == true) currentState = State.On;
         else currentState = State.Off;
+    }
+
+    public static Car GetCarInstance()
+    {
+        return car;
     }
 }

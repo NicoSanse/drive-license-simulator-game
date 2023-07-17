@@ -11,6 +11,7 @@ public class LowBeamBehaviour : MonoBehaviour
     private static bool lowBeamOn;
     private Color imageColor;
     private HighBeamBehaviour highBeam;
+    private Car car;
 
     void Awake()
     {
@@ -25,6 +26,7 @@ public class LowBeamBehaviour : MonoBehaviour
         lowBeamLightRight.intensity = 0;
 
         highBeam = HighBeamBehaviour.GetHighBeamBehaviourInstance();
+        car = Car.GetCarInstance();
     }
 
     // Update is called once per frame
@@ -60,7 +62,7 @@ public class LowBeamBehaviour : MonoBehaviour
     public void TurnLowBeamOnOrOff()
     {
         //if the car is on you can turn on lights
-        if (Car.car.IsOn())
+        if (car.IsOn())
         {
             if (highBeam.IsHighBeamOn())
             {

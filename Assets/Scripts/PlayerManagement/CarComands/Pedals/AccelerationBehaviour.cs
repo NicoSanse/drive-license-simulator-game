@@ -11,6 +11,7 @@ public class AccelerationBehaviour : MonoBehaviour
     private bool acceleratorPressed;
     private float sensibility = 3f;
     private ClutchBehaviour clutch;
+    private Car car;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class AccelerationBehaviour : MonoBehaviour
         acceleratorPressed = false;
         acceleration = 0f;
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
+        car = Car.GetCarInstance();
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class AccelerationBehaviour : MonoBehaviour
 
     private void RetroLights()
     {
-        if (Car.car.IsOn() && clutch.GetCurrentGear() == ClutchBehaviour.Gear.GearR && acceleratorPressed)
+        if (car.IsOn() && clutch.GetCurrentGear() == ClutchBehaviour.Gear.GearR && acceleratorPressed)
         { 
             retroLeftLight.intensity = 20;
             retroRightLight.intensity = 20;

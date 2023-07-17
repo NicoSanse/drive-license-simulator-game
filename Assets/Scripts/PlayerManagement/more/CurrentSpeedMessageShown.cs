@@ -5,19 +5,18 @@ using TMPro;
 
 public class CurrentSpeedMessageShown : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Car car;
     void Start()
     {
-        
+        car = Car.GetCarInstance();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ChangeMessageShown();
     }
 
     private void ChangeMessageShown(){
-        GetComponent<TMP_Text>().text = Mathf.RoundToInt(Car.car.GetSpeed()) + " km/h";
+        GetComponent<TMP_Text>().text = Mathf.RoundToInt(car.GetSpeed()) + " km/h";
     }
 }
