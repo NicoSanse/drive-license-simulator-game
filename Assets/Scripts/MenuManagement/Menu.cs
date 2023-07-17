@@ -69,7 +69,7 @@ public class Menu : MonoBehaviour
             case "FirstLevelButton":
                 print("StartFirstLevel");
                 SetCurrentLevel(listOfLevels.GetLevel(0));
-                gameManager.SetGameState(GameManager.GameState.Playing);
+                gameManager.ChangeGameState(gameManager.GetCurrentGameState());
                 SceneManager.LoadScene("LevelOne");
                 break;
             case "SecondLevelButton":
@@ -110,7 +110,7 @@ public class Menu : MonoBehaviour
         if (listOfLevels.GetLevel(position).IsPassed())
         {
             SetCurrentLevel(listOfLevels.GetLevel(position + 1));
-            gameManager.SetGameState(GameManager.GameState.Playing);
+            gameManager.ChangeGameState(gameManager.GetCurrentGameState());
             SceneManager.LoadScene(position + 3);
         }
         else

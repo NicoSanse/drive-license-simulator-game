@@ -30,7 +30,7 @@ public class MyCarRotation : MonoBehaviour
 
     void Update()
     {
-        MeasureRotation();
+        //MeasureRotation();
         previousRotation = currentRotation;
     }
 

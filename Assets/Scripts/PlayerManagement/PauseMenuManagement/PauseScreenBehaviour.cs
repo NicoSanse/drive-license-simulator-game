@@ -8,15 +8,22 @@ public class PauseScreenBehaviour : MonoBehaviour
 
     private Menu menu;
     private GameManager gameManager;
+    private static PauseScreenBehaviour pauseScreenBehaviour;
+    private bool quitting;
     [SerializeField] GameObject pauseScreen;
-    // Start is called before the first frame update
+
+    void Awake()
+    {
+        pauseScreenBehaviour = this;
+    }
+
     void Start()
     {
         menu = Menu.GetMenuInstance();
-        gameManager = GameManager.GetGameManagerInstance();  
+        gameManager = GameManager.GetGameManagerInstance();
+        quitting = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -25,20 +32,31 @@ public class PauseScreenBehaviour : MonoBehaviour
     public void Resume()
     {
         MSSceneControllerFree.mSSceneControllerFree.SetPause(false);
-        gameManager.SetGameState(GameManager.GameState.Playing);
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
         pauseScreen.SetActive(false);
     }
 
     public void Restart()
     {
         int currentLevel = menu.GetCurrentLevel().GetId();
-        gameManager.SetGameState(GameManager.GameState.Playing);
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
         SceneManager.LoadScene(currentLevel + 1);
     }
 
     public void Quit()
-    { 
+    {
+        quitting = true;
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
         SceneManager.LoadScene("Menu");
-        gameManager.SetGameState(GameManager.GameState.Menu);
+    }
+
+    public bool ClickedOnQuit()
+    {
+        return quitting;
+    }
+
+    public static PauseScreenBehaviour GetPauseScreenBehaviourInstance()
+    {
+        return pauseScreenBehaviour;
     }
 }

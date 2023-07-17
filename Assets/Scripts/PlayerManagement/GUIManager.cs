@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class GUIManager : MonoBehaviour
 {
-    public static GUIManager guiManager;
+    private static GUIManager guiManager;
     private CurrentCarStateOnOffButtonBehaviour currentCarStateOnOffButton;
     private PauseButtonBehaviour pauseButton;
     private SwitchCameraButtonBehaviour switchCameraButton;
@@ -141,5 +141,10 @@ public class GUIManager : MonoBehaviour
     public void SwitchCameraButton()
     { 
         switchCameraButton.SwitchCamera();
+    }
+
+    public static GUIManager GetGUIManagerInstance()
+    {
+        return guiManager;
     }
 }

@@ -7,6 +7,7 @@ public class PauseButtonBehaviour : MonoBehaviour
     [SerializeField] GameObject pauseScreen;
     private static PauseButtonBehaviour pauseButtonBehaviour;
     private GameManager gameManager;
+    private bool wasPauseButtonClicked;
     void Awake()
     {
         pauseButtonBehaviour = this;
@@ -15,6 +16,7 @@ public class PauseButtonBehaviour : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.GetGameManagerInstance();
+        wasPauseButtonClicked = false;
     }
 
     void Update()
@@ -24,13 +26,25 @@ public class PauseButtonBehaviour : MonoBehaviour
 
     public void ClickOnPauseButton()
     {
+        SetPauseButtonClicked(true);
         MSSceneControllerFree.mSSceneControllerFree.SetPause(true);
         pauseScreen.SetActive(true);
-        gameManager.SetGameState(GameManager.GameState.LevelPaused);
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
+        SetPauseButtonClicked(false);
     }
 
     public static PauseButtonBehaviour GetPauseButtonBehaviourInstance()
     {
         return pauseButtonBehaviour;
+    }
+
+    public void SetPauseButtonClicked(bool value)
+    {
+        wasPauseButtonClicked = value;
+    }
+
+    public bool WasPauseButtonClicked()
+    {
+        return wasPauseButtonClicked;
     }
 }

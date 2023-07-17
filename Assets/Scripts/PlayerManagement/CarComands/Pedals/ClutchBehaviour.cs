@@ -9,9 +9,9 @@ public class ClutchBehaviour : MonoBehaviour
     [SerializeField] GameObject loadingBar;
     private static ClutchBehaviour clutch;
     public enum Gear { Gear1 = 1, Gear2 = 2, Gear3 = 3, Gear4 = 4, Gear5 = 5, GearR = -1, GearN = 0 };
+    private static Gear currentGear;
     private bool clutchPressed;
     private Coroutine coroutineLoadBarAndChangeScale;
-    private Gear currentGear;
 
 
     void Awake()

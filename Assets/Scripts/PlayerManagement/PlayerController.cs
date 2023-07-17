@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController player;
+    private static PlayerController player;
     private GameManager gameManager;
     private ClutchBehaviour.Gear gear;
     private float speed;
+    private bool crashed;
 
     void Awake()
     {
@@ -17,8 +19,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        print("Start");
         gameManager = GameManager.GetGameManagerInstance();
+        crashed = false;
     }
 
     void Update()
@@ -32,10 +34,27 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Goal")
         {
-            print("You win!");
-            Car.car.Stop();
-            gameManager.LevelPassed();
+            crashed = false;
+            GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
         }
+        else
+        {
+            crashed = true;
+            GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[1].gameObject.SetActive(true);
+        }
+        Car.car.Stop();
+        GameObject.FindGameObjectWithTag("GUI").SetActive(false);
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
+    }
+
+    public bool IsCrashed()
+    {
+        return crashed;
+    }
+
+    public static PlayerController GetPlayerControllerInstance()
+    {
+        return player;
     }
 
 }

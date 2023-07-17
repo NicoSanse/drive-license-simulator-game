@@ -21,6 +21,11 @@ TagManager:
   - SeventhLevelButton
   - rilascioFrizione
   - PauseScreen
+  - GUI
+  - LevelLostPanel
+  - LevelWonPanel
+  - CanvasEndOfLevel
+  - GUICanvas
   layers:
   - Default
   - TransparentFX
