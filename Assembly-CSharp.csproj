@@ -81,6 +81,7 @@
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\Buttons\SwitchCameraButtonBehaviour.cs" />
      <Compile Include="Assets\Scripts\MenuManagement\WelcomeScene.cs" />
+     <Compile Include="Assets\Scripts\PlayerManagement\EndLevelManagement\EndOfLevel.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\CarComands\Pedals\BrakeBehaviour.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\Buttons\PauseButtonBehaviour.cs" />
@@ -105,7 +106,8 @@
      <Compile Include="Assets\Scripts\PlayerManagement\Car.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\PauseMenuManagement\PauseScreenBehaviour.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-     <Compile Include="Assets\Scripts\PlayerManagement\EndLevelManagement\EndOfLevel.cs" />
+     <Compile Include="Assets\Scripts\DataManagement\SaveState.cs" />
+     <Compile Include="Assets\Scripts\DataManagement\SaveManager.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\EasyRoads3D\shaders\EasyRoads3D-Surface-Offset.shader" />
