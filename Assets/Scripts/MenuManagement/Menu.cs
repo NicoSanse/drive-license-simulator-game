@@ -67,33 +67,24 @@ public class Menu : MonoBehaviour
         switch (button.tag)
         {
             case "FirstLevelButton":
-                print("StartFirstLevel");
-                SetCurrentLevel(listOfLevels.GetLevel(0));
-                gameManager.ChangeGameState(gameManager.GetCurrentGameState());
-                SceneManager.LoadScene("LevelOne");
+                StartFirstLevel();
                 break;
             case "SecondLevelButton":
-                print("StartSecondLevel");
                 CheckLevel(0);
                 break;
             case "ThirdLevelButton":
-                print("StartThirdLevel");
                 CheckLevel(1);
                 break;
             case "FourthLevelButton":
-                print("StartFourthLevel");
                 CheckLevel(2);
                 break;
             case "FifthLevelButton":
-                print("StartFifthLevel");
                 CheckLevel(3);
                 break;
             case "SixthLevelButton":
-                print("StartSixthLevel");
                 CheckLevel(4);
                 break;
             case "SeventhLevelButton":
-                print("StartSeventhLevel");
                 CheckLevel(5);
                 break;
             default:
@@ -102,16 +93,22 @@ public class Menu : MonoBehaviour
         }
     }
 
+    private void StartFirstLevel()
+    {
+        SetCurrentLevel(listOfLevels.GetLevel(0));
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState(), 2);
+    }
+
+
     //checks whether a level can be played or not. I want a level to be available only if the previous one has been passed
     //if a level can ben played, the current level is set and the scene is loaded
     //The first level is always available
-    public void CheckLevel(int position) 
+    private void CheckLevel(int position) 
     {
         if (listOfLevels.GetLevel(position).IsPassed())
         {
             SetCurrentLevel(listOfLevels.GetLevel(position + 1));
-            gameManager.ChangeGameState(gameManager.GetCurrentGameState());
-            SceneManager.LoadScene(position + 3);
+            gameManager.ChangeGameState(gameManager.GetCurrentGameState(), position + 3);
         }
         else
         {

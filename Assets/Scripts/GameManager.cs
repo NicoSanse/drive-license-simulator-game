@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
         currentGameState = state;
     }
 
-    public void ChangeGameState(GameState state) 
+    public void ChangeGameState(GameState state, int sceneIndex = 0) 
     { 
         switch (state)
         {
@@ -49,13 +50,13 @@ public class GameManager : MonoBehaviour
                 HandleWelcomeState();
                 break;
             case GameState.Menu:
-                HandleMenuState();
+                HandleMenuState(sceneIndex);
                 break;
             case GameState.Playing:
                 HandlePlayingState();
                 break;
             case GameState.LevelPaused:
-                HandleLevelPausedState();
+                HandleLevelPausedState(sceneIndex);
                 break;
             case GameState.LevelWon:
                 HandleLevelWonState();
@@ -66,16 +67,19 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+
     }
 
     private void HandleWelcomeState()
     {
         SetGameState(GameState.Menu);
+        LoadScene("Menu");
     }
 
-    private void HandleMenuState()
+    private void HandleMenuState(int sceneIndex)
     { 
         SetGameState(GameState.Playing);
+        LoadScene(sceneIndex);
     }
 
     private void HandlePlayingState()
@@ -97,11 +101,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void HandleLevelPausedState()
+    private void HandleLevelPausedState(int sceneIndex)
     {
         if(pauseScreen.ClickedOnQuit())
         {
             SetGameState(GameState.Menu);
+            LoadScene("Menu");
+        }
+        else if (pauseScreen.ClickedOnRestart())
+        { 
+            SetGameState(GameState.Playing);
+            LoadScene(sceneIndex);
         }
         else
         {
@@ -113,12 +123,14 @@ public class GameManager : MonoBehaviour
     { 
         SetGameState(GameState.Menu);
         LevelPassed();
+        LoadScene("Menu");
     }
 
     private void HandleLevelLostState()
     { 
         SetGameState(GameState.Menu);
         LevelFailed();
+        LoadScene("Menu");
     }
 
     //sets the current level as passed and come back to the menu
@@ -131,6 +143,16 @@ public class GameManager : MonoBehaviour
     public void LevelFailed()
     {
         menu.GetCurrentLevel().SetPassed(false);
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void LoadScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
     }
 
     public static GameManager GetGameManagerInstance() 

@@ -10,6 +10,7 @@ public class PauseScreenBehaviour : MonoBehaviour
     private GameManager gameManager;
     private static PauseScreenBehaviour pauseScreenBehaviour;
     private bool quitting;
+    private bool restarting;
     [SerializeField] GameObject pauseScreen;
 
     void Awake()
@@ -22,6 +23,7 @@ public class PauseScreenBehaviour : MonoBehaviour
         menu = Menu.GetMenuInstance();
         gameManager = GameManager.GetGameManagerInstance();
         quitting = false;
+        restarting = false;
     }
 
     void Update()
@@ -38,21 +40,25 @@ public class PauseScreenBehaviour : MonoBehaviour
 
     public void Restart()
     {
+        restarting = true;
         int currentLevel = menu.GetCurrentLevel().GetId();
-        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
-        SceneManager.LoadScene(currentLevel + 1);
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState(), currentLevel + 1);
     }
 
     public void Quit()
     {
         quitting = true;
         gameManager.ChangeGameState(gameManager.GetCurrentGameState());
-        SceneManager.LoadScene("Menu");
     }
 
     public bool ClickedOnQuit()
     {
         return quitting;
+    }
+
+    public bool ClickedOnRestart()
+    {
+        return restarting;
     }
 
     public static PauseScreenBehaviour GetPauseScreenBehaviourInstance()
