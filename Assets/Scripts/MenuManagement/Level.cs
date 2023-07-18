@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//very important class
-//the bool passed tells whether the level has been passed or not
-//and the int id is the level number
+//this class represents a level
 //the first level has id 1, the second has id 2 and so on...
 
 [System.Serializable]

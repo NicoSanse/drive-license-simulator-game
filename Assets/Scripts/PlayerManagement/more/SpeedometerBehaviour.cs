@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//this class models the speedometer
 public class SpeedometerBehaviour : MonoBehaviour
 {
     public Rigidbody target;

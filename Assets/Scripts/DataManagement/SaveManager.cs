@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+//we use this class to manage data
 public class SaveManager : MonoBehaviour
 {
     private static SaveManager saveManager;
@@ -37,6 +38,7 @@ public class SaveManager : MonoBehaviour
             saveState = (SaveState) binaryFormatter.Deserialize(file);
             file.Close();
         }
+        //if the file doesn't exist we create it once
         catch (System.Exception e)
         {
             Save();

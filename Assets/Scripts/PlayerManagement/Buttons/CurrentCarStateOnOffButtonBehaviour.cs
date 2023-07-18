@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+//this class is used by the button that turns on and off the car
+//and just shows whether the car is on or off
+
 public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
 {
     private Image ButtonImage;
@@ -25,6 +28,7 @@ public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
         
     }
 
+    //this method is called by GUIManager when the button is pressed
     public void DarkenButton()
     {
         MakeTestAppear("OFF");
@@ -32,6 +36,7 @@ public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
         StartCoroutine(MakeButtonBlack());
     }
 
+    //this method is called by GUIManager when the button is pressed
     public void LightenButton()
     {
         MakeTestAppear("ON");

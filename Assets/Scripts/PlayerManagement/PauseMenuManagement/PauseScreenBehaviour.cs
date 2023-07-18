@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PauseScreenBehaviour : MonoBehaviour
 {
-
     private Menu menu;
     private GameManager gameManager;
     private static PauseScreenBehaviour pauseScreenBehaviour;

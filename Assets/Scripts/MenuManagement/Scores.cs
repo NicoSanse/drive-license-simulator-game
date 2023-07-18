@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//this class is used by the levels in the menu
+//to show the scores of each level
 public class Scores : MonoBehaviour
 {
     private SaveManager saveManager;

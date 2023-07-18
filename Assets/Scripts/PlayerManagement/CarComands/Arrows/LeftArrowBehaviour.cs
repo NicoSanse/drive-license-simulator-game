@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//this class models the left arrow
 public class LeftArrowBehaviour : MonoBehaviour
 {
     [SerializeField] private Light leftFrontArrowLight;
@@ -32,12 +33,14 @@ public class LeftArrowBehaviour : MonoBehaviour
         
     }
 
+    //updates the state of the arrow and starts the "animation"
     public void SetLeftArrowOn()
     {
         leftArrowOn = true;
         togglingArrows = StartCoroutine(ToggleArrows());
     }
 
+    //updates the state of the arrow and stops the "animation"
     public void SetLeftArrowOff()
     {
         leftArrowOn = false;
@@ -57,8 +60,7 @@ public class LeftArrowBehaviour : MonoBehaviour
         return leftArrowOn;
     }
 
-    //checks whether the arrow is on or off and according to that
-    //turns the arrow off or starts the coroutine to make it toogle
+    //turns the arrow off or on
     public void TurnLeftArrowOnOrOff() 
     {
         //if the car is on you can set arrows

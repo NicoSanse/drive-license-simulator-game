@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//this class is used to manage the menu
 public class Menu : MonoBehaviour
 {
     [SerializeField] GameObject buttonFirstLevel, buttonSecondLevel, buttonThirdLevel,
@@ -87,6 +88,7 @@ public class Menu : MonoBehaviour
         }
     }
 
+    //the first level is always available
     private void StartFirstLevel()
     {
         SetCurrentLevel(listOfLevels[0]);
@@ -94,9 +96,8 @@ public class Menu : MonoBehaviour
     }
 
 
-    //checks whether a level can be played or not. I want a level to be available only if the previous one has been passed
+    //checks whether a level can be played or not. I want a level to be available only if the previous one was passed
     //if a level can ben played, the current level is set and the scene is loaded
-    //The first level is always available
     private void CheckLevel(int position) 
     {
         if (listOfLevels[position].IsPassed())
@@ -121,7 +122,7 @@ public class Menu : MonoBehaviour
         return currentLevel;
     }
 
-    public void SetCurrentLevel(Level level)
+    private void SetCurrentLevel(Level level)
     {
         currentLevel = level;
     }

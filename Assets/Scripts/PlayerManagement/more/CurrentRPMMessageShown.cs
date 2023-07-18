@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//this class shows the current RPM
 public class CurrentRPMMessageShown : MonoBehaviour
 {
     private Car car;

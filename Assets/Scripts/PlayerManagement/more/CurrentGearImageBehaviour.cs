@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//this class shows the red circle that shows the current gear
 public class CurrentGearImageBehaviour : MonoBehaviour
 {
     private ClutchBehaviour clutch;

@@ -8,7 +8,7 @@ public class Car : MonoBehaviour
     private float speed;
     private float RPM;
     private float[] torqueAdjustment;
-    //private float r;
+    private float r;
     private float radius;
     private float circumference;
     private ClutchBehaviour.Gear gear;
@@ -33,7 +33,7 @@ public class Car : MonoBehaviour
 
         torqueAdjustment = new float[5];
         SetTorqueAdjustmentValues();
-        //r = 3.0f;
+        r = 3.0f;
         radius = 0.5f;
         circumference = Mathf.PI * radius * 2f;
         gear = clutch.GetCurrentGear();
@@ -102,9 +102,10 @@ public class Car : MonoBehaviour
         float tempRPM = 0;
         float tempTorqueAdjustment = FindRightTorqueAdjustment();
 
-        //tempRPM = (speed * tempTorqueAdjustment * r)/(diameter * Mathf.PI) * 60f;
+        tempRPM = (speed * tempTorqueAdjustment * r)/(radius * 2 * Mathf.PI) * 60f;
         //tempRPM = (speed * 60) / (circumference * tempTorqueAdjustment);
         //tempRPM = (speed * 0.278f)/(tempTorqueAdjustment * radius * 2);
+
         return tempRPM;
     }
 

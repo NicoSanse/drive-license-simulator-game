@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//this class is used by the the menu
+//scene to show the licence's points
+
 public class LicencePointsMessage : MonoBehaviour
 {
     private SaveManager saveManager;

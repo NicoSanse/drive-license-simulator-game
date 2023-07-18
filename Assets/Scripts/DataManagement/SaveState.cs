@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+//this class is used to save the state of the game
+//which is nothing else but some informations encapsulated in a class
+
 [System.Serializable]
 public class SaveState
 {
