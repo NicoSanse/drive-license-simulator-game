@@ -23,14 +23,12 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     {
         changeGear = this;
     }
-    // Start is called before the first frame update
     void Start()
     {
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
         car = Car.GetCarInstance();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ChangeAlphaValue();
@@ -278,7 +276,6 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
                 break;
 
             default:
-                print("boh");
                 break;
         }
         clutch.GearHasBeenChanged();

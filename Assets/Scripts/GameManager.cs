@@ -140,8 +140,6 @@ public class GameManager : MonoBehaviour
     //sets the current level as passed and come back to the menu
     public void LevelPassed()
     {
-        //menu.GetCurrentLevel().SetPassed(true);
-        //menu.GetCurrentLevel().SetScore(player.GetScore());
         saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetPassed(true);
         saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetScore(player.GetScore());
         saveManager.SetSaveState(saveState);
@@ -151,8 +149,6 @@ public class GameManager : MonoBehaviour
     //sets the current level as failed
     public void LevelFailed()
     {
-        //menu.GetCurrentLevel().SetPassed(false);
-        //menu.GetCurrentLevel().SetScore(player.GetScore());
         saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetPassed(false);
         saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetScore(player.GetScore());
         saveManager.SetSaveState(saveState);

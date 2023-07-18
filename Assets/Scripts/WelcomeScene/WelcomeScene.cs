@@ -9,15 +9,15 @@ public class WelcomeScene : MonoBehaviour
 {
     [SerializeField] Image firstWelcomePanel;
     private GameManager gameManager;
-    public SaveState saveState;
     private SaveManager saveManager;
+    public SaveState saveState;
     private string playerName;
 
     void Start()
     {
         gameManager = GameManager.GetGameManagerInstance();
-        saveState = SaveManager.GetSaveManagerInstance().GetSaveState();
         saveManager = SaveManager.GetSaveManagerInstance();
+        saveState = saveManager.GetSaveState();
         ShowACanvas();
     }
 
@@ -38,7 +38,7 @@ public class WelcomeScene : MonoBehaviour
         GoToMenu();
     }
 
-    //shows the first canvas if the player is new, otherwise shows the second canvas
+    //shows the "login" canvas if the player is new, otherwise shows the "welcomeback" one
     private void ShowACanvas() {
         if (saveState != null)
         {

@@ -18,7 +18,6 @@ public class LeftArrowBehaviour : MonoBehaviour
     {
         leftArrow = this;
     }
-    // Start is called before the first frame update
     void Start()
     {
         leftArrowOn = false;
@@ -28,7 +27,6 @@ public class LeftArrowBehaviour : MonoBehaviour
         car = Car.GetCarInstance();
     }
 
-    // Update is called once per frame
     void Update()
     {
         

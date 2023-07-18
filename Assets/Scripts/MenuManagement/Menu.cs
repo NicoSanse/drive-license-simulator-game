@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
     private static Level currentLevel;
     private GameManager gameManager;
     private SaveManager saveManager;
+    private SaveState saveState;
 
     void Awake()
     {
@@ -26,7 +27,8 @@ public class Menu : MonoBehaviour
     {
         gameManager = GameManager.GetGameManagerInstance();
         saveManager = SaveManager.GetSaveManagerInstance();
-        listOfLevels = saveManager.GetSaveState().GetListOfLevels();
+        saveState = saveManager.GetSaveState();
+        listOfLevels = saveState.GetListOfLevels();
 
         for (int i = 0; i < listOfLevels.Count; i++)
         {
@@ -142,7 +144,6 @@ public class Menu : MonoBehaviour
     //makes quit the game
     public void ExitGame()
     {
-        print("ExitGame");
         Application.Quit();
     }
 

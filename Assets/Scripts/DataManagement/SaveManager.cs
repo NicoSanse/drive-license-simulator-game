@@ -33,9 +33,6 @@ public class SaveManager : MonoBehaviour
     {
         try 
         {
-            print("loading data");
-            print(saveState.GetHashCode() + ". AAA");
-            //FileStream file = new FileStream(SAVE_STATE_FILE, FileMode.Open, FileAccess.Read);
             FileStream file = new FileStream(Application.persistentDataPath + SAVE_STATE_FILE, FileMode.Open, FileAccess.Read);
             saveState = (SaveState) binaryFormatter.Deserialize(file);
             file.Close();
@@ -51,7 +48,6 @@ public class SaveManager : MonoBehaviour
     {
         if (saveState != null)
         {
-            //FileStream file = new FileStream(SAVE_STATE_FILE, FileMode.OpenOrCreate, FileAccess.Write);
             FileStream file = new FileStream(Application.persistentDataPath + SAVE_STATE_FILE, FileMode.OpenOrCreate, FileAccess.Write);
             saveState.SetLastTimeSave(System.DateTime.Now);
             binaryFormatter.Serialize(file, saveState);

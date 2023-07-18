@@ -20,7 +20,6 @@ public class ClutchBehaviour : MonoBehaviour
         clutch = this;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         clutchPressed = false;
@@ -28,7 +27,6 @@ public class ClutchBehaviour : MonoBehaviour
         car = Car.GetCarInstance();
     }
 
-    // Update is called once per frame
     void Update()
     {
 

@@ -5,15 +5,15 @@ using TMPro;
 
 public class LicencePointsMessage : MonoBehaviour
 {
+    private SaveManager saveManager;
     private SaveState saveState;
     private int score;
     void Start()
     {
-        saveState = SaveManager.GetSaveManagerInstance().GetSaveState();
+        saveManager = SaveManager.GetSaveManagerInstance();
+        saveState = saveManager.GetSaveState();
         score = saveState.GetDriveLicensePoints();
         GetComponent<TMP_Text>().text = "Your licence's points: " + score;
-        
-        print(saveState.GetHashCode() + ". CCC");
     }
 
     void Update()

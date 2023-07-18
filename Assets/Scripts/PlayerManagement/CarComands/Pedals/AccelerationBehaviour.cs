@@ -17,7 +17,7 @@ public class AccelerationBehaviour : MonoBehaviour
     {
         accelerator = this;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         acceleratorPressed = false;
@@ -26,7 +26,6 @@ public class AccelerationBehaviour : MonoBehaviour
         car = Car.GetCarInstance();
     }
 
-    // Update is called once per frame
     void Update()
     {
         StartCoroutine(CommonBehaviours.ChangeScale(acceleratorPressed, GetComponent<RectTransform>()));

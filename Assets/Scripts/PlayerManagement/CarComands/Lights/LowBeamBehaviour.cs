@@ -17,7 +17,7 @@ public class LowBeamBehaviour : MonoBehaviour
     {
         lowBeam = this;
     }
-    // Start is called before the first frame update
+    
     void Start()
     {
         lowBeamOn = false;
@@ -29,7 +29,6 @@ public class LowBeamBehaviour : MonoBehaviour
         car = Car.GetCarInstance();
     }
 
-    // Update is called once per frame
     void Update()
     {
         

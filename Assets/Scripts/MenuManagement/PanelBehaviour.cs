@@ -9,13 +9,11 @@ public class PanelBehaviour : MonoBehaviour
 
     public float maxUpperPosition = 550f;
     public float minLowerPosition = -60f;
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         ControlLevelsListMovement();

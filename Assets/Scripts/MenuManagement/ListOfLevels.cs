@@ -5,10 +5,7 @@ using UnityEngine;
 public class ListOfLevels : MonoBehaviour
 {
     private static List<Level> levels;
-    //questa riga è molto importante, per qualche motivo la lista va inizializzata qui
-    //forse se la inizializzo nella Awake, levels verrebbe inizializzata più volte 
-    //cioè quando diventano attive le classi che usano LisTOfLevels,
-    //ma non saprei risalire a tutte le chiamate e non avrebbe senso perchè anche il ciclo for dovrebbe ripetersi
+    
 
     void Awake()
     {

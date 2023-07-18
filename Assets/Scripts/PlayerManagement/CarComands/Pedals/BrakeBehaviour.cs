@@ -16,7 +16,7 @@ public class BrakeBehaviour : MonoBehaviour
     {
         brake = this;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         brakePressed = false;
@@ -24,7 +24,6 @@ public class BrakeBehaviour : MonoBehaviour
         car = Car.GetCarInstance();
     }
 
-    // Update is called once per frame
     void Update()
     {
         StartCoroutine(CommonBehaviours.ChangeScale(brakePressed, GetComponent<RectTransform>()));

@@ -27,16 +27,9 @@ public class Car : MonoBehaviour
         car = this;
     }
     
-    // Start is called before the first frame update
     void Start()
     {
-        leftArrow = LeftArrowBehaviour.GetLeftArrowBehaviourInstance();
-        rightArrow = RightArrowBehaviour.GetRightArrowBehaviourInstance();
-        highBeam = HighBeamBehaviour.GetHighBeamBehaviourInstance();
-        lowBeam = LowBeamBehaviour.GetLowBeamBehaviourInstance();
-        accelerator = AccelerationBehaviour.GetAccelerationBehaviourInstance();
-        brake = BrakeBehaviour.GetBrakeBehaviourInstance();
-        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
+        GettingInstances();
 
         torqueAdjustment = new float[5];
         SetTorqueAdjustmentValues();
@@ -58,7 +51,6 @@ public class Car : MonoBehaviour
         torqueAdjustment[4] = 1.0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
@@ -128,6 +120,17 @@ public class Car : MonoBehaviour
         else if(gear == ClutchBehaviour.Gear.GearN) Torque = 0;
 
         return Torque;
+    }
+
+    private void GettingInstances()
+    {
+        leftArrow = LeftArrowBehaviour.GetLeftArrowBehaviourInstance();
+        rightArrow = RightArrowBehaviour.GetRightArrowBehaviourInstance();
+        highBeam = HighBeamBehaviour.GetHighBeamBehaviourInstance();
+        lowBeam = LowBeamBehaviour.GetLowBeamBehaviourInstance();
+        accelerator = AccelerationBehaviour.GetAccelerationBehaviourInstance();
+        brake = BrakeBehaviour.GetBrakeBehaviourInstance();
+        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
     }
 
 
