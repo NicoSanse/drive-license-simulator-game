@@ -7,6 +7,7 @@ using UnityEngine;
 //and the int id is the level number
 //the first level has id 1, the second has id 2 and so on...
 
+[System.Serializable]
 public class Level
 {
     private bool passed;

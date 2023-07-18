@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager gameManager;
     private SaveManager saveManager;
+    private SaveState saveState;
     public enum GameState { Welcome, Menu, Playing, LevelPaused, LevelWon, LevelLost };
     private static GameState currentGameState = GameState.Welcome;
     private Menu menu;
@@ -16,12 +17,13 @@ public class GameManager : MonoBehaviour
     void Awake() 
     { 
         gameManager = this;
-        saveManager = SaveManager.GetSaveManagerInstance();
     }
 
     void Start()
     {
         menu = Menu.GetMenuInstance();
+        saveManager = SaveManager.GetSaveManagerInstance();
+        saveState = saveManager.GetSaveState();
         player = PlayerController.GetPlayerControllerInstance();
         pauseButton = PauseButtonBehaviour.GetPauseButtonBehaviourInstance();
     }
@@ -138,14 +140,22 @@ public class GameManager : MonoBehaviour
     //sets the current level as passed and come back to the menu
     public void LevelPassed()
     {
-        menu.GetCurrentLevel().SetPassed(true);
+        //menu.GetCurrentLevel().SetPassed(true);
+        //menu.GetCurrentLevel().SetScore(player.GetScore());
+        saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetPassed(true);
+        saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetScore(player.GetScore());
+        saveManager.SetSaveState(saveState);
         saveManager.Save();
     }
 
     //sets the current level as failed
     public void LevelFailed()
     {
-        menu.GetCurrentLevel().SetPassed(false);
+        //menu.GetCurrentLevel().SetPassed(false);
+        //menu.GetCurrentLevel().SetScore(player.GetScore());
+        saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetPassed(false);
+        saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetScore(player.GetScore());
+        saveManager.SetSaveState(saveState);
         saveManager.Save();
     }
 

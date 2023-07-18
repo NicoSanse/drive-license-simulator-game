@@ -9,26 +9,18 @@ public class WelcomeScene : MonoBehaviour
 {
     [SerializeField] Image firstWelcomePanel;
     private GameManager gameManager;
-    private SaveState saveState;
+    public SaveState saveState;
+    private SaveManager saveManager;
     private string playerName;
-    // Start is called before the first frame update
+
     void Start()
     {
         gameManager = GameManager.GetGameManagerInstance();
-        saveState = SaveState.GetSaveStateInstance();
-        if (saveState != null){
-            firstWelcomePanel.gameObject.SetActive(false);
-            GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
-            GetComponentsInChildren<TMP_Text>()[0].text = "Welcome back, " + saveState.GetNameOfPlayer() + "!";
-        }
-        else
-        {
-            firstWelcomePanel.gameObject.SetActive(true);
-            GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(false);
-        }
-}
+        saveState = SaveManager.GetSaveManagerInstance().GetSaveState();
+        saveManager = SaveManager.GetSaveManagerInstance();
+        ShowACanvas();
+    }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -42,9 +34,32 @@ public class WelcomeScene : MonoBehaviour
     public void GetPlayerName()
     { 
         playerName = GameObject.FindWithTag("PlayerName").GetComponent<TMP_Text>().text;
-        saveState = new SaveState(name);
-        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
+        CreateSaveState();
+        GoToMenu();
     }
+
+    //shows the first canvas if the player is new, otherwise shows the second canvas
+    private void ShowACanvas() {
+        if (saveState != null)
+        {
+            firstWelcomePanel.gameObject.SetActive(false);
+            GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
+            GetComponentsInChildren<TMP_Text>()[0].text = "Welcome back, " + saveState.GetNameOfPlayer() + "!";
+        }
+        else
+        {
+            firstWelcomePanel.gameObject.SetActive(true);
+            GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(false);
+        }
+    }
+
+    private void CreateSaveState()
+    {
+        saveState = new SaveState(playerName);
+        saveManager.SetSaveState(saveState);
+        saveManager.Save();
+    }
+
 
     public void ExitGame()
     {

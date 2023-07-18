@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ListOfLevels : MonoBehaviour
 {
-    private static SaveState saveState = SaveState.GetSaveStateInstance();
-    private List<Level> levels = saveState.GetListOfLevels();
+    private static List<Level> levels;
     //questa riga è molto importante, per qualche motivo la lista va inizializzata qui
     //forse se la inizializzo nella Awake, levels verrebbe inizializzata più volte 
     //cioè quando diventano attive le classi che usano LisTOfLevels,
@@ -16,9 +15,8 @@ public class ListOfLevels : MonoBehaviour
 
     }
 
-    void Start() 
+    void Start()
     {
-
     }
 
     void Update()
@@ -26,7 +24,7 @@ public class ListOfLevels : MonoBehaviour
         
     }
 
-    public List<Level> GetLevels() 
+    public static List<Level> GetLevels() 
     {
         return levels;
     }

@@ -10,14 +10,14 @@ public class Menu : MonoBehaviour
     buttonFifthLevel, buttonSixthLevel, buttonSeventhLevel;
 
     private static Menu menu;
-    private static ListOfLevels listOfLevels;
+    private static List<Level> listOfLevels;
     private static Level currentLevel;
     private GameManager gameManager;
+    private SaveManager saveManager;
 
     void Awake()
     {
         menu = this;
-        listOfLevels = gameObject.AddComponent<ListOfLevels>();
     }
 
     //here i update the content of the menu. I just want to see updated the levels that 
@@ -25,10 +25,12 @@ public class Menu : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.GetGameManagerInstance();
+        saveManager = SaveManager.GetSaveManagerInstance();
+        listOfLevels = saveManager.GetSaveState().GetListOfLevels();
 
-        for (int i = 0; i < listOfLevels.Length(); i++)
+        for (int i = 0; i < listOfLevels.Count; i++)
         {
-            if (listOfLevels.GetLevel(i).IsPassed())
+            if (listOfLevels[i].IsPassed())
             {
                 switch (i)
                 {
@@ -95,7 +97,7 @@ public class Menu : MonoBehaviour
 
     private void StartFirstLevel()
     {
-        SetCurrentLevel(listOfLevels.GetLevel(0));
+        SetCurrentLevel(listOfLevels[0]);
         gameManager.ChangeGameState(gameManager.GetCurrentGameState(), 2);
     }
 
@@ -105,9 +107,9 @@ public class Menu : MonoBehaviour
     //The first level is always available
     private void CheckLevel(int position) 
     {
-        if (listOfLevels.GetLevel(position).IsPassed())
+        if (listOfLevels[position].IsPassed())
         {
-            SetCurrentLevel(listOfLevels.GetLevel(position + 1));
+            SetCurrentLevel(listOfLevels[position + 1]);
             gameManager.ChangeGameState(gameManager.GetCurrentGameState(), position + 3);
         }
         else
@@ -117,7 +119,7 @@ public class Menu : MonoBehaviour
     }
 
 
-    public ListOfLevels GetListOfLevels()
+    public List<Level> GetListOfLevels()
     {
         return listOfLevels;
     }

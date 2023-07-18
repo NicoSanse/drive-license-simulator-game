@@ -5,7 +5,6 @@ using System.Collections.Generic;
 [System.Serializable]
 public class SaveState
 {
-    private static SaveState saveState;
     private string nameOfPlayer;
     private int driveLicensePoints;
     private List<Level> listOfLevels;
@@ -13,10 +12,8 @@ public class SaveState
 
     public SaveState(String nameOfPlayer)
     {
-        saveState = this;
         this.nameOfPlayer = nameOfPlayer;
         driveLicensePoints = 0;
-        listOfLevels = new List<Level>();
         InitializeListOfLevels();
         lastTimeSave = DateTime.Now;
     }
@@ -40,7 +37,7 @@ public class SaveState
     { 
         lastTimeSave = time;
     }
-
+    
     public List<Level> GetListOfLevels()
     { 
         return listOfLevels;
@@ -50,7 +47,7 @@ public class SaveState
     { 
         this.listOfLevels = listOfLevels;
     }
-
+    
     public void SetNameOfPlayer(String name)
     { 
         nameOfPlayer = name;
@@ -61,13 +58,11 @@ public class SaveState
         return nameOfPlayer;
     }
 
-    public static SaveState GetSaveStateInstance()
-    { 
-        return saveState;
-    }
+    
 
     private void InitializeListOfLevels()
-    { 
+    {
+        listOfLevels = new List<Level>();
         for (int i = 0; i < 10; i++)
         {
             listOfLevels.Add(new Level(i + 1));

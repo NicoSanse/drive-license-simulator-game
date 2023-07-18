@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private float speed;
     private bool crashed;
     private Car car;
+    private int score;
 
     void Awake()
     {
@@ -37,11 +38,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Goal")
         {
             crashed = false;
+            score = 100;
             GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
         }
         else
         {
             crashed = true;
+            score = 1;
             GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[1].gameObject.SetActive(true);
         }
         car.Stop();
@@ -52,6 +55,11 @@ public class PlayerController : MonoBehaviour
     public bool IsCrashed()
     {
         return crashed;
+    }
+
+    public int GetScore()
+    { 
+        return score;
     }
 
     public static PlayerController GetPlayerControllerInstance()

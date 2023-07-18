@@ -8,13 +8,13 @@ public class SaveManager : MonoBehaviour
 {
     private static SaveManager saveManager;
     private SaveState saveState;
-    private BinaryFormatter bf;
+    private BinaryFormatter binaryFormatter;
     private const string SAVE_STATE_FILE = "dati.ss";
 
     void Awake() 
     { 
         saveManager = this;
-        bf = new BinaryFormatter();
+        binaryFormatter = new BinaryFormatter();
         Load();
     }
 
@@ -28,14 +28,16 @@ public class SaveManager : MonoBehaviour
         
     }
 
-
+    //we use this method to get data from a local file
     private void Load()
     {
         try 
         {
+            print("loading data");
+            print(saveState.GetHashCode() + ". AAA");
             //FileStream file = new FileStream(SAVE_STATE_FILE, FileMode.Open, FileAccess.Read);
             FileStream file = new FileStream(Application.persistentDataPath + SAVE_STATE_FILE, FileMode.Open, FileAccess.Read);
-            saveState = (SaveState)bf.Deserialize(file);
+            saveState = (SaveState) binaryFormatter.Deserialize(file);
             file.Close();
         }
         catch (System.Exception e)
@@ -44,24 +46,27 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    //we use this method to save data in a local file
     public void Save()
     {
-        //todo: get the player name from the input field
         if (saveState != null)
         {
-            try
-            {
-                //FileStream file = new FileStream(SAVE_STATE_FILE, FileMode.OpenOrCreate, FileAccess.Write);
-                FileStream file = new FileStream(Application.persistentDataPath + SAVE_STATE_FILE, FileMode.OpenOrCreate, FileAccess.Write);
-                saveState.SetLastTimeSave(System.DateTime.Now);
-                bf.Serialize(file, saveState);
-                file.Close();
-            }
-            catch (System.Exception e)
-            {
-                Debug.Log(e.Message);
-            }
+            //FileStream file = new FileStream(SAVE_STATE_FILE, FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream file = new FileStream(Application.persistentDataPath + SAVE_STATE_FILE, FileMode.OpenOrCreate, FileAccess.Write);
+            saveState.SetLastTimeSave(System.DateTime.Now);
+            binaryFormatter.Serialize(file, saveState);
+            file.Close();
         }
+    }
+
+    public SaveState GetSaveState() 
+    { 
+        return saveState;
+    }
+
+    public void SetSaveState(SaveState saveState) 
+    { 
+        this.saveState = saveState;
     }
 
 
