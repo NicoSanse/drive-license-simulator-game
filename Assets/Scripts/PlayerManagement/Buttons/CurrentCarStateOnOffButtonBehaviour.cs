@@ -6,20 +6,20 @@ using TMPro;
 
 public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
 {
-    private Color tempColor;
+    private Image ButtonImage;
+    private TMP_Text TMPtext;
     private static CurrentCarStateOnOffButtonBehaviour currentCarStateOnOffButtonBehaviour;
 
     void Awake()
     {
         currentCarStateOnOffButtonBehaviour = this;
     }
-    // Start is called before the first frame update
     void Start()
     {
-
+        ButtonImage = GetComponent<Image>();
+        TMPtext = GetComponentInChildren<TMP_Text>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -27,32 +27,51 @@ public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
 
     public void DarkenButton()
     {
-        Color tempColor = GetComponentInChildren<TMP_Text>().color;
-        tempColor.a = 255f;
-        GetComponentInChildren<TMP_Text>().color = tempColor;
-        GetComponentInChildren<TMP_Text>().text = "OFF";
-        GetComponent<Image>().color = new Color(0, 0, 0);
-        StartCoroutine(MakeTextDisappear(GetComponentInChildren<TMP_Text>().color));
+        MakeTestAppear("OFF");
+        StartCoroutine(MakeTextDisappear());
+        StartCoroutine(MakeButtonBlack());
     }
 
     public void LightenButton()
     {
-        Color tempColor = GetComponentInChildren<TMP_Text>().color;
-        tempColor.a = 255f;
-        GetComponentInChildren<TMP_Text>().color = tempColor;
-        GetComponentInChildren<TMP_Text>().text = "ON";
-        GetComponent<Image>().color = new Color(255, 255, 255);
-        StartCoroutine(MakeTextDisappear(GetComponentInChildren<TMP_Text>().color));
+        MakeTestAppear("ON");
+        StartCoroutine(MakeTextDisappear());
+        StartCoroutine(MakeButtonRed());
     }
 
-    private IEnumerator MakeTextDisappear(Color tempColor)
+    private IEnumerator MakeButtonBlack()
     {
+        yield return null;
+        ButtonImage.color = new Color(0, 0, 0);
+    }
+
+    private IEnumerator MakeButtonRed()
+    {
+        yield return null;
+        ButtonImage.color = new Color(255, 0, 0);
+    }
+
+    private IEnumerator MakeTextDisappear()
+    {
+        yield return new WaitForSeconds(1.2f);
+        /*
+        Color tempColor = TMPtext.color;
         while(tempColor.a != 0)
         {
-            tempColor.a -= 50f;
-            yield return new WaitForSeconds(1f);
+            tempColor = new Color(tempColor.r, tempColor.g, tempColor.b, tempColor.a - 5);
+            TMPtext.color = tempColor;
+            yield return new WaitForSeconds(0.05f);
         }
-        GetComponentInChildren<TMP_Text>().color = tempColor;
+        */
+        TMPtext.color = new Color(TMPtext.color.r, TMPtext.color.g, TMPtext.color.b, 0f);
+    }
+
+    private void MakeTestAppear(string text)
+    {
+        TMPtext.text = text;
+
+        Color tempColor = TMPtext.color;
+        TMPtext.color = new Color(tempColor.r, tempColor.g, tempColor.b, 255f);
     }
 
     public static CurrentCarStateOnOffButtonBehaviour GetCurrentCarStateOnOffButtonBehaviourInstance()

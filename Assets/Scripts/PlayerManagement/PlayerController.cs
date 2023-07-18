@@ -8,9 +8,10 @@ public class PlayerController : MonoBehaviour
 {
     private static PlayerController player;
     private GameManager gameManager;
-    private ClutchBehaviour.Gear gear;
-    private float speed;
-    private bool crashed;
+    private SaveManager saveManager;
+    private SaveState saveState;
+    private Menu menu;
+    private Level currentLevel;
     private Car car;
     private int score;
 
@@ -22,8 +23,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.GetGameManagerInstance();
+        saveManager = SaveManager.GetSaveManagerInstance();
+        saveState = saveManager.GetSaveState();
+        menu = Menu.GetMenuInstance();
+        currentLevel = menu.GetCurrentLevel();
         car = Car.GetCarInstance();
-        crashed = false;
+        score = 0;
     }
 
     void Update()
@@ -35,31 +40,50 @@ public class PlayerController : MonoBehaviour
     //TODO: implement the control on scores which is still to be created
     void OnTriggerEnter(Collider collision)
     {
+        GameObject.FindGameObjectWithTag("GUI").SetActive(false);
+
+        //in this case the player has won
         if (collision.gameObject.tag == "Goal")
         {
-            crashed = false;
-            score = 100;
+            //activating the green panel and setting the level as passed
+            SetScore(100);
             GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
+            saveState.GetListOfLevels()[currentLevel.GetId() - 1].SetPassed(true);
         }
         else
         {
-            crashed = true;
-            score = 1;
+            //activating the red panel
+            SetScore(1);
             GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[1].gameObject.SetActive(true);
         }
-        car.Stop();
-        GameObject.FindGameObjectWithTag("GUI").SetActive(false);
-        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
+
+        StopCar();
+        LevelFinished();
     }
 
-    public bool IsCrashed()
+    private void StopCar()
     {
-        return crashed;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        car.Off();
+    }
+
+    //saving state and changing game state
+    private void LevelFinished()
+    {
+        saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetScore(GetScore());
+        saveManager.SetSaveState(saveState);
+        saveManager.Save();
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
     }
 
     public int GetScore()
     { 
         return score;
+    }
+
+    private void SetScore(int score)
+    {
+        this.score = score;
     }
 
     public static PlayerController GetPlayerControllerInstance()

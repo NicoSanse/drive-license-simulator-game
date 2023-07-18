@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private static GameManager gameManager;
     private SaveManager saveManager;
     private SaveState saveState;
-    public enum GameState { Welcome, Menu, Playing, LevelPaused, LevelWon, LevelLost };
+    public enum GameState { Welcome, Menu, Playing, LevelPaused, LevelEnd };
     private static GameState currentGameState = GameState.Welcome;
     private Menu menu;
     private PlayerController player;
@@ -62,11 +62,8 @@ public class GameManager : MonoBehaviour
             case GameState.LevelPaused:
                 HandleLevelPausedState(sceneIndex);
                 break;
-            case GameState.LevelWon:
-                HandleLevelWonState();
-                break;
-            case GameState.LevelLost:
-                HandleLevelLostState();
+            case GameState.LevelEnd:
+                HandleEndLevelState();
                 break;
             default:
                 break;
@@ -94,14 +91,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (player.IsCrashed())
-            {
-                SetGameState(GameState.LevelLost);
-            }
-            else
-            {
-                SetGameState(GameState.LevelWon);
-            }
+            SetGameState(GameState.LevelEnd);
         }
     }
 
@@ -123,37 +113,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void HandleLevelWonState()
+    private void HandleEndLevelState()
     { 
         SetGameState(GameState.Menu);
-        LevelPassed();
         LoadScene("Menu");
-    }
-
-    private void HandleLevelLostState()
-    { 
-        SetGameState(GameState.Menu);
-        LevelFailed();
-        LoadScene("Menu");
-    }
-
-    //sets the current level as passed and come back to the menu
-    public void LevelPassed()
-    {
-        saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetPassed(true);
-        saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetScore(player.GetScore());
-        saveManager.SetSaveState(saveState);
-        saveManager.Save();
-    }
-
-    //sets the current level as failed
-    public void LevelFailed()
-    {
-        saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetPassed(false);
-        saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetScore(player.GetScore());
-        saveManager.SetSaveState(saveState);
-        saveManager.Save();
-    }
+    }    
 
     public void LoadScene(string sceneName)
     {

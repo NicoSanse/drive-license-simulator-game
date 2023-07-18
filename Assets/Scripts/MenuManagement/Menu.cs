@@ -5,9 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] GameObject 
-    buttonFirstLevel, buttonSecondLevel, buttonThirdLevel, buttonFourthLevel, 
-    buttonFifthLevel, buttonSixthLevel, buttonSeventhLevel;
+    [SerializeField] GameObject buttonFirstLevel, buttonSecondLevel, buttonThirdLevel,
+    buttonFourthLevel, buttonFifthLevel, buttonSixthLevel;
 
     private static Menu menu;
     private static List<Level> listOfLevels;
@@ -49,13 +48,7 @@ public class Menu : MonoBehaviour
                         buttonFifthLevel.transform.GetChild(1).gameObject.SetActive(false);
                         break;
                     case 4:
-                        buttonFifthLevel.transform.GetChild(1).gameObject.SetActive(false);
-                        break;
-                    case 5:
-                        buttonFifthLevel.transform.GetChild(1).gameObject.SetActive(false);
-                        break;
-                    case 6:
-                        buttonFifthLevel.transform.GetChild(1).gameObject.SetActive(false);
+                        buttonSixthLevel.transform.GetChild(1).gameObject.SetActive(false);
                         break;
                     default:
                         break;
@@ -87,9 +80,6 @@ public class Menu : MonoBehaviour
                 break;
             case "SixthLevelButton":
                 CheckLevel(4);
-                break;
-            case "SeventhLevelButton":
-                CheckLevel(5);
                 break;
             default:
                 print(button.tag + " is not a valid tag");

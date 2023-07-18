@@ -58,12 +58,11 @@ public class SaveState
         return nameOfPlayer;
     }
 
-    
-
+    //creating the list of levels
     private void InitializeListOfLevels()
     {
         listOfLevels = new List<Level>();
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
             listOfLevels.Add(new Level(i + 1));
         }

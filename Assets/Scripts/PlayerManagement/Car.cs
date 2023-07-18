@@ -141,6 +141,11 @@ public class Car : MonoBehaviour
         else return false;
     }
 
+    public void SetSpeed(float speed)
+    { 
+        this.speed = speed;
+    }
+
     public float GetSpeed()
     {
         return speed;
