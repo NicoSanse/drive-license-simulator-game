@@ -3,9 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 //this class gives the functionalities to the player
 //it is responsible for the score and for the level passing
+
+//todo: implement mistakes saving
+//they are to be written in the save state as they are committed
+//saveState.GetListOfLevels()[currentLevel.GetId() - 1].AddMistake(mistake);
+//il mistake sarà una stringa da generare in base a cosa succede
+
+//todo: gestire anche eliminazione errori e/o modifiche
+
 public class PlayerController : MonoBehaviour
 {
     private static PlayerController player;
@@ -59,6 +68,10 @@ public class PlayerController : MonoBehaviour
             GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[1].gameObject.SetActive(true);
         }
 
+        //showing scores, which is the same in case of loss and victory
+        GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<TMP_Text>(true)[4].gameObject.SetActive(true);
+        GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Button>(true)[2].gameObject.SetActive(true);
+
         StopCar();
         LevelFinished();
     }
@@ -72,7 +85,7 @@ public class PlayerController : MonoBehaviour
     //saving state and changing game state
     private void LevelFinished()
     {
-        saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1].SetScore(GetScore());
+        saveState.GetListOfLevels()[currentLevel.GetId() - 1].SetScore(score);
         saveManager.SetSaveState(saveState);
         saveManager.Save();
         gameManager.ChangeGameState(gameManager.GetCurrentGameState());

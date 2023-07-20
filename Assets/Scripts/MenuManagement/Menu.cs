@@ -58,6 +58,74 @@ public class Menu : MonoBehaviour
         }
     }
 
+    public void InfoAboutLevels(GameObject button)
+    {
+        switch (button.name)
+        {
+            case "InfoFirstLevel":
+                InfoAboutALevel(0);
+                break;
+            case "InfoSecondLevel":
+                InfoAboutALevel(1);
+                break;
+            case "InfoThirdLevel":
+                InfoAboutALevel(2);
+                break;
+            case "InfoFourthLevel":
+                InfoAboutALevel(3);
+                break;
+            case "InfoFifthLevel":
+                InfoAboutALevel(4);
+                break;
+            case "InfoSixthLevel":
+                InfoAboutALevel(5);
+                break;
+            default:
+                print(button.name + " is not a valid name");
+                break;
+        }
+    }
+
+    private void InfoAboutALevel(int id)
+    {
+        SetCurrentLevel(listOfLevels[id]);
+        gameManager.LoadScene("InfoAboutALevel");
+    }
+
+    public void CheckMistakes(GameObject button)
+    {
+        switch(button.name)
+        {
+            case "checkMistakesFirstLevel":
+                CheckMistakesLevel(0);
+                break;
+            case "checkMistakesSecondLevel":
+                CheckMistakesLevel(1);
+                break;
+            case "checkMistakesThirdLevel":
+                CheckMistakesLevel(2);
+                break;
+            case "checkMistakesFourthLevel":
+                CheckMistakesLevel(3);
+                break;
+            case "checkMistakesFifthLevel":
+                CheckMistakesLevel(4);
+                break;
+            case "checkMistakesSixthLevel":
+                CheckMistakesLevel(5);
+                break;
+            default:
+                print(button.name + " is not a valid name");
+                break;
+        }
+    }
+
+    private void CheckMistakesLevel(int id)
+    {
+        SetCurrentLevel(listOfLevels[id]);
+        gameManager.LoadScene("CheckMistakes");
+    }
+
 
     //finds the right level to be played and go check whether it can be played or not
     public void StartLevel(GameObject button) 

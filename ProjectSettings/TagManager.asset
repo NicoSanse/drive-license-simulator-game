@@ -27,6 +27,7 @@ TagManager:
   - CanvasEndOfLevel
   - GUICanvas
   - PlayerName
+  - Scores
   layers:
   - Default
   - TransparentFX

@@ -11,11 +11,15 @@ public class Level
     private bool passed;
     private int id;
     private int score;
+    private List<string> mistakes;
+    private string description;
     public Level(int id)
     {
         passed = false;
         this.id = id;
         score = 0;
+        mistakes = new List<string>();
+        description = "";
     }
 
     public void SetPassed(bool passed) 
@@ -47,4 +51,31 @@ public class Level
     {
         return score;
     }
+
+    public string GetDescription() 
+    {
+        return description;
+    }
+
+    public void SetDescription(string description) 
+    {
+        this.description = description;
+    }
+
+    public void AddMistake(string mistake) 
+    {
+        mistakes.Add(mistake);
+    }
+
+    public List<string> GetMistakes() 
+    {
+        return mistakes;
+    }
+
+    public void ResetMistakes() 
+    {
+        mistakes.Clear();
+    }
+
+
 }
