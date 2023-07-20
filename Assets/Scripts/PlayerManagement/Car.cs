@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//this class models the car with his informations
-//almost uncorrelated to MSVechicleControllerFree Class
+//this class models the car with his informations and its almost 
+//uncorrelated to MSVechicleControllerFree Class which models physics
 public class Car : MonoBehaviour
 {
     private static Car car;

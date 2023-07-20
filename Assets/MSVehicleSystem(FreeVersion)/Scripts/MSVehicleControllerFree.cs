@@ -1091,7 +1091,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
         }
         if (isBraking & !changinGearsAuto)
         {
-			//specifi command for braking in neutral gear
+			//specific command for braking in neutral gear
             if (currentGear == 0)
             {
 				ms_Rigidbody.AddForce(transform.forward * -25000);
@@ -1686,7 +1686,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
         }
         else
         {
-            currentGear = (int)gear;
+            currentGear = (int) gear;
         }
 	}
 	#endregion

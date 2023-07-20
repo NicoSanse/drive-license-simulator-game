@@ -288,12 +288,27 @@ PrefabInstance:
     - target: {fileID: 114810812262616942, guid: d4a7e1a08d504784ba863438fe3772d8,
         type: 3}
       propertyPath: _vehicleTorque.manualAdjustmentOfTorques.Array.data[0]
-      value: 1.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 114810812262616942, guid: d4a7e1a08d504784ba863438fe3772d8,
         type: 3}
       propertyPath: _vehicleTorque.manualAdjustmentOfTorques.Array.data[1]
-      value: 1.2
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 114810812262616942, guid: d4a7e1a08d504784ba863438fe3772d8,
+        type: 3}
+      propertyPath: _vehicleTorque.manualAdjustmentOfTorques.Array.data[2]
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 114810812262616942, guid: d4a7e1a08d504784ba863438fe3772d8,
+        type: 3}
+      propertyPath: _vehicleTorque.manualAdjustmentOfTorques.Array.data[3]
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114810812262616942, guid: d4a7e1a08d504784ba863438fe3772d8,
+        type: 3}
+      propertyPath: _vehicleTorque.manualAdjustmentOfTorques.Array.data[4]
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4a7e1a08d504784ba863438fe3772d8, type: 3}
@@ -1096,8 +1111,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -12846,8 +12861,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
