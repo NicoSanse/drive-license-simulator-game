@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanelBehaviour : MonoBehaviour
+//this class helps control the movement of the list of levels
+public class ListMovementBehaviour : MonoBehaviour
 {
-
-    //capire quali sono i valori migliori per questi due parametri
-
+    //these two values are not the same as the ones in the inspector
+    //but still can control the position of the content of the list
     public float maxUpperPosition = 550f;
-    public float minLowerPosition = -60f;
+    public float minLowerPosition = -80f;
+    
     void Start()
     {
         
