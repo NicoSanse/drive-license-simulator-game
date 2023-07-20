@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+//this class models the change gear panel
+//management of touches is necessary since the event trigger gets confused by multiple events
+
 public class ChangeGearPanelBehaviour : MonoBehaviour
 {
     private static ChangeGearPanelBehaviour changeGear;
@@ -23,6 +26,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     {
         changeGear = this;
     }
+
     void Start()
     {
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
@@ -35,23 +39,22 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     }
     
 
-    //triggered by GUIManager class, stores the coordinates of first
-    //touch of drag
+    //triggered by GUIManager class, stores the coordinates of first drag touch
     public void TakeFirstTouchCoordinates(PointerEventData eventData) 
     {
         firstTouchCoordinates = eventData.position;
     }
 
-    //triggered by GUIManager class, stores the coordinates of last
-    //touch of drag and starts ChangeGear method
+    //triggered by GUIManager class, stores the coordinates of last drag touch
+    //then changes the gear
     public void TakeLastTouchCoordinates(PointerEventData eventData) 
     {
         lastTouchCoordinates = eventData.position;
         ChangeGear();
     }
     
-    //triggered by GUIManager class, stores the coordinates of first click and starts 
-    //the coroutine that finds how long the user is keeping pressed the change panel
+    //triggered by GUIManager class, stores the coordinates of first click
+    //then finds the time the user is keeping pressed the change gear panel
     public void NeutralGear(PointerEventData eventData)
     {
         clickFirstTouchCoordinates = eventData.position;
@@ -65,11 +68,8 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         //}
     }
 
-    //triggered buy GUIManager class, stores the coordinates of last click and finds
-    //the distance between the clicks
-    //this is necessary since the event trigger gets confused by multiple events
-    //then stops the previous coroutine 
-    //in the end finds whether the user wants to set neutral gear or not
+    //triggered buy GUIManager class, stores the coordinates of last click, finds
+    //the distance between the clicks and finds if the user wants to set neutral gear or not
     public void ReleseGearChangePanel(PointerEventData eventData)
     {
         //forse qua andrà aggiunto a tutta questa parte di codice la 
@@ -80,20 +80,19 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
 
         StopCoroutine(coroutineTimeForNeutralGear);
 
+        //if distance is too little, it won't be considered as dragging, but as clicking
         if(distance < 5){
+            //the user must keep pressed the change gear panel for about 1s
             if (timeForNeutralGear > 0.95f) 
             {
                 clutch.SetGear(ClutchBehaviour.Gear.GearN);
                 car.NotifyGearChanged();
             }
-            //fare il resize, preferibilmente nel secondo modo
             clutch.GetComponent<RectTransform>().localScale = new Vector3(0.1f, 0.3f, 1f);
-            //StartCoroutine(CommonBehaviours.ChangeScale(!clutch.IsClutchPressed(), clutch.GetComponent<RectTransform>()));
         }
     }
 
-    //makes the alpha value equal to 100 if the clutch is not pressed
-    //and to 255 if the clutch is pressed
+    //makes the image half-transparent if the clutch is not pressed
     private void ChangeAlphaValue()
     {
         Color color = this.GetComponent<Image>().color;
@@ -108,7 +107,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         this.GetComponent<Image>().color = color;
     }
 
-    //finds how long the user is keeping pressed the change panel
+    //measures the time the user is keeping pressed the change gear panel
     private IEnumerator TimeForNeutralGear()
     {
         timeForNeutralGear = 0f;
@@ -127,8 +126,8 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     {
         direction = lastTouchCoordinates - firstTouchCoordinates;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        angle += 360; // Garantisci che l'angolo sia positivo
-        angle %= 360; // Riduci l'angolo a un valore tra 0 e 359
+        angle += 360; 
+        angle %= 360; 
 
         if (angle >= 337.5f || angle < 22.5f)
             directionDragged = "right";
@@ -148,7 +147,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
             directionDragged = "down-right";
     }
 
-    //according to the current gear sets the new gear
+    //according to the current gear and direction of drag sets the new gear
     private void ChangeGear()
     {
         //if (clutch.IsClutchPressed())

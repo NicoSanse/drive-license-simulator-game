@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//this is the GameManager class and models the flow of the game
+//there are five states: welcome, menu, playing, level-paused and level-end
 public class GameManager : MonoBehaviour
 {
     private static GameManager gameManager;
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour
     private PlayerController player;
     private PauseButtonBehaviour pauseButton;
     private PauseScreenBehaviour pauseScreen;
+
     void Awake() 
     { 
         gameManager = this;
@@ -46,6 +49,7 @@ public class GameManager : MonoBehaviour
         currentGameState = state;
     }
 
+    //given the current game state, each state is manages separately
     public void ChangeGameState(GameState state, int sceneIndex = 0) 
     { 
         switch (state)
@@ -71,18 +75,21 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //from welcome you can only go to menu
     private void HandleWelcomeState()
     {
         SetGameState(GameState.Menu);
         LoadScene("Menu");
     }
 
+    //from menu you can only go to playing (given the level)
     private void HandleMenuState(int sceneIndex)
     { 
         SetGameState(GameState.Playing);
         LoadScene(sceneIndex);
     }
 
+    //while playing you can pause the level or finish it
     private void HandlePlayingState()
     {
         if (pauseButton.WasPauseButtonClicked())
@@ -95,6 +102,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //when you are on pause, you can either quit the level 
+    //or keep playing it again (both if you are resuming or restarting it)
     private void HandleLevelPausedState(int sceneIndex)
     {
         if(pauseScreen.ClickedOnQuit())
@@ -113,6 +122,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //when you finish a level you can just go back to the menu
     private void HandleEndLevelState()
     { 
         SetGameState(GameState.Menu);

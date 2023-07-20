@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//this class models the high beam
 public class HighBeamBehaviour : MonoBehaviour
 {
     [SerializeField] private Light highBeamLightLeft;
@@ -63,6 +64,7 @@ public class HighBeamBehaviour : MonoBehaviour
         //if the car is on you can turn on lights
         if (car.IsOn())
         {
+            //if low beam is on, turn it off
             if(lowBeam.IsLowBeamOn())
             {
                 lowBeam.TurnLowBeamOnOrOff();

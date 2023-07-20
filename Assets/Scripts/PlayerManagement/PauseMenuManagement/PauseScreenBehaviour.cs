@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//this class gives the functionalities to the pause screen
 public class PauseScreenBehaviour : MonoBehaviour
 {
     private Menu menu;
@@ -30,6 +31,7 @@ public class PauseScreenBehaviour : MonoBehaviour
         
     }
 
+    //allows to resume the level
     public void Resume()
     {
         MSSceneControllerFree.mSSceneControllerFree.SetPause(false);
@@ -37,6 +39,7 @@ public class PauseScreenBehaviour : MonoBehaviour
         pauseScreen.SetActive(false);
     }
 
+    //allows to restart the level
     public void Restart()
     {
         restarting = true;
@@ -44,6 +47,7 @@ public class PauseScreenBehaviour : MonoBehaviour
         gameManager.ChangeGameState(gameManager.GetCurrentGameState(), currentLevel + 1);
     }
 
+    //allows to quit the level
     public void Quit()
     {
         quitting = true;

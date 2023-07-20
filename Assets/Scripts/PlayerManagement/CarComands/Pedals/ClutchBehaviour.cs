@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+//this class models the clutch
 public class ClutchBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject loadingBar;
@@ -52,7 +53,8 @@ public class ClutchBehaviour : MonoBehaviour
         clutchPressed = clutch;
     }
 
-    //triggered by GUIManager class, starts the coroutine to decrease the scale
+    //triggered by GUIManager class, starts the coroutine 
+    //to decrease the scale of the clutch image
     public void ClutchIsPressed()
     {
         SetClutchPressed(true);
@@ -60,15 +62,15 @@ public class ClutchBehaviour : MonoBehaviour
     }
 
     //triggered by ChangeGearPanelBehaviour class, starts the coroutine
-    //to increase the value of the bar and the scale of the clutch
+    //to increase the value of the releasing bar and the scale of the clutch image
     public void GearHasBeenChanged() 
     {
         loadingBar.SetActive(true);
         coroutineLoadBarAndChangeScale = StartCoroutine(LoadBarAndChangeScale(FindTimeForChangeTheGear(currentGear), GetComponent<RectTransform>()));
     }
 
-    //triggered by GUIManger class, stops the coroutine and checks if the clutch was released
-    //in a proper time
+    //triggered by GUIManger class, stops the coroutine started
+    //earlier and checks if the clutch was released in a proper time
     public void ClutchIsReleased()
     {
         if (coroutineLoadBarAndChangeScale != null)

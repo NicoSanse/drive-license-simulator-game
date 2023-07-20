@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-
+//this class gives functionalities to the welcome scene
 public class WelcomeScene : MonoBehaviour
 {
     [SerializeField] Image firstWelcomePanel;
@@ -26,11 +26,8 @@ public class WelcomeScene : MonoBehaviour
         
     }
 
-    public void GoToMenu()
-    {
-        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
-    }
-
+    //stores the player name
+    //this is called only once at first access
     public void GetPlayerName()
     { 
         playerName = GameObject.FindWithTag("PlayerName").GetComponent<TMP_Text>().text;
@@ -53,6 +50,7 @@ public class WelcomeScene : MonoBehaviour
         }
     }
 
+    //creates the save state with the player name
     private void CreateSaveState()
     {
         saveState = new SaveState(playerName);
@@ -60,6 +58,10 @@ public class WelcomeScene : MonoBehaviour
         saveManager.Save();
     }
 
+    public void GoToMenu()
+    {
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState());
+    }
 
     public void ExitGame()
     {

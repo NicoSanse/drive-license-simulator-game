@@ -19,6 +19,7 @@ public class LeftArrowBehaviour : MonoBehaviour
     {
         leftArrow = this;
     }
+    
     void Start()
     {
         leftArrowOn = false;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//this class models the car with his informations
+//almost uncorrelated to MSVechicleControllerFree Class
 public class Car : MonoBehaviour
 {
     private static Car car;
@@ -56,6 +58,7 @@ public class Car : MonoBehaviour
         Move();
     }
 
+    //records the speed and RPM of the car
     private void Move()
     {
         if (currentState == State.On)
@@ -65,6 +68,7 @@ public class Car : MonoBehaviour
         speed = GetComponent<Rigidbody>().velocity.magnitude * 3.6f;
     }
 
+    //turns off all the lights and sets to zero all the rest
     public void Stop()
     {
         RPM = 0f;
@@ -78,6 +82,7 @@ public class Car : MonoBehaviour
         rightArrow.SetRightArrowOff();
     }
 
+    //turns off the car
     public void Off()
     {
         Stop();
@@ -85,18 +90,21 @@ public class Car : MonoBehaviour
         currentState = State.Off;
     }
 
+    //turns on the car
     public void On()
     { 
         gear = clutch.GetCurrentGear();
         currentState = State.On;
     }
 
+    //sets the gear
     public void NotifyGearChanged()
     {
         gear = clutch.GetCurrentGear();
         print("Gear changed to " + gear);
     }
 
+    //calculates the RPM of the car
     private float CalculateRPM() 
     {
         float tempRPM = 0;
@@ -123,19 +131,6 @@ public class Car : MonoBehaviour
         return Torque;
     }
 
-    private void GettingInstances()
-    {
-        leftArrow = LeftArrowBehaviour.GetLeftArrowBehaviourInstance();
-        rightArrow = RightArrowBehaviour.GetRightArrowBehaviourInstance();
-        highBeam = HighBeamBehaviour.GetHighBeamBehaviourInstance();
-        lowBeam = LowBeamBehaviour.GetLowBeamBehaviourInstance();
-        accelerator = AccelerationBehaviour.GetAccelerationBehaviourInstance();
-        brake = BrakeBehaviour.GetBrakeBehaviourInstance();
-        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
-    }
-
-
-
     public bool IsOn()
     {
         if (currentState == State.On) return true;
@@ -161,10 +156,22 @@ public class Car : MonoBehaviour
     {
         return gear;
     }
+    
     public void SetState(bool state)
     {
         if(state == true) currentState = State.On;
         else currentState = State.Off;
+    }
+    
+    private void GettingInstances()
+    {
+        leftArrow = LeftArrowBehaviour.GetLeftArrowBehaviourInstance();
+        rightArrow = RightArrowBehaviour.GetRightArrowBehaviourInstance();
+        highBeam = HighBeamBehaviour.GetHighBeamBehaviourInstance();
+        lowBeam = LowBeamBehaviour.GetLowBeamBehaviourInstance();
+        accelerator = AccelerationBehaviour.GetAccelerationBehaviourInstance();
+        brake = BrakeBehaviour.GetBrakeBehaviourInstance();
+        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
     }
 
     public static Car GetCarInstance()

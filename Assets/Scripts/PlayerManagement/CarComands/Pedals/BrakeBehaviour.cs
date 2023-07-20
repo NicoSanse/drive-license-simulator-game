@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//this class models the brake pedal
 public class BrakeBehaviour : MonoBehaviour
 {
     [SerializeField] private Light brakeLeftLight;
@@ -31,6 +32,7 @@ public class BrakeBehaviour : MonoBehaviour
         BrakesLight();
     }
 
+    //turns the brake lights on if the car is on and the brake is pressed
     private void BrakesLight()
     {
         if (car.IsOn())
@@ -59,20 +61,19 @@ public class BrakeBehaviour : MonoBehaviour
         return deceleration;
     }
 
-    //triggered by GUIManager class, starts the coroutine to 
-    //increase the decelerationb value
+    //triggered by GUIManager class when the brake button is pressed
     public void BrakeIsPressed() 
     {
         brakePressed = true;
     }
 
-    //triggered by GUIManager class, stops the coroutine
+    //triggered by GUIManager class when the brake button is released
     public void BrakeIsReleased() 
     {
         brakePressed = false;
     }
 
-    //increases(decreases actually) the deceleration value
+    //increases the deceleration value
     private void Decelerate() 
     {
         if (brakePressed)

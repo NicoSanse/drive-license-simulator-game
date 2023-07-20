@@ -6,6 +6,7 @@ using UnityEngine;
 public class CurrentGearImageBehaviour : MonoBehaviour
 {
     private ClutchBehaviour clutch;
+    private ClutchBehaviour.Gear currentGear;
     void Start()
     {
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
@@ -16,11 +17,11 @@ public class CurrentGearImageBehaviour : MonoBehaviour
         FindLocation();
     }
     
-    //locates the red circle on the current gear. for some reason the localPosition is different
+    //locates the red circle on the current gear. For some reason the localPosition is different
     //than inside the editor
     void FindLocation()
-    { 
-        ClutchBehaviour.Gear currentGear = clutch.GetCurrentGear();
+    {
+        currentGear = clutch.GetCurrentGear();
         RectTransform rectTransform = GetComponent<RectTransform>();
 
         if (currentGear == ClutchBehaviour.Gear.Gear1) rectTransform.localPosition = new Vector3(-130, 120, 0);

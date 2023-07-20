@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+//this class gives the functionalities to the player
+//it is responsible for the score and for the level passing
 public class PlayerController : MonoBehaviour
 {
     private static PlayerController player;

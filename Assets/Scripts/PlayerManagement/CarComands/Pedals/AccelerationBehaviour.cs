@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//this class models the accelerator
 public class AccelerationBehaviour : MonoBehaviour
 {
     [SerializeField] Light retroLeftLight;
@@ -33,6 +34,7 @@ public class AccelerationBehaviour : MonoBehaviour
         RetroLights();
     }
 
+    //turns the retro lights on if the car is on and the gear is R
     private void RetroLights()
     {
         if (car.IsOn() && clutch.GetCurrentGear() == ClutchBehaviour.Gear.GearR && acceleratorPressed)
@@ -67,14 +69,13 @@ public class AccelerationBehaviour : MonoBehaviour
         return acceleratorPressed;
     }
 
-    //triggered by GUIManager class, starts the coroutine to increase the 
-    //acceleration value
+    //triggered by GUIManager class when pressing the accelerator button
     public void AcceleratorIsPressed() 
     {
         acceleratorPressed = true;
     }
 
-    //triggered by GUIManager class, stops the coroutine
+    //triggered by GUIManager class when releasing the accelerator button
     public void AcceleratorIsReleased()
     {
         acceleratorPressed = false;
