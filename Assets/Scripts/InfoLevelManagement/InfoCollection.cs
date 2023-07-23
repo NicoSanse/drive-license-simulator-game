@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class InfoCollection : MonoBehaviour
 {
     private static InfoCollection infoCollection;
+    private GameManager gameManager;
     private Menu menu;
     private Level selectedLevel;
     private string description;
@@ -18,6 +18,7 @@ public class InfoCollection : MonoBehaviour
     void Start()
     {
         menu = Menu.GetMenuInstance();
+        gameManager = GameManager.GetGameManagerInstance();
         selectedLevel = menu.GetCurrentLevel();
         description = selectedLevel.GetDescription();
     }
@@ -26,9 +27,10 @@ public class InfoCollection : MonoBehaviour
     {
         
     }
+    
     public void BackToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState(), 1);
     }
 
     public Level GetSelectedLevel()

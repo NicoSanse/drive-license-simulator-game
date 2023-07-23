@@ -22,12 +22,11 @@ TagManager:
   - rilascioFrizione
   - PauseScreen
   - GUI
-  - LevelLostPanel
-  - LevelWonPanel
   - CanvasEndOfLevel
   - GUICanvas
   - PlayerName
   - Scores
+  - LevelWonPanel
   layers:
   - Default
   - TransparentFX

@@ -82,10 +82,19 @@ public class GameManager : MonoBehaviour
         LoadScene("Menu");
     }
 
-    //from menu you can only go to playing (given the level)
+    //from menu you can go to playing or to menu state again
     private void HandleMenuState(int sceneIndex)
-    { 
-        SetGameState(GameState.Playing);
+    {
+        if(sceneIndex == 1)
+        {
+            //this is unnecessary since if sceneIndex is 1, you are already in the menu
+            SetGameState(GameState.Menu);
+        }
+        else
+        {
+            SetGameState(GameState.Playing);
+        }
+
         LoadScene(sceneIndex);
     }
 
@@ -103,7 +112,7 @@ public class GameManager : MonoBehaviour
     }
 
     //when you are on pause, you can either quit the level 
-    //or keep playing it again (both if you are resuming or restarting it)
+    //or back playing it again (both if you are resuming or restarting it)
     private void HandleLevelPausedState(int sceneIndex)
     {
         if(pauseScreen.ClickedOnQuit())

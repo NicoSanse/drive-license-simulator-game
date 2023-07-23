@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 //this class collects the mistakes the user made 
-//it can happen in two ways:
-//if called from end of level, it gets the id of the level from the menu
-//otherwise it gets the id of the level from the inspector
+//the scene can be called from the menu or at the end of a level
 public class MistakesCollection : MonoBehaviour
 {
     private static MistakesCollection mistakesCollection;
@@ -39,8 +36,7 @@ public class MistakesCollection : MonoBehaviour
 
     public void BackToMenu()
     {
-        gameManager.SetGameState(GameManager.GameState.Menu);
-        SceneManager.LoadScene("Menu");
+        gameManager.ChangeGameState(gameManager.GetCurrentGameState(), 1);
     }
 
     public Level GetSelectedLevel()

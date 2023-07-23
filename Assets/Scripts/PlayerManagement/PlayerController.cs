@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -52,25 +51,22 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         GameObject.FindGameObjectWithTag("GUI").SetActive(false);
+        GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
 
         //in this case the player has won
         if (collision.gameObject.tag == "Goal")
         {
-            //activating the green panel and setting the level as passed
+            //setting the level as passed
             SetScore(100);
-            GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
             saveState.GetListOfLevels()[currentLevel.GetId() - 1].SetPassed(true);
         }
         else
         {
-            //activating the red panel
+            //colouring the panel red
             SetScore(1);
-            GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[1].gameObject.SetActive(true);
+            GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<TMP_Text>()[0].text = "You Lose!";
+            GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>()[0].color = new Color(192f, 64f, 69f, 206f);
         }
-
-        //showing scores, which is the same in case of loss and victory
-        GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<TMP_Text>(true)[4].gameObject.SetActive(true);
-        GameObject.FindWithTag("CanvasEndOfLevel").GetComponentsInChildren<Button>(true)[2].gameObject.SetActive(true);
 
         StopCar();
         LevelFinished();
