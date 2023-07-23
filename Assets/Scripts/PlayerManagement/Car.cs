@@ -34,7 +34,6 @@ public class Car : MonoBehaviour
 
     void Update()
     {
-        print(gear);
         CalculateSpeed();
     }
 

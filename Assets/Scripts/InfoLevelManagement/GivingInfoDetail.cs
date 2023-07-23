@@ -31,7 +31,6 @@ public class GivingInfoDetail : MonoBehaviour
 
     private void WriteDescription()
     {
-        description.text = "";
-        //to continue
+        description.text = infoCollection.GetSelectedLevel().GetDescription();
     }
 }

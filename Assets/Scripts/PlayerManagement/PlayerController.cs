@@ -47,26 +47,28 @@ public class PlayerController : MonoBehaviour
     }    
 
     //once the player enters the goal, the level is passed
-    //TODO: implement the control on scores which is still to be created
-    void OnTriggerEnter(Collider collision)
+    void OnTriggerEnter(Collider collider)
     {
         GameObject.FindGameObjectWithTag("GUI").SetActive(false);
         GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
 
-        //in this case the player has won
-        if (collision.gameObject.tag == "Goal")
-        {
-            //setting the level as passed
-            SetScore(100);
-            saveState.GetListOfLevels()[currentLevel.GetId() - 1].SetPassed(true);
-        }
-        else
-        {
-            //colouring the panel red
-            SetScore(1);
-            GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<TMP_Text>()[0].text = "You Lose!";
-            GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>()[0].color = new Color(192f, 64f, 69f, 206f);
-        }
+        //setting the level as passed
+        SetScore(100);
+        saveState.GetListOfLevels()[currentLevel.GetId() - 1].SetPassed(true);
+
+        StopCar();
+        LevelFinished();
+    }
+
+    //if the player hits anything, the level is lost
+    void OnCollisionEnter(Collision collision)
+    {
+        GameObject.FindGameObjectWithTag("GUI").SetActive(false);
+        GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
+
+        SetScore(1);
+        GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<TMP_Text>()[0].text = "You Lose!";
+        GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>()[0].color = new Color(192/255f, 64/255f, 69/255f, 206/255f);
 
         StopCar();
         LevelFinished();

@@ -310,9 +310,6 @@
     <Reference Include="Unity.VisualScripting.YamlDotNet">
         <HintPath>C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="EasyRoads3Dv3Editor">
-        <HintPath>C:\Users\nicos\drive license simulator game\Assets\EasyRoads3D\Editor\EasyRoads3Dv3Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
         <HintPath>C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
     </Reference>
@@ -327,12 +324,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
         <HintPath>C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="EasyRoads3Dv3">
-        <HintPath>C:\Users\nicos\drive license simulator game\Assets\EasyRoads3D\lib\EasyRoads3Dv3.dll</HintPath>
-    </Reference>
-    <Reference Include="DelaunayER">
-        <HintPath>C:\Users\nicos\drive license simulator game\Assets\EasyRoads3D\lib\DelaunayER.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
         <HintPath>C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>

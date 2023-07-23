@@ -65,9 +65,12 @@ public class SaveState
     private void InitializeListOfLevels()
     {
         listOfLevels = new List<Level>();
-        for (int i = 0; i < 5; i++)
+        LevelDescriptions levelDescriptions = new LevelDescriptions();
+        for (int i = 0; i <= 5; i++)
         {
-            listOfLevels.Add(new Level(i + 1));
+            Level tempLevel = new Level(i + 1);
+            tempLevel.SetDescription(levelDescriptions.descriptions[i]);
+            listOfLevels.Add(tempLevel);
         }
     }
 }
