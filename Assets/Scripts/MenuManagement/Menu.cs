@@ -88,7 +88,6 @@ public class Menu : MonoBehaviour
 
     private void InfoAboutALevel(int id)
     {
-        print("ID: " + id);
         SetCurrentLevel(listOfLevels[id]);
         gameManager.LoadScene("InfoAboutALevel");
     }
