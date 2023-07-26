@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     private Level currentLevel;
     private Car car;
     private int score;
+    private GameObject canvasEndOfLevel;
+    private GameObject GUI;
+    private int timesCollisionEnterCalled;
+    private int timesTriggerEnterCalled;
 
     void Awake()
     {
@@ -39,6 +43,10 @@ public class PlayerController : MonoBehaviour
         currentLevel = menu.GetCurrentLevel();
         car = Car.GetCarInstance();
         score = 0;
+        canvasEndOfLevel = GameObject.FindGameObjectWithTag("CanvasEndOfLevel");
+        GUI = GameObject.FindGameObjectWithTag("GUI");
+        timesCollisionEnterCalled = 0;
+        timesTriggerEnterCalled = 0;
     }
 
     void Update()
@@ -49,29 +57,37 @@ public class PlayerController : MonoBehaviour
     //once the player enters the goal, the level is passed
     void OnTriggerEnter(Collider collider)
     {
-        GameObject.FindGameObjectWithTag("GUI").SetActive(false);
-        GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
+        if (timesTriggerEnterCalled == 0)
+        {
+            GUI.SetActive(false);
+            canvasEndOfLevel.GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
 
-        //setting the level as passed
-        SetScore(100);
-        saveState.GetListOfLevels()[currentLevel.GetId() - 1].SetPassed(true);
+            //setting the level as passed
+            SetScore(100);
+            saveState.GetListOfLevels()[currentLevel.GetId() - 1].SetPassed(true);
 
-        StopCar();
-        LevelFinished();
+            StopCar();
+            LevelFinished();
+            timesTriggerEnterCalled++;
+        }
     }
 
     //if the player hits anything, the level is lost
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter()
     {
-        GameObject.FindGameObjectWithTag("GUI").SetActive(false);
-        GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
+        if (timesCollisionEnterCalled == 0)
+        {
+            GUI.SetActive(false);
+            canvasEndOfLevel.GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
+            canvasEndOfLevel.GetComponentsInChildren<TMP_Text>()[0].text = "You Lose!";
+            canvasEndOfLevel.GetComponentsInChildren<Image>()[0].color = new Color(192 / 255f, 64 / 255f, 69 / 255f, 206 / 255f);
 
-        SetScore(1);
-        GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<TMP_Text>()[0].text = "You Lose!";
-        GameObject.FindGameObjectWithTag("CanvasEndOfLevel").GetComponentsInChildren<Image>()[0].color = new Color(192/255f, 64/255f, 69/255f, 206/255f);
+            SetScore(1);
 
-        StopCar();
-        LevelFinished();
+            StopCar();
+            LevelFinished();
+            timesCollisionEnterCalled++;
+        }
     }
 
     private void StopCar()

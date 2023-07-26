@@ -19,13 +19,13 @@ public class LevelDescriptions
 
     private string FirstDescription()
     {
-        description = " - horizontal signage \n - vertical signage \n";
+        description = " - horizontal signage \n - vertical signage \n - intersections \n";
         return description;
     }
 
     private string SecondDescription()
     {
-        description += " - roundabouts \n - intersections \n - traffic lights \n";
+        description += " - roundabouts \n - traffic lights \n";
         return description;
     }
 
