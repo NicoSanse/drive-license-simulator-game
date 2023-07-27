@@ -24,10 +24,12 @@ public class PlayerController : MonoBehaviour
     private Level currentLevel;
     private Car car;
     private int score;
+    private ParticlesManagement particles;
     private GameObject canvasEndOfLevel;
     private GameObject GUI;
     private int timesCollisionEnterCalled;
     private int timesTriggerEnterCalled;
+    private bool onTheRoad;
 
     void Awake()
     {
@@ -36,22 +38,13 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameManager.GetGameManagerInstance();
-        saveManager = SaveManager.GetSaveManagerInstance();
-        saveState = saveManager.GetSaveState();
-        menu = Menu.GetMenuInstance();
-        currentLevel = menu.GetCurrentLevel();
-        car = Car.GetCarInstance();
-        score = 0;
-        canvasEndOfLevel = GameObject.FindGameObjectWithTag("CanvasEndOfLevel");
-        GUI = GameObject.FindGameObjectWithTag("GUI");
-        timesCollisionEnterCalled = 0;
-        timesTriggerEnterCalled = 0;
+        Initialization();
     }
 
     void Update()
     {
-
+        PlayerOnTheRoad();
+        SafetyDistance();
     }    
 
     //once the player enters the goal, the level is passed
@@ -90,6 +83,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //determine if the player is on the road
+    private void PlayerOnTheRoad()
+    { 
+        onTheRoad = Physics.Raycast(transform.position, Vector3.down, 1f, LayerMask.GetMask("Road"));
+        if(!onTheRoad)
+        {
+            print("ooooo");
+        }
+    }
+
+    //determine if the player is at a safe distance from the car in front of him
+    private void SafetyDistance()
+    {
+        float safeDistance = (car.GetSpeed() * 1000)/(3600);
+        bool isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, safeDistance, LayerMask.GetMask("Car")));
+
+        if (!isDistanceSafe)
+        {
+            print("aaaaa");
+        }
+
+    }
+
     private void StopCar()
     {
         GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -103,6 +119,22 @@ public class PlayerController : MonoBehaviour
         saveManager.SetSaveState(saveState);
         saveManager.Save();
         gameManager.ChangeGameState(gameManager.GetCurrentGameState());
+    }
+
+    private void Initialization()
+    {
+        gameManager = GameManager.GetGameManagerInstance();
+        saveManager = SaveManager.GetSaveManagerInstance();
+        saveState = saveManager.GetSaveState();
+        menu = Menu.GetMenuInstance();
+        currentLevel = menu.GetCurrentLevel();
+        car = Car.GetCarInstance();
+        score = 0;
+        particles = ParticlesManagement.getParticlesInstance();
+        canvasEndOfLevel = GameObject.FindGameObjectWithTag("CanvasEndOfLevel");
+        GUI = GameObject.FindGameObjectWithTag("GUI");
+        timesCollisionEnterCalled = 0;
+        timesTriggerEnterCalled = 0;
     }
 
     public int GetScore()
