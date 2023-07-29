@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class OtherCarsBehaviour : MonoBehaviour
 {
+    private List<Vector3> waypoints;
     private Vector3 destination;
-    private OtherCarsPath path;
+    private int currentWaypointIndex;
 
     void Start()
-    {
-        path = OtherCarsPath.GetOtherCarsPathInstance();
-        destination = path.GetCurrentWaypoint();
+    {            
+        waypoints = OtherCarsPath.GetWaypoints();
+        destination = FindNearestWayPoint();
     }
 
     void Update()
     {
-        destination = path.GetCurrentWaypoint();
+        destination = waypoints[currentWaypointIndex];
         GoToDestination();
     }
 
@@ -23,9 +24,36 @@ public class OtherCarsBehaviour : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, destination);
         
-        if (distance > 0) 
-        { 
+        if (distance > 0)
+        {
+            Quaternion rotation = Quaternion.LookRotation(destination - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.1f);
             transform.position = Vector3.MoveTowards(transform.position, destination, 0.1f);
         }
+        else
+        {
+            currentWaypointIndex++;
+            if (currentWaypointIndex >= waypoints.Count)
+            {
+                currentWaypointIndex = 0;
+            }
+        }
+    }
+
+
+    private Vector3 FindNearestWayPoint()
+    {
+        float distance = Mathf.Infinity;
+        currentWaypointIndex = 0;
+        for (int i = 0; i < waypoints.Count; i++)
+        {
+            float tempDistance = Vector3.Distance(transform.position, waypoints[i]);
+            if (tempDistance < distance)
+            {
+                distance = tempDistance;
+                currentWaypointIndex = i;
+            }
+        }
+        return waypoints[currentWaypointIndex];
     }
 }
