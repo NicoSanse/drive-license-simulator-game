@@ -24,16 +24,12 @@ public class OtherCarsPath : MonoBehaviour
 
     private void GenerateWaypoints()
     {
-        Vector3 tempWayPoint = new Vector3(307, 0, 404);
-        Vector3 tempWayPoint2 = new Vector3(309, 0, 417);
-        Vector3 tempWayPoint3 = new Vector3(312, 0, 428);
-        Vector3 tempWayPoint4 = new Vector3(326, 0, 430);
-        Vector3 tempWayPoint5 = new Vector3(360, 0, 430);
+        Vector3 tempWayPoint = new Vector3(307, 1, 420);
+        Vector3 tempWayPoint2 = new Vector3(320, 1, 431);
+        Vector3 tempWayPoint3 = new Vector3(460, 1, 431);
         waypoints.Add(tempWayPoint);
         waypoints.Add(tempWayPoint2);
         waypoints.Add(tempWayPoint3);
-        waypoints.Add(tempWayPoint4);
-        waypoints.Add(tempWayPoint5);
     }
 
 

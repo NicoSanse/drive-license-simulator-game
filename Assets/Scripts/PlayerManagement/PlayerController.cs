@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         onTheRoad = Physics.Raycast(transform.position, Vector3.down, 1f, LayerMask.GetMask("Road"));
         if(!onTheRoad)
         {
-            print("ooooo");
+            //lose points
         }
     }
 
@@ -97,11 +97,11 @@ public class PlayerController : MonoBehaviour
     private void SafetyDistance()
     {
         float safeDistance = (car.GetSpeed() * 1000)/(3600);
-        bool isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, safeDistance, LayerMask.GetMask("Car")));
+        bool isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, safeDistance, LayerMask.GetMask("OtherCars")));
 
         if (!isDistanceSafe)
         {
-            print("aaaaa");
+            //lose points
         }
 
     }

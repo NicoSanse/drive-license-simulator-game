@@ -4,39 +4,71 @@ using UnityEngine;
 
 public class OtherCarsBehaviour : MonoBehaviour
 {
+    //list of waypoints
     private List<Vector3> waypoints;
+
+    //current destination the car is aheaded to in world coordinates
     private Vector3 destination;
+
+    //direction the car is headed to, it's a vector
+    private Vector3 direction;
+
+    //index of the list containing waypoints
     private int currentWaypointIndex;
+
+    //speed of the car
+    private float speed = 30f;
+
+    //not in km/h!!
+    private float turningSpeed = 170f;
 
     void Start()
     {            
         waypoints = OtherCarsPath.GetWaypoints();
         destination = FindNearestWayPoint();
+        direction = (destination - transform.position).normalized;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        destination = waypoints[currentWaypointIndex];
         GoToDestination();
+        SafetyDistance();
     }
 
     private void GoToDestination()
     {
-        float distance = Vector3.Distance(transform.position, destination);
-        
-        if (distance > 0)
+        direction = destination - transform.position;
+
+        if (Vector3.Distance(transform.position, destination) > 1f)
         {
-            Quaternion rotation = Quaternion.LookRotation(destination - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.1f);
-            transform.position = Vector3.MoveTowards(transform.position, destination, 0.1f);
+            transform.Translate(speed * Vector3.forward * Time.deltaTime);
+
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, turningSpeed * Time.deltaTime);
         }
-        else
+        else 
         {
             currentWaypointIndex++;
             if (currentWaypointIndex >= waypoints.Count)
             {
                 currentWaypointIndex = 0;
             }
+            destination = waypoints[currentWaypointIndex];
+        }
+    }
+
+    private void SafetyDistance()
+    {
+        float safeDistance = (speed * 1000)/(3600);
+        bool isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, safeDistance, LayerMask.GetMask("OtherCars")));
+
+        if (!isDistanceSafe)
+        {
+            speed -= 0.01f;
+        }
+        else if (speed <= 30f)
+        {
+            speed += 0.01f;
         }
     }
 
