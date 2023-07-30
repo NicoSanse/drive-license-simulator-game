@@ -14,18 +14,24 @@ public class OtherCarsBehaviour : MonoBehaviour
     private Vector3 direction;
 
     //index of the list containing waypoints
-    private int currentWaypointIndex;
-
+    [SerializeField] private int currentWaypointIndex;
     //speed of the car
-    private float speed = 30f;
+    private float speed = 50f;
 
     //not in km/h!!
     private float turningSpeed = 170f;
+    int randomSeedPath;
 
     void Start()
-    {            
-        waypoints = OtherCarsPath.GetWaypoints();
-        destination = FindNearestWayPoint();
+    {
+        randomSeedPath = Random.Range(0, 2);
+
+        print("randomSeedPath: " + randomSeedPath);
+
+        randomSeedPath = 0;
+
+        waypoints = OtherCarsPath.GetAPath(randomSeedPath);
+        destination = waypoints[currentWaypointIndex];
         direction = (destination - transform.position).normalized;
     }
 
@@ -35,14 +41,17 @@ public class OtherCarsBehaviour : MonoBehaviour
         SafetyDistance();
     }
 
+    //main function that moves the other cars
     private void GoToDestination()
     {
         direction = destination - transform.position;
 
         if (Vector3.Distance(transform.position, destination) > 1f)
         {
+            AdjustTravelSpeed();
             transform.Translate(speed * Vector3.forward * Time.deltaTime);
 
+            AdjustTurningSpeed();
             Quaternion rotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, turningSpeed * Time.deltaTime);
         }
@@ -57,6 +66,7 @@ public class OtherCarsBehaviour : MonoBehaviour
         }
     }
 
+    //keeps each car correctly distanced from the car ahead
     private void SafetyDistance()
     {
         float safeDistance = (speed * 1000)/(3600);
@@ -72,20 +82,54 @@ public class OtherCarsBehaviour : MonoBehaviour
         }
     }
 
-
-    private Vector3 FindNearestWayPoint()
+    //this finds the value that best fits turningSpeed variable based on empirical tests
+    private void AdjustTurningSpeed()
     {
-        float distance = Mathf.Infinity;
-        currentWaypointIndex = 0;
-        for (int i = 0; i < waypoints.Count; i++)
+        if (randomSeedPath == 1)
         {
-            float tempDistance = Vector3.Distance(transform.position, waypoints[i]);
-            if (tempDistance < distance)
+            if (currentWaypointIndex == 5)
             {
-                distance = tempDistance;
-                currentWaypointIndex = i;
+                turningSpeed = 65f;
+            }
+            else
+            {
+                turningSpeed = 170f;
             }
         }
-        return waypoints[currentWaypointIndex];
+        else if (randomSeedPath == 0)
+        {
+            if (currentWaypointIndex == 3 || currentWaypointIndex == 6 || currentWaypointIndex == 8 || currentWaypointIndex == 9 )
+            {
+                turningSpeed = 90f;
+            }
+            else if (currentWaypointIndex == 10 || currentWaypointIndex == 12)
+            { 
+                turningSpeed = 100f;
+            }
+            else
+            {
+                turningSpeed = 170f;
+            }
+        }
     }
+
+    //sets an appropriate travel speed
+    private void AdjustTravelSpeed()
+    { 
+        if(Vector3.Distance(transform.position, destination) < 40)
+        {
+            while (speed > 30f)
+            {
+                speed -= 0.5f;
+            }
+        }
+        else
+        { 
+            while (speed < 50f)
+            {
+                speed += 0.01f;
+            }
+        }
+    }
+
 }
