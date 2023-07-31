@@ -17,7 +17,6 @@ public class OtherCarsBehaviour : MonoBehaviour
     [SerializeField] private int currentWaypointIndex;
     //speed of the car
     private float speed = 50f;
-
     //not in km/h!!
     private float turningSpeed = 170f;
     //manually set the path the car will follow
@@ -27,8 +26,6 @@ public class OtherCarsBehaviour : MonoBehaviour
     private Ray ray;
     private RaycastHit hitInfo;
     bool isRightSideFree;
-    private Coroutine accelerateCars;
-    private Coroutine decelerateCars;
     private bool onTheRoad;
 
     void Start()
@@ -38,7 +35,6 @@ public class OtherCarsBehaviour : MonoBehaviour
         direction = (destination - transform.position).normalized;
 
         rayCastDirection = transform.forward;
-        rayCastDirection.x += 0.3f;
         ray = new Ray(transform.position, rayCastDirection);
         isRightSideFree = true;
         onTheRoad = true;
@@ -47,6 +43,7 @@ public class OtherCarsBehaviour : MonoBehaviour
     void Update()
     {
         SelfDestroy();
+        CarOnTheRoad();
     }
 
     void FixedUpdate()
@@ -107,7 +104,7 @@ public class OtherCarsBehaviour : MonoBehaviour
     private void GiveTheWay()
     {
         isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 10f, LayerMask.GetMask("OtherCars")));
-        int index = 0;
+        int index = 2;
 
         while(index <= 10 && isRightSideFree)
         { 
@@ -116,23 +113,16 @@ public class OtherCarsBehaviour : MonoBehaviour
             ray = new Ray(transform.position, rayCastDirection);
             isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 10f, LayerMask.GetMask("OtherCars")));
             index++;
-
-            Debug.DrawRay(transform.position, rayCastDirection * 10f, Color.green);
         }
         rayCastDirection = transform.forward;
-        rayCastDirection.x += 0.3f;
 
         if (!isRightSideFree)
         {
-            //speed = 5;
-            //if (accelerateCars != null) StopCoroutine(accelerateCars);
-            decelerateCars = StartCoroutine(DecreaseSpeed(0));
+            speed = 5;
         }
         else
         {
-            //speed = 30f;
-            //if (decelerateCars != null) StopCoroutine(decelerateCars);
-            accelerateCars = StartCoroutine(IncrementSpeed());
+            speed = 30f;
         }
     }
 
@@ -177,6 +167,29 @@ public class OtherCarsBehaviour : MonoBehaviour
                 turningSpeed = 170f;
             }
         }
+        else if (seedPath == 6)
+        {
+            if (currentWaypointIndex == 9)
+            { 
+                turningSpeed = 90f;
+            }
+            else if (currentWaypointIndex == 13)
+            { 
+                turningSpeed = 100f;
+            }
+            else if (currentWaypointIndex == 15)
+            {
+                turningSpeed = 120f;
+            }
+            else if (currentWaypointIndex == 11 || currentWaypointIndex == 15)
+            {
+                turningSpeed = 75f;
+            }
+            else
+            {
+                turningSpeed = 170f;
+            }
+        }
     }
 
     //sets an appropriate travel speed
@@ -200,7 +213,7 @@ public class OtherCarsBehaviour : MonoBehaviour
 
     private void CarOnTheRoad()
     {
-        onTheRoad = Physics.Raycast(transform.position, -transform.up, 1f, LayerMask.GetMask("Road"));
+        onTheRoad = Physics.Raycast(transform.position, -transform.up, 3f, LayerMask.GetMask("Road"));
         if (!onTheRoad)
         {
             Destroy(gameObject);
@@ -214,23 +227,4 @@ public class OtherCarsBehaviour : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private IEnumerator IncrementSpeed()
-    {
-        while (speed <= 50f)
-        {
-            speed += 0.05f;
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
-    private IEnumerator DecreaseSpeed(int thisSpeed)
-    { 
-        while(speed >= thisSpeed)
-        {
-            speed -= 0.5f; 
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
 }

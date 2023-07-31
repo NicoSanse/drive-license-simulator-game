@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     //determine if the player is on the road
     private void PlayerOnTheRoad()
     { 
-        onTheRoad = Physics.Raycast(transform.position, Vector3.down, 1f, LayerMask.GetMask("Road"));
+        onTheRoad = Physics.Raycast(transform.position, Vector3.down, 3f, LayerMask.GetMask("Road"));
         if(!onTheRoad)
         {
             //lose points
