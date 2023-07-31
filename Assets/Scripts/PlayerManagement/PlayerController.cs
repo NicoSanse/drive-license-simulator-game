@@ -41,6 +41,11 @@ public class PlayerController : MonoBehaviour
         Initialization();
     }
 
+    void Update()
+    { 
+        
+    }
+
     void FixedUpdate()
     {
         PlayerOnTheRoad();

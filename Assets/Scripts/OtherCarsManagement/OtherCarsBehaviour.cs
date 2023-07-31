@@ -20,19 +20,40 @@ public class OtherCarsBehaviour : MonoBehaviour
 
     //not in km/h!!
     private float turningSpeed = 170f;
+    //manually set the path the car will follow
     [SerializeField] private int seedPath;
+    //need to check if the right side of the car is free
+    private Vector3 rayCastDirection;
+    private Ray ray;
+    private RaycastHit hitInfo;
+    bool isRightSideFree;
+    private Coroutine accelerateCars;
+    private Coroutine decelerateCars;
+    private bool onTheRoad;
 
     void Start()
     {
         waypoints = OtherCarsPath.GetAPath(seedPath);
         destination = waypoints[currentWaypointIndex];
         direction = (destination - transform.position).normalized;
+
+        rayCastDirection = transform.forward;
+        rayCastDirection.x += 0.3f;
+        ray = new Ray(transform.position, rayCastDirection);
+        isRightSideFree = true;
+        onTheRoad = true;
+    }
+
+    void Update()
+    {
+        SelfDestroy();
     }
 
     void FixedUpdate()
     {
         GoToDestination();
         SafetyDistance();
+        GiveTheWay();
     }
 
     //main function that moves the other cars
@@ -68,11 +89,50 @@ public class OtherCarsBehaviour : MonoBehaviour
 
         if (!isDistanceSafe)
         {
-            speed -= 0.01f;
+            while (speed >= 30f)
+            {
+                speed -= 0.5f;
+            }
         }
-        else if (speed <= 30f)
+        else
         {
-            speed += 0.01f;
+            while (speed <= 50f)
+            {
+                speed += 0.05f;
+            }
+        }
+    }
+
+    //this checks if the right side of the car is free. if not so, stop
+    private void GiveTheWay()
+    {
+        isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 10f, LayerMask.GetMask("OtherCars")));
+        int index = 0;
+
+        while(index <= 10 && isRightSideFree)
+        { 
+            float t = (float) index / 10;
+            rayCastDirection = Vector3.Slerp(rayCastDirection, transform.right, t);
+            ray = new Ray(transform.position, rayCastDirection);
+            isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 10f, LayerMask.GetMask("OtherCars")));
+            index++;
+
+            Debug.DrawRay(transform.position, rayCastDirection * 10f, Color.green);
+        }
+        rayCastDirection = transform.forward;
+        rayCastDirection.x += 0.3f;
+
+        if (!isRightSideFree)
+        {
+            //speed = 5;
+            //if (accelerateCars != null) StopCoroutine(accelerateCars);
+            decelerateCars = StartCoroutine(DecreaseSpeed(0));
+        }
+        else
+        {
+            //speed = 30f;
+            //if (decelerateCars != null) StopCoroutine(decelerateCars);
+            accelerateCars = StartCoroutine(IncrementSpeed());
         }
     }
 
@@ -124,17 +184,52 @@ public class OtherCarsBehaviour : MonoBehaviour
     { 
         if(Vector3.Distance(transform.position, destination) < 40)
         {
-            while (speed > 30f)
+            while (speed >= 30f)
             {
                 speed -= 0.5f;
             }
         }
         else
-        { 
-            while (speed < 50f)
+        {
+            while (speed <= 50f)
             {
-                speed += 0.01f;
+                speed += 0.05f;
             }
+        }
+    }
+
+    private void CarOnTheRoad()
+    {
+        onTheRoad = Physics.Raycast(transform.position, -transform.up, 1f, LayerMask.GetMask("Road"));
+        if (!onTheRoad)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void SelfDestroy()
+    {
+        if (transform.position.y < -10)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator IncrementSpeed()
+    {
+        while (speed <= 50f)
+        {
+            speed += 0.05f;
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    private IEnumerator DecreaseSpeed(int thisSpeed)
+    { 
+        while(speed >= thisSpeed)
+        {
+            speed -= 0.5f; 
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
