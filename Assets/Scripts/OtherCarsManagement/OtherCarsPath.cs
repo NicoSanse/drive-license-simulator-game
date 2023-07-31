@@ -79,7 +79,24 @@ public class OtherCarsPath : MonoBehaviour
         Vector3 tempWayPoint4 = new Vector3(615, 1, 424);
         Vector3 tempWayPoint5 = new Vector3(888, 1, 424);
         Vector3 tempWayPoint6 = new Vector3(913.5f, 1, 450);
-        Vector3 tempWayPoint7 = new Vector3(913.5f, 1, 478);
+        Vector3 tempWayPoint7 = new Vector3(913.5f, 1, 480);
+        Vector3 tempWayPoint8 = new Vector3(933, 1, 499);
+        Vector3 tempWayPoint9 = new Vector3(1030, 1, 499);
+        Vector3 tempWayPoint10 = new Vector3(1053.5f, 1, 530);
+        Vector3 tempWayPoint11 = new Vector3(1053.5f, 1, 870);
+        Vector3 tempWayPoint12 = new Vector3(1030, 1, 895.5f);
+        Vector3 tempWayPoint13 = new Vector3(458, 1, 895.5f);
+        Vector3 tempWayPoint14 = new Vector3(439.5f, 1, 872);
+        Vector3 tempWayPoint15 = new Vector3(439.5f, 1, 673);
+        Vector3 tempWayPoint16 = new Vector3(427, 1, 663.5f);
+        Vector3 tempWayPoint17 = new Vector3(12, 1, 663.5f);
+        Vector3 tempWayPoint18 = new Vector3(0, 1, 648);
+        Vector3 tempWayPoint19 = new Vector3(0, 1, 464);
+        Vector3 tempWayPoint20 = new Vector3(0, 1, 403);
+        Vector3 tempWayPoint21 = new Vector3(0, 1, 72);
+        Vector3 tempWayPoint22 = new Vector3(16, 1, 56.5f);
+        Vector3 tempWayPoint23 = new Vector3(297, 1, 56.5f);
+        Vector3 tempWayPoint24 = new Vector3(307, 1, 70);
         secondPath.Add(tempWayPoint);
         secondPath.Add(tempWayPoint2);
         secondPath.Add(tempWayPoint3);
@@ -87,6 +104,23 @@ public class OtherCarsPath : MonoBehaviour
         secondPath.Add(tempWayPoint5);
         secondPath.Add(tempWayPoint6);
         secondPath.Add(tempWayPoint7);
+        secondPath.Add(tempWayPoint8);
+        secondPath.Add(tempWayPoint9);
+        secondPath.Add(tempWayPoint10);
+        secondPath.Add(tempWayPoint11);
+        secondPath.Add(tempWayPoint12);
+        secondPath.Add(tempWayPoint13);
+        secondPath.Add(tempWayPoint14);
+        secondPath.Add(tempWayPoint15);
+        secondPath.Add(tempWayPoint16);
+        secondPath.Add(tempWayPoint17);
+        secondPath.Add(tempWayPoint18);
+        secondPath.Add(tempWayPoint19);
+        secondPath.Add(tempWayPoint20);
+        secondPath.Add(tempWayPoint21);
+        secondPath.Add(tempWayPoint22);
+        secondPath.Add(tempWayPoint23);
+        secondPath.Add(tempWayPoint24);
     }
 
     private void GenerateThirdPath()

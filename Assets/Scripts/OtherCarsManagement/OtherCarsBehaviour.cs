@@ -20,17 +20,11 @@ public class OtherCarsBehaviour : MonoBehaviour
 
     //not in km/h!!
     private float turningSpeed = 170f;
-    int randomSeedPath;
+    [SerializeField] private int seedPath;
 
     void Start()
     {
-        randomSeedPath = Random.Range(0, 2);
-
-        print("randomSeedPath: " + randomSeedPath);
-
-        randomSeedPath = 0;
-
-        waypoints = OtherCarsPath.GetAPath(randomSeedPath);
+        waypoints = OtherCarsPath.GetAPath(seedPath);
         destination = waypoints[currentWaypointIndex];
         direction = (destination - transform.position).normalized;
     }
@@ -85,18 +79,30 @@ public class OtherCarsBehaviour : MonoBehaviour
     //this finds the value that best fits turningSpeed variable based on empirical tests
     private void AdjustTurningSpeed()
     {
-        if (randomSeedPath == 1)
+        if (seedPath == 1)
         {
-            if (currentWaypointIndex == 5)
+            if (currentWaypointIndex == 5 || currentWaypointIndex == 11)
             {
                 turningSpeed = 65f;
+            }
+            else if (currentWaypointIndex == 9 || currentWaypointIndex == 7)
+            {
+                turningSpeed = 90f;
+            }
+            else if (currentWaypointIndex == 13)
+            {
+                turningSpeed = 120f;
+            }
+            else if(currentWaypointIndex == 17 || currentWaypointIndex == 21)
+            {
+                turningSpeed = 150f;
             }
             else
             {
                 turningSpeed = 170f;
             }
         }
-        else if (randomSeedPath == 0)
+        else if (seedPath == 0)
         {
             if (currentWaypointIndex == 3 || currentWaypointIndex == 6 || currentWaypointIndex == 8 || currentWaypointIndex == 9 )
             {
