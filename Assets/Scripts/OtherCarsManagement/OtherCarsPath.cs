@@ -187,8 +187,43 @@ public class OtherCarsPath : MonoBehaviour
     }
 
     private void GenerateFirstPathReverse()
-    { 
-
+    {
+        Vector3 tempWayPoint = new Vector3(299.5f, 1, 66);
+        Vector3 tempWayPoint2 = new Vector3(312, 1, 56.5f);
+        Vector3 tempWayPoint3 = new Vector3(515, 1, 56.5f);
+        Vector3 tempWayPoint4 = new Vector3(531.5f, 1, 70);
+        Vector3 tempWayPoint5 = new Vector3(531.5f, 1, 640);
+        Vector3 tempWayPoint6 = new Vector3(548, 1, 656.5f);
+        Vector3 tempWayPoint7 = new Vector3(740, 1, 656.5f);
+        Vector3 tempWayPoint8 = new Vector3(767, 1, 649.5f);
+        Vector3 tempWayPoint9 = new Vector3(876, 1, 649.5f);
+        Vector3 tempWayPoint10 = new Vector3(892.5f, 1, 632);
+        Vector3 tempWayPoint11 = new Vector3(892.5f, 1, 539);
+        Vector3 tempWayPoint12 = new Vector3(892.5f, 1, 482);
+        Vector3 tempWayPoint13 = new Vector3(892.5f, 1, 455);
+        Vector3 tempWayPoint14 = new Vector3(874, 1, 445.5f);
+        Vector3 tempWayPoint15 = new Vector3(616, 1, 445.5f);
+        Vector3 tempWayPoint16 = new Vector3(592, 1, 438.5f);
+        Vector3 tempWayPoint17 = new Vector3(312, 1, 438.5f);
+        Vector3 tempWayPoint18 = new Vector3(299.5f, 1, 420);
+        firstPathReverse.Add(tempWayPoint);
+        firstPathReverse.Add(tempWayPoint2);
+        firstPathReverse.Add(tempWayPoint3);
+        firstPathReverse.Add(tempWayPoint4);
+        firstPathReverse.Add(tempWayPoint5);
+        firstPathReverse.Add(tempWayPoint6);
+        firstPathReverse.Add(tempWayPoint7);
+        firstPathReverse.Add(tempWayPoint8);
+        firstPathReverse.Add(tempWayPoint9);
+        firstPathReverse.Add(tempWayPoint10);
+        firstPathReverse.Add(tempWayPoint11);
+        firstPathReverse.Add(tempWayPoint12);
+        firstPathReverse.Add(tempWayPoint13);
+        firstPathReverse.Add(tempWayPoint14);
+        firstPathReverse.Add(tempWayPoint15);
+        firstPathReverse.Add(tempWayPoint16);
+        firstPathReverse.Add(tempWayPoint17);
+        firstPathReverse.Add(tempWayPoint18);
     }
 
     private void GenerateSecondPathReverse()

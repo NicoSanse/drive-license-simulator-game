@@ -26,7 +26,6 @@ public class OtherCarsBehaviour : MonoBehaviour
     private Ray ray;
     private RaycastHit hitInfo;
     bool isRightSideFree;
-    private bool onTheRoad;
 
     void Start()
     {
@@ -37,13 +36,11 @@ public class OtherCarsBehaviour : MonoBehaviour
         rayCastDirection = transform.forward;
         ray = new Ray(transform.position, rayCastDirection);
         isRightSideFree = true;
-        onTheRoad = true;
     }
 
     void Update()
     {
         SelfDestroy();
-        CarOnTheRoad();
     }
 
     void FixedUpdate()
@@ -167,14 +164,25 @@ public class OtherCarsBehaviour : MonoBehaviour
                 turningSpeed = 170f;
             }
         }
+        else if (seedPath == 5)
+        {
+            if (currentWaypointIndex == 3 || currentWaypointIndex == 5 || currentWaypointIndex == 9)
+            {
+                turningSpeed = 100f;
+            }
+            else
+            {
+                turningSpeed = 170f;
+            }
+        }
         else if (seedPath == 6)
         {
             if (currentWaypointIndex == 9)
-            { 
+            {
                 turningSpeed = 90f;
             }
             else if (currentWaypointIndex == 13)
-            { 
+            {
                 turningSpeed = 100f;
             }
             else if (currentWaypointIndex == 15)
@@ -211,18 +219,9 @@ public class OtherCarsBehaviour : MonoBehaviour
         }
     }
 
-    private void CarOnTheRoad()
-    {
-        onTheRoad = Physics.Raycast(transform.position, -transform.up, 3f, LayerMask.GetMask("Road"));
-        if (!onTheRoad)
-        {
-            Destroy(gameObject);
-        }
-    }
-
     private void SelfDestroy()
     {
-        if (transform.position.y < -10)
+        if (transform.position.y < -10 || transform.position.y > 15)
         {
             Destroy(gameObject);
         }
