@@ -81,8 +81,8 @@ public class OtherCarsBehaviour : MonoBehaviour
     //keeps each car correctly distanced from the car ahead
     private void SafetyDistance()
     {
-        float safeDistance = (speed * 1000)/(3600);
-        bool isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, safeDistance, LayerMask.GetMask("OtherCars")));
+        float fakeSafeDistance = 4f;
+        bool isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, fakeSafeDistance, LayerMask.GetMask("OtherCars")));
 
         if (!isDistanceSafe)
         {
@@ -103,7 +103,7 @@ public class OtherCarsBehaviour : MonoBehaviour
     //this checks if the right side of the car is free. if not so, stop
     private void GiveTheWay()
     {
-        isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 10f, LayerMask.GetMask("OtherCars")));
+        isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("OtherCars")));
         int index = 2;
 
         while(index <= 10 && isRightSideFree)
@@ -111,7 +111,7 @@ public class OtherCarsBehaviour : MonoBehaviour
             float t = (float) index / 10;
             rayCastDirection = Vector3.Slerp(rayCastDirection, transform.right, t);
             ray = new Ray(transform.position, rayCastDirection);
-            isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 10f, LayerMask.GetMask("OtherCars")));
+            isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("OtherCars")));
             index++;
         }
         rayCastDirection = transform.forward;
