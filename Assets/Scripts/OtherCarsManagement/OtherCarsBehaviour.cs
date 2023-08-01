@@ -26,6 +26,10 @@ public class OtherCarsBehaviour : MonoBehaviour
     private Ray ray;
     private RaycastHit hitInfo;
     bool isRightSideFree;
+    bool isRightSideFreeFromPlayer;
+    bool isDistanceSafe;
+    bool isDistanceSafeFromPlayer;
+    bool isOnRoad;
 
     void Start()
     {
@@ -41,6 +45,7 @@ public class OtherCarsBehaviour : MonoBehaviour
     void Update()
     {
         SelfDestroy();
+        DestroyCarsNotOnRoad();
     }
 
     void FixedUpdate()
@@ -79,9 +84,10 @@ public class OtherCarsBehaviour : MonoBehaviour
     private void SafetyDistance()
     {
         float fakeSafeDistance = 4f;
-        bool isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, fakeSafeDistance, LayerMask.GetMask("OtherCars")));
+        isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, fakeSafeDistance, LayerMask.GetMask("OtherCars")));
+        isDistanceSafeFromPlayer = !(Physics.Raycast(transform.position, transform.forward, fakeSafeDistance, LayerMask.GetMask("Player")));
 
-        if (!isDistanceSafe)
+        if (!isDistanceSafe || !isDistanceSafeFromPlayer)
         {
             while (speed >= 30f)
             {
@@ -101,19 +107,21 @@ public class OtherCarsBehaviour : MonoBehaviour
     private void GiveTheWay()
     {
         isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("OtherCars")));
+        isRightSideFreeFromPlayer = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("Player")));
         int index = 2;
 
-        while(index <= 10 && isRightSideFree)
+        while(index <= 10 && isRightSideFree && isRightSideFreeFromPlayer)
         { 
             float t = (float) index / 10;
             rayCastDirection = Vector3.Slerp(rayCastDirection, transform.right, t);
             ray = new Ray(transform.position, rayCastDirection);
             isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("OtherCars")));
+            isRightSideFreeFromPlayer = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("Player")));
             index++;
         }
         rayCastDirection = transform.forward;
 
-        if (!isRightSideFree)
+        if (!isRightSideFree || !isRightSideFreeFromPlayer)
         {
             speed = 5;
         }
@@ -126,7 +134,24 @@ public class OtherCarsBehaviour : MonoBehaviour
     //this finds the value that best fits turningSpeed variable based on empirical tests
     private void AdjustTurningSpeed()
     {
-        if (seedPath == 1)
+        //setting for first path
+        if (seedPath == 0)
+        {
+            if (currentWaypointIndex == 3 || currentWaypointIndex == 6 || currentWaypointIndex == 8 || currentWaypointIndex == 9)
+            {
+                turningSpeed = 90f;
+            }
+            else if (currentWaypointIndex == 10 || currentWaypointIndex == 12)
+            {
+                turningSpeed = 100f;
+            }
+            else
+            {
+                turningSpeed = 170f;
+            }
+        }
+        //setting for second path
+        else if (seedPath == 1)
         {
             if (currentWaypointIndex == 5 || currentWaypointIndex == 11)
             {
@@ -149,14 +174,19 @@ public class OtherCarsBehaviour : MonoBehaviour
                 turningSpeed = 170f;
             }
         }
-        else if (seedPath == 0)
+        //setting for third path
+        else if(seedPath == 2)
         {
-            if (currentWaypointIndex == 3 || currentWaypointIndex == 6 || currentWaypointIndex == 8 || currentWaypointIndex == 9 )
+            if (currentWaypointIndex == 1 || currentWaypointIndex == 10)
+            {
+                turningSpeed = 150f;
+            }
+            else if (currentWaypointIndex == 6)
             {
                 turningSpeed = 90f;
             }
-            else if (currentWaypointIndex == 10 || currentWaypointIndex == 12)
-            { 
+            else if (currentWaypointIndex == 8 || currentWaypointIndex == 16)
+            {
                 turningSpeed = 100f;
             }
             else
@@ -164,6 +194,7 @@ public class OtherCarsBehaviour : MonoBehaviour
                 turningSpeed = 170f;
             }
         }
+        //setting for the reverse of first path
         else if (seedPath == 5)
         {
             if (currentWaypointIndex == 3 || currentWaypointIndex == 5 || currentWaypointIndex == 9)
@@ -175,6 +206,7 @@ public class OtherCarsBehaviour : MonoBehaviour
                 turningSpeed = 170f;
             }
         }
+        //setting for the reverse of the second path
         else if (seedPath == 6)
         {
             if (currentWaypointIndex == 9)
@@ -192,6 +224,22 @@ public class OtherCarsBehaviour : MonoBehaviour
             else if (currentWaypointIndex == 11 || currentWaypointIndex == 15)
             {
                 turningSpeed = 75f;
+            }
+            else
+            {
+                turningSpeed = 170f;
+            }
+        }
+        //setting for the reverse of third path
+        else if(seedPath == 7)
+        {
+            if (currentWaypointIndex == 5)
+            {
+                turningSpeed = 120f;
+            }
+            else if (currentWaypointIndex == 13)
+            {
+                turningSpeed = 150f;
             }
             else
             {
@@ -216,6 +264,15 @@ public class OtherCarsBehaviour : MonoBehaviour
             {
                 speed += 0.05f;
             }
+        }
+    }
+
+    private void DestroyCarsNotOnRoad()
+    { 
+        isOnRoad = Physics.Raycast(transform.position, -transform.up, 4f, LayerMask.GetMask("Road"));
+        if (!isOnRoad)
+        {
+            Destroy(gameObject);
         }
     }
 
