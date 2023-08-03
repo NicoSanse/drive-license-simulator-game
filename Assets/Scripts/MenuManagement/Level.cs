@@ -67,6 +67,18 @@ public class Level
         mistakes.Add(mistake);
     }
 
+    public bool IsMistakeAlreadyAdded(string mistake)
+    {
+        foreach (string m in mistakes)
+        {
+            if (m == mistake)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<string> GetMistakes() 
     {
         return mistakes;
