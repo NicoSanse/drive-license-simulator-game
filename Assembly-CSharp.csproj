@@ -40,13 +40,14 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
      <Compile Include="Assets\Scripts\MenuManagement\Level.cs" />
+     <Compile Include="Assets\Scripts\OtherCarsManagement\OtherCarsBehaviour.cs" />
      <Compile Include="Assets\MSVehicleSystem(FreeVersion)\Scripts\ExampleSceneFree.cs" />
      <Compile Include="Assets\Scripts\MistakesManagement\GivingDetails.cs" />
-     <Compile Include="Assets\Scripts\PlayerManagement\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\PlayerManagement\Player\PlayerController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
      <Compile Include="Assets\MSVehicleSystem(FreeVersion)\Scripts\JoystickFree.cs" />
-     <Compile Include="Assets\Scripts\PlayerManagement\GUIManager.cs" />
+     <Compile Include="Assets\Scripts\PlayerManagement\Player\GUIManager.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\more\CurrentGearImageBehaviour.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
@@ -61,7 +62,6 @@
      <Compile Include="Assets\Scripts\MistakesManagement\MistakesCollection.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
-     <Compile Include="Assets\Scripts\RoadsSpawning\SpawnMainRoadFirstLevel.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\CarComands\Lights\LowBeamBehaviour.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\MenuManagement\LicencePointsMessage.cs" />
@@ -78,13 +78,14 @@
      <Compile Include="Assets\Scripts\PlayerManagement\CarComands\Arrows\RightArrowBehaviour.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
-     <Compile Include="Assets\Scripts\ParticlesManagement\ParticlesManagement.cs" />
+     <Compile Include="Assets\Scripts\PlayerManagement\ParticlesManagement\ParticlesManagement.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
      <Compile Include="Assets\Scripts\MenuManagement\Menu.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
      <Compile Include="Assets\Scripts\InfoLevelManagement\GivingInfoDetail.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+     <Compile Include="Assets\Scripts\OtherCarsManagement\OtherCarsPath.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\more\CurrentSpeedMessageShown.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\Buttons\SwitchCameraButtonBehaviour.cs" />
@@ -102,6 +103,7 @@
      <Compile Include="Assets\MSVehicleSystem(FreeVersion)\Scripts\MSSceneControllerFree.cs" />
      <Compile Include="Assets\MSVehicleSystem(FreeVersion)\Scripts\MyCarRotation.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\CarComands\Pedals\ClutchBehaviour.cs" />
+     <Compile Include="Assets\Scripts\PlayerManagement\Player\PlayerPaths.cs" />
      <Compile Include="Assets\Scripts\DataManagement\SaveManager.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\CarComands\Lights\HighBeamBehaviour.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
@@ -113,7 +115,7 @@
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\CarComands\Arrows\LeftArrowBehaviour.cs" />
-     <Compile Include="Assets\Scripts\PlayerManagement\Car.cs" />
+     <Compile Include="Assets\Scripts\PlayerManagement\Player\Car.cs" />
      <Compile Include="Assets\Scripts\PlayerManagement\PauseMenuManagement\PauseScreenBehaviour.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

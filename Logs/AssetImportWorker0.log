@@ -1,0 +1,544 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.21f1 (1b156197d683) revision 1774945'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22621) 64bit Core' Language: 'it' Physical Memory: 7549 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/nicos/drive license simulator game
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+49499
+Successfully changed project path to: C:/Users/nicos/drive license simulator game
+C:/Users/nicos/drive license simulator game
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [2500] Host "[IP] 192.168.100.11 [Port] 0 [Flags] 2 [Guid] 938147405 [EditorId] 938147405 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-FSRO3K3O) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [2500] Host "[IP] 192.168.100.11 [Port] 0 [Flags] 2 [Guid] 938147405 [EditorId] 938147405 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-FSRO3K3O) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 457.33 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.21f1 (1b156197d683)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/nicos/drive license simulator game/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon(TM) Graphics (ID=0x1636)
+    Vendor:   ATI
+    VRAM:     3774 MB
+    Driver:   26.20.14040.0
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56476
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.21f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.011740 seconds.
+Native extension for WindowsStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for iOS target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 397 ms
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 105.72 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.538 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1539ms)
+		BeginReloadAssembly (360ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (1007ms)
+			LoadAssemblies (355ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (143ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (32ms)
+			SetupLoadedEditorAssemblies (768ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (504ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (106ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (109ms)
+				ProcessInitializeOnLoadMethodAttributes (49ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.013855 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.97 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+Package Manager log level set to [2]
+- Completed reload, in  1.373 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1374ms)
+		BeginReloadAssembly (138ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (25ms)
+		EndReloadAssembly (1105ms)
+			LoadAssemblies (156ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (315ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (73ms)
+			SetupLoadedEditorAssemblies (492ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (36ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (102ms)
+				ProcessInitializeOnLoadAttributes (320ms)
+				ProcessInitializeOnLoadMethodAttributes (24ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.91 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3454 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 51 unused Assets / (135.4 KB). Loaded Objects now: 3944.
+Memory consumption went from 219.3 MB to 219.2 MB.
+Total: 3.026100 ms (FindLiveObjects: 0.330400 ms CreateObjectMapping: 0.100100 ms MarkObjects: 2.447600 ms  DeleteObjects: 0.146400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 101906.442282 seconds.
+  path: Assets/MyPrefab/Cylinder.prefab
+  artifactKey: Guid(ec51ce8a2678ce64797067494b97f107) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MyPrefab/Cylinder.prefab using Guid(ec51ce8a2678ce64797067494b97f107) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6ce3b379379285612adb5fc4f40ffd4') in 0.162570 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004369 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.97 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.172 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1173ms)
+		BeginReloadAssembly (178ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (42ms)
+		EndReloadAssembly (854ms)
+			LoadAssemblies (136ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (308ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (48ms)
+			SetupLoadedEditorAssemblies (339ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (29ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (67ms)
+				ProcessInitializeOnLoadAttributes (216ms)
+				ProcessInitializeOnLoadMethodAttributes (19ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.59 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3434 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 33 unused Assets / (128.8 KB). Loaded Objects now: 3968.
+Memory consumption went from 221.7 MB to 221.5 MB.
+Total: 3.457400 ms (FindLiveObjects: 0.296500 ms CreateObjectMapping: 0.086200 ms MarkObjects: 2.944200 ms  DeleteObjects: 0.129000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004533 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.91 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.173 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1174ms)
+		BeginReloadAssembly (152ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (10ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (37ms)
+		EndReloadAssembly (904ms)
+			LoadAssemblies (107ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (349ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (47ms)
+			SetupLoadedEditorAssemblies (331ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (28ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (67ms)
+				ProcessInitializeOnLoadAttributes (208ms)
+				ProcessInitializeOnLoadMethodAttributes (20ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 5.87 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3434 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 33 unused Assets / (128.9 KB). Loaded Objects now: 3983.
+Memory consumption went from 221.7 MB to 221.6 MB.
+Total: 3.817000 ms (FindLiveObjects: 0.856600 ms CreateObjectMapping: 0.407300 ms MarkObjects: 2.429700 ms  DeleteObjects: 0.121700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 431.616490 seconds.
+  path: Assets/European Road Signs/Prefabs/Empty Stands/Empty Stand.prefab
+  artifactKey: Guid(3f130de15bdea3e47b171b89cc78e29e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Empty Stands/Empty Stand.prefab using Guid(3f130de15bdea3e47b171b89cc78e29e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16a6141c43beb6646c2a9522a0d2699b') in 0.103752 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Filling Station (Single).prefab
+  artifactKey: Guid(82abd4a69ea6f77478b74a69fa059df7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Filling Station (Single).prefab using Guid(82abd4a69ea6f77478b74a69fa059df7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee589bc1e8944fd2229a409f200a4017') in 0.034378 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000054 seconds.
+  path: Assets/European Road Signs/Models/Empty Stands/Empty_stand.fbx
+  artifactKey: Guid(9dcab8b6ae34e844f9b57090e9903041) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Models/Empty Stands/Empty_stand.fbx using Guid(9dcab8b6ae34e844f9b57090e9903041) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f79101303d23d0ddab0c0695c0f92c8d') in 0.122895 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Dead End (Single).prefab
+  artifactKey: Guid(30b3dc0ecfe106246bdfc2166993cb5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Dead End (Single).prefab using Guid(30b3dc0ecfe106246bdfc2166993cb5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0746bd40a6201df1b1a49943139a9afe') in 0.060988 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000059 seconds.
+  path: Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Bus Stop (Single).prefab
+  artifactKey: Guid(a217398cb3ee72743a3ee6278f2c7fb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Bus Stop (Single).prefab using Guid(a217398cb3ee72743a3ee6278f2c7fb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c7ff1e8b154bfeeb739895b0a374c898') in 0.060230 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - First Aid (Single).prefab
+  artifactKey: Guid(5e8b4e11e64a60b49b46a60a4a09eceb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - First Aid (Single).prefab using Guid(5e8b4e11e64a60b49b46a60a4a09eceb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e3f9e01ea9b9ad96f6977b097df8eb2') in 0.047106 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000111 seconds.
+  path: Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Bus Stop 2 (Single).prefab
+  artifactKey: Guid(a3b052bff811ffe4cb9b29372759ca7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Bus Stop 2 (Single).prefab using Guid(a3b052bff811ffe4cb9b29372759ca7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a92430bc369d693849709980c146283') in 0.047450 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Highway (Single).prefab
+  artifactKey: Guid(2f9534b7c50e5eb4ab2fb5a1d2be8085) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Highway (Single).prefab using Guid(2f9534b7c50e5eb4ab2fb5a1d2be8085) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '91405020d061af20b0b35480de6c064d') in 0.053764 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Hotel (Single).prefab
+  artifactKey: Guid(b40c1828e3c1056499408d54c4b45e68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Hotel (Single).prefab using Guid(b40c1828e3c1056499408d54c4b45e68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '280bc086ec1617bc09240ef2ed8a2314') in 0.044519 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Highway End (Single).prefab
+  artifactKey: Guid(5a72b9762ce1d334eb5cd63104465ddb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Highway End (Single).prefab using Guid(5a72b9762ce1d334eb5cd63104465ddb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c799d1a0b4f70afbb4e840ca46a0cdae') in 0.049435 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Bump (Single).prefab
+  artifactKey: Guid(5a8dffc5be6bf724582281f39986497d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Bump (Single).prefab using Guid(5a8dffc5be6bf724582281f39986497d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a29266f1c92e92d559532246580eed1') in 0.050845 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Hospital (Single).prefab
+  artifactKey: Guid(df5d1ab121bc31f48bf416b6ff9fa5b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Informational Signs/Single Variants/Informational - Hospital (Single).prefab using Guid(df5d1ab121bc31f48bf416b6ff9fa5b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13bcb83a874ac992238e13724bc66cf7') in 0.051101 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.833034 seconds.
+  path: Assets/European Road Signs/Prefabs/Mandatory Signs/Single Variants/Mandatory - Cycles (Single).prefab
+  artifactKey: Guid(21a81829f68930349ae1fc2eae22caf3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Mandatory Signs/Single Variants/Mandatory - Cycles (Single).prefab using Guid(21a81829f68930349ae1fc2eae22caf3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c768d131051695855cbde382ab52cc10') in 0.049585 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/European Road Signs/Models/Mandatory Signs/Mandatory_CyclesEnd.fbx
+  artifactKey: Guid(aa2f7416413ae4748b462d4091511b0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Models/Mandatory Signs/Mandatory_CyclesEnd.fbx using Guid(aa2f7416413ae4748b462d4091511b0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5040f841f8e0a8ba288c08ce2c117f4f') in 0.088715 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/European Road Signs/Models/Mandatory Signs/MandatorySingle_Cycles.fbx
+  artifactKey: Guid(f07807f3b5aa1ec4291979325bd8cb72) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Models/Mandatory Signs/MandatorySingle_Cycles.fbx using Guid(f07807f3b5aa1ec4291979325bd8cb72) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc9606e7aaece7e92b15c262c1f3d4c3') in 0.080375 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/European Road Signs/Models/Warning Signs/Warning_Bicyclists.fbx
+  artifactKey: Guid(51c1dcc7bfdf1bc479da4ffe77af54b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Models/Warning Signs/Warning_Bicyclists.fbx using Guid(51c1dcc7bfdf1bc479da4ffe77af54b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4432f1e7b5f8165111bf0104a43bae01') in 0.093875 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/European Road Signs/Models/Mandatory Signs/Mandatory_Cycles.fbx
+  artifactKey: Guid(13269cdc106fa384d806dc88284081ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Models/Mandatory Signs/Mandatory_Cycles.fbx using Guid(13269cdc106fa384d806dc88284081ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1abbf28d6bbd43208afaf75c4c122150') in 0.089921 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/European Road Signs/Prefabs/Warning Signs/Single Variants/Warning - Bicyclists (Single).prefab
+  artifactKey: Guid(ac759253b0ab63e4f90fcf3f430fb4bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Warning Signs/Single Variants/Warning - Bicyclists (Single).prefab using Guid(ac759253b0ab63e4f90fcf3f430fb4bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f690328f1cb0ef86c5cac4e240fe5dca') in 0.047631 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000085 seconds.
+  path: Assets/European Road Signs/Models/Warning Signs/WarningSingle_Bicyclists.fbx
+  artifactKey: Guid(f32d6f9d8de8e534ab0918aa36e0d986) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Models/Warning Signs/WarningSingle_Bicyclists.fbx using Guid(f32d6f9d8de8e534ab0918aa36e0d986) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8abe6ffa9f319384a853733fe8fbc94') in 0.110351 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/European Road Signs/Prefabs/Mandatory Signs/Single Variants/Mandatory - Cycles End (Single).prefab
+  artifactKey: Guid(6eccb78a65bfa97419e4c7a105417101) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Prefabs/Mandatory Signs/Single Variants/Mandatory - Cycles End (Single).prefab using Guid(6eccb78a65bfa97419e4c7a105417101) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c7feac2c7e3adee1a126479cbb16aa1') in 0.047645 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/European Road Signs/Models/Mandatory Signs/MandatorySingle_CyclesEnd.fbx
+  artifactKey: Guid(ba52df62676314e4580097dd01176cf7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/European Road Signs/Models/Mandatory Signs/MandatorySingle_CyclesEnd.fbx using Guid(ba52df62676314e4580097dd01176cf7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '997b83f102b1748f6dd5f0483482007b') in 0.113914 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004792 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.99 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.099 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1099ms)
+		BeginReloadAssembly (148ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (38ms)
+		EndReloadAssembly (840ms)
+			LoadAssemblies (117ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (261ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (57ms)
+			SetupLoadedEditorAssemblies (341ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (29ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (72ms)
+				ProcessInitializeOnLoadAttributes (208ms)
+				ProcessInitializeOnLoadMethodAttributes (22ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.92 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3434 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 33 unused Assets / (129.9 KB). Loaded Objects now: 4001.
+Memory consumption went from 222.0 MB to 221.9 MB.
+Total: 3.070600 ms (FindLiveObjects: 0.329100 ms CreateObjectMapping: 0.092300 ms MarkObjects: 2.503600 ms  DeleteObjects: 0.144100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004724 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\nicos\drive license simulator game\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.92 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.123 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1124ms)
+		BeginReloadAssembly (164ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (36ms)
+		EndReloadAssembly (835ms)
+			LoadAssemblies (121ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (255ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (61ms)
+			SetupLoadedEditorAssemblies (348ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (32ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (71ms)
+				ProcessInitializeOnLoadAttributes (207ms)
+				ProcessInitializeOnLoadMethodAttributes (27ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.49 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3434 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 33 unused Assets / (129.0 KB). Loaded Objects now: 4016.
+Memory consumption went from 222.0 MB to 221.9 MB.
+Total: 3.910100 ms (FindLiveObjects: 0.522400 ms CreateObjectMapping: 0.222500 ms MarkObjects: 3.027300 ms  DeleteObjects: 0.135800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 

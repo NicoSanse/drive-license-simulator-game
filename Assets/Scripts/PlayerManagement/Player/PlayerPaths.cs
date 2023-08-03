@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//this class contains the paths for each level
+//from player controller class the path is picked
+//the number is of path is written in Unity editor
+
 public class PlayerPaths : MonoBehaviour
 {
     private static List<List<Vector3>> paths;
