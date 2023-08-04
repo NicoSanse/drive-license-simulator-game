@@ -69,8 +69,6 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         else
         {
             ClutchNotPressed();
-            particles.SwitchMaterial("red");
-            particles.Play();
         }
     }
 
@@ -263,7 +261,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
                     {
                         clutch.SetGear(ClutchBehaviour.Gear.Gear1);
                     }
-                    if (directionDragged == "dwon-left")
+                    if (directionDragged == "down-left")
                     {
                         clutch.SetGear(ClutchBehaviour.Gear.Gear2);
                     }
@@ -293,15 +291,16 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         else
         {
             ClutchNotPressed();
-            particles.SwitchMaterial("red");
-            particles.Play();
         }
     }
 
     //adds the error the player made
-    private void ClutchNotPressed()
-    { 
-        if(!currentLevel.IsMistakeAlreadyAdded("You didn't press the clutch!"))
+    public void ClutchNotPressed()
+    {
+        particles.SwitchMaterial("red");
+        particles.Play();
+
+        if (!currentLevel.IsMistakeAlreadyAdded("You didn't press the clutch!"))
         {
             currentLevel.AddMistake("You didn't press the clutch!");
             tempMistakes.Add("You didn't press the clutch!");
@@ -311,6 +310,9 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     //adds the error the player made, decreases the score and the player loses
     private void CarDestroyed()
     { 
+        particles.SwitchMaterial("red");
+        particles.Play();
+        
         if(!currentLevel.IsMistakeAlreadyAdded("You destroyed the car!"))
         {
             currentLevel.AddMistake("You destroyed the car!");

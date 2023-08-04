@@ -71,8 +71,6 @@ public class ClutchBehaviour : MonoBehaviour
         }
         else
         {
-            particles.SwitchMaterial("red");
-            particles.Play();
             ClucthReleasedTooEarly();
             MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
             car.Off();
@@ -152,6 +150,9 @@ public class ClutchBehaviour : MonoBehaviour
     //adds the error the player made and decreases the score
     private void ClucthReleasedTooEarly()
     {
+        particles.SwitchMaterial("red");
+        particles.Play();
+        
         if (!currentLevel.IsMistakeAlreadyAdded("You released the clutch too early!"))
         {
             currentLevel.AddMistake("You released the clutch too early!");

@@ -138,11 +138,11 @@ public class PlayerController : MonoBehaviour
         {
             particles.SwitchMaterial("yellow");
             particles.Play();
-            if (!currentLevel.IsMistakeAlreadyAdded("You went out of the road"))
+            if (!currentLevel.IsMistakeAlreadyAdded("You went out of the road!"))
             {
                 score -= 10;
-                currentLevel.AddMistake("You went out of the road");
-                tempMistakes.Add("You went out of the road");
+                currentLevel.AddMistake("You went out of the road!");
+                tempMistakes.Add("You went out of the road!");
             }
         }
     }
@@ -157,14 +157,26 @@ public class PlayerController : MonoBehaviour
         {
             particles.SwitchMaterial("yellow");
             particles.Play();
-            if (!currentLevel.IsMistakeAlreadyAdded("You were too close to the car in front of you"))
+            if (!currentLevel.IsMistakeAlreadyAdded("You were too close to the car in front of you!"))
             {
                 score -= 10;
-                currentLevel.AddMistake("You were too close to the car in front of you");
-                tempMistakes.Add("You were too close to the car in front of you");
+                currentLevel.AddMistake("You were too close to the car in front of you!");
+                tempMistakes.Add("You were too close to the car in front of you!");
             }
         }
+    }
 
+    //if the player is going too slow, we tell him
+    public void SpeedTooLowErrorManaging()
+    {
+        particles.SwitchMaterial("yellow");
+        particles.Play();
+        if(!currentLevel.IsMistakeAlreadyAdded("You were going too slow and the car stopped!"))
+        {
+            score -= 10;
+            currentLevel.AddMistake("You were going too slow and the car stopped!");
+            tempMistakes.Add("You were going too slow and the car stopped!");
+        }
     }
 
     //at the end of every level, we check if the player has NOT committed 

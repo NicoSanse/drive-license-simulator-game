@@ -481,6 +481,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
     public static MSVehicleControllerFree mSVehicleControllerFree;
 	private ClutchBehaviour clutch;
 	private Car car;
+	private CurrentCarStateOnOffButtonBehaviour onOffButton;
+	private PlayerController player;
 
     void Awake(){
 		mSVehicleControllerFree = this;
@@ -539,6 +541,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
 
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
 		car = Car.GetCarInstance();
+		onOffButton = CurrentCarStateOnOffButtonBehaviour.GetCurrentCarStateOnOffButtonBehaviourInstance();
+		player = PlayerController.GetPlayerControllerInstance();
     }
 
 	void SetValues(){
@@ -1104,6 +1108,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
                 car.Off();
                 StartCoroutine("StartEngineCoroutine", false);
                 StartCoroutine("TurnOffEngineTime");
+				player.SpeedTooLowErrorManaging();
             }
         }
     }

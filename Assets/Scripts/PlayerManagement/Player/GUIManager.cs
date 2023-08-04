@@ -23,6 +23,8 @@ public class GUIManager : MonoBehaviour
     private ClutchBehaviour clutch;
     private ChangeGearPanelBehaviour changeGearPanel;
     private Car car;
+    private MSVehicleControllerFree mSVehicleControllerFree;
+    private ParticlesManagement particles;
 
     void Awake()
     {
@@ -116,14 +118,21 @@ public class GUIManager : MonoBehaviour
         //if Car is on, turn it off
         if (car.IsOn())
         { 
-            MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
+            mSVehicleControllerFree.MySetEngineOnOff(true);
             currentCarStateOnOffButton.DarkenButton();
         }
         //otherwise turn it on
         else
         {
-            MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(false);
-            currentCarStateOnOffButton.LightenButton();
+            if (clutch.IsClutchPressed())
+            {
+                mSVehicleControllerFree.MySetEngineOnOff(false);
+                currentCarStateOnOffButton.LightenButton();
+            }
+            else
+            {
+                changeGearPanel.ClutchNotPressed();
+            }
         }
     }
 
@@ -156,5 +165,8 @@ public class GUIManager : MonoBehaviour
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
         changeGearPanel = ChangeGearPanelBehaviour.GetChangeGearPanelBehaviourInstance();
         car = Car.GetCarInstance();
+        mSVehicleControllerFree = MSVehicleControllerFree.mSVehicleControllerFree;
+        changeGearPanel = ChangeGearPanelBehaviour.GetChangeGearPanelBehaviourInstance();
+        particles = ParticlesManagement.getParticlesInstance();
     }
 }

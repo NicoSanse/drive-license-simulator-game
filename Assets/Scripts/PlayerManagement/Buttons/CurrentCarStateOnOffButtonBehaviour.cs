@@ -6,6 +6,7 @@ using TMPro;
 
 //this class is used by the button that turns on and off the car
 //and just shows whether the car is on or off
+
 public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
 {
     private Image ButtonImage;
@@ -31,18 +32,18 @@ public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
         
     }
 
-    //this method is called by GUIManager when the button is pressed
+    //this method is called by GUIManager when the button to turn off the engine is pressed
     public void DarkenButton()
     {
-        MakeTestAppear("OFF");
+        MakeTextAppear("OFF");
         MakeButtonBlack();
         StartCoroutine(MakeTextDisappear());
     }
 
-    //this method is called by GUIManager when the button is pressed
+    //this method is called by GUIManager when the button to turn on the engine is pressed
     public void LightenButton()
     {
-        MakeTestAppear("ON");
+        MakeTextAppear("ON");
         MakeButtonRed();
         StartCoroutine(MakeTextDisappear());
     }
@@ -71,7 +72,7 @@ public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
         TMPtext.color = textColor;
     }
 
-    private void MakeTestAppear(string text)
+    private void MakeTextAppear(string text)
     {
         TMPtext.text = text;
 
