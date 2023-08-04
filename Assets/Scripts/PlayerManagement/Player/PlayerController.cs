@@ -138,11 +138,11 @@ public class PlayerController : MonoBehaviour
         {
             particles.SwitchMaterial("yellow");
             particles.Play();
-            if (!currentLevel.IsMistakeAlreadyAdded("You are not on the road"))
+            if (!currentLevel.IsMistakeAlreadyAdded("You went out of the road"))
             {
                 score -= 10;
-                currentLevel.AddMistake("You are not on the road");
-                tempMistakes.Add("You are not on the road");
+                currentLevel.AddMistake("You went out of the road");
+                tempMistakes.Add("You went out of the road");
             }
         }
     }
@@ -157,11 +157,11 @@ public class PlayerController : MonoBehaviour
         {
             particles.SwitchMaterial("yellow");
             particles.Play();
-            if (!currentLevel.IsMistakeAlreadyAdded("You are too close to the car in front of you"))
+            if (!currentLevel.IsMistakeAlreadyAdded("You were too close to the car in front of you"))
             {
                 score -= 10;
-                currentLevel.AddMistake("You are too close to the car in front of you");
-                tempMistakes.Add("You are too close to the car in front of you");
+                currentLevel.AddMistake("You were too close to the car in front of you");
+                tempMistakes.Add("You were too close to the car in front of you");
             }
         }
 
@@ -230,6 +230,11 @@ public class PlayerController : MonoBehaviour
     public void SetScore(int score)
     {
         this.score = score;
+    }
+
+    public List<string> GetTempMistakes()
+    {
+        return tempMistakes;
     }
 
     public static PlayerController GetPlayerControllerInstance()

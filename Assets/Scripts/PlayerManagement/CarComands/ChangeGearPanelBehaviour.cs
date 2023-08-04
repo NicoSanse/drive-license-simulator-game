@@ -27,6 +27,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     private SaveState saveState;
     private Menu menu;
     private Level currentLevel;
+    private List<string> tempMistakes;
 
     void Awake()
     {
@@ -67,6 +68,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         }
         else
         {
+            ClutchNotPressed();
             particles.SwitchMaterial("red");
             particles.Play();
         }
@@ -82,13 +84,18 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         vectorBetweenClickTouches = clickLastTouchCoordinates - clickFirstTouchCoordinates;
         float distance = vectorBetweenClickTouches.magnitude;
 
-        StopCoroutine(coroutineTimeForNeutralGear);
+        if (coroutineTimeForNeutralGear != null)
+        {
+            StopCoroutine(coroutineTimeForNeutralGear);
+        }
 
         //if distance is too little, it won't be considered as dragging, but as clicking
         if(distance < 5){
             //the user must keep pressed the change gear panel for about 1s
             if (timeForNeutralGear > 0.95f) 
             {
+                particles.SwitchMaterial("green");
+                particles.Play();
                 clutch.SetGear(ClutchBehaviour.Gear.GearN);
                 car.NotifyGearChanged();
             }
@@ -285,16 +292,29 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         }
         else
         {
+            ClutchNotPressed();
             particles.SwitchMaterial("red");
             particles.Play();
         }
     }
 
+    //adds the error the player made
+    private void ClutchNotPressed()
+    { 
+        if(!currentLevel.IsMistakeAlreadyAdded("You didn't press the clutch!"))
+        {
+            currentLevel.AddMistake("You didn't press the clutch!");
+            tempMistakes.Add("You didn't press the clutch!");
+        }
+    }
+
+    //adds the error the player made, decreases the score and the player loses
     private void CarDestroyed()
     { 
         if(!currentLevel.IsMistakeAlreadyAdded("You destroyed the car!"))
         {
             currentLevel.AddMistake("You destroyed the car!");
+            tempMistakes.Add("You destroyed the car!");
         }
         player.Lose();
 
@@ -312,6 +332,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
         car = Car.GetCarInstance();
         particles = ParticlesManagement.getParticlesInstance();
+        tempMistakes = player.GetTempMistakes();
     }
 
     public static ChangeGearPanelBehaviour GetChangeGearPanelBehaviourInstance()

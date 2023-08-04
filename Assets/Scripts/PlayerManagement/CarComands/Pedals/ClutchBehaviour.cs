@@ -15,6 +15,12 @@ public class ClutchBehaviour : MonoBehaviour
     private Coroutine coroutineLoadBarAndChangeScale;
     private Car car;
     private ParticlesManagement particles;
+    private SaveManager saveManager;
+    private SaveState saveState;
+    private Menu menu;
+    private Level currentLevel;
+    private PlayerController player;
+    private List<string> tempMistakes;
 
 
     void Awake()
@@ -24,10 +30,7 @@ public class ClutchBehaviour : MonoBehaviour
 
     void Start()
     {
-        clutchPressed = false;
-        currentGear = Gear.Gear1;
-        car = Car.GetCarInstance();
-        particles = ParticlesManagement.getParticlesInstance();
+        Initialization();
     }
 
     void Update()
@@ -70,6 +73,7 @@ public class ClutchBehaviour : MonoBehaviour
         {
             particles.SwitchMaterial("red");
             particles.Play();
+            ClucthReleasedTooEarly();
             MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
             car.Off();
         }
@@ -143,6 +147,33 @@ public class ClutchBehaviour : MonoBehaviour
             default:
                 return 0f;
         }
+    }
+
+    //adds the error the player made and decreases the score
+    private void ClucthReleasedTooEarly()
+    {
+        if (!currentLevel.IsMistakeAlreadyAdded("You released the clutch too early!"))
+        {
+            currentLevel.AddMistake("You released the clutch too early!");
+            tempMistakes.Add("You released the clutch too early!");
+        }
+
+        int tempScore = player.GetScore();
+        player.SetScore(tempScore - 10);
+    }
+
+    private void Initialization()
+    {
+        clutchPressed = false;
+        currentGear = Gear.Gear1;
+        car = Car.GetCarInstance();
+        particles = ParticlesManagement.getParticlesInstance();
+        saveManager = SaveManager.GetSaveManagerInstance();
+        saveState = saveManager.GetSaveState();
+        menu = Menu.GetMenuInstance();
+        currentLevel = saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1];
+        player = PlayerController.GetPlayerControllerInstance();
+        tempMistakes = player.GetTempMistakes();
     }
 
     public void SetGear(Gear gear)

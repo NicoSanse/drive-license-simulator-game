@@ -19,7 +19,7 @@ public class LevelDescriptions
 
     private string FirstDescription()
     {
-        description = " - horizontal signage \n - vertical signage \n - intersections \n";
+        description = " - signage \n - speed limits \n - intersections \n";
         return description;
     }
 
@@ -31,7 +31,7 @@ public class LevelDescriptions
 
     private string ThirdDescription()
     {
-        description += " - pedestrian crossings \n - speed limits";
+        description += " - pedestrian crossings \n";
         return description;
     }
 
