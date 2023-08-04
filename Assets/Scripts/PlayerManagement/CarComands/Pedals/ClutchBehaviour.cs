@@ -99,6 +99,7 @@ public class ClutchBehaviour : MonoBehaviour
             rectTransform.localScale += new Vector3(incrementValue/50, (incrementValue/50) * 3, 0f);
 
             if (currentGear == Gear.Gear1) carRigidbody.AddForce(transform.forward * 800 * (incrementValue + 1));
+            if (currentGear == Gear.GearR) carRigidbody.AddForce(transform.forward * -800 * (incrementValue + 1));
         }
 
         yield return null;
