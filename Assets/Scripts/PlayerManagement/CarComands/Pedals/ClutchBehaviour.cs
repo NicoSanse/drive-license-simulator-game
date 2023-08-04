@@ -14,6 +14,7 @@ public class ClutchBehaviour : MonoBehaviour
     private bool clutchPressed;
     private Coroutine coroutineLoadBarAndChangeScale;
     private Car car;
+    private Rigidbody carRigidbody;
     private ParticlesManagement particles;
     private SaveManager saveManager;
     private SaveState saveState;
@@ -96,6 +97,8 @@ public class ClutchBehaviour : MonoBehaviour
             loadingBar.GetComponent<Slider>().value += incrementValue;
             loadingBar.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, loadingBar.GetComponent<Slider>().value);
             rectTransform.localScale += new Vector3(incrementValue/50, (incrementValue/50) * 3, 0f);
+
+            if (currentGear == Gear.Gear1) carRigidbody.AddForce(transform.forward * 800 * (incrementValue + 1));
         }
 
         yield return null;
@@ -169,6 +172,7 @@ public class ClutchBehaviour : MonoBehaviour
         clutchPressed = false;
         currentGear = Gear.GearN;
         car = Car.GetCarInstance();
+        carRigidbody = car.GetComponent<Rigidbody>();
         particles = ParticlesManagement.GetParticlesInstance();
         saveManager = SaveManager.GetSaveManagerInstance();
         saveState = saveManager.GetSaveState();
