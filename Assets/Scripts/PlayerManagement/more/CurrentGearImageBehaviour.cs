@@ -17,8 +17,7 @@ public class CurrentGearImageBehaviour : MonoBehaviour
         FindLocation();
     }
     
-    //locates the red circle on the current gear. For some reason the localPosition is different
-    //than inside the editor
+    //locates the red circle on the current gear. The coordinates are local in the editor
     void FindLocation()
     {
         currentGear = clutch.GetCurrentGear();

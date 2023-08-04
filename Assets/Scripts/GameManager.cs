@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//this is the GameManager class and models the flow of the game
+//this is the GameManager class. It models the flow of the game.
 //there are five states: welcome, menu, playing, level-paused and level-end
 public class GameManager : MonoBehaviour
 {

@@ -67,8 +67,6 @@ public class SaveManager : MonoBehaviour
         this.saveState = saveState;
     }
 
-
-
     public static SaveManager GetSaveManagerInstance() 
     { 
         return saveManager;

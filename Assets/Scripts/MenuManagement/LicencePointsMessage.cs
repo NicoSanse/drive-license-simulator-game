@@ -11,6 +11,7 @@ public class LicencePointsMessage : MonoBehaviour
     private SaveManager saveManager;
     private SaveState saveState;
     private int score;
+    
     void Start()
     {
         saveManager = SaveManager.GetSaveManagerInstance();

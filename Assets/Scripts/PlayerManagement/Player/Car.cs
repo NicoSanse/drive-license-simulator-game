@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//this class models the car with his informations and its almost 
-//uncorrelated to MSVechicleControllerFree Class which models physics
+//this class models the mainly the informations of the player car and it's almost 
+//uncorrelated to MSVechicleControllerFree Class, which instead models physics
+
 public class Car : MonoBehaviour
 {
     private static Car car;
@@ -48,7 +49,6 @@ public class Car : MonoBehaviour
     {
         accelerator.SetAcceleration(0f);
         brake.SetDeceleration(0f);
-
         lowBeam.SetLowBeamOff();
         highBeam.SetHighBeamOff();
         leftArrow.SetLeftArrowOff();
@@ -74,7 +74,6 @@ public class Car : MonoBehaviour
     public void NotifyGearChanged()
     {
         gear = clutch.GetCurrentGear();
-        print("Gear changed to " + gear);
     }
 
     public bool IsOn()

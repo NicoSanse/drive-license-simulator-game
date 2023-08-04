@@ -50,17 +50,6 @@ public class BrakeBehaviour : MonoBehaviour
         }
     }
 
-
-    public void SetDeceleration(float value) 
-    {
-        deceleration = value;
-    }
-
-    public float GetDeceleration() 
-    {
-        return deceleration;
-    }
-
     //triggered by GUIManager class when the brake button is pressed
     public void BrakeIsPressed() 
     {
@@ -85,6 +74,16 @@ public class BrakeBehaviour : MonoBehaviour
             deceleration -= Time.deltaTime * sensibility;
         }
         deceleration = Mathf.Clamp(deceleration, 0, 1);
+    }
+
+    public void SetDeceleration(float value)
+    {
+        deceleration = value;
+    }
+
+    public float GetDeceleration()
+    {
+        return deceleration;
     }
 
     public static BrakeBehaviour GetBrakeBehaviourInstance()

@@ -12,6 +12,7 @@ public class Scores : MonoBehaviour
     private Level level;
     private int score;
     [SerializeField] private int levelPos;
+    
     void Start()
     {
         saveManager = SaveManager.GetSaveManagerInstance();

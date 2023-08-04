@@ -14,6 +14,7 @@ public class ClutchBehaviour : MonoBehaviour
     private bool clutchPressed;
     private Coroutine coroutineLoadBarAndChangeScale;
     private Car car;
+    private ParticlesManagement particles;
 
 
     void Awake()
@@ -26,6 +27,7 @@ public class ClutchBehaviour : MonoBehaviour
         clutchPressed = false;
         currentGear = Gear.Gear1;
         car = Car.GetCarInstance();
+        particles = ParticlesManagement.getParticlesInstance();
     }
 
     void Update()
@@ -33,44 +35,21 @@ public class ClutchBehaviour : MonoBehaviour
 
     }
 
-    public void SetGear(Gear gear)
-    {
-        currentGear = gear;
-    }
-
-    public Gear GetCurrentGear()
-    {
-        return currentGear;
-    }
-
-    public bool IsClutchPressed()
-    {
-        return clutchPressed;
-    }
-
-    public void SetClutchPressed(bool clutch)
-    {
-        clutchPressed = clutch;
-    }
-
-    //triggered by GUIManager class, starts the coroutine 
-    //to decrease the scale of the clutch image
+    //triggered by GUIManager class, starts the coroutine to decrease the scale of the clutch image
     public void ClutchIsPressed()
     {
         SetClutchPressed(true);
         StartCoroutine(DecreaseScale());
     }
 
-    //triggered by ChangeGearPanelBehaviour class, starts the coroutine
-    //to increase the value of the releasing bar and the scale of the clutch image
+    //triggered by ChangeGearPanelBehaviour class, starts the coroutine to increase the value of the releasing bar and the scale of the clutch image
     public void GearHasBeenChanged() 
     {
         loadingBar.SetActive(true);
         coroutineLoadBarAndChangeScale = StartCoroutine(LoadBarAndChangeScale(FindTimeForChangeTheGear(currentGear), GetComponent<RectTransform>()));
     }
 
-    //triggered by GUIManger class, stops the coroutine started
-    //earlier and checks if the clutch was released in a proper time
+    //triggered by GUIManger class, stops the coroutine started earlier and checks if the clutch was released in a proper time
     public void ClutchIsReleased()
     {
         if (coroutineLoadBarAndChangeScale != null)
@@ -80,18 +59,19 @@ public class ClutchBehaviour : MonoBehaviour
 
         if (currentGear == 0)
         {
-            print("auto in folle");
+            //don't do anything
         }
         else if (currentGear != 0 && loadingBar.GetComponent<Slider>().value > 0.9f)
         {
-            print("Clutch Released ok");
+            particles.SwitchMaterial("green");
+            particles.Play();
         }
         else
         {
-            print("Clutch released too early");
-            //quando testerò il tutto dovrò decommentare la riga successiva
-            //MSVehicleControllerFree.mSVehicleControllerFree.setEngineOnOff(true);
-            //car.Off();
+            particles.SwitchMaterial("red");
+            particles.Play();
+            MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
+            car.Off();
         }
 
         SetClutchPressed(false);
@@ -100,11 +80,9 @@ public class ClutchBehaviour : MonoBehaviour
         car.NotifyGearChanged();
     }
 
-    //!!!!!forse la seguente funzione si può splittare in due distinte
 
-    //increases the value of the bar and increases the scale of the clutch
-    //the rate of increment is split in 50 to increase the scale, though i can't
-    //really remember why
+    //increases the value of the bar and increases the scale of the clutch. The rate 
+    //of increment is split in 50 to increase the scale, though i can't really remember why
     private IEnumerator LoadBarAndChangeScale(float incrementValue, RectTransform rectTransform)
     {
         yield return new WaitForSeconds(0.2f);
@@ -120,7 +98,7 @@ public class ClutchBehaviour : MonoBehaviour
         yield return null;
     }
 
-    //decreases the scale of the clutch, can't use the CommonPedalsBehaviours
+    //decreases the scale of the clutch. Can't use the CommonPedalsBehaviours
     //because interfers with other funcionalities
     private IEnumerator DecreaseScale()
     {
@@ -165,6 +143,26 @@ public class ClutchBehaviour : MonoBehaviour
             default:
                 return 0f;
         }
+    }
+
+    public void SetGear(Gear gear)
+    {
+        currentGear = gear;
+    }
+
+    public Gear GetCurrentGear()
+    {
+        return currentGear;
+    }
+
+    public bool IsClutchPressed()
+    {
+        return clutchPressed;
+    }
+
+    public void SetClutchPressed(bool clutch)
+    {
+        clutchPressed = clutch;
     }
 
     public static ClutchBehaviour GetClutchBehaviourInstance()

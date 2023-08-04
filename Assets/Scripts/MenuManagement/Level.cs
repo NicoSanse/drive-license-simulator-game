@@ -13,6 +13,7 @@ public class Level
     private int score;
     private List<string> mistakes;
     private string description;
+    
     public Level(int id)
     {
         passed = false;
@@ -67,16 +68,14 @@ public class Level
         mistakes.Add(mistake);
     }
 
+    public void RemoveMistake(string mistake) 
+    {
+        mistakes.Remove(mistake);
+    }
+
     public bool IsMistakeAlreadyAdded(string mistake)
     {
-        foreach (string m in mistakes)
-        {
-            if (m == mistake)
-            {
-                return true;
-            }
-        }
-        return false;
+        return mistakes.Contains(mistake);
     }
 
     public List<string> GetMistakes() 

@@ -31,7 +31,10 @@ public class GivingDetails : MonoBehaviour
 
     private void WriteMistakes()
     {
-        //mistakes.text = "";
-        //to continue
+        List<string> mistakesList = mistakesCollection.GetMistakes();
+        foreach (string mistake in mistakesList)
+        {
+            mistakes.text += mistake + "\n";
+        }
     }
 }

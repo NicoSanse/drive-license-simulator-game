@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
+//this class is very important since includes all the methods that can be called by the GUI,
+//so by the player. This class doesn't do anything, but calling the classes that actually
+//are responsible for the behaviour of the specific component of the car
 
 public class GUIManager : MonoBehaviour
 {

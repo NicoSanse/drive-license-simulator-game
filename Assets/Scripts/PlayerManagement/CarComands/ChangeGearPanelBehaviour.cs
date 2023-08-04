@@ -21,6 +21,12 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     private float timeForNeutralGear;
     private ClutchBehaviour clutch;
     private Car car;
+    private ParticlesManagement particles;
+    private PlayerController player;
+    private SaveManager saveManager;
+    private SaveState saveState;
+    private Menu menu;
+    private Level currentLevel;
 
     void Awake()
     {
@@ -29,8 +35,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
 
     void Start()
     {
-        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
-        car = Car.GetCarInstance();
+        Initialization();
     }
 
     void Update()
@@ -45,27 +50,26 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         firstTouchCoordinates = eventData.position;
     }
 
-    //triggered by GUIManager class, stores the coordinates of last drag touch
-    //then changes the gear
+    //triggered by GUIManager class, stores the coordinates of last drag touch then changes the gear
     public void TakeLastTouchCoordinates(PointerEventData eventData) 
     {
         lastTouchCoordinates = eventData.position;
         ChangeGear();
     }
     
-    //triggered by GUIManager class, stores the coordinates of first click
-    //then finds the time the user is keeping pressed the change gear panel
+    //triggered by GUIManager class, stores the coordinates of first click and finds the time the user is keeping pressed the change gear panel
     public void NeutralGear(PointerEventData eventData)
     {
         clickFirstTouchCoordinates = eventData.position;
-        //if (clutch.IsClutchPressed())
-        //{
+        if (clutch.IsClutchPressed())
+        {
             coroutineTimeForNeutralGear = StartCoroutine(TimeForNeutralGear());
-        //}
-        //else
-        //{
-          //  print("Frizione non premuta");
-        //}
+        }
+        else
+        {
+            particles.SwitchMaterial("red");
+            particles.Play();
+        }
     }
 
     //triggered buy GUIManager class, stores the coordinates of last click, finds
@@ -147,137 +151,167 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
             directionDragged = "down-right";
     }
 
-    //according to the current gear and direction of drag sets the new gear
+    //according to the current gear and direction of drag, the new gear is set
     private void ChangeGear()
     {
-        //if (clutch.IsClutchPressed())
-        //eccetera
-
-        CalculateDirection();
-        ClutchBehaviour.Gear currentGear = clutch.GetCurrentGear();
-
-        switch (currentGear)
+        if (clutch.IsClutchPressed())
         {
-            case ClutchBehaviour.Gear.Gear1:
-                if (directionDragged == "down")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear2);
-                }
-                if (directionDragged == "down-right")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.GearR);
-                }
-                else
-                {
-                    print("Non puoi cambiare marcia");
-                }
-                break;
+            CalculateDirection();
+            ClutchBehaviour.Gear currentGear = clutch.GetCurrentGear();
 
-            case ClutchBehaviour.Gear.Gear2:
-                if (directionDragged == "up")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear1);
-                }
-                if (directionDragged == "up-right")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear3);
-                }
-                else
-                {
-                    print("Non puoi cambiare marcia");
-                }
-                break;
+            switch (currentGear)
+            {
+                case ClutchBehaviour.Gear.Gear1:
+                    if (directionDragged == "down")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear2);
+                    }
+                    if (directionDragged == "down-right")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.GearR);
+                    }
+                    else
+                    {
+                        print("Non puoi cambiare marcia");
+                    }
+                    break;
 
-            case ClutchBehaviour.Gear.Gear3:
-                if (directionDragged == "down")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear4);
-                }
-                if (directionDragged == "down-left")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear2);
-                }
-                if (directionDragged == "down-right")
-                {
-                    //insommma meh
-                    clutch.SetGear(ClutchBehaviour.Gear.GearR);
-                }
-                else
-                {
-                    print("Non puoi cambiare marcia");
-                }
-                break;
+                case ClutchBehaviour.Gear.Gear2:
+                    if (directionDragged == "up")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear1);
+                    }
+                    if (directionDragged == "up-right")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear3);
+                    }
+                    else
+                    {
+                        print("Non puoi cambiare marcia");
+                    }
+                    break;
 
-            case ClutchBehaviour.Gear.Gear4:
-                if (directionDragged == "up")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear3);
-                }
-                if (directionDragged == "up-right")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear5);
-                }
-                if (directionDragged == "up-left")
-                {
-                    //insommma meh
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear1);
-                }
-                else
-                {
-                    print("Non puoi cambiare marcia");
-                }
-                break;
+                case ClutchBehaviour.Gear.Gear3:
+                    if (directionDragged == "down")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear4);
+                    }
+                    if (directionDragged == "down-left")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear2);
+                    }
+                    if (directionDragged == "down-right")
+                    {
+                        CarDestroyed();
+                        clutch.SetGear(ClutchBehaviour.Gear.GearR);
+                    }
+                    else
+                    {
+                        print("Non puoi cambiare marcia");
+                    }
+                    break;
 
-            case ClutchBehaviour.Gear.Gear5:
-                if (directionDragged == "down")
-                {
-                    //insommma meh
-                    clutch.SetGear(ClutchBehaviour.Gear.GearR);
-                }
-                else if (directionDragged == "down-left")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear4);
-                }
-                break;
+                case ClutchBehaviour.Gear.Gear4:
+                    if (directionDragged == "up")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear3);
+                    }
+                    if (directionDragged == "up-right")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear5);
+                    }
+                    if (directionDragged == "up-left")
+                    {
+                        particles.SwitchMaterial("yellow");
+                        particles.Play();
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear1);
+                    }
+                    else
+                    {
+                        print("Non puoi cambiare marcia");
+                    }
+                    break;
 
-            case ClutchBehaviour.Gear.GearR:
-                if (directionDragged == "up-left")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear1);
-                }
-                break;
+                case ClutchBehaviour.Gear.Gear5:
+                    if (directionDragged == "down")
+                    {
+                        CarDestroyed();
+                        clutch.SetGear(ClutchBehaviour.Gear.GearR);
+                    }
+                    else if (directionDragged == "down-left")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear4);
+                    }
+                    break;
 
-            case ClutchBehaviour.Gear.GearN:
-                if (directionDragged == "up-left")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear1);
-                }
-                if (directionDragged == "dwon-left")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear2);
-                }
-                if (directionDragged == "up")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear3);
-                }
-                if (directionDragged == "down")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear4);
-                }
-                if (directionDragged == "up-right")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.Gear5);
-                }
-                if (directionDragged == "down-right")
-                {
-                    clutch.SetGear(ClutchBehaviour.Gear.GearR);
-                }
-                break;
+                case ClutchBehaviour.Gear.GearR:
+                    if (directionDragged == "up-left")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear1);
+                    }
+                    break;
 
-            default:
-                break;
+                case ClutchBehaviour.Gear.GearN:
+                    if (directionDragged == "up-left")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear1);
+                    }
+                    if (directionDragged == "dwon-left")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear2);
+                    }
+                    if (directionDragged == "up")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear3);
+                    }
+                    if (directionDragged == "down")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear4);
+                    }
+                    if (directionDragged == "up-right")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.Gear5);
+                    }
+                    if (directionDragged == "down-right")
+                    {
+                        clutch.SetGear(ClutchBehaviour.Gear.GearR);
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            clutch.GearHasBeenChanged();
         }
-        clutch.GearHasBeenChanged();
+        else
+        {
+            particles.SwitchMaterial("red");
+            particles.Play();
+        }
+    }
+
+    private void CarDestroyed()
+    { 
+        if(!currentLevel.IsMistakeAlreadyAdded("You destroyed the car!"))
+        {
+            currentLevel.AddMistake("You destroyed the car!");
+        }
+        player.Lose();
+
+        int tempScore = player.GetScore();
+        player.SetScore(tempScore - 10);
+    }
+
+    private void Initialization()
+    {
+        saveManager = SaveManager.GetSaveManagerInstance();
+        saveState = saveManager.GetSaveState();
+        menu = Menu.GetMenuInstance();
+        currentLevel = saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1];
+        player = PlayerController.GetPlayerControllerInstance();
+        clutch = ClutchBehaviour.GetClutchBehaviourInstance();
+        car = Car.GetCarInstance();
+        particles = ParticlesManagement.getParticlesInstance();
     }
 
     public static ChangeGearPanelBehaviour GetChangeGearPanelBehaviourInstance()

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//this class manages the particles release, which are meant as comunicative instrument
+//to tell the user that he is doing something wrong or right
+
 public class ParticlesManagement : MonoBehaviour
 {
     private static ParticlesManagement particlesInstance;

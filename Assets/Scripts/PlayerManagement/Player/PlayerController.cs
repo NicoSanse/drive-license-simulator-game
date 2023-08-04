@@ -4,13 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-//this class gives the functionalities to the player
-//it is responsible for the score and for the level passing
-
-//todo: implement mistakes saving
-//they are to be written in the save state as they are committed
-//saveState.GetListOfLevels()[currentLevel.GetId() - 1].AddMistake(mistake);
-//il mistake sarà una stringa da generare in base a cosa succede
+//this class gives the functionalities to the player and includes the logic behind
+//the player behaviour. It is responsible for the score and for the level passing
 
 //todo: gestire anche eliminazione errori e/o modifiche
 
@@ -23,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Menu menu;
     private Level currentLevel;
     private Car car;
+    private MSVehicleControllerFree mSVehicleControllerFree;
     private int score;
     private ParticlesManagement particles;
     private GameObject canvasEndOfLevel;
@@ -36,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private GameObject currentWaypointPrefab;
     private float safeDistance;
     private bool isDistanceSafe;
+    private List<string> tempMistakes;
 
     void Awake()
     {
@@ -89,7 +86,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Win()
+    public void Win()
     {
         GUI.SetActive(false);
         canvasEndOfLevel.GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
@@ -98,11 +95,13 @@ public class PlayerController : MonoBehaviour
         currentLevel.SetPassed(true);
         currentLevel.SetScore(score);
 
+        CheckMistakes();
+
         StopCar();
         LevelFinished();
     }
 
-    private void Lose()
+    public void Lose()
     {
         particles.SwitchMaterial("red");
         particles.Play();
@@ -124,6 +123,7 @@ public class PlayerController : MonoBehaviour
             if(!currentLevel.IsMistakeAlreadyAdded("You hit something or someone!"))
             {
                 currentLevel.AddMistake("You hit something or someone!");
+                tempMistakes.Add("You hit something or someone!");
             }
             Lose();
             timesCollisionEnterCalled++;
@@ -142,6 +142,7 @@ public class PlayerController : MonoBehaviour
             {
                 score -= 10;
                 currentLevel.AddMistake("You are not on the road");
+                tempMistakes.Add("You are not on the road");
             }
         }
     }
@@ -160,15 +161,24 @@ public class PlayerController : MonoBehaviour
             {
                 score -= 10;
                 currentLevel.AddMistake("You are too close to the car in front of you");
+                tempMistakes.Add("You are too close to the car in front of you");
             }
         }
 
     }
 
-    private void StopCar()
-    {
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        car.Off();
+    //at the end of every level, we check if the player has NOT committed 
+    //the mistakes he has already committed in the past, and if not so, we remove them
+    private void CheckMistakes()
+    { 
+        List<string> pastMistakes = currentLevel.GetMistakes();
+        foreach(string mistake in pastMistakes)
+        {
+            if(!tempMistakes.Contains(mistake))
+            {
+                currentLevel.RemoveMistake(mistake);
+            }
+        }
     }
 
     //saving state and changing game state
@@ -194,13 +204,22 @@ public class PlayerController : MonoBehaviour
         menu = Menu.GetMenuInstance();
         currentLevel = saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1];
         car = Car.GetCarInstance();
+        mSVehicleControllerFree = MSVehicleControllerFree.mSVehicleControllerFree;
         score = 0;
         particles = ParticlesManagement.getParticlesInstance();
         canvasEndOfLevel = GameObject.FindGameObjectWithTag("CanvasEndOfLevel");
         GUI = GameObject.FindGameObjectWithTag("GUI");
         timesCollisionEnterCalled = 0;
         index = 0;
+        tempMistakes = new List<string>();
         DrawCurrentWaypoint();
+    }
+
+    private void StopCar()
+    {
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        mSVehicleControllerFree.MySetEngineOnOff(true);
+        car.Off();
     }
 
     public int GetScore()
@@ -208,7 +227,7 @@ public class PlayerController : MonoBehaviour
         return score;
     }
 
-    private void SetScore(int score)
+    public void SetScore(int score)
     {
         this.score = score;
     }

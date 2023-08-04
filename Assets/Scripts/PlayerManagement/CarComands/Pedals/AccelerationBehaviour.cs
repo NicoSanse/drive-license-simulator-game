@@ -49,26 +49,6 @@ public class AccelerationBehaviour : MonoBehaviour
         }
     }
 
-    public void SetAcceleration(float value) 
-    {
-        acceleration = value;
-    }
-
-    public float GetAcceleration() 
-    {
-        return acceleration;
-    }
-
-    private void SetAcceleratorPressed(bool value) 
-    {
-        acceleratorPressed = value;
-    }
-
-    public bool IsAcceleratorPressed() 
-    {
-        return acceleratorPressed;
-    }
-
     //triggered by GUIManager class when pressing the accelerator button
     public void AcceleratorIsPressed() 
     {
@@ -93,6 +73,26 @@ public class AccelerationBehaviour : MonoBehaviour
             acceleration -= Time.deltaTime * sensibility;
         }
         acceleration = Mathf.Clamp(acceleration, 0, 1);
+    }
+
+    public void SetAcceleration(float value)
+    {
+        acceleration = value;
+    }
+
+    public float GetAcceleration()
+    {
+        return acceleration;
+    }
+
+    private void SetAcceleratorPressed(bool value)
+    {
+        acceleratorPressed = value;
+    }
+
+    public bool IsAcceleratorPressed()
+    {
+        return acceleratorPressed;
     }
 
     public static AccelerationBehaviour GetAccelerationBehaviourInstance()
