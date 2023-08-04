@@ -17,7 +17,7 @@ public class LicencePointsMessage : MonoBehaviour
         saveManager = SaveManager.GetSaveManagerInstance();
         saveState = saveManager.GetSaveState();
         score = saveState.GetDriveLicensePoints();
-        GetComponent<TMP_Text>().text = "Your licence's points: " + score;
+        //GetComponent<TMP_Text>().text = "Your licence's points: " + score;
     }
 
     void Update()
