@@ -1096,22 +1096,14 @@ public class MSVehicleControllerFree : MonoBehaviour {
             {
 				ms_Rigidbody.AddForce(transform.forward * -25000);
 			}
-			//its appropriate to use a specific sound for this
-            if (currentGear == 1 & KMh < 5 | currentGear == 2 & KMh < 10 |
-                currentGear == 3 & KMh < 20 | currentGear == 4 & KMh < 30 |
-                currentGear == 5 & KMh < 45 | currentGear == -1 & KMh < 5)
-            { 
-				//suono velocità troppo bassa
-			}
-			//speed too low, make the car stop
+			//speed too low, makes the car stop
             if (currentGear == 1 & KMh < 3 | currentGear == 2 & KMh < 5 |
                 currentGear == 3 & KMh < 10 | currentGear == 4 & KMh < 15 |
                 currentGear == 5 & KMh < 25 | currentGear == -1 & KMh < 3)
             {
-				//decommentare le seguenti righe in fase di test su cellulare
-                //car.Off();
-                //StartCoroutine("StartEngineCoroutine", false);
-                //StartCoroutine("TurnOffEngineTime");
+                car.Off();
+                StartCoroutine("StartEngineCoroutine", false);
+                StartCoroutine("TurnOffEngineTime");
             }
         }
     }

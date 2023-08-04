@@ -14,6 +14,7 @@ public class MyCarRotation : MonoBehaviour
     private float angleRotationDifference;
     private float leftTurningValue;
     private float rightTurningValue;
+    
     void Awake()
     {
         myCarRotation = this;
