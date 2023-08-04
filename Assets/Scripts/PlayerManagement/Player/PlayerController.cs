@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     private float safeDistance;
     private bool isDistanceSafe;
     private List<string> tempMistakes;
+    private int speedLimitDefault;
+    private Transform carTransform;
 
     void Awake()
     {
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         FollowPath();
+        SpeedLimit();
     }
 
     void FixedUpdate()
@@ -130,6 +133,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //finds whether the player is respecting speed limit or not
+    private void SpeedLimit()
+    {
+        //in this area speed limit is 30
+        if (carTransform.position.z > 420 && carTransform.position.z < 700 && 
+            carTransform.position.x < -14 && carTransform.position.x > -620)
+        {
+            speedLimitDefault = 30;
+        }
+        else
+        {
+            speedLimitDefault = 50;
+        }
+
+        if(car.GetSpeed() > speedLimitDefault)
+        {
+            particles.SwitchMaterial("yellow");
+            particles.Play();
+        }
+
+        if (car.GetSpeed() > speedLimitDefault + 5)
+        {
+            if (!currentLevel.IsMistakeAlreadyAdded("You were going too fast!"))
+            {
+                score -= 10;
+                currentLevel.AddMistake("You were going too fast!");
+                tempMistakes.Add("You were going too fast!");
+            }
+            Lose();
+        }
+    }
+
     //determine if the player is on the road
     private void PlayerOnTheRoad()
     { 
@@ -167,7 +202,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //if the player is going too slow, we tell him
-    public void SpeedTooLowErrorManaging()
+    public void SpeedTooLow()
     {
         particles.SwitchMaterial("yellow");
         particles.Play();
@@ -224,6 +259,8 @@ public class PlayerController : MonoBehaviour
         timesCollisionEnterCalled = 0;
         index = 0;
         tempMistakes = new List<string>();
+        speedLimitDefault = 50;
+        carTransform = car.GetComponent<Transform>();
         DrawCurrentWaypoint();
     }
 
