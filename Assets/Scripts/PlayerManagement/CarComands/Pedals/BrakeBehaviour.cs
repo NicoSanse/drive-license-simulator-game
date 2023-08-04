@@ -39,8 +39,8 @@ public class BrakeBehaviour : MonoBehaviour
         {
             if (brakePressed)
             {
-                brakeLeftLight.intensity = 20;
-                brakeRightLight.intensity = 20;
+                brakeLeftLight.intensity = 50;
+                brakeRightLight.intensity = 50;
             }
             else
             {

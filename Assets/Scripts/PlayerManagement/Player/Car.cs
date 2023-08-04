@@ -59,7 +59,6 @@ public class Car : MonoBehaviour
     public void Off()
     {
         Stop();
-        gear = ClutchBehaviour.Gear.GearN;
         currentState = State.Off;
     }
 

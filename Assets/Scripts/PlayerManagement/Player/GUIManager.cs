@@ -124,15 +124,8 @@ public class GUIManager : MonoBehaviour
         //otherwise turn it on
         else
         {
-            if (clutch.IsClutchPressed())
-            {
-                mSVehicleControllerFree.MySetEngineOnOff(false);
-                currentCarStateOnOffButton.LightenButton();
-            }
-            else
-            {
-                changeGearPanel.ClutchNotPressed();
-            }
+            mSVehicleControllerFree.MySetEngineOnOff(false);
+            currentCarStateOnOffButton.LightenButton();
         }
     }
 
@@ -167,6 +160,6 @@ public class GUIManager : MonoBehaviour
         car = Car.GetCarInstance();
         mSVehicleControllerFree = MSVehicleControllerFree.mSVehicleControllerFree;
         changeGearPanel = ChangeGearPanelBehaviour.GetChangeGearPanelBehaviourInstance();
-        particles = ParticlesManagement.getParticlesInstance();
+        particles = ParticlesManagement.GetParticlesInstance();
     }
 }

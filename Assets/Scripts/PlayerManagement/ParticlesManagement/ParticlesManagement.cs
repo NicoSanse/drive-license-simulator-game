@@ -50,7 +50,7 @@ public class ParticlesManagement : MonoBehaviour
         GetComponent<ParticleSystem>().Play();
     }
 
-    public static ParticlesManagement getParticlesInstance()
+    public static ParticlesManagement GetParticlesInstance()
     {
         return particlesInstance;
     }

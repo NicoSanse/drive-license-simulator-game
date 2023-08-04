@@ -333,7 +333,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
         player = PlayerController.GetPlayerControllerInstance();
         clutch = ClutchBehaviour.GetClutchBehaviourInstance();
         car = Car.GetCarInstance();
-        particles = ParticlesManagement.getParticlesInstance();
+        particles = ParticlesManagement.GetParticlesInstance();
         tempMistakes = player.GetTempMistakes();
     }
 

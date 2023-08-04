@@ -55,6 +55,7 @@ public class ClutchBehaviour : MonoBehaviour
     //triggered by GUIManger class, stops the coroutine started earlier and checks if the clutch was released in a proper time
     public void ClutchIsReleased()
     {
+        GetComponent<RectTransform>().localScale = new Vector3(0.1f, 0.3f, 1f);
         if (coroutineLoadBarAndChangeScale != null)
         { 
             StopCoroutine(coroutineLoadBarAndChangeScale); 
@@ -166,9 +167,9 @@ public class ClutchBehaviour : MonoBehaviour
     private void Initialization()
     {
         clutchPressed = false;
-        currentGear = Gear.Gear1;
+        currentGear = Gear.GearN;
         car = Car.GetCarInstance();
-        particles = ParticlesManagement.getParticlesInstance();
+        particles = ParticlesManagement.GetParticlesInstance();
         saveManager = SaveManager.GetSaveManagerInstance();
         saveState = saveManager.GetSaveState();
         menu = Menu.GetMenuInstance();

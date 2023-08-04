@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
         car = Car.GetCarInstance();
         mSVehicleControllerFree = MSVehicleControllerFree.mSVehicleControllerFree;
         score = 0;
-        particles = ParticlesManagement.getParticlesInstance();
+        particles = ParticlesManagement.GetParticlesInstance();
         canvasEndOfLevel = GameObject.FindGameObjectWithTag("CanvasEndOfLevel");
         GUI = GameObject.FindGameObjectWithTag("GUI");
         timesCollisionEnterCalled = 0;

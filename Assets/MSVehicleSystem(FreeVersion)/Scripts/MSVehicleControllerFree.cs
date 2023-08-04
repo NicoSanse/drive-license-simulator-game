@@ -483,6 +483,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	private Car car;
 	private CurrentCarStateOnOffButtonBehaviour onOffButton;
 	private PlayerController player;
+	private ParticlesManagement particles;
 
     void Awake(){
 		mSVehicleControllerFree = this;
@@ -543,6 +544,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		car = Car.GetCarInstance();
 		onOffButton = CurrentCarStateOnOffButtonBehaviour.GetCurrentCarStateOnOffButtonBehaviourInstance();
 		player = PlayerController.GetPlayerControllerInstance();
+		particles = ParticlesManagement.GetParticlesInstance();
     }
 
 	void SetValues(){
@@ -1100,8 +1102,15 @@ public class MSVehicleControllerFree : MonoBehaviour {
             {
 				ms_Rigidbody.AddForce(transform.forward * -25000);
 			}
+			if (currentGear == 1 & KMh < 5 | currentGear == 2 & KMh < 10 |
+				currentGear == 3 & KMh < 15 | currentGear == 4 & KMh < 20 |
+				currentGear == 5 & KMh < 30 | currentGear == -1 & KMh < 5)
+			{
+				particles.SwitchMaterial("yellow");
+				particles.Play();
+			}
 			//speed too low, makes the car stop
-            if (currentGear == 1 & KMh < 3 | currentGear == 2 & KMh < 5 |
+			if (currentGear == 1 & KMh < 3 | currentGear == 2 & KMh < 5 |
                 currentGear == 3 & KMh < 10 | currentGear == 4 & KMh < 15 |
                 currentGear == 5 & KMh < 25 | currentGear == -1 & KMh < 3)
             {
