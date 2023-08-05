@@ -286,6 +286,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
                 default:
                     break;
             }
+            
             clutch.GearHasBeenChanged();
         }
         else

@@ -8,13 +8,13 @@ using UnityEngine.EventSystems;
 public class ClutchBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject loadingBar;
+    [SerializeField] Rigidbody carRigidbody;
     private static ClutchBehaviour clutch;
     public enum Gear { Gear1 = 1, Gear2 = 2, Gear3 = 3, Gear4 = 4, Gear5 = 5, GearR = -1, GearN = 0 };
     private static Gear currentGear;
     private bool clutchPressed;
     private Coroutine coroutineLoadBarAndChangeScale;
     private Car car;
-    private Rigidbody carRigidbody;
     private ParticlesManagement particles;
     private SaveManager saveManager;
     private SaveState saveState;
@@ -36,7 +36,14 @@ public class ClutchBehaviour : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKey("q"))
+        {
+            ClutchIsPressed();
+        }
+        if (Input.GetKeyUp("q"))
+        {
+            ClutchIsReleased();
+        }
     }
 
     //triggered by GUIManager class, starts the coroutine to decrease the scale of the clutch image
@@ -49,14 +56,18 @@ public class ClutchBehaviour : MonoBehaviour
     //triggered by ChangeGearPanelBehaviour class, starts the coroutine to increase the value of the releasing bar and the scale of the clutch image
     public void GearHasBeenChanged() 
     {
-        loadingBar.SetActive(true);
-        coroutineLoadBarAndChangeScale = StartCoroutine(LoadBarAndChangeScale(FindTimeForChangeTheGear(currentGear), GetComponent<RectTransform>()));
+        if (car.IsOn())
+        {
+            loadingBar.SetActive(true);
+            coroutineLoadBarAndChangeScale = StartCoroutine(LoadBarAndChangeScale(FindTimeForChangeTheGear(currentGear), GetComponent<RectTransform>()));
+        }
     }
 
     //triggered by GUIManger class, stops the coroutine started earlier and checks if the clutch was released in a proper time
     public void ClutchIsReleased()
     {
         GetComponent<RectTransform>().localScale = new Vector3(0.1f, 0.3f, 1f);
+
         if (coroutineLoadBarAndChangeScale != null)
         { 
             StopCoroutine(coroutineLoadBarAndChangeScale); 
@@ -66,16 +77,19 @@ public class ClutchBehaviour : MonoBehaviour
         {
             //don't do anything
         }
-        else if (currentGear != 0 && loadingBar.GetComponent<Slider>().value > 0.9f)
+        else if (currentGear != 0 && loadingBar.GetComponent<Slider>().value > 0.7f)
         {
             particles.SwitchMaterial("green");
             particles.Play();
         }
         else
         {
-            ClucthReleasedTooEarly();
-            MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
-            car.Off();
+            if (car.IsOn())
+            {
+                MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
+                car.Off();
+                ClucthReleasedTooEarly();
+            }
         }
 
         SetClutchPressed(false);
@@ -98,8 +112,8 @@ public class ClutchBehaviour : MonoBehaviour
             loadingBar.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, loadingBar.GetComponent<Slider>().value);
             rectTransform.localScale += new Vector3(incrementValue/50, (incrementValue/50) * 3, 0f);
 
-            if (currentGear == Gear.Gear1) carRigidbody.AddForce(transform.forward * 800 * (incrementValue + 1));
-            if (currentGear == Gear.GearR) carRigidbody.AddForce(transform.forward * -800 * (incrementValue + 1));
+            if (currentGear == Gear.Gear1) carRigidbody.velocity = new Vector3(0, 0, Mathf.Pow(incrementValue, -0.2f));
+            if (currentGear == Gear.GearR) carRigidbody.velocity = new Vector3(0, 0, -Mathf.Pow(incrementValue, -0.2f));
         }
 
         yield return null;
@@ -125,7 +139,7 @@ public class ClutchBehaviour : MonoBehaviour
     //makes the bar inactive
     private void MakeDisappearTheLoadingBar()
     {
-        loadingBar.SetActive(false);
+        if(loadingBar.activeSelf) loadingBar.SetActive(false);
     }
 
     //finds the best time for each gear(actually its a rate value)
@@ -134,15 +148,15 @@ public class ClutchBehaviour : MonoBehaviour
         switch (gear)
         {
             case Gear.Gear1:
-                return 0.005f;
-            case Gear.Gear2:
                 return 0.01f;
-            case Gear.Gear3:
+            case Gear.Gear2:
                 return 0.015f;
-            case Gear.Gear4:
+            case Gear.Gear3:
                 return 0.02f;
-            case Gear.Gear5:
+            case Gear.Gear4:
                 return 0.025f;
+            case Gear.Gear5:
+                return 0.03f;
             case Gear.GearR:
                 return 0.005f;
             case Gear.GearN:
@@ -173,7 +187,6 @@ public class ClutchBehaviour : MonoBehaviour
         clutchPressed = false;
         currentGear = Gear.GearN;
         car = Car.GetCarInstance();
-        carRigidbody = car.GetComponent<Rigidbody>();
         particles = ParticlesManagement.GetParticlesInstance();
         saveManager = SaveManager.GetSaveManagerInstance();
         saveState = saveManager.GetSaveState();

@@ -59,34 +59,25 @@ public class MyCarRotation : MonoBehaviour
             //leftSensibility = angleRotationDifference / 15;
             leftTurningValue += leftSensibility * Time.deltaTime;
         }
-        //not considering little variation as intentional rotation
-        else if(angleRotationDifference < 5)
-        {
-            print("BBBB");
-            //leftSensibility = 3f;
-            leftTurningValue -= leftSensibility * Time.deltaTime;
-        }
-        leftTurningValue = Mathf.Clamp(leftTurningValue, 0, 1);
-        print("left turning value: " + leftTurningValue);
-
-
-
-
-
         //managing turning right
-        if (angleRotationDifference >= 5)
+        else if (angleRotationDifference >= 5)
         {
             print("CCCC");
             //rightSensibility = angleRotationDifference / 15;
             rightTurningValue += rightSensibility * Time.deltaTime;
         }
         //not considering little variation as intentional rotation
-        else if(angleRotationDifference > -5)
+        else
         {
-            print("DDDD");
+            print("BBBB");
+            //leftSensibility = 3f;
             //rightSensibility = 3f;
+            leftTurningValue -= leftSensibility * Time.deltaTime;
             rightTurningValue -= rightSensibility * Time.deltaTime;
         }
+
+        leftTurningValue = Mathf.Clamp(leftTurningValue, 0, 1);
+        print("left turning value: " + leftTurningValue);
         rightTurningValue = Mathf.Clamp(rightTurningValue, 0, 1);
         print("right turning value: " + rightTurningValue);
 

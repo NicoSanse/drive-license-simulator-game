@@ -16,7 +16,7 @@ public class WheelClassFree {
 	[Tooltip("If this variable is true, this wheel will receive engine torque.")]
 	public bool wheelDrive = true;
 	[Tooltip("If this variable is true, this wheel will receive handbrake force.")]
-	public bool wheelHandBrake = true;
+	public bool wheelHandBrake = false;
 	[Range(-2.0f,2.0f)][Tooltip("In this variable you can set the horizontal offset of the sliding mark of this wheel.")]
 	public float skidMarkShift = 0.0f;
 	[Tooltip("If this variable is true, the wheel associated with this index will receive rotation defined by the flywheel.")]
@@ -587,6 +587,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		youCanCall = true;
 		handBrakeTrue = false;
         theEngineIsRunning = false;
+		isBraking = false;
 
 		ms_Rigidbody = GetComponent <Rigidbody> ();
 		ms_Rigidbody.useGravity = true;
@@ -1115,6 +1116,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
                 currentGear == 5 & KMh < 25 | currentGear == -1 & KMh < 3)
             {
                 car.Off();
+				onOffButton.Off();
                 StartCoroutine("StartEngineCoroutine", false);
                 StartCoroutine("TurnOffEngineTime");
 				player.SpeedTooLow();
@@ -1932,7 +1934,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		}
 		if (KMh < 0.5f && Mathf.Abs (verticalInput) < 0.05f) {
 			if (wheelCollider.rpm > (25 / wheelCollider.radius)) {
-				wheelCollider.brakeTorque += 0.5f * _vehicleSettings.vehicleMass * Mathf.Abs (wheelCollider.rpm) * Time.deltaTime;
+				//wheelCollider.brakeTorque += 0.5f * _vehicleSettings.vehicleMass * Mathf.Abs (wheelCollider.rpm) * Time.deltaTime;
 			}
 		}
 	}

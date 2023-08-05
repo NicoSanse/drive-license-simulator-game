@@ -48,6 +48,13 @@ public class CurrentCarStateOnOffButtonBehaviour : MonoBehaviour
         StartCoroutine(MakeTextDisappear());
     }
 
+    //called when the car turns off for going too slow
+    public void Off()
+    {
+        MakeTextAppear("OFF");
+        MakeButtonBlack();
+    }
+
     private void MakeButtonBlack()
     {
         ButtonColor.r = 0f;

@@ -60,6 +60,7 @@ public class Car : MonoBehaviour
     {
         Stop();
         currentState = State.Off;
+        clutch.SetGear(ClutchBehaviour.Gear.GearN);
     }
 
     //turns on the car

@@ -5,7 +5,6 @@ using UnityEngine;
 //this class models the accelerator
 public class AccelerationBehaviour : MonoBehaviour
 {
-    [SerializeField] Light retroLeftLight;
     [SerializeField] Light retroRightLight;
     private static AccelerationBehaviour accelerator;
     private float acceleration;
@@ -39,12 +38,10 @@ public class AccelerationBehaviour : MonoBehaviour
     {
         if (car.IsOn() && clutch.GetCurrentGear() == ClutchBehaviour.Gear.GearR && acceleratorPressed)
         { 
-            retroLeftLight.intensity = 20;
-            retroRightLight.intensity = 20;
+            retroRightLight.intensity = 50;
         }
         else
         {
-            retroLeftLight.intensity = 0;
             retroRightLight.intensity = 0;
         }
     }
@@ -64,7 +61,7 @@ public class AccelerationBehaviour : MonoBehaviour
     //increases the acceleration value
     private void Accelerate() 
     {
-        if (acceleratorPressed)
+        if (acceleratorPressed && car.IsOn())
         {
             acceleration += Time.deltaTime * sensibility;
         }
