@@ -114,8 +114,8 @@ public class PlayerController : MonoBehaviour
 
         GUI.SetActive(false);
         canvasEndOfLevel.GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
-        canvasEndOfLevel.GetComponentsInChildren<TMP_Text>()[0].text = "You Lose!";
         canvasEndOfLevel.GetComponentsInChildren<Image>()[0].color = new Color(192 / 255f, 64 / 255f, 69 / 255f, 206 / 255f);
+        canvasEndOfLevel.GetComponentsInChildren<TMP_Text>()[0].text = "You Lose!";
 
         currentLevel.SetScore(score);
 

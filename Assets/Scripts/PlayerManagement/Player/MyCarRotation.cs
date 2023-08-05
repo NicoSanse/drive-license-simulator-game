@@ -35,9 +35,8 @@ public class MyCarRotation : MonoBehaviour
         previousRotation = currentRotation;
     }
 
-    //the rotation is calculated as a difference in the rotation 
-    //of the device measured by the gyroscope
-    //using the current and prevoius position of the device
+    //the rotation is calculated as a difference in the rotation of the device between
+    //current and previous position of the device
     private void MeasureRotation()
     {
         //measure rotation
