@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
             if (Vector3.Distance(transform.position, waypoints[index]) <= 15f)
             {
                 index++;
-                score += 10; 
+                score += 8; 
                 Destroy(currentWaypointPrefab);
                 DrawCurrentWaypoint();
                 particles.SwitchMaterial("green");
