@@ -20,7 +20,7 @@ public class Scores : MonoBehaviour
         level = saveState.GetListOfLevels()[levelPos];
         score = level.GetScore();
 
-        GetComponent<TMP_Text>().text = "Scores: " +  score;
+        GetComponent<TMP_Text>().text = "Scores: " +  score + "/100";
     }
 
     void Update()

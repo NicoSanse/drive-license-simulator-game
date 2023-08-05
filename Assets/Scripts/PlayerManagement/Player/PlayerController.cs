@@ -61,9 +61,12 @@ public class PlayerController : MonoBehaviour
 
     //draws the current waypoint so the players can see
     private void DrawCurrentWaypoint()
-    { 
-        Vector3 currentWaypoint = waypoints[index];
-        currentWaypointPrefab = Instantiate(waypointPrefab, currentWaypoint, Quaternion.identity);
+    {
+        if (index < waypoints.Count)
+        {
+            Vector3 currentWaypoint = waypoints[index];
+            currentWaypointPrefab = Instantiate(waypointPrefab, currentWaypoint, Quaternion.identity);
+        }
     }
 
     //tells the player where to go and in the end if the score
@@ -113,6 +116,8 @@ public class PlayerController : MonoBehaviour
         canvasEndOfLevel.GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
         canvasEndOfLevel.GetComponentsInChildren<TMP_Text>()[0].text = "You Lose!";
         canvasEndOfLevel.GetComponentsInChildren<Image>()[0].color = new Color(192 / 255f, 64 / 255f, 69 / 255f, 206 / 255f);
+
+        currentLevel.SetScore(score);
 
         StopCar();
         LevelFinished();
@@ -214,18 +219,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //at the end of every level, we check if the player has NOT committed 
-    //the mistakes he has already committed in the past, and if not so, we remove them
+    //at the end of every level, we save the mistakes the player made
+    //previous mistakes that are not made again are deleted
     private void CheckMistakes()
     { 
-        List<string> pastMistakes = currentLevel.GetMistakes();
-        foreach(string mistake in pastMistakes)
-        {
-            if(!tempMistakes.Contains(mistake))
-            {
-                currentLevel.RemoveMistake(mistake);
-            }
-        }
+        currentLevel.SetMistakes(tempMistakes);
     }
 
     //saving state and changing game state

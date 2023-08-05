@@ -45,7 +45,18 @@ public class Level
 
     public void SetScore(int score) 
     {
-        this.score = score;
+        if (score > 100)
+        {
+            score = 100;
+        }
+        else if (score < 0)
+        {
+            score = 0;
+        }
+        else
+        {
+            this.score = score;
+        }
     }
 
     public int GetScore() 
@@ -81,6 +92,11 @@ public class Level
     public List<string> GetMistakes() 
     {
         return mistakes;
+    }
+
+    public void SetMistakes(List<string> mistakes) 
+    {
+        this.mistakes = mistakes;
     }
 
     public void ResetMistakes() 
