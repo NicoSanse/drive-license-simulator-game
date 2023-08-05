@@ -1,27 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-//this class is used by the levels in the menu
-//to show the scores of each level
+//this class shows a little image representing a level passed in the menu
 
-public class Scores : MonoBehaviour
+public class LevelCompleted : MonoBehaviour
 {
     private SaveManager saveManager;
     private SaveState saveState;
     private Level level;
-    private int score;
     [SerializeField] private int levelPos;
-    
+
     void Start()
     {
         saveManager = SaveManager.GetSaveManagerInstance();
         saveState = saveManager.GetSaveState();
         level = saveState.GetListOfLevels()[levelPos];
-        score = level.GetScore();
 
-        GetComponent<TMP_Text>().text = "Scores: " +  score + "/100";
+        if (level.IsPassed())
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void Update()
