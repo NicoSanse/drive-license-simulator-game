@@ -7,25 +7,32 @@ using TMPro;
 //to navigate to the menu
 public class EndOfLevel : MonoBehaviour
 {
+    private static EndOfLevel endOfLevel;
     private GameManager gameManager;
-    private PlayerController player;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text mistakeText;
-    private int score;
-    private string lastMistakes;
+
+    void Awake()
+    { 
+        endOfLevel = this;
+    }
 
     void Start()
     {
         gameManager = GameManager.GetGameManagerInstance();
-        player = PlayerController.GetPlayerControllerInstance();
     }
 
     void Update()
-    {        
-        score = player.GetScore();
+    {
+        
+    }
+
+    public void Initialization(string mistake, int score)
+    {
+        if (score < 0) score = 0;
+        if (score > 100) score = 100;
         scoreText.text = "Your score: " + score + " points";
-        lastMistakes = GetLastMistake();
-        mistakeText.text = lastMistakes;
+        mistakeText.text = mistake;
     }
 
     public void GoToMenu()
@@ -33,16 +40,8 @@ public class EndOfLevel : MonoBehaviour
         gameManager.ChangeGameState(gameManager.GetCurrentGameState());
     }
 
-    private string GetLastMistake()
+    public static EndOfLevel GetEndOfLevelInstance()
     {
-        List<string> mistakes = player.GetTempMistakes();
-        if (mistakes.Count > 0)
-        {
-            return mistakes[mistakes.Count - 1];
-        }
-        else 
-        { 
-            return ""; 
-        }
+        return endOfLevel;
     }
 }

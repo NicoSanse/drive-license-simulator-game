@@ -16,6 +16,7 @@ public class ClutchBehaviour : MonoBehaviour
     private Coroutine coroutineLoadBarAndChangeScale;
     private Car car;
     private ParticlesManagement particles;
+    private CurrentCarStateOnOffButtonBehaviour currentCarStateOnOffButton;
     private SaveManager saveManager;
     private SaveState saveState;
     private Menu menu;
@@ -88,6 +89,7 @@ public class ClutchBehaviour : MonoBehaviour
             {
                 MSVehicleControllerFree.mSVehicleControllerFree.MySetEngineOnOff(true);
                 car.Off();
+                currentCarStateOnOffButton.Off();
                 ClucthReleasedTooEarly();
             }
         }
@@ -112,8 +114,8 @@ public class ClutchBehaviour : MonoBehaviour
             loadingBar.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, loadingBar.GetComponent<Slider>().value);
             rectTransform.localScale += new Vector3(incrementValue/50, (incrementValue/50) * 3, 0f);
 
-            if (currentGear == Gear.Gear1) carRigidbody.velocity = new Vector3(0, 0, Mathf.Pow(incrementValue, -0.2f));
-            if (currentGear == Gear.GearR) carRigidbody.velocity = new Vector3(0, 0, -Mathf.Pow(incrementValue, -0.2f));
+            if (currentGear == Gear.Gear1) carRigidbody.velocity = new Vector3(0, 0, incrementValue * 300);
+            if (currentGear == Gear.GearR) carRigidbody.velocity = new Vector3(0, 0, -incrementValue * 300);
         }
 
         yield return null;
@@ -188,6 +190,7 @@ public class ClutchBehaviour : MonoBehaviour
         currentGear = Gear.GearN;
         car = Car.GetCarInstance();
         particles = ParticlesManagement.GetParticlesInstance();
+        currentCarStateOnOffButton = CurrentCarStateOnOffButtonBehaviour.GetCurrentCarStateOnOffButtonBehaviourInstance();
         saveManager = SaveManager.GetSaveManagerInstance();
         saveState = saveManager.GetSaveState();
         menu = Menu.GetMenuInstance();

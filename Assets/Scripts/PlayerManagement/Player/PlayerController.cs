@@ -7,8 +7,6 @@ using TMPro;
 //this class gives the functionalities to the player and includes the logic behind
 //the player behaviour. It is responsible for the score and for the level passing
 
-//todo: gestire anche eliminazione errori e/o modifiche
-
 public class PlayerController : MonoBehaviour
 {
     private static PlayerController player;
@@ -50,13 +48,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         FollowPath();
-        SpeedLimit();
+        SpeedLimitMistake();
     }
 
     void FixedUpdate()
     {
-        PlayerOnTheRoad();
-        SafetyDistance();
+        PlayerOnTheRoadMistake();
+        SafetyDistanceMistake();
     }
 
     //draws the current waypoint so the players can see
@@ -69,8 +67,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //tells the player where to go and in the end if the score
-    //is high enough, the level is passed
+    //tells the player where to go and in the end if the score is high enough, the level is passed
     private void FollowPath()
     {
         if (index < waypoints.Count) 
@@ -94,6 +91,10 @@ public class PlayerController : MonoBehaviour
 
     public void Win()
     {
+        EndOfLevel.GetEndOfLevelInstance().Initialization(tempMistakes[tempMistakes.Count - 1], score);
+        particles.SwitchMaterial("green");
+        particles.Play();
+        
         GUI.SetActive(false);
         canvasEndOfLevel.GetComponentsInChildren<Image>(true)[0].gameObject.SetActive(true);
 
@@ -109,6 +110,7 @@ public class PlayerController : MonoBehaviour
 
     public void Lose()
     {
+        EndOfLevel.GetEndOfLevelInstance().Initialization(tempMistakes[tempMistakes.Count - 1], score);
         particles.SwitchMaterial("red");
         particles.Play();
 
@@ -128,18 +130,24 @@ public class PlayerController : MonoBehaviour
     {
         if (timesCollisionEnterCalled == 0)
         {
-            if(!currentLevel.IsMistakeAlreadyAdded("You hit something or someone!"))
-            {
-                currentLevel.AddMistake("You hit something or someone!");
-                tempMistakes.Add("You hit something or someone!");
-            }
-            Lose();
+            CollisionMistake();
             timesCollisionEnterCalled++;
         }
     }
 
+    private void CollisionMistake()
+    {
+        if (!currentLevel.IsMistakeAlreadyAdded("You hit something or someone!"))
+        {
+            currentLevel.AddMistake("You hit something or someone!");
+        }
+        score -= 50;
+        tempMistakes.Add("You hit something or someone!");
+        Lose();
+    }
+
     //finds whether the player is respecting speed limit or not
-    private void SpeedLimit()
+    private void SpeedLimitMistake()
     {
         //in this area speed limit is 30
         if (carTransform.position.z > 420 && carTransform.position.z < 700 && 
@@ -152,26 +160,27 @@ public class PlayerController : MonoBehaviour
             speedLimitDefault = 50;
         }
 
-        if(car.GetSpeed() > speedLimitDefault)
+        if(car.GetSpeed() >= speedLimitDefault)
         {
             particles.SwitchMaterial("yellow");
             particles.Play();
         }
 
-        if (car.GetSpeed() > speedLimitDefault + 5)
+        if (car.GetSpeed() >= speedLimitDefault + 5)
         {
             if (!currentLevel.IsMistakeAlreadyAdded("You were going too fast!"))
             {
-                score -= 10;
                 currentLevel.AddMistake("You were going too fast!");
-                tempMistakes.Add("You were going too fast!");
             }
+            tempMistakes.Add("You were going too fast!");
+            score -= 10;
+
             Lose();
         }
     }
 
     //determine if the player is on the road
-    private void PlayerOnTheRoad()
+    private void PlayerOnTheRoadMistake()
     { 
         onTheRoad = Physics.Raycast(transform.position, Vector3.down, 3f, LayerMask.GetMask("Road"));
         if(!onTheRoad)
@@ -180,15 +189,15 @@ public class PlayerController : MonoBehaviour
             particles.Play();
             if (!currentLevel.IsMistakeAlreadyAdded("You went out of the road!"))
             {
-                score -= 10;
                 currentLevel.AddMistake("You went out of the road!");
-                tempMistakes.Add("You went out of the road!");
             }
+            score -= 10;
+            tempMistakes.Add("You went out of the road!");
         }
     }
 
     //determine if the player is at a safe distance from the car in front of him
-    private void SafetyDistance()
+    private void SafetyDistanceMistake()
     {
         safeDistance = (car.GetSpeed() * 10)/(36);
         isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, safeDistance, LayerMask.GetMask("OtherCars")));
@@ -201,22 +210,24 @@ public class PlayerController : MonoBehaviour
             {
                 score -= 10;
                 currentLevel.AddMistake("You were too close to the car in front of you!");
-                tempMistakes.Add("You were too close to the car in front of you!");
             }
+            score -= 10;
+            tempMistakes.Add("You were too close to the car in front of you!");
         }
     }
 
     //if the player is going too slow, we tell him
-    public void SpeedTooLow()
+    public void SpeedTooLowMistake()
     {
         particles.SwitchMaterial("yellow");
         particles.Play();
         if(!currentLevel.IsMistakeAlreadyAdded("You were going too slow and the car stopped!"))
         {
-            score -= 10;
             currentLevel.AddMistake("You were going too slow and the car stopped!");
-            tempMistakes.Add("You were going too slow and the car stopped!");
         }
+        score -= 10;
+        tempMistakes.Add("You were going too slow and the car stopped!");
+
     }
 
     //at the end of every level, we save the mistakes the player made
@@ -256,7 +267,7 @@ public class PlayerController : MonoBehaviour
         GUI = GameObject.FindGameObjectWithTag("GUI");
         timesCollisionEnterCalled = 0;
         index = 0;
-        tempMistakes = new List<string>();
+        tempMistakes = new List<string>(10);
         speedLimitDefault = 50;
         carTransform = car.GetComponent<Transform>();
         DrawCurrentWaypoint();

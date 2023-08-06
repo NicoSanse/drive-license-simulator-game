@@ -35,18 +35,15 @@ public class BrakeBehaviour : MonoBehaviour
     //turns the brake lights on if the car is on and the brake is pressed
     private void BrakesLight()
     {
-        if (car.IsOn())
+        if (car.IsOn() && brakePressed)
         {
-            if (brakePressed)
-            {
-                brakeLeftLight.intensity = 50;
-                brakeRightLight.intensity = 50;
-            }
-            else
-            {
-                brakeLeftLight.intensity = 0;
-                brakeRightLight.intensity = 0;
-            }
+            brakeLeftLight.intensity = 50;
+            brakeRightLight.intensity = 50;
+        }
+        else
+        {
+            brakeLeftLight.intensity = 0;
+            brakeRightLight.intensity = 0;
         }
     }
 
