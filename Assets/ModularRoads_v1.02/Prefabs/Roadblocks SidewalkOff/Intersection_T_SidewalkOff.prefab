@@ -2150,6 +2150,7 @@ GameObject:
   - component: {fileID: 3300040}
   - component: {fileID: 2300040}
   - component: {fileID: 13600008}
+  - component: {fileID: 5398976766468775119}
   m_Layer: 0
   m_Name: TrafficLight01
   m_TagString: Untagged
@@ -2243,6 +2244,19 @@ CapsuleCollider:
   m_Height: 2.85
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 1.29}
+--- !u!114 &5398976766468775119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d36ccbb47324840bb76aa43df2cfa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDelay: 0
 --- !u!1 &100056
 GameObject:
   m_ObjectHideFlags: 0
@@ -3733,6 +3747,7 @@ GameObject:
   - component: {fileID: 3300054}
   - component: {fileID: 2300054}
   - component: {fileID: 13600010}
+  - component: {fileID: 3086488576316250417}
   m_Layer: 0
   m_Name: TrafficLight01
   m_TagString: Untagged
@@ -3826,6 +3841,19 @@ CapsuleCollider:
   m_Height: 2.85
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 1.29}
+--- !u!114 &3086488576316250417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d36ccbb47324840bb76aa43df2cfa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDelay: 0
 --- !u!1 &100092
 GameObject:
   m_ObjectHideFlags: 0
@@ -4018,6 +4046,7 @@ GameObject:
   - component: {fileID: 3300056}
   - component: {fileID: 2300056}
   - component: {fileID: 13600012}
+  - component: {fileID: 7378623976534806468}
   m_Layer: 0
   m_Name: TrafficLight01
   m_TagString: Untagged
@@ -4111,6 +4140,19 @@ CapsuleCollider:
   m_Height: 2.85
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 1.29}
+--- !u!114 &7378623976534806468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d36ccbb47324840bb76aa43df2cfa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDelay: 0
 --- !u!1 &100102
 GameObject:
   m_ObjectHideFlags: 0
@@ -5591,6 +5633,7 @@ GameObject:
   - component: {fileID: 3300070}
   - component: {fileID: 2300070}
   - component: {fileID: 13600014}
+  - component: {fileID: 2102311350126184746}
   m_Layer: 0
   m_Name: TrafficLight01
   m_TagString: Untagged
@@ -5684,6 +5727,19 @@ CapsuleCollider:
   m_Height: 2.85
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 1.29}
+--- !u!114 &2102311350126184746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d36ccbb47324840bb76aa43df2cfa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDelay: 0
 --- !u!1 &100138
 GameObject:
   m_ObjectHideFlags: 0
@@ -7554,6 +7610,7 @@ GameObject:
   - component: {fileID: 3300100}
   - component: {fileID: 2300100}
   - component: {fileID: 13600032}
+  - component: {fileID: 7245085678718779893}
   m_Layer: 0
   m_Name: TrafficLight01
   m_TagString: Untagged
@@ -7647,6 +7704,19 @@ CapsuleCollider:
   m_Height: 2.85
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 1.29}
+--- !u!114 &7245085678718779893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d36ccbb47324840bb76aa43df2cfa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDelay: 8
 --- !u!1 &100192
 GameObject:
   m_ObjectHideFlags: 0
@@ -9127,6 +9197,7 @@ GameObject:
   - component: {fileID: 3300114}
   - component: {fileID: 2300114}
   - component: {fileID: 13600034}
+  - component: {fileID: 9214923335269698127}
   m_Layer: 0
   m_Name: TrafficLight01
   m_TagString: Untagged
@@ -9220,6 +9291,19 @@ CapsuleCollider:
   m_Height: 2.85
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 1.29}
+--- !u!114 &9214923335269698127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d36ccbb47324840bb76aa43df2cfa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDelay: 8
 --- !u!1 &100228
 GameObject:
   m_ObjectHideFlags: 0

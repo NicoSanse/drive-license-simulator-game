@@ -151,16 +151,7 @@ public class PlayerController : MonoBehaviour
     //finds whether the player is respecting speed limit or not
     private void SpeedLimitMistake()
     {
-        //in this area speed limit is 30
-        if (carTransform.position.z > 420 && carTransform.position.z < 700 && 
-            carTransform.position.x < -14 && carTransform.position.x > -620)
-        {
-            speedLimitDefault = 30;
-        }
-        else
-        {
-            speedLimitDefault = 50;
-        }
+        CheckSpeedArea();
 
         if(car.GetSpeed() >= speedLimitDefault)
         {
@@ -185,7 +176,7 @@ public class PlayerController : MonoBehaviour
     private void PlayerOnTheRoadMistake()
     { 
         onTheRoad = Physics.Raycast(transform.position, Vector3.down, 3f, LayerMask.GetMask("Road"));
-        if(!onTheRoad)
+        if (!onTheRoad)
         {
             particles.SwitchMaterial("yellow");
             particles.Play();
@@ -229,7 +220,31 @@ public class PlayerController : MonoBehaviour
         }
         score -= 10;
         tempMistakes.Add("You were going too slow and the car stopped!");
+    }
 
+    public void RedLightMistake()
+    { 
+        particles.SwitchMaterial("red");
+        particles.Play();
+        if (!currentLevel.IsMistakeAlreadyAdded("You passed a red light!"))
+        {
+            currentLevel.AddMistake("You passed a red light!");
+        }
+        score -= 40;
+        tempMistakes.Add("You passed a red light!");
+        Lose();
+    }
+
+    public void YellowLightMistake()
+    {
+        particles.SwitchMaterial("yellow");
+        particles.Play();
+        if (!currentLevel.IsMistakeAlreadyAdded("You passed a yellow light!"))
+        {
+            currentLevel.AddMistake("You passed a yellow light!");
+        }
+        score -= 10;
+        tempMistakes.Add("You passed a yellow light!");
     }
 
     //at the end of every level, we save the mistakes the player made
@@ -269,7 +284,7 @@ public class PlayerController : MonoBehaviour
         GUI = GameObject.FindGameObjectWithTag("GUI");
         timesCollisionEnterCalled = 0;
         index = 0;
-        tempMistakes = new List<string>(10);
+        tempMistakes = new List<string>();
         speedLimitDefault = 50;
         carTransform = car.GetComponent<Transform>();
         DrawCurrentWaypoint();
@@ -279,6 +294,22 @@ public class PlayerController : MonoBehaviour
     {
         if (path == 0) scoreRate = 8;
         if (path == 1) scoreRate = 5;
+    }
+
+    private void CheckSpeedArea()
+    {
+        //in this area speed limit is 30
+        if ((carTransform.position.z > 420 && carTransform.position.z < 700 && 
+            carTransform.position.x < -14 && carTransform.position.x > -620) ||
+            (carTransform.position.z > 685 && carTransform.position.z < 970 &&
+            carTransform.position.x > -5 && carTransform.position.x < 315))
+        {
+            speedLimitDefault = 30;
+        }
+        else
+        {
+            speedLimitDefault = 50;
+        }
     }
 
     private void StopCar()

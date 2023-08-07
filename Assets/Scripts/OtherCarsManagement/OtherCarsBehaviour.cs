@@ -25,11 +25,15 @@ public class OtherCarsBehaviour : MonoBehaviour
     private Vector3 rayCastDirection;
     private Ray ray;
     private RaycastHit hitInfo;
-    bool isRightSideFree;
-    bool isRightSideFreeFromPlayer;
-    bool isDistanceSafe;
-    bool isDistanceSafeFromPlayer;
-    bool isOnRoad;
+    private bool isRightSideFree;
+    private bool isRightSideFreeFromPlayer;
+    private bool isDistanceSafe;
+    private bool isDistanceSafeFromPlayer;
+    private bool isOnRoad;
+
+    private GameObject roundabout1;
+    private GameObject roundabout2;
+    private float distanceFromRoundabout;
 
     void Start()
     {
@@ -40,6 +44,9 @@ public class OtherCarsBehaviour : MonoBehaviour
         rayCastDirection = transform.forward;
         ray = new Ray(transform.position, rayCastDirection);
         isRightSideFree = true;
+
+        roundabout1 = GameObject.FindGameObjectsWithTag("roundabout")[0];
+        roundabout2 = GameObject.FindGameObjectsWithTag("roundabout")[1];
     }
 
     void Update()
@@ -52,7 +59,7 @@ public class OtherCarsBehaviour : MonoBehaviour
     {
         GoToDestination();
         SafetyDistance();
-        GiveTheWay();
+        WhereToGiveTheWay();
     }
 
     //main function that moves the other cars
@@ -103,8 +110,22 @@ public class OtherCarsBehaviour : MonoBehaviour
         }
     }
 
+    //usually give the way to the ones on right side, but when close to a roundabout, give the way to the ones on left side
+    private void WhereToGiveTheWay()
+    {
+        distanceFromRoundabout = CalculateDistanceFromRoundabout();
+        if(distanceFromRoundabout > 20f)
+        {
+            GiveTheWay(transform.right);
+        }
+        else
+        {
+            GiveTheWay(-transform.right);
+        }
+    }
+
     //this checks if the right side of the car is free. if not so, stop
-    private void GiveTheWay()
+    private void GiveTheWay(Vector3 sideToGiveTheWay)
     {
         isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("OtherCars")));
         isRightSideFreeFromPlayer = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("Player")));
@@ -113,7 +134,7 @@ public class OtherCarsBehaviour : MonoBehaviour
         while(index <= 10 && isRightSideFree && isRightSideFreeFromPlayer)
         { 
             float t = (float) index / 10;
-            rayCastDirection = Vector3.Slerp(rayCastDirection, transform.right, t);
+            rayCastDirection = Vector3.Slerp(rayCastDirection, sideToGiveTheWay, t);
             ray = new Ray(transform.position, rayCastDirection);
             isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("OtherCars")));
             isRightSideFreeFromPlayer = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("Player")));
@@ -265,6 +286,13 @@ public class OtherCarsBehaviour : MonoBehaviour
                 speed += 0.05f;
             }
         }
+    }
+
+    private float CalculateDistanceFromRoundabout()
+    { 
+        float distanceFromRoundabout1 = Vector3.Distance(transform.position, roundabout1.transform.position);
+        float distanceFromRoundabout2 = Vector3.Distance(transform.position, roundabout2.transform.position);
+        return Mathf.Min(distanceFromRoundabout1, distanceFromRoundabout2);
     }
 
     private void DestroyCarsNotOnRoad()

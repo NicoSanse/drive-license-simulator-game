@@ -114,8 +114,8 @@ public class ClutchBehaviour : MonoBehaviour
             loadingBar.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, loadingBar.GetComponent<Slider>().value);
             rectTransform.localScale += new Vector3(incrementValue/50, (incrementValue/50) * 3, 0f);
 
-            if (currentGear == Gear.Gear1) carRigidbody.velocity = new Vector3(0, 0, incrementValue * 300);
-            if (currentGear == Gear.GearR) carRigidbody.velocity = new Vector3(0, 0, -incrementValue * 300);
+            if (currentGear == Gear.Gear1) carRigidbody.velocity = carRigidbody.transform.forward* incrementValue * 300;
+            if (currentGear == Gear.GearR) carRigidbody.velocity = carRigidbody.transform.forward * incrementValue * -300;
         }
 
         yield return null;
@@ -177,9 +177,9 @@ public class ClutchBehaviour : MonoBehaviour
         if (!currentLevel.IsMistakeAlreadyAdded("You released the clutch too early!"))
         {
             currentLevel.AddMistake("You released the clutch too early!");
-            tempMistakes.Add("You released the clutch too early!");
         }
-
+        tempMistakes = player.GetTempMistakes();
+        tempMistakes.Add("You released the clutch too early!");
         int tempScore = player.GetScore();
         player.SetScore(tempScore - 10);
     }
@@ -196,7 +196,6 @@ public class ClutchBehaviour : MonoBehaviour
         menu = Menu.GetMenuInstance();
         currentLevel = saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1];
         player = PlayerController.GetPlayerControllerInstance();
-        tempMistakes = player.GetTempMistakes();
     }
 
     public void SetGear(Gear gear)

@@ -461,6 +461,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d91cc46c04cf1f24d8e6d87e57af13c1, type: 2}
     - target: {fileID: 114810812262616942, guid: d4a7e1a08d504784ba863438fe3772d8,
         type: 3}
+      propertyPath: _cameras.setLayers
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114810812262616942, guid: d4a7e1a08d504784ba863438fe3772d8,
+        type: 3}
       propertyPath: _vehicleSettings.startOn
       value: 0
       objectReference: {fileID: 0}

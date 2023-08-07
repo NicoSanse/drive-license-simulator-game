@@ -80,7 +80,7 @@ public class StabilizeTurnsClassFree {
 [Serializable]
 public class VehicleCamerasClassFree {
 	[Tooltip("If this variable is checked, the script will automatically place the 'IgnoreRaycast' layer on the player when needed.")]
-	public bool setLayers = true;
+	public bool setLayers = false;
 	[Tooltip("Here you must associate all the cameras that you want to control by this script, associating each one with an index and selecting your preferences.")]
 	public CameraTypeClassFree[] cameras;
 	[Tooltip("Here you can configure the cameras, deciding their speed of movement, rotation, zoom, among other options.")]
