@@ -93,13 +93,14 @@ public class PlayerPaths : MonoBehaviour
         Vector3 point12 = new Vector3(300, 1, 945);
         Vector3 point13 = new Vector3(300, 1, 692);
         Vector3 point14 = new Vector3(300, 1, 605);
-        Vector3 point15 = new Vector3(180, 1, 588);
-        Vector3 point16 = new Vector3(149, 1, 570);
-        Vector3 point17 = new Vector3(149, 1, 466);
-        Vector3 point18 = new Vector3(168, 1, 431);
-        Vector3 point19 = new Vector3(271, 1, 431);
-        Vector3 point20 = new Vector3(300, 1, 420);
-        Vector3 point21 = new Vector3(292, 1, 152);
+        Vector3 point15 = new Vector3(285, 1, 588);
+        Vector3 point16 = new Vector3(180, 1, 588);
+        Vector3 point17 = new Vector3(149, 1, 570);
+        Vector3 point18 = new Vector3(149, 1, 466);
+        Vector3 point19 = new Vector3(168, 1, 431);
+        Vector3 point20 = new Vector3(271, 1, 431);
+        Vector3 point21 = new Vector3(300, 1, 420);
+        Vector3 point22 = new Vector3(292, 1, 152);
         secondPlayerPath.Add(point1);
         secondPlayerPath.Add(point2);
         secondPlayerPath.Add(point3);
@@ -121,6 +122,7 @@ public class PlayerPaths : MonoBehaviour
         secondPlayerPath.Add(point19);
         secondPlayerPath.Add(point20);
         secondPlayerPath.Add(point21);
+        secondPlayerPath.Add(point22);
     }
 
     private void BuildThirdPlayerPath()
