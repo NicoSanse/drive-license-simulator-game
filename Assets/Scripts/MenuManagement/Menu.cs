@@ -136,8 +136,7 @@ public class Menu : MonoBehaviour
                 StartFirstLevel();
                 break;
             case "SecondLevelButton":
-                //CheckLevel(0);
-                StartSecondLevel();
+                CheckLevel(0);
                 break;
             case "ThirdLevelButton":
                 CheckLevel(1);
@@ -162,12 +161,6 @@ public class Menu : MonoBehaviour
     {
         SetCurrentLevel(listOfLevels[0]);
         gameManager.ChangeGameState(gameManager.GetCurrentGameState(), 2);
-    }
-
-    private void StartSecondLevel()
-    {
-        SetCurrentLevel(listOfLevels[1]);
-        gameManager.ChangeGameState(gameManager.GetCurrentGameState(), 3);
     }
 
 

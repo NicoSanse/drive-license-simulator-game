@@ -37,14 +37,7 @@ public class ClutchBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey("q"))
-        {
-            ClutchIsPressed();
-        }
-        if (Input.GetKeyUp("q"))
-        {
-            ClutchIsReleased();
-        }
+        
     }
 
     //triggered by GUIManager class, starts the coroutine to decrease the scale of the clutch image

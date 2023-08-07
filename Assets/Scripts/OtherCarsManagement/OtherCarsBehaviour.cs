@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class OtherCarsBehaviour : MonoBehaviour
 {
+    private SaveManager saveManager;
+    private SaveState saveState;
+    private Menu menu;
+    private Level currentLevel;
     //list of waypoints
     private List<Vector3> waypoints;
 
@@ -41,12 +45,14 @@ public class OtherCarsBehaviour : MonoBehaviour
         destination = waypoints[currentWaypointIndex];
         direction = (destination - transform.position).normalized;
 
+        saveManager = SaveManager.GetSaveManagerInstance();
+        saveState = saveManager.GetSaveState();
+        menu = Menu.GetMenuInstance();
+        currentLevel = saveState.GetListOfLevels()[menu.GetCurrentLevel().GetId() - 1];
+
         rayCastDirection = transform.forward;
         ray = new Ray(transform.position, rayCastDirection);
         isRightSideFree = true;
-
-        roundabout1 = GameObject.FindGameObjectsWithTag("roundabout")[0];
-        roundabout2 = GameObject.FindGameObjectsWithTag("roundabout")[1];
     }
 
     void Update()
@@ -289,10 +295,19 @@ public class OtherCarsBehaviour : MonoBehaviour
     }
 
     private float CalculateDistanceFromRoundabout()
-    { 
-        float distanceFromRoundabout1 = Vector3.Distance(transform.position, roundabout1.transform.position);
-        float distanceFromRoundabout2 = Vector3.Distance(transform.position, roundabout2.transform.position);
-        return Mathf.Min(distanceFromRoundabout1, distanceFromRoundabout2);
+    {
+        if (currentLevel.GetId() == 2)
+        {
+            roundabout1 = GameObject.FindGameObjectsWithTag("roundabout")[0];
+            roundabout2 = GameObject.FindGameObjectsWithTag("roundabout")[1];
+            float distanceFromRoundabout1 = Vector3.Distance(transform.position, roundabout1.transform.position);
+            float distanceFromRoundabout2 = Vector3.Distance(transform.position, roundabout2.transform.position);
+            return Mathf.Min(distanceFromRoundabout1, distanceFromRoundabout2);
+        }
+        else
+        {
+            return 0f;
+        }
     }
 
     private void DestroyCarsNotOnRoad()
