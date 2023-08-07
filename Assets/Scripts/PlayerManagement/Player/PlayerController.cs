@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Car car;
     private MSVehicleControllerFree mSVehicleControllerFree;
     private int score;
+    private int scoreRate;
     private ParticlesManagement particles;
     private GameObject canvasEndOfLevel;
     private GameObject GUI;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         GetPath();
+        FindScoreRate();
         Initialization();
     }
 
@@ -75,7 +77,7 @@ public class PlayerController : MonoBehaviour
             if (Vector3.Distance(transform.position, waypoints[index]) <= 15f)
             {
                 index++;
-                score += 8; 
+                score += scoreRate; 
                 Destroy(currentWaypointPrefab);
                 DrawCurrentWaypoint();
                 particles.SwitchMaterial("green");
@@ -271,6 +273,12 @@ public class PlayerController : MonoBehaviour
         speedLimitDefault = 50;
         carTransform = car.GetComponent<Transform>();
         DrawCurrentWaypoint();
+    }
+
+    private void FindScoreRate()
+    {
+        if (path == 0) scoreRate = 8;
+        if (path == 1) scoreRate = 5;
     }
 
     private void StopCar()
