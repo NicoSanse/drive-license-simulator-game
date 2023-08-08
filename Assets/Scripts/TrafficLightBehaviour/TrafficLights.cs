@@ -11,9 +11,12 @@ public class TrafficLights : MonoBehaviour
     private GameObject littleRedLight;
     private GameObject littleGreenLight;
     private bool isPlayerPassing;
+    private bool otherCarsClose;
     private int timesCalled;
     private PlayerController player;
     private ParticlesManagement particles;
+    private RaycastHit hit;
+    private GameObject otherCar;
 
     void Start()
     {
@@ -27,6 +30,9 @@ public class TrafficLights : MonoBehaviour
         littleGreenLight = lights[0].gameObject;
         timesCalled = 0;
 
+        isPlayerPassing = false;
+        otherCarsClose = false;
+
         ChangeLights();
     }
 
@@ -38,6 +44,7 @@ public class TrafficLights : MonoBehaviour
     void FixedUpdate()
     {
         CheckPlayerPassing();
+        StopOtherCars();
     }
 
     private void ChangeLights()
@@ -111,6 +118,25 @@ public class TrafficLights : MonoBehaviour
                     }
                     timesCalled++;
                 }
+            }
+        }
+    }
+
+    private void StopOtherCars()
+    {
+        otherCarsClose = Physics.Raycast(transform.position + new Vector3(2f, 1f, 0), transform.right, out hit, 9f, LayerMask.GetMask("OtherCars"));
+        Debug.DrawRay(transform.position + new Vector3(2f, 1f, 0), transform.right * 9f, Color.yellow);
+
+        if (otherCarsClose)
+        { 
+            otherCar = hit.transform.gameObject;
+            if(redLight.activeSelf || yellowLight.activeSelf)
+            {
+                otherCar.SendMessage("Stop");
+            }
+            else
+            {
+                otherCar.SendMessage("Go");
             }
         }
     }

@@ -39,6 +39,8 @@ public class OtherCarsBehaviour : MonoBehaviour
     private GameObject roundabout2;
     private float distanceFromRoundabout;
 
+    private RaycastHit hit;
+
     void Start()
     {
         waypoints = OtherCarsPath.GetAPath(seedPath);
@@ -96,23 +98,17 @@ public class OtherCarsBehaviour : MonoBehaviour
     //keeps each car correctly distanced from the car ahead
     private void SafetyDistance()
     {
-        float fakeSafeDistance = 4f;
-        isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, fakeSafeDistance, LayerMask.GetMask("OtherCars")));
+        float fakeSafeDistance = 3f;
+        isDistanceSafe = !(Physics.Raycast(transform.position, transform.forward, out hit, fakeSafeDistance, LayerMask.GetMask("OtherCars")));
         isDistanceSafeFromPlayer = !(Physics.Raycast(transform.position, transform.forward, fakeSafeDistance, LayerMask.GetMask("Player")));
 
         if (!isDistanceSafe || !isDistanceSafeFromPlayer)
         {
-            while (speed >= 30f)
-            {
-                speed -= 0.5f;
-            }
+            speed = 0f;
         }
         else
         {
-            while (speed <= 50f)
-            {
-                speed += 0.05f;
-            }
+            speed = 50f;
         }
     }
 
@@ -130,7 +126,7 @@ public class OtherCarsBehaviour : MonoBehaviour
         }
     }
 
-    //this checks if the right side of the car is free. if not so, stop
+    //this checks if the right (or left) side of the car is free. if not so, stop
     private void GiveTheWay(Vector3 sideToGiveTheWay)
     {
         isRightSideFree = !(Physics.Raycast(ray, out hitInfo, 4f, LayerMask.GetMask("OtherCars")));
@@ -156,6 +152,17 @@ public class OtherCarsBehaviour : MonoBehaviour
         {
             speed = 30f;
         }
+    }
+
+    //stop and go are called from trafficLight script
+    public void Stop()
+    {
+        speed = 0f;
+    }
+
+    public void Go()
+    {
+        speed = 50f;
     }
 
     //this finds the value that best fits turningSpeed variable based on empirical tests
@@ -205,7 +212,7 @@ public class OtherCarsBehaviour : MonoBehaviour
         //setting for fourth path
         else if (seedPath == 3)
         {
-            print(currentWaypointIndex);
+
         }
         //setting for the reverse of first path
         else if (seedPath == 5)
@@ -254,25 +261,16 @@ public class OtherCarsBehaviour : MonoBehaviour
         {
             if (distanceFromRoundabout < 15)
             {
-                while (speed >= 25f)
-                {
-                    speed -= 0.5f;
-                }
+                speed = 25f;
             }
             else
             {
-                while (speed >= 30f)
-                {
-                    speed -= 0.5f;
-                }
+                speed = 30f;
             }
         }
         else
         {
-            while (speed <= 50f)
-            {
-                speed += 0.05f;
-            }
+            speed = 50f;
         }
     }
 
