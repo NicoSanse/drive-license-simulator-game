@@ -298,7 +298,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
     //adds the error the player made
     public void ClutchNotPressedMistake()
     {
-        particles.SwitchMaterial("red");
+        particles.SwitchMaterial("yellow");
         particles.Play();
 
         if (!currentLevel.IsMistakeAlreadyAdded("You didn't press the clutch!"))
@@ -319,8 +319,7 @@ public class ChangeGearPanelBehaviour : MonoBehaviour
             currentLevel.AddMistake("You destroyed the car!");
         }
         tempMistakes.Add("You destroyed the car!");
-        int tempScore = player.GetScore();
-        player.SetScore(tempScore - 10);
+        player.SetScore(0);
         
         player.Lose();
     }

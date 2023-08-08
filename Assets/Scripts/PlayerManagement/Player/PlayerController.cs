@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
         {
             currentLevel.AddMistake("You hit something or someone!");
         }
-        score -= 50;
+        score = 0;
         tempMistakes.Add("You hit something or someone!");
         Lose();
     }
@@ -201,7 +201,6 @@ public class PlayerController : MonoBehaviour
             particles.Play();
             if (!currentLevel.IsMistakeAlreadyAdded("You were too close to the car in front of you!"))
             {
-                score -= 10;
                 currentLevel.AddMistake("You were too close to the car in front of you!");
             }
             score -= 10;
@@ -230,7 +229,7 @@ public class PlayerController : MonoBehaviour
         {
             currentLevel.AddMistake("You passed a red light!");
         }
-        score -= 40;
+        score = 0;
         tempMistakes.Add("You passed a red light!");
         Lose();
     }
@@ -245,6 +244,18 @@ public class PlayerController : MonoBehaviour
         }
         score -= 10;
         tempMistakes.Add("You passed a yellow light!");
+    }
+
+    public void ArrowNotSetMistake()
+    { 
+        particles.SwitchMaterial("yellow");
+        particles.Play();
+        if (!currentLevel.IsMistakeAlreadyAdded("You didn't set the arrow!"))
+        {
+            currentLevel.AddMistake("You didn't set the arrow!");
+        }
+        score -= 10;
+        tempMistakes.Add("You didn't set the arrow!");
     }
 
     //at the end of every level, we save the mistakes the player made

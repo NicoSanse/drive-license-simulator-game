@@ -5,6 +5,9 @@ using UnityEngine;
 public class MyCarRotation : MonoBehaviour
 {
     public static MyCarRotation myCarRotation;
+    private PlayerController player;
+    private LeftArrowBehaviour leftArrow;
+    private RightArrowBehaviour rightArrow;
     private float rotation;
     private float sensibility;
     
@@ -14,6 +17,9 @@ public class MyCarRotation : MonoBehaviour
     }
     void Start()
     {
+        player = PlayerController.GetPlayerControllerInstance();
+        leftArrow = LeftArrowBehaviour.GetLeftArrowBehaviourInstance();
+        rightArrow = RightArrowBehaviour.GetRightArrowBehaviourInstance();
         rotation = 0f;
         sensibility = 2f;
     }
@@ -21,6 +27,7 @@ public class MyCarRotation : MonoBehaviour
     void Update()
     {
         MeasureRotation();
+        CheckArrowOn();
     }
 
     //the rotation is calculated through accelerometer of the device
@@ -28,9 +35,19 @@ public class MyCarRotation : MonoBehaviour
     {
         rotation = Input.acceleration.x * sensibility;
         Mathf.Clamp(rotation, -0.9f, 0.9f);
-        if(rotation > -0.2f && rotation < 0.2f)
+        if(rotation > -0.2f && rotation < 0.2f) rotation = 0f;
+    }
+
+    //the player must set the arrow on before turning
+    private void CheckArrowOn()
+    {
+        if (rotation > 0.35f && !rightArrow.IsRightArrowOn())
+        { 
+            player.ArrowNotSetMistake();
+        }
+        if (rotation < -0.35f && !leftArrow.IsLeftArrowOn())
         {
-            rotation = 0f;
+            player.ArrowNotSetMistake();
         }
     }
 
