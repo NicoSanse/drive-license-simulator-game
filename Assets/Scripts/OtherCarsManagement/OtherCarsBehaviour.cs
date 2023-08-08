@@ -120,7 +120,7 @@ public class OtherCarsBehaviour : MonoBehaviour
     private void WhereToGiveTheWay()
     {
         distanceFromRoundabout = CalculateDistanceFromRoundabout();
-        if(distanceFromRoundabout > 20f)
+        if(distanceFromRoundabout > 25f)
         {
             GiveTheWay(transform.right);
         }
@@ -180,29 +180,10 @@ public class OtherCarsBehaviour : MonoBehaviour
         //setting for second path
         else if (seedPath == 1)
         {
-            if (currentWaypointIndex == 5 || currentWaypointIndex == 11)
-            {
-                turningSpeed = 65f;
-            }
-            else if (currentWaypointIndex == 9 || currentWaypointIndex == 7)
-            {
-                turningSpeed = 90f;
-            }
-            else if (currentWaypointIndex == 13)
-            {
-                turningSpeed = 120f;
-            }
-            else if(currentWaypointIndex == 17 || currentWaypointIndex == 21)
-            {
-                turningSpeed = 150f;
-            }
-            else
-            {
-                turningSpeed = 170f;
-            }
+
         }
         //setting for third path
-        else if(seedPath == 2)
+        else if (seedPath == 2)
         {
             if (currentWaypointIndex == 1 || currentWaypointIndex == 10)
             {
@@ -221,6 +202,11 @@ public class OtherCarsBehaviour : MonoBehaviour
                 turningSpeed = 170f;
             }
         }
+        //setting for fourth path
+        else if (seedPath == 3)
+        {
+            print(currentWaypointIndex);
+        }
         //setting for the reverse of first path
         else if (seedPath == 5)
         {
@@ -236,29 +222,10 @@ public class OtherCarsBehaviour : MonoBehaviour
         //setting for the reverse of the second path
         else if (seedPath == 6)
         {
-            if (currentWaypointIndex == 9)
-            {
-                turningSpeed = 90f;
-            }
-            else if (currentWaypointIndex == 13)
-            {
-                turningSpeed = 100f;
-            }
-            else if (currentWaypointIndex == 15)
-            {
-                turningSpeed = 120f;
-            }
-            else if (currentWaypointIndex == 11 || currentWaypointIndex == 15)
-            {
-                turningSpeed = 75f;
-            }
-            else
-            {
-                turningSpeed = 170f;
-            }
+
         }
         //setting for the reverse of third path
-        else if(seedPath == 7)
+        else if (seedPath == 7)
         {
             if (currentWaypointIndex == 5)
             {
@@ -273,6 +240,11 @@ public class OtherCarsBehaviour : MonoBehaviour
                 turningSpeed = 170f;
             }
         }
+        else if (seedPath == 8)
+        {
+            
+        }
+        
     }
 
     //sets an appropriate travel speed
@@ -280,9 +252,19 @@ public class OtherCarsBehaviour : MonoBehaviour
     { 
         if(Vector3.Distance(transform.position, destination) < 40)
         {
-            while (speed >= 30f)
+            if (distanceFromRoundabout < 15)
             {
-                speed -= 0.5f;
+                while (speed >= 25f)
+                {
+                    speed -= 0.5f;
+                }
+            }
+            else
+            {
+                while (speed >= 30f)
+                {
+                    speed -= 0.5f;
+                }
             }
         }
         else

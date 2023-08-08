@@ -93,7 +93,6 @@ public class TrafficLights : MonoBehaviour
             if (redLight.activeSelf || yellowLight.activeSelf)
             {
                 isPlayerPassing = Physics.Raycast(transform.position + new Vector3(0, 1f, 0), transform.right, 9f, LayerMask.GetMask("Player"));
-                Debug.DrawRay(transform.position + new Vector3(0, 1f, 0), transform.right * 9f, Color.green);
 
                 if (isPlayerPassing)
                 {

@@ -163,7 +163,6 @@ public class Menu : MonoBehaviour
         gameManager.ChangeGameState(gameManager.GetCurrentGameState(), 2);
     }
 
-
     //checks whether a level can be played or not. I want a level to be available only if the previous one was passed
     //if a level can ben played, the current level is set and the scene is loaded
     private void CheckLevel(int position) 

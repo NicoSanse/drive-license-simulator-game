@@ -94,29 +94,17 @@ public class OtherCarsPath : MonoBehaviour
     private void GenerateSecondPath()
     {
         Vector3 tempWayPoint = new Vector3(307, 1, 420);
-        Vector3 tempWayPoint2 = new Vector3(320, 1, 431);
-        Vector3 tempWayPoint3 = new Vector3(590, 1, 431);
-        Vector3 tempWayPoint4 = new Vector3(615, 1, 424);
-        Vector3 tempWayPoint5 = new Vector3(888, 1, 424);
-        Vector3 tempWayPoint6 = new Vector3(913.5f, 1, 450);
-        Vector3 tempWayPoint7 = new Vector3(913.5f, 1, 480);
-        Vector3 tempWayPoint8 = new Vector3(933, 1, 499);
-        Vector3 tempWayPoint9 = new Vector3(1030, 1, 499);
-        Vector3 tempWayPoint10 = new Vector3(1053.5f, 1, 530);
-        Vector3 tempWayPoint11 = new Vector3(1053.5f, 1, 870);
-        Vector3 tempWayPoint12 = new Vector3(1030, 1, 895.5f);
-        Vector3 tempWayPoint13 = new Vector3(458, 1, 895.5f);
-        Vector3 tempWayPoint14 = new Vector3(439.5f, 1, 872);
-        Vector3 tempWayPoint15 = new Vector3(439.5f, 1, 673);
-        Vector3 tempWayPoint16 = new Vector3(427, 1, 663.5f);
-        Vector3 tempWayPoint17 = new Vector3(12, 1, 663.5f);
-        Vector3 tempWayPoint18 = new Vector3(0, 1, 648);
-        Vector3 tempWayPoint19 = new Vector3(0, 1, 464);
-        Vector3 tempWayPoint20 = new Vector3(0, 1, 403);
-        Vector3 tempWayPoint21 = new Vector3(0, 1, 72);
-        Vector3 tempWayPoint22 = new Vector3(16, 1, 56.5f);
-        Vector3 tempWayPoint23 = new Vector3(297, 1, 56.5f);
-        Vector3 tempWayPoint24 = new Vector3(307, 1, 70);
+        Vector3 tempWayPoint2 = new Vector3(307, 1, 460);
+        Vector3 tempWayPoint3 = new Vector3(307, 1, 652);
+        Vector3 tempWayPoint4 = new Vector3(296, 1, 663.5f);
+        Vector3 tempWayPoint5 = new Vector3(12, 1, 663.5f);
+        Vector3 tempWayPoint6 = new Vector3(0, 1, 648);
+        Vector3 tempWayPoint7 = new Vector3(0, 1, 464);
+        Vector3 tempWayPoint8 = new Vector3(0, 1, 403);
+        Vector3 tempWayPoint9 = new Vector3(0, 1, 72);
+        Vector3 tempWayPoint10 = new Vector3(16, 1, 56.5f);
+        Vector3 tempWayPoint11 = new Vector3(297, 1, 56.5f);
+        Vector3 tempWayPoint12 = new Vector3(307, 1, 70);
         secondPath.Add(tempWayPoint);
         secondPath.Add(tempWayPoint2);
         secondPath.Add(tempWayPoint3);
@@ -129,18 +117,6 @@ public class OtherCarsPath : MonoBehaviour
         secondPath.Add(tempWayPoint10);
         secondPath.Add(tempWayPoint11);
         secondPath.Add(tempWayPoint12);
-        secondPath.Add(tempWayPoint13);
-        secondPath.Add(tempWayPoint14);
-        secondPath.Add(tempWayPoint15);
-        secondPath.Add(tempWayPoint16);
-        secondPath.Add(tempWayPoint17);
-        secondPath.Add(tempWayPoint18);
-        secondPath.Add(tempWayPoint19);
-        secondPath.Add(tempWayPoint20);
-        secondPath.Add(tempWayPoint21);
-        secondPath.Add(tempWayPoint22);
-        secondPath.Add(tempWayPoint23);
-        secondPath.Add(tempWayPoint24);
     }
 
     private void GenerateThirdPath()
@@ -181,7 +157,54 @@ public class OtherCarsPath : MonoBehaviour
 
     private void GenerateFourthPath()
     {
-        
+        Vector3 tempWayPoint = new Vector3(165, 1, 438.5f);
+        Vector3 tempWayPoint2 = new Vector3(156.5f, 1, 445);
+        Vector3 tempWayPoint3 = new Vector3(156.5f, 1, 570);
+        Vector3 tempWayPoint4 = new Vector3(163, 1, 582);
+        Vector3 tempWayPoint5 = new Vector3(156.5f, 1, 595);
+        Vector3 tempWayPoint6 = new Vector3(141, 1, 589);
+        Vector3 tempWayPoint7 = new Vector3(16, 1, 588);
+        Vector3 tempWayPoint8 = new Vector3(7, 1, 595);
+        Vector3 tempWayPoint9 = new Vector3(7, 1, 630);
+        Vector3 tempWayPoint10 = new Vector3(7, 1, 680);
+        Vector3 tempWayPoint11 = new Vector3(7, 1, 780);
+        Vector3 tempWayPoint12 = new Vector3(7, 1, 825);
+        Vector3 tempWayPoint13 = new Vector3(7, 1, 940);
+        Vector3 tempWayPoint14 = new Vector3(11, 1, 950);
+        Vector3 tempWayPoint15 = new Vector3(20, 1, 956);
+        Vector3 tempWayPoint16 = new Vector3(285, 1, 956);
+        Vector3 tempWayPoint17 = new Vector3(294, 1, 950);
+        Vector3 tempWayPoint18 = new Vector3(299.5f, 1, 942);
+        Vector3 tempWayPoint19 = new Vector3(299.5f, 1, 690);
+        Vector3 tempWayPoint20 = new Vector3(299.5f, 1, 650);
+        Vector3 tempWayPoint21 = new Vector3(299.5f, 1, 610);
+        Vector3 tempWayPoint22 = new Vector3(299.5f, 1, 450);
+        Vector3 tempWayPoint23 = new Vector3(294, 1, 442);
+        Vector3 tempWayPoint24 = new Vector3(285, 1, 438.5f);
+        fourthPath.Add(tempWayPoint);
+        fourthPath.Add(tempWayPoint2);
+        fourthPath.Add(tempWayPoint3);
+        fourthPath.Add(tempWayPoint4);
+        fourthPath.Add(tempWayPoint5);
+        fourthPath.Add(tempWayPoint6);
+        fourthPath.Add(tempWayPoint7);
+        fourthPath.Add(tempWayPoint8);
+        fourthPath.Add(tempWayPoint9);
+        fourthPath.Add(tempWayPoint10);
+        fourthPath.Add(tempWayPoint11);
+        fourthPath.Add(tempWayPoint12);
+        fourthPath.Add(tempWayPoint13);
+        fourthPath.Add(tempWayPoint14);
+        fourthPath.Add(tempWayPoint15);
+        fourthPath.Add(tempWayPoint16);
+        fourthPath.Add(tempWayPoint17);
+        fourthPath.Add(tempWayPoint18);
+        fourthPath.Add(tempWayPoint19);
+        fourthPath.Add(tempWayPoint20);
+        fourthPath.Add(tempWayPoint21);
+        fourthPath.Add(tempWayPoint22);
+        fourthPath.Add(tempWayPoint23);
+        fourthPath.Add(tempWayPoint24);
     }
 
     private void GenerateFifthPath()
@@ -239,20 +262,10 @@ public class OtherCarsPath : MonoBehaviour
         Vector3 tempWayPoint6 = new Vector3(6.5f, 1, 465);
         Vector3 tempWayPoint7 = new Vector3(6.5f, 1, 645);
         Vector3 tempWayPoint8 = new Vector3(18, 1, 656.5f);
-        Vector3 tempWayPoint9 = new Vector3(429, 1, 656.5f);
-        Vector3 tempWayPoint10 = new Vector3(446.5f, 1, 673);
-        Vector3 tempWayPoint11 = new Vector3(446.5f, 1, 860);
-        Vector3 tempWayPoint12 = new Vector3(459, 1, 880.5f);
-        Vector3 tempWayPoint13 = new Vector3(1024, 1, 880.5f);
-        Vector3 tempWayPoint14 = new Vector3(1039.5f, 1, 865);
-        Vector3 tempWayPoint15 = new Vector3(1039.5f, 1, 527);
-        Vector3 tempWayPoint16 = new Vector3(1025, 1, 513.5f);
-        Vector3 tempWayPoint17 = new Vector3(912, 1, 513.5f);
-        Vector3 tempWayPoint18 = new Vector3(899.5f, 1, 502);
-        Vector3 tempWayPoint19 = new Vector3(898, 1, 448);
-        Vector3 tempWayPoint20 = new Vector3(886, 1, 438.5f);
-        Vector3 tempWayPoint21 = new Vector3(312, 1, 438.5f);
-        Vector3 tempWayPoint22 = new Vector3(299.5f, 1, 420);
+        Vector3 tempWayPoint9 = new Vector3(290, 1, 656.5f);
+        Vector3 tempWayPoint10 = new Vector3(299.5f, 1, 646);
+        Vector3 tempWayPoint11 = new Vector3(299.5f, 1, 464);
+        Vector3 tempWayPoint12 = new Vector3(299.5f, 1, 406);
         secondPathReverse.Add(tempWayPoint);
         secondPathReverse.Add(tempWayPoint2);
         secondPathReverse.Add(tempWayPoint3);
@@ -265,16 +278,6 @@ public class OtherCarsPath : MonoBehaviour
         secondPathReverse.Add(tempWayPoint10);
         secondPathReverse.Add(tempWayPoint11);
         secondPathReverse.Add(tempWayPoint12);
-        secondPathReverse.Add(tempWayPoint13);
-        secondPathReverse.Add(tempWayPoint14);
-        secondPathReverse.Add(tempWayPoint15);
-        secondPathReverse.Add(tempWayPoint16);
-        secondPathReverse.Add(tempWayPoint17);
-        secondPathReverse.Add(tempWayPoint18);
-        secondPathReverse.Add(tempWayPoint19);
-        secondPathReverse.Add(tempWayPoint20);
-        secondPathReverse.Add(tempWayPoint21);
-        secondPathReverse.Add(tempWayPoint22);
     }
 
     private void GenerateThirdPathReverse()
@@ -315,7 +318,48 @@ public class OtherCarsPath : MonoBehaviour
 
     private void GenerateFourthPathReverse()
     { 
-
+        Vector3 tempWayPoint = new Vector3(298, 1, 432);
+        Vector3 tempWayPoint2 = new Vector3(307.5f, 1, 440);
+        Vector3 tempWayPoint3 = new Vector3(307.5f, 1, 556);
+        Vector3 tempWayPoint4 = new Vector3(307.5f, 1, 630);
+        Vector3 tempWayPoint5 = new Vector3(307.5f, 1, 944);
+        Vector3 tempWayPoint6 = new Vector3(314, 1, 960);
+        Vector3 tempWayPoint7 = new Vector3(304, 1, 970);
+        Vector3 tempWayPoint8 = new Vector3(294, 1, 964);
+        Vector3 tempWayPoint9 = new Vector3(20, 1, 963.5f);
+        Vector3 tempWayPoint10 = new Vector3(6, 1, 958);
+        Vector3 tempWayPoint11 = new Vector3(0, 1, 948);
+        Vector3 tempWayPoint12 = new Vector3(0, 1, 836);
+        Vector3 tempWayPoint13 = new Vector3(0, 1, 688);
+        Vector3 tempWayPoint14 = new Vector3(0, 1, 612);
+        Vector3 tempWayPoint15 = new Vector3(0, 1, 590);
+        Vector3 tempWayPoint16 = new Vector3(9, 1, 581);
+        Vector3 tempWayPoint17 = new Vector3(136, 1, 581);
+        Vector3 tempWayPoint18 = new Vector3(145, 1, 575);
+        Vector3 tempWayPoint19 = new Vector3(150, 1, 566);
+        Vector3 tempWayPoint20 = new Vector3(150, 1, 440);
+        Vector3 tempWayPoint21 = new Vector3(158, 1, 431.5f);
+        fourthPathReverse.Add(tempWayPoint);
+        fourthPathReverse.Add(tempWayPoint2);
+        fourthPathReverse.Add(tempWayPoint3);
+        fourthPathReverse.Add(tempWayPoint4);
+        fourthPathReverse.Add(tempWayPoint5);
+        fourthPathReverse.Add(tempWayPoint6);
+        fourthPathReverse.Add(tempWayPoint7);
+        fourthPathReverse.Add(tempWayPoint8);
+        fourthPathReverse.Add(tempWayPoint9);
+        fourthPathReverse.Add(tempWayPoint10);
+        fourthPathReverse.Add(tempWayPoint11);
+        fourthPathReverse.Add(tempWayPoint12);
+        fourthPathReverse.Add(tempWayPoint13);
+        fourthPathReverse.Add(tempWayPoint14);
+        fourthPathReverse.Add(tempWayPoint15);
+        fourthPathReverse.Add(tempWayPoint16);
+        fourthPathReverse.Add(tempWayPoint17);
+        fourthPathReverse.Add(tempWayPoint18);
+        fourthPathReverse.Add(tempWayPoint19);
+        fourthPathReverse.Add(tempWayPoint20);
+        fourthPathReverse.Add(tempWayPoint21);
     }
 
     private void GenerateFifthPathReverse()
